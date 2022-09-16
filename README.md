@@ -1,2 +1,2 @@
-# puffin-innovations
+# Puffin Innovations
  WordPress theme for Puffin Innovations
