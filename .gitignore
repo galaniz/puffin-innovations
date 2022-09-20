@@ -1,0 +1,7 @@
+node_modules/
+vendor/
+assets/public
+style.css
+composer.lock
+package-lock.json
+.DS_Store
