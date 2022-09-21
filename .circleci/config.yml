@@ -11,6 +11,14 @@ jobs:
       - run: composer dump-autoload
       - run: npm install
       - run: npm run build
+      - add_ssh_keys:
+          fingerprints:
+            - "96:49:79:f2:41:67:a8:62:01:f6:3a:b5:2b:39:2c:d3"
+      - run: ssh-keyscan -p $SSH_PORT $SSH_HOST >> ~/.ssh/known_hosts
+      - run: sudo apt update
+      - run: sudo apt install rsync
+      - run:
+          rsync -avzr --delete --delete-excluded --exclude-from='exclude-list.txt' -e "ssh -p $SSH_PORT" ./ $SSH_USER@$SSH_HOST://home/puffininn_graciela/web/wp-content/themes/puffin-innovations
 
 workflows:
   version: 2.1
