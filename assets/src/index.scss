@@ -2,6 +2,13 @@
  * Theme styles
  */
 
+/* Test */
+
+body {
+  background: var(--wp--preset--color--black);
+  color: var(--wp--preset--color--white);
+}
+
 /* Remove animations */
 
 @media (prefers-reduced-motion: reduce) {

@@ -21,6 +21,8 @@ const initialize = () => {
   /* Check if using mouse */
 
   usingMouse()
+
+  console.log('PI', ns, reduceMotion)
 } // End initialize
 
 initialize()

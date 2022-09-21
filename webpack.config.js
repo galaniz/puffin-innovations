@@ -213,6 +213,7 @@ Requires at least: 5.9
 Requires PHP: 7.4.0
 Description: Block theme for Puffin Innovations
 Author: AIR Knowbility - Indie Team A
+Author URI: https://knowbility.org/programs/air
 Theme URI: https://puffininno.com
 License: MIT License
 License URI: https://opensource.org/licenses/MIT
