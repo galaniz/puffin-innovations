@@ -1,0 +1,22 @@
+
+version: 2.1
+
+jobs:
+  build-and-deploy-production:
+    docker:
+      - image: cimg/php:7.4-node
+    steps:
+      - checkout
+      - run: composer install
+      - run: composer dump-autoload
+      - run: npm install
+      - run: npm run build
+
+workflows:
+  version: 2.1
+  build_and_deploy_production:
+    jobs:
+      - build-and-deploy-production:
+          filters:
+            branches:
+              only: main

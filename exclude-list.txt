@@ -1,0 +1,7 @@
+.gitattributes
+.gitignore
+phpcs.xml.dist
+exclude-list.txt
+/.circleci/
+/.git/
+/node_modules/
