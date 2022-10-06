@@ -1,0 +1,83 @@
+/**
+ * Objects: logo
+ */
+
+/* Imports */
+
+@use "sass:map";
+@use "@alanizcreative/formation/src/config" as con;
+@use "@alanizcreative/formation/src/utils/functions" as func;
+@use "@alanizcreative/formation/src/utils/mixins" as mix;
+
+/* Styles */
+
+$logo: map.get(con.$vars, "logo");
+
+.o-logo, 
+.o-logo-s {
+  --text-top: #{map.get($logo, "white")};
+  --text-bottom: #{map.get($logo, "orange")};
+  --base: #{map.get($logo, "grey-dark")};
+  --beak-bottom: #{map.get($logo, "yellow")};
+  --beak-top: #{map.get($logo, "orange")};
+  --body: #{map.get($logo, "white")};
+
+  [data-theme="primary-base"] &,
+  [data-theme="primary-light"] &,
+  [data-theme="background-base"] &,
+  [data-theme="background-dark"] &,
+  [data-theme="background-light"] & {
+    --text-top: #{map.get($logo, "black")};
+  }
+
+  [data-theme="primary-base"] & {
+    --text-bottom: #{map.get($logo, "black")};
+    --base: #{map.get($logo, "charcoal")};
+    --beak-bottom: #{map.get($logo, "yellow-light")};
+    --beak-top: #{map.get($logo, "yellow-dark")};
+  }
+
+  [data-theme="primary-dark"] & {
+    --text-bottom: #{map.get($logo, "grey-light")};
+    --base: #{map.get($logo, "grey")};
+  }
+
+  [data-theme="primary-light"] & {
+    --beak-bottom: #{map.get($logo, "yellow-dark")};
+  }
+
+  [data-theme="primary-light"] &,
+  [data-theme="background-base"] &,
+  [data-theme="background-dark"] & {
+    --text-bottom: #{map.get($logo, "charcoal")};
+  }
+
+  [data-theme="background-light"] & {
+    --text-bottom: #{map.get($logo, "orange-dark")};
+    --body: #{map.get($logo, "grey-light")};
+  }
+
+  svg {
+    height: auto;
+  }
+}
+
+.o-logo {
+  svg {
+    @include mix.fluid-size(
+      width,
+      func.calc-rem(120px) func.calc-rem(190px),
+      "s" "xl"
+    );
+  }
+}
+
+.o-logo-s {
+  svg {
+    @include mix.fluid-size(
+      width,
+      func.calc-rem(120px) func.calc-rem(150px),
+      "s" "xl"
+    );
+  }
+}

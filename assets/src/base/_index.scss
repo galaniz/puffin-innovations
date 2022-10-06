@@ -1,0 +1,28 @@
+/**
+ * Base
+ */
+
+/* Imports */
+
+@use "@alanizcreative/formation/src/base/mixins" as mix;
+@use "@alanizcreative/formation/src/utils/functions" as func;
+
+/* Root */
+
+:root {
+  @include mix.set-root;
+
+  --text-color: #{rgba(func.get-color("foreground-dark"), 0.8)};
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  @extend %u-font-weight-normal;
+  @extend %u-font-family-primary;
+
+  color: var(--text-color);
+}
