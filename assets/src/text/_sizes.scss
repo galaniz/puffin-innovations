@@ -11,11 +11,15 @@
 /* Styles */
 
 html {
+  /* h1 */
+
   @include mix.fluid-size(
     --h1,
     func.calc-rem(48px) func.calc-rem(90px),
     "s" "xl"
   );
+
+  /* h2 */
 
   @include mix.fluid-size(
     --h2,
@@ -23,11 +27,15 @@ html {
     "s" "xl"
   );
 
+  /* h2-l */
+
   @include mix.fluid-size(
     --h2-l,
     func.calc-rem(36px) func.calc-rem(70px),
     "s" "xl"
   );
+
+  /* h3 */
 
   @include mix.fluid-size(
     --h3,
@@ -42,22 +50,6 @@ html {
   @include mix.breakpoint-min("r") {
     --h4: func.calc-rem(24px);
     --h5: func.calc-rem(20px);
-  }
-}
-
-h5,
-h6,
-.t-h5,
-.t-h6 {
-  @extend %u-font-weight-bold;
-
-  font-size: func.calc-rem(18px);
-}
-
-h5,
-.t-h5 {
-  @include mix.breakpoint-min("r") {
-    font-size: func.calc-rem(20px);
   }
 }
 

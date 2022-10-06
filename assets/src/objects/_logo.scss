@@ -13,7 +13,27 @@
 
 $logo: map.get(con.$vars, "logo");
 
-.o-logo, 
+.o-logo {
+  svg {
+    @include mix.fluid-size(
+      width,
+      func.calc-rem(120px) func.calc-rem(190px),
+      "s" "xl"
+    );
+  }
+}
+
+.o-logo-s {
+  svg {
+    @include mix.fluid-size(
+      width,
+      func.calc-rem(120px) func.calc-rem(150px),
+      "s" "xl"
+    );
+  }
+}
+
+.o-logo,
 .o-logo-s {
   --text-top: #{map.get($logo, "white")};
   --text-bottom: #{map.get($logo, "orange")};
@@ -59,25 +79,5 @@ $logo: map.get(con.$vars, "logo");
 
   svg {
     height: auto;
-  }
-}
-
-.o-logo {
-  svg {
-    @include mix.fluid-size(
-      width,
-      func.calc-rem(120px) func.calc-rem(190px),
-      "s" "xl"
-    );
-  }
-}
-
-.o-logo-s {
-  svg {
-    @include mix.fluid-size(
-      width,
-      func.calc-rem(120px) func.calc-rem(150px),
-      "s" "xl"
-    );
   }
 }
