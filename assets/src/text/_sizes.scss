@@ -46,11 +46,34 @@ html {
   --h4: func.calc-rem(22px);
   --h5: func.calc-rem(18px);
   --h6: func.calc-rem(18px);
+  --t-quote: func.calc-rem(22px);
+  --t: func.calc-rem(18px);
+  --t-s: func.calc-rem(16px);
+  --t-xs: func.calc-rem(16px);
 
-  @include mix.breakpoint-min("r") {
+  @include mix.breakpoint-min("m") {
     --h4: func.calc-rem(24px);
     --h5: func.calc-rem(20px);
+    --t-quote: func.calc-rem(24px);
+    --t: func.calc-rem(20px);
+    --t-s: func.calc-rem(18px);
   }
+
+  /* t-l */
+
+  @include mix.fluid-size(
+    --t-l,
+    func.calc-rem(22px) func.calc-rem(28px),
+    "s" "xl"
+  );
+
+  /* t-m */
+
+  @include mix.fluid-size(
+    --t-m,
+    func.calc-rem(20px) func.calc-rem(24px),
+    "s" "xl"
+  );
 }
 
 h2,
@@ -68,6 +91,27 @@ h6,
 .t-h5,
 .t-h6 {
   line-height: 1.3;
+}
+
+.t-l,
+.t-quote,
+.t-m,
+.t,
+.t-s,
+.t-xs {
+  letter-spacing: 0.01em;
+}
+
+.t-l,
+.t-quote,
+.t-s,
+.t-xs {
+  line-height: 1.5;
+}
+
+.t-m,
+.t {
+  line-height: 1.6;
 }
 
 h1,
@@ -118,4 +162,28 @@ h6,
   @extend %u-font-weight-bold;
 
   font-size: var(--h6);
+}
+
+.t-l {
+  font-size: var(--t-l);
+}
+
+.t-quote {
+  font-size: var(--t-quote);
+}
+
+.t-m {
+  font-size: var(--t-m);
+}
+
+.t {
+  font-size: var(--t);
+}
+
+.t-s {
+  font-size: var(--t-s);
+}
+
+.t-xs {
+  font-size: var(--t-xs);
 }

@@ -164,15 +164,22 @@ const outputCompatEnv = {
 
 /* Copy patterns */
 
-/*const copyPatterns = [
+const copyPatterns = [
   {
     from: '*.svg',
     context: path.resolve(__dirname, 'assets', 'src', 'svg'),
     to ({ context, absoluteFilename }) {
       return path.resolve(__dirname, 'assets/public/svg/[name][ext]')
     }
+  },
+  {
+    from: '*.*',
+    context: path.resolve(__dirname, 'assets', 'src', 'fonts'),
+    to ({ context, absoluteFilename }) {
+      return path.resolve(__dirname, 'assets/public/fonts/[name][ext]')
+    }
   }
-]*/
+]
 
 /* Entries */
 
@@ -235,7 +242,7 @@ module.exports = [
     module: {
       rules: rulesCompat
     },
-    resolve: resolve,
+    resolve,
     target: ['web', 'es5'],
     plugins: [
       new MiniCssExtractPlugin({
@@ -244,10 +251,10 @@ module.exports = [
       new webpack.BannerPlugin({
         raw: true,
         banner: styleBanner
-      })
-      /*new CopyWebpackPlugin({
+      }),
+      new CopyWebpackPlugin({
         patterns: copyPatterns
-      })*/
+      })
     ]
   },
   {
@@ -260,8 +267,8 @@ module.exports = [
       chunkFormat: 'array-push'
     },
     module: {
-      rules: rules
+      rules
     },
-    resolve: resolve
+    resolve
   }
 ]

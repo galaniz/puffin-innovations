@@ -29,6 +29,7 @@
 /* Text */
 
 @use "@alanizcreative/formation/src/text/align";
+@use "text/list-style";
 @use "text/sizes";
 @use "text/color" as c;
 
@@ -46,13 +47,23 @@
 @use "@alanizcreative/formation/src/layouts/gap-margin";
 @use "@alanizcreative/formation/src/layouts/height";
 
+/* Borders */
+
+@use "@alanizcreative/formation/src/borders/radius";
+
 /* Components */
 
 @use "@alanizcreative/formation/src/components/skip-link";
+@use "components/nav";
 
 /* Objects */
 
 @use "objects/logo";
+@use "objects/button";
+
+/* Effects */
+
+@use "@alanizcreative/formation/src/effects/transition";
 
 /* Remove animations */
 

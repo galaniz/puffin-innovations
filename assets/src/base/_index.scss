@@ -13,6 +13,7 @@
   @include mix.set-root;
 
   --text-color: #{rgba(func.get-color("foreground-dark"), 0.8)};
+  --link-color: var(--primary-dark);
 }
 
 html {
@@ -25,4 +26,8 @@ body {
   @extend %u-font-family-primary;
 
   color: var(--text-color);
+}
+
+a {
+  color: var(--link-color);
 }

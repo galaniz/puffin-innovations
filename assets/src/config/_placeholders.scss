@@ -1,0 +1,32 @@
+/**
+ * Config: placeholders
+ */
+
+/* Imports */
+
+@use "@alanizcreative/formation/src/config";
+
+/* Styles */
+
+%u-button {
+  --p: var(--2-5xs) var(--xs);
+  --s: var(--h5);
+
+  @extend %u-font-family-secondary;
+  @extend %u-font-weight-bold;
+  @extend %u-line-height-130-pc;
+
+  padding: var(--p);
+  font-size: var(--s);
+  border-radius: 6rem;
+  color: currentColor;
+}
+
+%u-button-secondary {
+  box-shadow: inset 0 0 0 var(--border-width) currentColor;
+}
+
+%u-button-small {
+  --p: var(--3xs) var(--1-5xs);
+  --s: var(--h6);
+}

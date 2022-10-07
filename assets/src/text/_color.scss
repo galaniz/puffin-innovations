@@ -12,6 +12,7 @@
 .t-light {
   --outline-color: var(--background-light);
   --text-color: #{rgba(func.get-color("background-base"), 0.8)};
+  --link-color: var(--background-dark);
 
   h1,
   h2,
@@ -21,4 +22,8 @@
   h6 {
     color: var(--background-light);
   }
+}
+
+.t-link-current {
+  --link-color: currentColor;
 }
