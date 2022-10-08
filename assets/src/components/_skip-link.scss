@@ -1,0 +1,14 @@
+/**
+ * Components: nav
+ */
+
+/* Imports */
+
+@use "@alanizcreative/formation/src/components/skip-link";
+
+/* Styles */
+
+.c-skip-link {
+  margin: var(--2xs);
+  border-radius: var(--border-radius-xl);
+}

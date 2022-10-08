@@ -2,12 +2,70 @@
  * Theme styles
  */
 
-/* Test */
+/* Normalize */
 
-body {
-  background: var(--wp--preset--color--black);
-  color: var(--wp--preset--color--white);
-}
+@use "normalize.css/normalize.css";
+
+/* Config */
+
+@forward "config";
+
+/* Base */
+
+@use "base/fonts";
+@use "@alanizcreative/formation/src/base";
+@use "@alanizcreative/formation/src/base/inputs-reset";
+@use "base" as b;
+@use "base/focus";
+
+/* A11y */
+
+@use "@alanizcreative/formation/src/a11y";
+
+/* Backgrounds */
+
+@use "backgrounds";
+
+/* Text */
+
+@use "@alanizcreative/formation/src/text/align";
+@use "text/list-style";
+@use "text/sizes";
+@use "text/color" as c;
+
+/* Layouts */
+
+@use "@alanizcreative/formation/src/layouts/display";
+@use "@alanizcreative/formation/src/layouts/overflow";
+@use "@alanizcreative/formation/src/layouts/position";
+@use "@alanizcreative/formation/src/layouts/aspect-ratio";
+@use "@alanizcreative/formation/src/layouts/container";
+@use "@alanizcreative/formation/src/layouts/width";
+@use "@alanizcreative/formation/src/layouts/padding";
+@use "@alanizcreative/formation/src/layouts/margin";
+@use "layouts/flex";
+@use "@alanizcreative/formation/src/layouts/gap-margin";
+@use "@alanizcreative/formation/src/layouts/height";
+
+/* Borders */
+
+@use "@alanizcreative/formation/src/borders/radius";
+
+/* Components */
+
+@use "components/skip-link";
+@use "components/nav";
+
+/* Objects */
+
+@use "objects/logo";
+@use "objects/button";
+@use "objects/form";
+
+/* Effects */
+
+@use "effects/transition";
+@use "effects/underline";
 
 /* Remove animations */
 

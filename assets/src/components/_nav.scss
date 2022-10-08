@@ -1,0 +1,87 @@
+/**
+ * Components: nav
+ */
+
+/* Imports */
+
+@use "@alanizcreative/formation/src/utils/functions" as func;
+@use "@alanizcreative/formation/src/components/nav";
+@use "@alanizcreative/formation/src/components/nav/overflow";
+@use "@alanizcreative/formation/src/components/nav/icon";
+@use "@alanizcreative/formation/src/components/nav/icon/four";
+
+/* Styles */
+
+.c-nav {
+  [data-logo] {
+    margin-right: var(--l);
+  }
+}
+
+.c-nav__link {
+  .c-nav__list &[data-depth="0"] {
+    white-space: nowrap;
+  }
+
+  &::after {
+    @extend %u-opacity-0;
+
+    transform: translateY(100%) scaleX(0.9);
+    transition: opacity var(--duration) var(--easing), transform var(--duration) var(--easing);
+    height: func.calc-rem(3px);
+    background: currentColor;
+    top: auto;
+  }
+
+  &:hover, 
+  &:active, 
+  &:focus,
+  .current-menu-parent &,
+  .current-menu-item & {
+    &::after {
+      @extend %u-opacity-1;
+
+      transform: translateY(0) scaleX(1);
+    }
+  }
+}
+
+.c-nav__label {
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+
+  [data-show] & {
+    transform: translateY(15%);
+  }
+}
+
+.c-nav-overflow {
+  --prop: visibility, transform;
+  --duration: 0ms, 400ms;
+  --delay: 400ms, 10ms;
+
+  border-top-left-radius: var(--border-radius-xl);
+  border-bottom-left-radius: var(--border-radius-xl);
+  max-width: 20rem;
+  transform: translateX(100%);
+
+  .c-nav[data-open="true"] & {
+    --delay: 10ms, 0ms;
+
+    transform: translateX(0);
+  }
+}
+
+.c-nav__overlay {
+  --prop: visibility, opacity;
+  --duration: 0ms, 400ms;
+  --delay: 400ms, 10ms;
+
+	@extend %u-opacity-0;
+
+  .c-nav[data-open="true"] & {
+    --delay: 10ms, 0ms;
+
+    @extend %u-opacity-1;
+  }
+}

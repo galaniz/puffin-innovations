@@ -1,0 +1,255 @@
+/**
+ * Config
+ */
+
+/* Vertical padding */
+
+$padding-vertical: (
+  "5xs",
+  "4xs",
+  "3xs",
+  "2xs",
+  "xs",
+  "s",
+  "m",
+  "l",
+  "xl",
+  "2xl",
+  "3xl",
+);
+
+/* Horizontal padding */
+
+$padding-horizontal: (
+  "5xs",
+  "4xs",
+  "3xs",
+  "2xs",
+  "xs",
+  "s",
+);
+
+/* Vertical margin */
+
+$margin-vertical: (
+  "5xs",
+  "4xs",
+  "3xs",
+  "2xs",
+  "xs",
+  "s",
+);
+
+/* Config variables */
+
+@use "@alanizcreative/formation/src/config" with (
+
+  $colors: (
+    "primary": (
+      "base": #e05920,
+      "light": #ffc14a,
+      "tint": #4c94d5,
+      "dark": #1b62a4,
+    ),
+    "foreground": (
+      "dark": #141415,
+    ),
+    "background": (
+      "base": #e9e9e9,
+      "light": #ffffff,
+      "dark": #cbe0f3,
+    ),
+    "negative": (
+      "light": #ffcfcc,
+      "dark": #b72d25,
+    ),
+    "positive": (
+      "light": #ade7d2,
+      "dark": #066140,
+    ),
+  ),
+
+  $text-colors: (
+    "primary-base",
+    "primary-light",
+    "primary-dark",
+    "foreground-dark",
+    "background-light",
+    "negative-light",
+    "negative-dark",
+    "positive-light",
+    "positive-dark",
+  ),
+
+  $background-colors: (
+    "primary-base",
+    "primary-light",
+    "primary-dark",
+    "foreground-dark",
+    "background-base",
+    "background-light",
+    "background-dark",
+  ),
+
+  $font-families: (
+    "primary": (
+      "Neue Haas Unica"
+      Helvetica,
+      Arial,
+      sans-serif,
+    ),
+    "secondary": (
+      "Mont",
+      Verdana,
+      sans-serif,
+    ),
+  ),
+
+  $font-weights: (
+    "black": 900,
+    "bold": 700,
+    "normal": 400,
+  ),
+
+  $breakpoints: (
+    "xs": 400px,
+    "s": 600px,
+    "r": 800px,
+    "m": 900px,
+    "l": 1000px,
+    "xl": 1200px,
+  ),
+
+  $spacing: (
+    "5xs": 5px,
+    "4xs": 10px,
+    "3-5xs": 12.5px,
+    "3xs": 15px,
+    "2-5xs": 17.5px,
+    "2xs": 20px,
+    "1-5xs": 25px,
+    "xs": 30px,
+    "s": 40px,
+    "sm": 50px,
+    "m": 60px,
+    "l": 80px,
+    "xl": 100px,
+    "2xl": 120px,
+    "3xl": 140px,
+    "4xl": 200px,
+  ),
+
+  $padding-top: $padding-vertical,
+  $padding-bottom: $padding-vertical,
+  $padding-vertical-breakpoints: ("l"),
+  $padding-left: $padding-horizontal,
+  $padding-right: $padding-horizontal,
+  $padding-horizontal-breakpoints: ("l"),
+
+  $margin-bottom: $margin-vertical,
+  $margin-bottom-all: $margin-vertical,
+
+  $gaps: (
+    "4xs",
+    "3xs",
+    "2xs",
+    "xs",
+    "s",
+    "sm",
+    "m",
+    "l",
+    "xl",
+  ),
+
+  $gap-breakpoints: ("m", "l"),
+
+  $widths: ("xs", "s", "m", "l"),
+  $heights: ("xs", "s", "m", "l"),
+  $max-widths: ("xl", "4xl"),
+  $max-width-breakpoints: ("m"),
+
+  $container-padding: 20px,
+
+  $containers: (
+    "default": 1340px,
+  ),
+
+  $flex-row-breakpoints: ("m", "l", "xl"),
+
+  $nav: (
+    "icon": (
+      "width": 50px,
+      "line-width": 2px,
+      "margin": 8px
+    ),
+  ),
+
+  $aspect-ratio-padding: (
+    "56": 56.25%,
+    "66": 66.667%,
+  ),
+
+  $border-radius: (
+    "xs": 5px,
+    "s": 10px,
+    "m": 15px,
+    "l": 20px,
+    "xl": 30px,
+  ),
+
+  $outline: (
+    "width": 0.25rem,
+    "color": "var(--foreground-dark)",
+    "offset": 0.25rem,
+  ),
+
+  $vars: (
+    "logo": (
+      "white": #ffffff,
+      "orange": #e05920,
+      "orange-dark": #d84000,
+      "yellow": #ffa800,
+      "yellow-light": #ffc14a,
+      "yellow-dark": #ec9c00,
+      "grey": #9fa4ab,
+      "grey-light": #e9e9e9,
+      "grey-dark": #626870,
+      "black": #141415,
+      "charcoal": #3b3b3e,
+    ),
+  ),
+
+  $placeholders: (
+    (
+      "name": "line-height-120-pc",
+      "prop": (
+        line-height: 1.2
+      ),
+    ),
+    (
+      "name": "line-height-130-pc",
+      "prop": (
+        line-height: 1.3
+      ),
+    ),
+    (
+      "name": "line-height-150-pc",
+      "prop": (
+        line-height: 1.5
+      ),
+    ),
+    (
+      "name": "line-height-160-pc",
+      "prop": (
+        line-height: 1.6
+      ),
+    ),
+    (
+      "name": "letter-spacing-1-pc",
+      "prop": (
+        letter-spacing: 0.01em
+      ),
+    ),
+  ),
+
+);

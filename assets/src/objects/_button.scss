@@ -1,0 +1,22 @@
+/**
+ * Objects: button
+ */
+
+/* Imports */
+
+@use "../config/placeholders";
+
+/* Styles */
+
+.o-button-primary, 
+.o-button-secondary {
+  @extend %u-button;
+}
+
+.o-button-secondary {
+  @extend %u-button-secondary;
+}
+
+.o-button-small {
+  @extend %u-button-small;
+}

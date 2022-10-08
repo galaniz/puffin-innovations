@@ -1,0 +1,208 @@
+/**
+ * Text: sizes
+ */
+
+/* Imports */
+
+@use "@alanizcreative/formation/src/config";
+@use "@alanizcreative/formation/src/utils/functions" as func;
+@use "@alanizcreative/formation/src/utils/mixins" as mix;
+
+/* Styles */
+
+html {
+  /* h1 */
+
+  @include mix.fluid-size(
+    --h1,
+    func.calc-rem(48px) func.calc-rem(90px),
+    "s" "xl"
+  );
+
+  /* h2 */
+
+  @include mix.fluid-size(
+    --h2,
+    func.calc-rem(36px) func.calc-rem(48px),
+    "s" "xl"
+  );
+
+  /* h2-l */
+
+  @include mix.fluid-size(
+    --h2-l,
+    func.calc-rem(36px) func.calc-rem(70px),
+    "s" "xl"
+  );
+
+  /* h3 */
+
+  @include mix.fluid-size(
+    --h3,
+    func.calc-rem(28px) func.calc-rem(36px),
+    "s" "xl"
+  );
+
+  --h4: func.calc-rem(22px);
+  --h5: func.calc-rem(18px);
+  --h6: func.calc-rem(18px);
+  --t-quote: func.calc-rem(22px);
+  --t: func.calc-rem(18px);
+  --t-s: func.calc-rem(16px);
+  --t-xs: func.calc-rem(16px);
+
+  @include mix.breakpoint-min("m") {
+    --h4: func.calc-rem(24px);
+    --h5: func.calc-rem(20px);
+    --t-quote: func.calc-rem(24px);
+    --t: func.calc-rem(20px);
+    --t-s: func.calc-rem(18px);
+  }
+
+  /* t-l */
+
+  @include mix.fluid-size(
+    --t-l,
+    func.calc-rem(22px) func.calc-rem(28px),
+    "s" "xl"
+  );
+
+  /* t-m */
+
+  @include mix.fluid-size(
+    --t-m,
+    func.calc-rem(20px) func.calc-rem(24px),
+    "s" "xl"
+  );
+}
+
+h1,
+h2,
+h3,
+h4, 
+h5, 
+h6,
+.t-h1,
+.t-h2,
+.t-h2-l,
+.t-h2,
+.t-h3,
+.t-h4,
+.t-h5,
+.t-h6 {
+  @extend %u-font-family-secondary;
+  
+  color: var(--heading-color);
+}
+
+h2,
+h3,
+.t-h2-l,
+.t-h2,
+.t-h3 {
+  @extend %u-line-height-120-pc;
+}
+
+h4,
+h5,
+h6,
+.t-h4,
+.t-h5,
+.t-h6 {
+  @extend %u-line-height-130-pc;
+}
+
+.t-l,
+.t-quote,
+.t-m,
+.t,
+.t-s,
+.t-xs {
+  @extend %u-letter-spacing-1-pc;
+}
+
+.t-l,
+.t-quote,
+.t-s,
+.t-xs {
+  @extend %u-line-height-150-pc;
+}
+
+.t-m,
+.t {
+  @extend %u-line-height-160-pc;
+}
+
+h1,
+.t-h1 {
+  @extend %u-font-weight-black;
+
+  letter-spacing: 0.005em;
+  line-height: 1.1;
+  font-size: var(--h1);
+}
+
+h2,
+.t-h2 {
+  @extend %u-font-weight-black;
+
+  font-size: var(--h2);
+}
+
+.t-h2-l {
+  @extend %u-font-weight-black;
+
+  font-size: var(--h2-l);
+}
+
+h3,
+.t-h3 {
+  @extend %u-font-weight-bold;
+
+  font-size: var(--h3);
+}
+
+h4,
+.t-h4 {
+  @extend %u-font-weight-bold;
+
+  font-size: var(--h4);
+}
+
+h5,
+.t-h5 {
+  @extend %u-font-weight-bold;
+
+  font-size: var(--h5);
+}
+
+h6,
+.t-h6 {
+  @extend %u-font-weight-bold;
+
+  font-size: var(--h6);
+}
+
+.t-l {
+  font-size: var(--t-l);
+}
+
+.t-quote {
+  font-size: var(--t-quote);
+}
+
+.t-m {
+  font-size: var(--t-m);
+}
+
+.t {
+  font-size: var(--t);
+}
+
+.t-s {
+  font-size: var(--t-s);
+}
+
+.t-xs {
+  font-size: var(--t-xs);
+}

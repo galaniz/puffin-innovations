@@ -1,0 +1,65 @@
+/**
+ * Objects: form
+ */
+
+/* Imports */
+
+@use "@alanizcreative/formation/src/config";
+
+/* Styles */
+
+.o-form {
+  --label: var(--h4);
+  --input: var(--t-m);
+  --border-radius: var(--border-radius-s);
+
+  label {
+    @extend %u-font-family-secondary;
+    @extend %u-line-height-130-pc;
+    @extend %u-display-block;
+
+    font-size: var(--label);
+    margin-bottom: var(--3xs);
+    color: var(--heading-color);
+
+    &[data-req]::after {
+      content: '*';
+    }
+  }
+
+  input[type="search"],
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"],
+  textarea,
+  select {
+    --color: transparent;
+
+    @extend %u-width-100-pc;
+    @extend %u-letter-spacing-1-pc;
+    @extend %u-line-height-160-pc;
+
+    border-radius: var(--border-radius);
+    background: var(--input-bg);
+    padding: var(--input-padding);
+    font-size: var(--input);
+    color: var(--heading-color);
+    box-shadow: inset 0 0 0 0.1875rem var(--color);
+    transition: box-shadow var(--duration) var(--easing);
+
+    &:focus {
+      --outline-width: 0;
+      --color: var(--outline-color);
+    }
+  }
+}
+
+.o-form-s {
+  --label: var(--h5);
+  --input-padding: var(--3-5xs) var(--xs);
+}
+
+.o-form-round {
+  --border-radius: var(--border-radius-xl);
+}

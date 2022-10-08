@@ -1,0 +1,16 @@
+/**
+ * Layouts: flex
+ */
+
+/* Imports */
+
+@use "@alanizcreative/formation/src/layouts/flex";
+@use "@alanizcreative/formation/src/utils/mixins" as mix;
+
+/* Styles */
+
+.l-align-self-center-m {
+  @include mix.breakpoint-min("m") {
+    align-self: center;
+  }
+}

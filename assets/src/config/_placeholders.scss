@@ -1,0 +1,44 @@
+/**
+ * Config: placeholders
+ */
+
+/* Imports */
+
+@use "@alanizcreative/formation/src/config";
+
+/* Styles */
+
+%u-transition-border-radius {
+  border-radius: var(--border-radius-xl);
+  transition: border-radius 600ms var(--cubic), transform 600ms var(--cubic);
+
+  &:hover {
+    border-radius: var(--border-radius-s);
+    transform: scale(1.04);
+  }
+}
+
+%u-button {
+  --p: var(--2-5xs) var(--xs);
+  --s: var(--h5);
+
+  @extend %u-font-family-secondary;
+  @extend %u-font-weight-bold;
+  @extend %u-line-height-130-pc;
+  @extend %u-display-inline-flex;
+  @extend %u-justify-content-center;
+  @extend %u-transition-border-radius;
+
+  padding: var(--p);
+  font-size: var(--s);
+}
+
+%u-button-secondary {
+  color: currentColor;
+  box-shadow: inset 0 0 0 var(--border-width) currentColor;
+}
+
+%u-button-small {
+  --p: var(--3xs) var(--1-5xs);
+  --s: var(--h6);
+}

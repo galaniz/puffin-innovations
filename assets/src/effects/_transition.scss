@@ -1,0 +1,14 @@
+/**
+ * Effects: transition
+ */
+
+/* Imports */
+
+@use "@alanizcreative/formation/src/effects/transition";
+@use "../config/placeholders";
+
+/* Styles */
+
+.e-transition-border-radius {
+  @extend %u-transition-border-radius;
+}
