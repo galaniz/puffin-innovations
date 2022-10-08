@@ -76,12 +76,31 @@ html {
   );
 }
 
+h1,
+h2,
+h3,
+h4, 
+h5, 
+h6,
+.t-h1,
+.t-h2,
+.t-h2-l,
+.t-h2,
+.t-h3,
+.t-h4,
+.t-h5,
+.t-h6 {
+  @extend %u-font-family-secondary;
+  
+  color: var(--heading-color);
+}
+
 h2,
 h3,
 .t-h2-l,
 .t-h2,
 .t-h3 {
-  line-height: 1.2;
+  @extend %u-line-height-120-pc;
 }
 
 h4,
@@ -90,7 +109,7 @@ h6,
 .t-h4,
 .t-h5,
 .t-h6 {
-  line-height: 1.3;
+  @extend %u-line-height-130-pc;
 }
 
 .t-l,
@@ -99,19 +118,19 @@ h6,
 .t,
 .t-s,
 .t-xs {
-  letter-spacing: 0.01em;
+  @extend %u-letter-spacing-1-pc;
 }
 
 .t-l,
 .t-quote,
 .t-s,
 .t-xs {
-  line-height: 1.5;
+  @extend %u-line-height-150-pc;
 }
 
 .t-m,
 .t {
-  line-height: 1.6;
+  @extend %u-line-height-160-pc;
 }
 
 h1,

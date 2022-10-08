@@ -1,0 +1,18 @@
+/**
+ * Backgrounds
+ */
+
+/* Imports */
+
+@use '@alanizcreative/formation/src/backgrounds/color';
+@use "@alanizcreative/formation/src/utils/functions" as func;
+
+/* Styles */
+
+.bg-foreground-dark-09 {
+  background-color: rgba(func.get-color("foreground-dark"), 0.9);
+}
+
+.bg-background-light-15 {
+  background-color: var(--background-light-15);
+}

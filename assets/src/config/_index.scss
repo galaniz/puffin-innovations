@@ -161,15 +161,20 @@ $margin-vertical: (
     "xl",
   ),
 
+  $gap-breakpoints: ("m", "l"),
+
   $widths: ("xs", "s", "m", "l"),
   $heights: ("xs", "s", "m", "l"),
   $max-widths: ("xl", "4xl"),
+  $max-width-breakpoints: ("m"),
 
   $container-padding: 20px,
 
   $containers: (
     "default": 1340px,
   ),
+
+  $flex-row-breakpoints: ("m", "l", "xl"),
 
   $nav: (
     "icon": (
@@ -190,6 +195,12 @@ $margin-vertical: (
     "m": 15px,
     "l": 20px,
     "xl": 30px,
+  ),
+
+  $outline: (
+    "width": 0.25rem,
+    "color": "var(--foreground-dark)",
+    "offset": 0.25rem,
   ),
 
   $vars: (

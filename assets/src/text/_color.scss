@@ -11,17 +11,12 @@
 
 .t-light {
   --outline-color: var(--background-light);
+  --heading-color: var(--background-light);
   --text-color: #{rgba(func.get-color("background-base"), 0.8)};
-  --link-color: var(--background-dark);
+  --link-color: var(--background-light);
+  --input-bg: var(--background-light-15);
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: var(--background-light);
-  }
+  color: var(--text-color);
 }
 
 .t-link-current {

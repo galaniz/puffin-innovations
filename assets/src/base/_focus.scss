@@ -1,0 +1,17 @@
+/**
+ * Base: focus
+ */
+
+/* Imports */
+
+@use "@alanizcreative/formation/src/base/focus";
+
+/* Styles */
+
+.outline-snug {
+  --outline-offset: 0;
+}
+
+.outline-tight {
+  --outline-offset: -0.25rem;
+}

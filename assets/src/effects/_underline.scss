@@ -1,0 +1,33 @@
+/**
+ * Effects: underline
+ */
+
+/* Styles */
+
+.e-underline a,
+.e-underline-reverse a {
+  transition: box-shadow 200ms var(--easing);
+  box-shadow: 0 var(--u) 0 0 var(--c);
+}
+
+.e-underline a {
+  --u: var(--underline);
+  --c: currentColor;
+
+  &:hover,
+  &:active,
+  &:focus {
+    --c: transparent;
+  }
+}
+
+.e-underline-reverse a {
+  --u: var(--underline);
+  --c: transparent;
+
+  &:hover,
+  &:active,
+  &:focus {
+    --c: currentColor;
+  }
+}

@@ -33,6 +33,10 @@ class PI extends Formation {
 
 	public static $colors = [];
 
+	/* Assets path for svgs */
+
+	public static $svg_assets_path = '';
+
 	/**
 	 * Constructor
 	 */
@@ -41,6 +45,10 @@ class PI extends Formation {
 		/* Namespace */
 
 		self::$namespace = 'pi';
+
+		/* Paths */
+
+		self::$svg_assets_path = get_template_directory() . '/assets/public/svg/';
 
 		/* Styles and scripts */
 
@@ -150,7 +158,10 @@ class PI extends Formation {
 		if ( is_admin() ) {
 			$theme_settings = new Theme(
 				[
-					'fields'   => [
+					'mailchimp_list_locations' => [
+						'mc_footer' => 'footer',
+					],
+					'fields'                   => [
 						[
 							'name'    => 'tagline',
 							'label'   => 'Tagline',
