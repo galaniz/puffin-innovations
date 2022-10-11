@@ -15,3 +15,7 @@
 .outline-tight {
   --outline-offset: -0.25rem;
 }
+
+body .outline-none:focus {
+  outline: none
+}

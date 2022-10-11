@@ -16,6 +16,7 @@ const n = 'pi'
 /* Output path */
 
 const outputPath = path.resolve(__dirname, 'assets', 'public')
+const outputCommonPath = path.resolve(__dirname, 'PI', 'Common', 'assets', 'public')
 
 /* Asset paths */
 
@@ -100,6 +101,14 @@ const rulesCompat = [
             targets: { chrome: '60', edge: '16' }
           }
         ]
+      ],
+      plugins: [
+        [
+          'transform-react-jsx',
+          {
+            pragma: 'wp.element.createElement'
+          }
+        ]
       ]
     }
   },
@@ -181,6 +190,18 @@ const copyPatterns = [
   }
 ]
 
+/* Block paths */
+
+const blocks = [
+  'hero'
+]
+
+const blocksEntry = {}
+
+blocks.forEach(b => {
+  blocksEntry[b] = './PI/Common/assets/src/blocks/' + b + '.js'
+})
+
 /* Entries */
 
 let entries = []
@@ -229,6 +250,9 @@ License URI: https://opensource.org/licenses/MIT
 /* Exports */
 
 module.exports = [
+
+  /* Front end assets */
+
   {
     mode: 'production',
     entry: entries[0],
@@ -257,6 +281,7 @@ module.exports = [
       })
     ]
   },
+
   {
     mode: 'production',
     entry: entries[1],
@@ -270,5 +295,22 @@ module.exports = [
       rules
     },
     resolve
+  },
+
+  /* Block assets */
+
+  {
+    mode: 'production',
+    entry: blocksEntry,
+    output: {
+      path: outputCommonPath,
+      filename: 'js/blocks/[name].js',
+      publicPath: '/',
+      chunkFormat: 'array-push'
+    },
+    resolve,
+    module: {
+      rules: rulesCompat
+    }
   }
 ]

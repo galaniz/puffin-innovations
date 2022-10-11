@@ -17,15 +17,17 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Imports
  */
 
-use Formation\Formation;
+use PI\Common\Blocks\Index as Blocks;
+use Formation\Formation as FRM;
 use Formation\Utils;
 use Formation\Admin\Settings\Theme;
+use Formation\Common\Blocks\Contact_Form;
 
 /**
  * Class
  */
 
-class PI extends Formation {
+class PI extends FRM {
 
 	/**
 	 * Variables
@@ -36,6 +38,32 @@ class PI extends Formation {
 	/* Assets path for svgs */
 
 	public static $svg_assets_path = '';
+
+	/* A11y classes */
+
+	public static $a11y_class = [
+		'visually_hide' => 'a11y-visually-hidden',
+		'hide'          => 'a11y-hide-input',
+	];
+
+	/* Static markup */
+
+	public static $html = [
+		'loader' => [
+			'button' => '',
+		],
+		'result' => [
+			'error'   => [
+				'default' => '',
+				'summary' => '',
+			],
+			'success' => '',
+		],
+	];
+
+	/* Hero theme */
+
+	public static $hero_theme = 'background-light';
 
 	/**
 	 * Constructor
@@ -50,7 +78,103 @@ class PI extends Formation {
 
 		self::$svg_assets_path = get_template_directory() . '/assets/public/svg/';
 
+		/* Markup */
+
+		/* phpcs:disable */
+		$error_icon = file_get_contents( PI::$svg_assets_path . 'error.svg' );
+		$success_icon = file_get_contents( PI::$svg_assets_path . 'success.svg' );
+		/* phpcs:enable */
+
+		self::$html['result']['success'] = (
+			'<div class="o-form-result__positive l-width-100-pc l-none outline-none" aria-labelledby="%s" tabindex="-1">' .
+				'<div class="o-form__positive l-padding-left-2xs l-padding-right-2xs l-padding-top-2xs l-padding-bottom-2xs">' .
+					'<div class="l-flex l-gap-margin-3xs">' .
+						'<div>' .
+							'<div class="l-width-s l-height-s l-svg">' .
+								$success_icon .
+							'</div>' .
+						'</div>' .
+						'<div>' .
+							'<h2 id="%s" class="t-h4 l-padding-top-5xs l-padding-bottom-5xs o-form-result__primary"></h2>' .
+							'<p class="t t-current o-form-result__secondary"></p>' .
+						'</div>' .
+					'</div>' .
+				'</div>' .
+			'</div>'
+		);
+
+		self::$html['result']['error']['default'] = (
+			'<div class="o-form-result__negative l-width-100-pc l-none outline-none" aria-labelledby="%s" tabindex="-1">' .
+				'<div class="o-form__negative l-padding-left-2xs l-padding-right-2xs l-padding-top-2xs l-padding-bottom-2xs">' .
+					'<div class="l-flex l-gap-margin-3xs">' .
+						'<div>' .
+							'<div class="l-width-s l-height-s l-svg">' .
+								$error_icon .
+							'</div>' .
+						'</div>' .
+						'<div>' .
+							'<h2 id="%s" class="t-h4 l-padding-top-5xs l-padding-bottom-5xs o-form-result__primary"></h2>' .
+							'<p class="t t-current o-form-result__secondary"></p>' .
+						'</div>' .
+					'</div>' .
+				'</div>' .
+			'</div>'
+		);
+
+		self::$html['result']['error']['summary'] = (
+			'<div class="o-form-error__summary l-width-100-pc l-none outline-none" aria-labelledby="%s" tabindex="-1">' .
+				'<div class="o-form__negative l-padding-left-2xs l-padding-right-2xs l-padding-top-2xs l-padding-bottom-2xs">' .
+					'<div class="l-flex l-gap-margin-3xs">' .
+						'<div>' .
+							'<div class="l-width-s l-height-s l-svg">' .
+								$error_icon .
+							'</div>' .
+						'</div>' .
+						'<div>' .
+							'<h2 id="%s" class="t-h4 l-padding-top-5xs l-padding-bottom-5xs">There is a problem</h2>' .
+							'<ul class="l-flex l-flex-column l-margin-bottom-5xs-all l-margin-0-last t t-link-current t-list-style-none e-underline o-form-error__list" role="list"></ul>' .
+						'</div>' .
+					'</div>' .
+				'</div>' .
+			'</div>'
+		);
+
 		/* Styles and scripts */
+
+		self::$width_options = [
+			[
+				'label' => 'None',
+				'value' => '',
+			],
+			[
+				'label' => 'Auto',
+				'value' => 'auto',
+			],
+			[
+				'label' => '100%',
+				'value' => '1-1',
+			],
+			[
+				'label' => '75%',
+				'value' => '3-4',
+			],
+			[
+				'label' => '66%',
+				'value' => '2-3',
+			],
+			[
+				'label' => '50%',
+				'value' => '1-2',
+			],
+			[
+				'label' => '33%',
+				'value' => '1-3',
+			],
+			[
+				'label' => '25%',
+				'value' => '1-4',
+			],
+		];
 
 		self::$styles = [
 			[
@@ -153,15 +277,18 @@ class PI extends Formation {
 
 		parent::__construct();
 
+		/* Blocks */
+
+		$contact_form_blocks = new Contact_Form();
+		$blocks              = new Blocks();
+
 		/* Settings */
 
 		if ( is_admin() ) {
 			$theme_settings = new Theme(
 				[
-					'mailchimp_list_locations' => [
-						'mc_footer' => 'footer',
-					],
-					'fields'                   => [
+					'mailchimp' => true,
+					'fields'    => [
 						[
 							'name'    => 'tagline',
 							'label'   => 'Tagline',
@@ -177,6 +304,153 @@ class PI extends Formation {
 				]
 			);
 		}
+
+		/* Actions */
+
+		add_action( 'widgets_init', [$this, 'register_widgets'] );
+		add_action( 'wp', [$this, 'wp'] );
+
+		/* Filters */
+
+		add_filter( 'formation_contact_form_args', [$this, 'filter_contact_form_args'], 10, 2 );
+		add_filter( 'formation_contact_form_field_args', [$this, 'filter_contact_field_args'], 10, 2 );
+		add_filter( 'formation_contact_form_group_classes', [$this, 'filter_contact_group_classes'], 10, 3 );
 	}
+
+	/**
+	 * Register widget area.
+	 */
+
+	public function register_widgets() {
+		$n = self::$namespace;
+
+		register_sidebar(
+			[
+				'name'          => 'Footer Contact Form',
+				'id'            => "$n-footer-contact-form",
+				'before_widget' => '',
+				'after_widget'  => '',
+				'before_title'  => '',
+				'after_title'   => '',
+			]
+		);
+	}
+
+	/**
+	 * After WP object is set up.
+	 */
+
+	public function wp() {
+		global $post;
+
+		if ( ! is_object( $post ) || ! isset( $post->ID ) ) {
+			return;
+		}
+
+		$id = $post->ID;
+
+		if ( is_home() ) {
+			$id = (int) get_option( 'page_for_posts' );
+		}
+
+		$hero_theme = get_post_meta( $id, self::$namespace . '_hero_theme', true );
+
+		if ( $hero_theme ) {
+			self::$hero_theme = $hero_theme;
+		}
+	}
+
+	/**
+	 * Filter contact form args.
+	 */
+
+	public function filter_contact_form_args( $args, $attr ) {
+		$form_class         = 'o-form';
+		$fields_class       = 'l-flex l-flex-column l-flex-row-xl l-flex-wrap';
+		$button_class       = 'o-button-primary l-width-100-pc';
+		$button_field_class = '';
+		$gap                = 'l-gap-margin-xs l-gap-margin-s-m';
+
+		if ( 'mailchimp' === $attr['type'] ) {
+			$form_class        .= ' o-form-s o-form-round';
+			$button_field_class = 'l-margin-top-auto';
+			$gap                = 'l-gap-margin-2xs';
+		} else {
+			$button_class .= ' o-button-large';
+		}
+
+		$fields_class .= " $gap";
+
+		$args['form_class']         = $form_class;
+		$args['fields_class']       = $fields_class;
+		$args['button_class']       = $button_class;
+		$args['button_field_class'] = $button_field_class;
+		$args['error_summary']      = self::$html['result']['error']['summary'];
+		$args['error_result']       = self::$html['result']['error']['default'];
+		$args['success_result']     = self::$html['result']['success'];
+		$args['a11y_class']         = self::$a11y_class['visually_hide'];
+
+		return $args;
+	}
+
+	/**
+	 * Filter contact group classes.
+	 */
+
+	public function filter_contact_group_classes( $classes, $attr, $block ) {
+		$classes['container_class'] = 'l-width-100-pc';
+		$classes['fields_class']    = 'l-flex l-flex-column l-gap-margin-2xs';
+
+		return $classes;
+	}
+
+	/**
+	 * Filter contact field args.
+	 */
+
+	public function filter_contact_field_args( $field, $attr ) {
+		$old_field_class = $field['field_class'] ?? '';
+		$field_class     = 'l-flex-grow-1 l-relative';
+		$type            = $field['type'] ?? '';
+		$radio           = strpos( $type, 'radio' ) !== false;
+		$checkbox        = strpos( $type, 'checkbox' ) !== false;
+		$width           = $attr['width'] ?? false;
+
+		/* Field class */
+
+		if ( $width ) {
+			if ( '1-1' === $width ) {
+				$field_class .= ' l-width-100-pc';
+			} else {
+				$field_class .= " l-width-$width-xl";
+			}
+		}
+
+		if ( 'radio-select' === $type || 'radio-text' === $type ) {
+			$field_class .= ' l-flex l-flex-column l-flex-row-m l-align-center-m l-gap-margin-2xs';
+		}
+
+		if ( $old_field_class ) {
+			$field_class = $old_field_class . " $field_class";
+		}
+
+		$field['field_class'] = $field_class;
+
+		/* Class */
+
+		if ( $radio || $checkbox ) {
+			$class     = self::$a11y_class['hide'];
+			$old_class = $field['class'] ?? '';
+
+			if ( $old_class ) {
+				$class = $old_class . " $class";
+			}
+
+			$field['class'] = $class;
+		}
+
+		return $field;
+	}
+
 
 } // End PI

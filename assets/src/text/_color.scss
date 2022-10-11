@@ -15,10 +15,19 @@
   --text-color: #{rgba(func.get-color("background-base"), 0.8)};
   --link-color: var(--background-light);
   --input-bg: var(--background-light-15);
+  --submit-bg: var(--background-light);
+  --submit-color: var(--foreground-dark);
+  --negative-color: var(--negative-light);
+  --positive-color: var(--positive-light);
+  --bg-result: #{rgba(func.get-color("background-light"), 0.05)};
 
   color: var(--text-color);
 }
 
 .t-link-current {
   --link-color: currentColor;
+}
+
+.t-current {
+  color: currentColor;
 }

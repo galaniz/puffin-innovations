@@ -6,24 +6,41 @@
 
 @use "@alanizcreative/formation/src/config";
 
-/* Styles */
+/* Form */
 
 .o-form {
   --label: var(--h4);
+  --label-s: var(--h5);
   --input: var(--t-m);
   --border-radius: var(--border-radius-s);
 
+  fieldset {
+    @extend %u-width-100-pc;
+  }
+
   label {
-    @extend %u-font-family-secondary;
-    @extend %u-line-height-130-pc;
     @extend %u-display-block;
 
-    font-size: var(--label);
-    margin-bottom: var(--3xs);
-    color: var(--heading-color);
+    &[data-req] > span:first-child::after {
+      content: ' *';
+      color: var(--negative-color);
+    }
+  }
 
-    &[data-req]::after {
-      content: '*';
+  label:first-child,
+  legend:first-child {
+    margin-bottom: var(--3xs);
+  }
+
+  label,
+  legend {
+    > span:first-child {
+      @extend %u-font-family-secondary;
+      @extend %u-line-height-130-pc;
+      @extend %u-display-block;
+  
+      font-size: var(--label);
+      color: var(--heading-color);
     }
   }
 
@@ -53,13 +70,97 @@
       --color: var(--outline-color);
     }
   }
+
+  [type="submit"] {
+    background-color: var(--submit-bg);
+    color: var(--submit-color);
+  }
+
+  [role="group"] {
+    --input: var(--t);
+    --input-padding: var(--4xs) var(--2xs);
+  }
 }
 
 .o-form-s {
   --label: var(--h5);
+  --label-s: var(--h6);
   --input-padding: var(--3-5xs) var(--xs);
 }
 
 .o-form-round {
   --border-radius: var(--border-radius-xl);
+}
+
+/* Form controls */
+
+.o-form__field {
+  &[data-type="radio"],
+  &[data-type="radio-select"],
+  &[data-type="radio-text"],
+  &[data-type="checkbox"] {
+    label {
+      @extend %u-display-inline-flex;
+    }
+
+    .o-form__label {
+      @extend %u-font-family-secondary;
+      @extend %u-line-height-130-pc;
+
+      padding: var(--5xs) 0;
+      color: var(--heading-color);
+      margin-left: var(--3xs);
+      font-size: var(--label);
+
+      fieldset & {
+        font-size: var(--label-s);
+      }
+    }
+  }
+}
+
+.o-form__control {
+  --br: var(--border-radius-l);
+
+  @extend %u-flex-shrink-0;
+
+  width: var(--s);
+  height: var(--s);
+  background-color: var(--background-base);
+  border-radius: var(--br);
+
+  input:checked ~ label & {
+    background-color: var(--primary-dark);
+  }
+
+  &[data-type="checkbox"] {
+    --br: var(--border-radius-xs);
+  }
+}
+
+/* Result */ 
+
+.o-form__negative,
+.o-form__positive {
+  box-shadow: inset 0.3125rem 0 0 0 currentColor;
+  border-top-right-radius: var(--border-radius-s);
+  border-bottom-right-radius: var(--border-radius-s);
+  background-color: var(--bg-result);
+
+  [tabindex="-1"]:focus & {
+    box-shadow: inset 0 0 0 0.3125rem currentColor;
+  }
+}
+
+.o-form__negative,
+.o-form__error {
+  --heading-color: var(--negative-color);
+
+  color: var(--negative-color);
+}
+
+.o-form__positive {
+  --heading-color: var(--positive-color);
+
+  color: var(--positive-color);
 }

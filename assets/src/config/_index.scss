@@ -163,6 +163,7 @@ $margin-vertical: (
 
   $gap-breakpoints: ("m", "l"),
 
+  $width-percentage-breakpoints: ("s", "m", "xl"),
   $widths: ("xs", "s", "m", "l"),
   $heights: ("xs", "s", "m", "l"),
   $max-widths: ("xl", "4xl"),
@@ -195,6 +196,7 @@ $margin-vertical: (
     "m": 15px,
     "l": 20px,
     "xl": 30px,
+    "2xl": 40px,
   ),
 
   $outline: (

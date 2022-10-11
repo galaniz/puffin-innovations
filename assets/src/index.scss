@@ -46,6 +46,7 @@
 @use "layouts/flex";
 @use "@alanizcreative/formation/src/layouts/gap-margin";
 @use "@alanizcreative/formation/src/layouts/height";
+@use "layouts/svg";
 
 /* Borders */
 
@@ -55,6 +56,7 @@
 
 @use "components/skip-link";
 @use "components/nav";
+@use "components/hero";
 
 /* Objects */
 

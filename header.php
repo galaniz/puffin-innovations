@@ -15,10 +15,6 @@ use PI\PI as PI;
 use Formation\Pub\Nav_Walker;
 use Formation\Utils_Optional;
 
-/* Hero theme */
-
-$theme = 'background-light';
-
 /* Logo */
 
 $logo = Utils_Optional::render_logo();
@@ -80,11 +76,11 @@ if ( has_nav_menu( 'main' ) ) {
 </head>
 <body <?php body_class(); ?>>
 	<?php wp_body_open(); ?>
-	<header class="l-padding-top-2xs l-padding-bottom-2xs l-padding-top-xs-l l-padding-bottom-xs-l" data-theme="<?php echo esc_attr( $theme ); ?>">
+	<header class="l-padding-top-2xs l-padding-bottom-2xs l-padding-top-xs-l l-padding-bottom-xs-l" data-theme="<?php echo esc_attr( PI::$hero_theme ); ?>">
 		<a href="#main" class="c-skip-link t-h5 bg-background-light t-foreground-dark l-block l-absolute l-left-0 l-right-0 l-top-0 l-padding-right-2xs l-padding-left-2xs l-padding-top-2xs l-padding-bottom-2xs t-align-center outline-snug">
 			Skip to main content
 		</a>
-		<nav class="c-nav l-container t-link-current" aria-label="Main">
+		<nav class="c-nav l-container l-relative t-link-current" aria-label="Main">
 			<div class="c-nav__overlay bg-foreground-dark-09 l-fixed l-top-0 l-left-0 l-width-100-pc l-height-100-pc e-transition"></div>
 			<div class="l-flex l-justify-between l-align-center">
 				<?php /* phpcs:ignore */ ?>

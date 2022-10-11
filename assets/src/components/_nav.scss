@@ -4,6 +4,8 @@
 
 /* Imports */
 
+@use 'sass:map';
+@use "@alanizcreative/formation/src/config" as con;
 @use "@alanizcreative/formation/src/utils/functions" as func;
 @use "@alanizcreative/formation/src/components/nav";
 @use "@alanizcreative/formation/src/components/nav/overflow";
@@ -13,6 +15,8 @@
 /* Styles */
 
 .c-nav {
+  z-index: map.get(con.$z-index, "nav");
+
   [data-logo] {
     margin-right: var(--l);
   }
