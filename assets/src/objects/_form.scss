@@ -20,11 +20,6 @@
 
   label {
     @extend %u-display-block;
-
-    &[data-req] > span:first-child::after {
-      content: ' *';
-      color: var(--negative-color);
-    }
   }
 
   label:first-child,
@@ -37,7 +32,6 @@
     > span:first-child {
       @extend %u-font-family-secondary;
       @extend %u-line-height-130-pc;
-      @extend %u-display-block;
   
       font-size: var(--label);
       color: var(--heading-color);
@@ -79,6 +73,15 @@
   [role="group"] {
     --input: var(--t);
     --input-padding: var(--4xs) var(--2xs);
+  }
+
+  [data-req] > span:first-child::after {
+    content: ' *';
+    color: var(--negative-color);
+  }
+
+  [data-required] {
+    @extend %u-visually-hidden;
   }
 }
 

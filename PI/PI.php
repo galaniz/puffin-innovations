@@ -399,6 +399,7 @@ class PI extends FRM {
 
 	public function filter_contact_group_classes( $classes, $attr, $block ) {
 		$classes['container_class'] = 'l-width-100-pc';
+		$classes['fieldset_class']  = 'o-form__group';
 		$classes['fields_class']    = 'l-flex l-flex-column l-gap-margin-2xs';
 
 		return $classes;

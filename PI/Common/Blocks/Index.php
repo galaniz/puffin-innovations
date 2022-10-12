@@ -75,6 +75,9 @@ class Index {
 			'core/table',
 			'core/separator',
 			'core/shortcode',
+			"$n/contact-form",
+			"$n/contact-form-group",
+			"$n/contact-form-field",
 			"$n/hero",
 		];
 	}
