@@ -52,10 +52,10 @@ class PI extends FRM {
 	public static $html = [
 		'loader' => [
 			'button' => (
-				'<div class="o-loader l-absolute l-top-0 l-left-0 l-right-0 l-bottom-0 l-flex l-align-center l-justify-center" data-hide>' .
-					'<div class="l-width-xs l-height-xs b-radius-100-pc"></div>' .
-					'<div class="l-width-xs l-height-xs b-radius-100-pc l-absolute l-top-0 l-left-0 l-right-0 l-bottom-0 l-margin-auto"></div>' .
-				'</div>'
+				'<span class="o-loader l-absolute l-top-0 l-left-0 l-right-0 l-bottom-0 l-flex l-align-center l-justify-center" data-hide>' .
+					'<span class="l-width-xs l-height-xs b-radius-100-pc"></span>' .
+					'<span class="l-width-xs l-height-xs b-radius-100-pc l-absolute l-top-0 l-left-0 l-right-0 l-bottom-0 l-margin-auto"></span>' .
+				'</span>'
 			),
 		],
 		'result' => [
@@ -214,12 +214,20 @@ class PI extends FRM {
 				'value' => '1-1',
 			],
 			[
+				'label' => '80%',
+				'value' => '4-5',
+			],
+			[
 				'label' => '75%',
 				'value' => '3-4',
 			],
 			[
 				'label' => '66%',
 				'value' => '2-3',
+			],
+			[
+				'label' => '60%',
+				'value' => '3-5',
 			],
 			[
 				'label' => '50%',
@@ -232,6 +240,10 @@ class PI extends FRM {
 			[
 				'label' => '25%',
 				'value' => '1-4',
+			],
+			[
+				'label' => '20%',
+				'value' => '1-5',
 			],
 		];
 

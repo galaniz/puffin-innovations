@@ -27,6 +27,10 @@
   color: var(--text-color);
 }
 
+.t-link {
+  color: var(--link-color);
+}
+
 .t-link-current {
   --link-color: currentColor;
 }

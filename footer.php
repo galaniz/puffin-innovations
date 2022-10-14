@@ -12,7 +12,6 @@
 /* Imports */
 
 use PI\PI as PI;
-use Formation\Utils_Optional;
 use Formation\Common\Field\Select_Fields;
 
 /* Namespace */
@@ -21,7 +20,7 @@ $n = PI::$namespace;
 
 /* Logo */
 
-$logo = Utils_Optional::render_logo();
+$logo = PI::render_logo();
 
 if ( $logo ) {
 	$tagline = get_option( $n . '_tagline', '' );
