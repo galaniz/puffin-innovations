@@ -14,6 +14,7 @@
 
   --scrollbar-width: 0rem;
   --background-light-15: #{rgba(func.get-color("background-light"), 0.15)};
+  --background-light-60: #{rgba(func.get-color("background-light"), 0.6)};
   --text-color: #{rgba(func.get-color("foreground-dark"), 0.8)};
   --heading-color: var(--foreground-dark);
   --link-color: var(--primary-dark);
@@ -21,6 +22,9 @@
   --underline: #{func.calc-rem(1px)};
   --input-bg: var(--background-base); 
   --input-padding: var(--2xs) var(--xs);
+  --input-control-bg-checked: var(--primary-dark);
+  --input-control-color-checked: var(--background-light);
+  --placeholder-color: var(--text-color);
   --submit-bg: var(--foreground-dark);
   --submit-color: var(--background-light);
   --negative-color: var(--negative-dark);

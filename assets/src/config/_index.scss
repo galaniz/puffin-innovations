@@ -163,7 +163,7 @@ $margin-vertical: (
 
   $gap-breakpoints: ("m", "l"),
 
-  $width-percentage-breakpoints: ("s", "m", "xl"),
+  $width-percentage-breakpoints: ("s", "m", "l", "xl"),
   $widths: ("xs", "s", "m", "l"),
   $heights: ("xs", "s", "m", "l"),
   $max-widths: ("xl", "4xl"),
@@ -175,7 +175,7 @@ $margin-vertical: (
     "default": 1340px,
   ),
 
-  $flex-row-breakpoints: ("m", "l", "xl"),
+  $flex-row-breakpoints: ("s", "m", "l", "xl"),
 
   $nav: (
     "icon": (

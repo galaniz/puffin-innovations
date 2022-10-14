@@ -15,9 +15,7 @@ import SendForm from 'Formation/objects/form/send'
 
 const ns = window.namespace
 const n = window[ns]
-
 const el = {}
-
 const meta = [
   {
     prop: 'nav',
@@ -123,6 +121,10 @@ const initialize = () => {
 
   if (el.forms.length) {
     const sendForm = (form, nonce = null) => {
+      /* Store instance */
+
+      let instance = null
+
       /* Get elements */
 
       const meta = [
@@ -248,10 +250,10 @@ const initialize = () => {
         labelClass: 'o-form__label',
         errorTemplate: `
           <span class='o-form__error l-padding-top-4xs l-flex l-gap-margin-4xs' id='%id'>
-            <span>
+            <span class='t-line-height-0'>
               <svg width="25" height="25" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg"><path d="M10.0001 14.1666C10.1945 14.1666 10.3577 14.1007 10.4897 13.9687C10.6216 13.8368 10.6876 13.6736 10.6876 13.4791C10.6876 13.2847 10.6216 13.1215 10.4897 12.9895C10.3577 12.8576 10.1945 12.7916 10.0001 12.7916C9.80564 12.7916 9.64244 12.8576 9.5105 12.9895C9.37855 13.1215 9.31258 13.2847 9.31258 13.4791C9.31258 13.6736 9.37855 13.8368 9.5105 13.9687C9.64244 14.1007 9.80564 14.1666 10.0001 14.1666ZM10.0001 18.3333C8.86119 18.3333 7.7848 18.1145 6.77091 17.677C5.75703 17.2395 4.87161 16.6423 4.11466 15.8854C3.35772 15.1284 2.7605 14.243 2.323 13.2291C1.8855 12.2152 1.66675 11.1319 1.66675 9.97913C1.66675 8.84024 1.8855 7.76385 2.323 6.74996C2.7605 5.73607 3.35772 4.85413 4.11466 4.10413C4.87161 3.35413 5.75703 2.76038 6.77091 2.32288C7.7848 1.88538 8.86814 1.66663 10.0209 1.66663C11.1598 1.66663 12.2362 1.88538 13.2501 2.32288C14.264 2.76038 15.1459 3.35413 15.8959 4.10413C16.6459 4.85413 17.2397 5.73607 17.6772 6.74996C18.1147 7.76385 18.3334 8.84718 18.3334 9.99996C18.3334 11.1388 18.1147 12.2152 17.6772 13.2291C17.2397 14.243 16.6459 15.1284 15.8959 15.8854C15.1459 16.6423 14.264 17.2395 13.2501 17.677C12.2362 18.1145 11.1529 18.3333 10.0001 18.3333ZM10.0626 10.9791C10.2431 10.9791 10.3924 10.9201 10.5105 10.802C10.6286 10.684 10.6876 10.5347 10.6876 10.3541V6.33329C10.6876 6.15274 10.6286 6.00343 10.5105 5.88538C10.3924 5.76732 10.2431 5.70829 10.0626 5.70829C9.88203 5.70829 9.73272 5.76732 9.61467 5.88538C9.49661 6.00343 9.43758 6.15274 9.43758 6.33329V10.3541C9.43758 10.5347 9.49661 10.684 9.61467 10.802C9.73272 10.9201 9.88203 10.9791 10.0626 10.9791Z" fill="currentColor"/></svg>
             </span>
-            <span>
+            <span class='t-line-height-0'>
               <span class='t-h6' id='%id-text'>%message</span>
             </span>
           </span>
@@ -276,7 +278,31 @@ const initialize = () => {
         }
       }
 
-      return new SendForm(args)
+      /* Filter inputs */
+
+      if (type === 'mailchimp' || type === 'contact-mailchimp') {
+        args.filterInputs = (formValuesArgs, inputs) => {
+          inputs.forEach((input) => {
+            if (input.hasAttribute('data-tag')) {
+              formValuesArgs.tag = true
+            }
+
+            if (input.hasAttribute('data-merge-field')) {
+              formValuesArgs.merge_field = input.getAttribute('data-merge-field')
+            }
+
+            if (input.hasAttribute('data-mailchimp-consent')) {
+              instance.data.mailchimp_consent_name = input.name
+            }
+          })
+
+          return formValuesArgs
+        }
+      }
+
+      instance = new SendForm(args)
+
+      return instance
     }
 
     /* Get nonce */

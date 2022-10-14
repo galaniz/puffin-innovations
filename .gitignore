@@ -1,6 +1,7 @@
 node_modules/
 vendor/
 assets/public
+PI/Common/assets/public
 style.css
 composer.lock
 package-lock.json

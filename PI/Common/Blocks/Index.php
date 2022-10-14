@@ -13,6 +13,8 @@ namespace PI\Common\Blocks;
 
 use PI\PI as PI;
 use PI\Common\Blocks\Hero;
+use PI\Common\Blocks\Container;
+use PI\Common\Blocks\Column;
 use Formation\Common\Blocks\Blocks;
 use function Formation\additional_script_data;
 
@@ -37,6 +39,8 @@ class Index {
 		/* Add blocks */
 
 		new Hero();
+		new Container();
+		new Column();
 		new Blocks(
 			[
 				'folder_url' => get_template_directory_uri() . '/PI/Common/assets/public/js/blocks/',
@@ -79,6 +83,8 @@ class Index {
 			"$n/contact-form-group",
 			"$n/contact-form-field",
 			"$n/hero",
+			"$n/container",
+			"$n/column",
 		];
 	}
 

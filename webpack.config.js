@@ -193,7 +193,9 @@ const copyPatterns = [
 /* Block paths */
 
 const blocks = [
-  'hero'
+  'hero',
+  'container',
+  'column'
 ]
 
 const blocksEntry = {}

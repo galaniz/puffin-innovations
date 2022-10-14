@@ -166,9 +166,9 @@ class Hero {
 				$media_output = "<img class='$image_classes' src='$src' alt='$alt' srcset='$srcset' sizes='$sizes' width='$width' height='$height'>";
 			}
 
-			if ( $media_video ) {
+			/*if ( $media_video ) {
 
-			}
+			}*/
 
 			if ( $media_output ) {
 				$ar = $media_video ? 56 : 66;

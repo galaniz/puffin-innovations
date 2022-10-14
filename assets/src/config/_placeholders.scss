@@ -28,6 +28,8 @@
   @extend %u-display-inline-flex;
   @extend %u-justify-content-center;
   @extend %u-transition-border-radius;
+  @extend %u-overflow-hidden;
+  @extend %u-position-relative;
 
   padding: var(--p);
   font-size: var(--sz);

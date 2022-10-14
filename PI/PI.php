@@ -22,6 +22,7 @@ use Formation\Formation as FRM;
 use Formation\Utils;
 use Formation\Admin\Settings\Theme;
 use Formation\Common\Blocks\Contact_Form;
+use function Formation\additional_script_data;
 
 /**
  * Class
@@ -50,7 +51,12 @@ class PI extends FRM {
 
 	public static $html = [
 		'loader' => [
-			'button' => '',
+			'button' => (
+				'<div class="o-loader l-absolute l-top-0 l-left-0 l-right-0 l-bottom-0 l-flex l-align-center l-justify-center" data-hide>' .
+					'<div class="l-width-xs l-height-xs b-radius-100-pc"></div>' .
+					'<div class="l-width-xs l-height-xs b-radius-100-pc l-absolute l-top-0 l-left-0 l-right-0 l-bottom-0 l-margin-auto"></div>' .
+				'</div>'
+			),
 		],
 		'result' => [
 			'error'   => [
@@ -58,6 +64,59 @@ class PI extends FRM {
 				'summary' => '',
 			],
 			'success' => '',
+		],
+	];
+
+	/* Padding options */
+
+	public static $padding_options = [
+		[
+			'label' => 'None',
+			'value' => '',
+		],
+		[
+			'label' => '5px',
+			'value' => '5xs',
+		],
+		[
+			'label' => '10px',
+			'value' => '4xs',
+		],
+		[
+			'label' => '15px',
+			'value' => '3xs',
+		],
+		[
+			'label' => '20px',
+			'value' => '2xs',
+		],
+		[
+			'label' => '30px',
+			'value' => 'xs',
+		],
+		[
+			'label' => '40px',
+			'value' => 's',
+		],
+		[
+			'label' => '60px',
+			'value' => 'm',
+		],
+		[
+			'label' => '80px',
+			'value' => 'l',
+		],
+		[
+			'label' => '100px',
+			'value' => 'xl',
+		],
+		[
+			'label' => '120px',
+			'value' => '2xl',
+		],
+		[
+			'label' => '140px',
+			'value' => '3xl',
 		],
 	];
 
@@ -173,6 +232,49 @@ class PI extends FRM {
 			[
 				'label' => '25%',
 				'value' => '1-4',
+			],
+		];
+
+		self::$gap_options = [
+			[
+				'label' => 'None',
+				'value' => '',
+			],
+			[
+				'label' => '10px',
+				'value' => '4xs',
+			],
+			[
+				'label' => '15px',
+				'value' => '3xs',
+			],
+			[
+				'label' => '20px',
+				'value' => '2xs',
+			],
+			[
+				'label' => '30px',
+				'value' => 'xs',
+			],
+			[
+				'label' => '40px',
+				'value' => 's',
+			],
+			[
+				'label' => '50px',
+				'value' => 'sm',
+			],
+			[
+				'label' => '60px',
+				'value' => 'm',
+			],
+			[
+				'label' => '80px',
+				'value' => 'l',
+			],
+			[
+				'label' => '100px',
+				'value' => 'xl',
 			],
 		];
 
@@ -305,6 +407,10 @@ class PI extends FRM {
 			);
 		}
 
+		/* Pass data to front end */
+
+		additional_script_data( self::$namespace, ['padding_options' => self::$padding_options ], true, true );
+
 		/* Actions */
 
 		add_action( 'widgets_init', [$this, 'register_widgets'] );
@@ -385,6 +491,7 @@ class PI extends FRM {
 		$args['fields_class']       = $fields_class;
 		$args['button_class']       = $button_class;
 		$args['button_field_class'] = $button_field_class;
+		$args['button_loader']      = self::$html['loader']['button'];
 		$args['error_summary']      = self::$html['result']['error']['summary'];
 		$args['error_result']       = self::$html['result']['error']['default'];
 		$args['success_result']     = self::$html['result']['success'];

@@ -14,7 +14,7 @@
 
   border-bottom-right-radius: var(--border-radius-xl);
   border-bottom-left-radius: var(--border-radius-xl);
-  background-color: var(--theme);
+  background: var(--theme);
   width: calc(100vw - var(--scrollbar-width));
   height: 200vh;
   bottom: 0;
