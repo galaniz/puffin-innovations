@@ -4,19 +4,25 @@
 
 /* Imports */
 
+@use 'sass:map';
+@use "@alanizcreative/formation/src/config" as con;
 @use "@alanizcreative/formation/src/utils/functions" as func;
 @use "@alanizcreative/formation/src/components/nav";
 @use "@alanizcreative/formation/src/components/nav/overflow";
 @use "@alanizcreative/formation/src/components/nav/icon";
 @use "@alanizcreative/formation/src/components/nav/icon/four";
 
-/* Styles */
+/* Container */
 
 .c-nav {
+  z-index: map.get(con.$z-index, "nav");
+
   [data-logo] {
     margin-right: var(--l);
   }
 }
+
+/* Link */
 
 .c-nav__link {
   .c-nav__list &[data-depth="0"] {
@@ -46,7 +52,24 @@
   }
 }
 
-.c-nav__label {
+/* Icon */
+
+.c-nav__button {
+  --icon-color: var(--heading-color);
+
+  &[data-show] {
+    --icon-color: var(--foreground-dark);
+  }
+}
+
+.c-nav-icon__top,
+.c-nav-icon__middle,
+.c-nav-icon__bottom {
+  background: var(--icon-color);
+}
+
+.c-nav-icon-label {
+  color: var(--icon-color);
   font-size: 1rem;
   letter-spacing: 0.05em;
 
@@ -54,6 +77,8 @@
     transform: translateY(15%);
   }
 }
+
+/* Mobile */
 
 .c-nav-overflow {
   --prop: visibility, transform;

@@ -30,6 +30,7 @@
 
 @use "@alanizcreative/formation/src/text/align";
 @use "text/list-style";
+@use "text/line-height";
 @use "text/sizes";
 @use "text/color" as c;
 
@@ -46,6 +47,8 @@
 @use "layouts/flex";
 @use "@alanizcreative/formation/src/layouts/gap-margin";
 @use "@alanizcreative/formation/src/layouts/height";
+@use "@alanizcreative/formation/src/layouts/object";
+@use "layouts/svg";
 
 /* Borders */
 
@@ -55,12 +58,14 @@
 
 @use "components/skip-link";
 @use "components/nav";
+@use "components/hero";
 
 /* Objects */
 
 @use "objects/logo";
 @use "objects/button";
 @use "objects/form";
+@use "objects/loader";
 
 /* Effects */
 

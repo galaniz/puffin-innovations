@@ -15,3 +15,12 @@
 .outline-tight {
   --outline-offset: -0.25rem;
 }
+
+body .outline-none:focus {
+  outline: none
+}
+
+body:not([data-using-mouse]) input:focus ~ label .o-form__control {
+  outline: var(--outline-width) solid var(--outline-color);
+  outline-offset: var(--outline-offset);
+}

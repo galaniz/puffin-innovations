@@ -14,3 +14,9 @@
     align-self: center;
   }
 }
+
+.l-align-center-m {
+  @include mix.breakpoint-min("m") {
+    align-items: center;
+  }
+}

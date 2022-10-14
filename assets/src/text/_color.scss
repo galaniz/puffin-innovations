@@ -14,11 +14,27 @@
   --heading-color: var(--background-light);
   --text-color: #{rgba(func.get-color("background-base"), 0.8)};
   --link-color: var(--background-light);
+  --placeholder-color: var(--background-light-60);
   --input-bg: var(--background-light-15);
+  --input-control-bg-checked: var(--background-light);
+  --input-control-color-checked: var(--foreground-dark);
+  --submit-bg: var(--background-light);
+  --submit-color: var(--foreground-dark);
+  --negative-color: var(--negative-light);
+  --positive-color: var(--positive-light);
+  --bg-result: #{rgba(func.get-color("background-light"), 0.05)};
 
   color: var(--text-color);
 }
 
+.t-link {
+  color: var(--link-color);
+}
+
 .t-link-current {
   --link-color: currentColor;
+}
+
+.t-current {
+  color: currentColor;
 }

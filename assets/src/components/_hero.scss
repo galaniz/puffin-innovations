@@ -1,0 +1,39 @@
+/**
+ * Components: hero
+ */
+
+/* Imports */
+
+@use "@alanizcreative/formation/src/config";
+@use "@alanizcreative/formation/src/utils/mixins" as mix;
+
+/* Styles */
+
+.c-hero-bg {
+  --offset: var(--container-padding) * -1;
+
+  &::before {
+    @extend %u-z-index--1;
+
+    border-bottom-right-radius: var(--border-radius-xl);
+    border-bottom-left-radius: var(--border-radius-xl);
+    background: var(--theme);
+    width: calc(100vw - var(--scrollbar-width));
+    height: 125rem;
+    bottom: 0;
+    top: auto;
+  }
+
+  [data-layout="partial-left"] &::before {
+    left: calc(var(--offset));
+  }
+
+  [data-layout="partial-right"] &::before {
+    right: calc(var(--offset));
+    left: auto;
+  }
+
+  @include mix.breakpoint-min("container") {
+    --offset: ((100vw - var(--scrollbar-width)) - var(--container-no-padding)) / 2 * -1;
+  }
+}

@@ -20,7 +20,7 @@
 
 %u-button {
   --p: var(--2-5xs) var(--xs);
-  --s: var(--h5);
+  --sz: var(--h5);
 
   @extend %u-font-family-secondary;
   @extend %u-font-weight-bold;
@@ -28,9 +28,11 @@
   @extend %u-display-inline-flex;
   @extend %u-justify-content-center;
   @extend %u-transition-border-radius;
+  @extend %u-overflow-hidden;
+  @extend %u-position-relative;
 
   padding: var(--p);
-  font-size: var(--s);
+  font-size: var(--sz);
 }
 
 %u-button-secondary {
@@ -40,5 +42,12 @@
 
 %u-button-small {
   --p: var(--3xs) var(--1-5xs);
-  --s: var(--h6);
+  --sz: var(--h6);
+}
+
+%u-button-large {
+  --p: var(--2xs) var(--s);
+  --sz: var(--h4);
+
+  border-radius: var(--border-radius-2xl);
 }

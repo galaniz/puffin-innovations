@@ -12,7 +12,6 @@
 /* Imports */
 
 use PI\PI as PI;
-use Formation\Utils_Optional;
 use Formation\Common\Field\Select_Fields;
 
 /* Namespace */
@@ -21,7 +20,7 @@ $n = PI::$namespace;
 
 /* Logo */
 
-$logo = Utils_Optional::render_logo();
+$logo = PI::render_logo();
 
 if ( $logo ) {
 	$tagline = get_option( $n . '_tagline', '' );
@@ -68,45 +67,6 @@ if ( has_nav_menu( 'footer' ) ) {
 	);
 }
 
-/* Mailchimp form */
-
-$mailchimp_list        = Utils_Optional::get_mailchimp_list( 'mc_footer' );
-$mailchimp_list_fields = $mailchimp_list['fields'] ?? false;
-$mailchimp_form        = '';
-
-if ( $mailchimp_list_fields ) {
-	$mailchimp_list_fields = array_map(
-		function( $v ) {
-			$v['field_class'] = 'l-flex-grow-1';
-			return $v;
-		},
-		$mailchimp_list_fields
-	);
-
-	$mailchimp_list_fields = Select_Fields::render( $mailchimp_list_fields, false );
-
-	if ( $mailchimp_list_fields ) {
-		$mailchimp_form = (
-			'<div class="l-flex-grow-1">' .
-				PI::render_form(
-					[
-						'form_class'          => 'o-form o-form-s o-form-round',
-						'form_data_type'      => 'mailchimp',
-						'form_attr'           => ['data-location' => 'mc_footer'],
-						'fields_class'        => 'l-flex l-flex-column l-flex-row-xl l-gap-margin-2xs',
-						'fields'              => $mailchimp_list_fields,
-						'button_field_class'  => 'l-margin-top-auto t-foreground-dark',
-						'button_class'        => 'o-button-primary bg-background-light l-width-100-pc',
-						'error_summary_class' => 'o-form-error__summary l-none',
-						'submit_label'        => $mailchimp_list['submit_label'],
-						'success_message'     => $mailchimp_list['success_message'],
-					]
-				) .
-			'</div>'
-		);
-	}
-}
-
 /* Social */
 
 $social = PI::render_social(
@@ -114,6 +74,11 @@ $social = PI::render_social(
 		'links'      => 'social',
 		'list_class' => 'l-flex l-flex-wrap l-gap-margin-2xs t-list-style-none',
 		'link_class' => 'l-flex l-padding-top-3xs l-padding-bottom-3xs l-padding-left-3xs l-padding-right-3xs bg-background-light-15 e-transition-border-radius',
+		'link_attr'  => [
+			'target' => '_blank',
+			'rel'    => 'noreferrer',
+		],
+		'a11y_class' => PI::$a11y_class['visually_hide'],
 		'icon_class' => 'l-flex',
 		'icon_paths' => [
 			'Facebook'  => PI::$svg_assets_path . 'facebook.svg',
@@ -198,7 +163,11 @@ if ( $legal ) {
 				<?php /* phpcs:disable */ ?>
 				<?php echo $logo; ?>
 				<?php echo $navigation; ?>
-				<?php echo $mailchimp_form; ?>
+				<?php if ( is_active_sidebar( "$n-footer-contact-form" ) ) : ?>
+					<div class="l-flex-grow-1 l-width-2-5-m">
+						<?php dynamic_sidebar( "$n-footer-contact-form" ); ?>
+					</div>
+				<?php endif; ?>
 				<?php echo $social; ?>
 				<?php echo $legal ?>
 				<?php /* phpcs:enable */ ?>

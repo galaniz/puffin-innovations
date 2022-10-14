@@ -76,7 +76,6 @@ html {
   );
 }
 
-h1,
 h2,
 h3,
 h4, 
@@ -133,7 +132,6 @@ h6,
   @extend %u-line-height-160-pc;
 }
 
-h1,
 .t-h1 {
   @extend %u-font-weight-black;
 

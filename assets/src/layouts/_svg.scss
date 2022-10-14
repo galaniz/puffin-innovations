@@ -1,0 +1,16 @@
+/**
+ * Layouts: flex
+ */
+
+/* Imports */
+
+@use "@alanizcreative/formation/src/config";
+
+/* Styles */
+
+.l-svg {
+  svg {
+    @extend %u-width-100-pc;
+    @extend %u-height-100-pc;
+  }
+}

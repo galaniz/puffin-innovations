@@ -18,11 +18,12 @@
   },
   "homepage": "https://github.com/galaniz/puffin-innovations#readme",
   "devDependencies": {
-    "@alanizcreative/formation": "^4.0.0",
+    "@alanizcreative/formation": "^4.0.1",
     "@babel/core": "^7.19.1",
     "@babel/preset-env": "^7.19.1",
     "autoprefixer": "^10.4.11",
     "babel-loader": "^8.2.5",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.1",
     "css-vars-ponyfill": "^2.4.8",
