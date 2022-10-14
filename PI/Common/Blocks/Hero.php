@@ -225,7 +225,7 @@ class Hero {
 		}
 
 		if ( $title_small ) {
-			$title_output .= "<span class='t-h5 l-block'>$title_small</span>";
+			$title_output .= "<span class='t-h5 l-block'>$title_small </span>";
 		}
 
 		if ( $title_large ) {
