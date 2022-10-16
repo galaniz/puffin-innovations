@@ -12,6 +12,7 @@ const {
 const {
   Panel,
   PanelBody,
+  TextControl,
   SelectControl,
   CheckboxControl
 } = window.wp.components
@@ -46,6 +47,7 @@ registerBlockType(name, {
     const { attributes, setAttributes } = props
 
     const {
+      internal_name = def.internal_name, // eslint-disable-line camelcase
       tag = def.tag,
       width_mobile = def.width_mobile, // eslint-disable-line camelcase
       width = def.width,
@@ -53,32 +55,27 @@ registerBlockType(name, {
       grow = def.grow
     } = attributes
 
+    /* Internal name */
+
+    const internalName = internal_name // eslint-disable-line camelcase
+
     /* Output */
 
     return [
       <Fragment key='frag'>
         <InspectorControls>
           <PanelBody title='Column Options'>
+            <TextControl
+              label='Internal Name'
+              help='For editor organization'
+              value={internal_name} // eslint-disable-line camelcase
+              onChange={v => setAttributes({ internal_name: v })}
+            />
             <SelectControl
               label='Tag'
               value={tag}
-              options={[
-                { label: 'Div', value: 'div' },
-                { label: 'List Item', value: 'li' }
-              ]}
+              options={nO.html_options}
               onChange={tag => setAttributes({ tag })}
-            />
-            <SelectControl
-              label='Justify'
-              value={justify}
-              options={[
-                { label: 'None', value: '' },
-                { label: 'Start', value: 'start' },
-                { label: 'Center', value: 'center' },
-                { label: 'End', value: 'end' },
-                { label: 'Space Between', value: 'between' }
-              ]}
-              onChange={justify => setAttributes({ justify })}
             />
             <SelectControl
               label='Width'
@@ -92,8 +89,21 @@ registerBlockType(name, {
               options={nO.width_options}
               onChange={width => setAttributes({ width })}
             />
+            <SelectControl
+              label='Justify'
+              value={justify}
+              options={[
+                { label: 'None', value: '' },
+                { label: 'Start', value: 'start' },
+                { label: 'Center', value: 'center' },
+                { label: 'End', value: 'end' },
+                { label: 'Space Between', value: 'between' }
+              ]}
+              onChange={justify => setAttributes({ justify })}
+            />
             <CheckboxControl
               label='Grow'
+              help='Fill in remaining space'
               value='1'
               checked={!!grow}
               onChange={grow => setAttributes({ grow })}
@@ -102,7 +112,7 @@ registerBlockType(name, {
         </InspectorControls>
       </Fragment>,
       <Panel key='panel'>
-        <PanelBody title='Column'>
+        <PanelBody title={`Column${internalName ? `: ${internalName}` : ''}`} initialOpen={false}>
           <InnerBlocks />
         </PanelBody>
       </Panel>

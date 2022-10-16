@@ -27,18 +27,20 @@ class Column {
 	public static $blocks = [
 		'column' => [
 			'attr'    => [
-				'tag'          => ['type' => 'string'],
-				'width_mobile' => ['type' => 'string'],
-				'width'        => ['type' => 'string'],
-				'justify'      => ['type' => 'string'],
-				'grow'         => ['type' => 'boolean'],
+				'internal_name' => ['type' => 'string'],
+				'tag'           => ['type' => 'string'],
+				'width_mobile'  => ['type' => 'string'],
+				'width'         => ['type' => 'string'],
+				'justify'       => ['type' => 'string'],
+				'grow'          => ['type' => 'boolean'],
 			],
 			'default' => [
-				'tag'          => 'div',
-				'width_mobile' => '',
-				'width'        => '',
-				'justify'      => '',
-				'grow'         => false,
+				'internal_name' => '',
+				'tag'           => 'div',
+				'width_mobile'  => '',
+				'width'         => '',
+				'justify'       => '',
+				'grow'          => false,
 			],
 			'render'  => [__CLASS__, 'render_column'],
 			'handle'  => 'column',
@@ -87,16 +89,16 @@ class Column {
 
 		$classes = 'l-flex l-flex-column l-width-100-pc';
 
-		/* Justify */
-
-		if ( $justify ) {
-			$classes .= " l-justify-$justify";
-		}
-
 		/* Grow */
 
 		if ( $grow ) {
 			$classes .= ' l-flex-grow-1';
+		}
+
+		/* Justify */
+
+		if ( $justify ) {
+			$classes .= " l-justify-$justify";
 		}
 
 		/* Width */
@@ -105,7 +107,7 @@ class Column {
 			$classes .= " l-width-$width_mobile-s";
 		}
 
-		if ( $width ) {
+		if ( $width && $width !== $width_mobile ) {
 			$classes .= " l-width-$width-l";
 		}
 

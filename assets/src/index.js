@@ -10,6 +10,7 @@ import { setElements, usingMouse, request } from 'Formation/utils'
 
 import Nav from 'Formation/components/nav'
 import SendForm from 'Formation/objects/form/send'
+import Conditional from 'Formation/objects/form/conditional'
 
 /* Variables */
 
@@ -58,8 +59,36 @@ const meta = [
     selector: `.js-${ns}-form`,
     all: true,
     array: true
+  },
+  {
+    prop: 'conditionals',
+    selector: '.js-conditional',
+    all: true,
+    array: true
+  },
+  {
+    prop: 'fieldsets',
+    selector: 'fieldset',
+    all: true,
+    array: true
   }
 ]
+
+/* Resize helper */
+
+const onResize = (callback = () => {}) => {
+  let resizeTimer
+
+  const resizeHandler = () => {
+    clearTimeout(resizeTimer)
+
+    resizeTimer = setTimeout(() => {
+      callback()
+    }, 100)
+  }
+
+  window.addEventListener('resize', resizeHandler)
+}
 
 /* Init */
 
@@ -74,8 +103,6 @@ const initialize = () => {
 
   /* Get scrollbar width */
 
-  let resizeTimer
-
   const getScrollbarWidth = () => {
     const html = document.documentElement
     const w = window.innerWidth - html.clientWidth
@@ -83,17 +110,9 @@ const initialize = () => {
     html.style.setProperty('--scrollbar-width', `${w}px`)
   }
 
-  const resizeHandler = () => {
-    clearTimeout(resizeTimer)
-
-    resizeTimer = setTimeout(() => {
-      getScrollbarWidth()
-    }, 100)
-  }
+  onResize(getScrollbarWidth())
 
   getScrollbarWidth()
-
-  window.addEventListener('resize', resizeHandler)
 
   /* Navigation */
 
@@ -320,6 +339,63 @@ const initialize = () => {
         .catch(xhr => {
           console.log(xhr)
         })
+    })
+  }
+
+  /* Conditional inputs */
+
+  if (el.conditionals.length) {
+    const conditional = (item) => {
+      return new Conditional(item)
+    }
+
+    el.conditionals.forEach((c) => {
+      conditional(c)
+    })
+  }
+
+  /* Fieldsets - equalize labels if radio-select or radio-text */
+
+  if (el.fieldsets.length) {
+    el.fieldsets.forEach((fieldset) => {
+      /* Get elements */
+
+      const meta = [
+        {
+          prop: 'radioSelect',
+          selector: '[data-type="radio-select"]'
+        },
+        {
+          prop: 'radioText',
+          selector: '[data-type="radio-text"]'
+        },
+        {
+          prop: 'labels',
+          selector: '[data-type|="radio"] span.o-form__label',
+          all: true,
+          array: true
+        }
+      ]
+
+      const f = {}
+
+      setElements(fieldset, meta, f)
+
+      /* Get and set max width */
+
+      const setWidth = () => {
+        if (f.radioSelect || f.radioText) {
+          fieldset.style.setProperty('--label-width', 'auto')
+
+          const width = Math.max.apply(null, f.labels.map((l) => l.clientWidth))
+
+          fieldset.style.setProperty('--label-width', `${width / 16}rem`)
+        }
+      }
+
+      setWidth()
+
+      onResize(setWidth())
     })
   }
 }

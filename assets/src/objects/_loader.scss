@@ -5,32 +5,31 @@
 /* Imports */
 
 @use "@alanizcreative/formation/src/config";
-@use '@alanizcreative/formation/src/objects/load/loader';
+@use "@alanizcreative/formation/src/objects/load/loader";
 
 /* Styles */
 
 .o-loader {
   @extend %u-color-inherit;
 
-  div:first-child {
+  span:first-child {
     border: var(--5xs) transparent solid;
-    border-top: var(--5xs) currentColor solid;
-
+    border-top: var(--5xs) currentcolor solid;
     animation: a-spin 1s infinite linear;
 
     @keyframes a-spin {
       0% {
         transform: rotate(0deg);
       }
-    
+
       100% {
         transform: rotate(359deg);
       }
     }
   }
 
-  div:last-child {
-    border: var(--5xs) currentColor solid;
+  span:last-child {
+    border: var(--5xs) currentcolor solid;
     opacity: 0.3;
   }
 }

@@ -112,9 +112,10 @@ $margin-vertical: (
   ),
 
   $breakpoints: (
+    "0": 0px,
     "xs": 400px,
     "s": 600px,
-    "r": 800px,
+    "m-1": 899px,
     "m": 900px,
     "l": 1000px,
     "xl": 1200px,
@@ -163,11 +164,36 @@ $margin-vertical: (
 
   $gap-breakpoints: ("m", "l"),
 
-  $width-percentage-breakpoints: ("s", "m", "l", "xl"),
-  $widths: ("xs", "s", "m", "l"),
-  $heights: ("xs", "s", "m", "l"),
-  $max-widths: ("2xl", "xl", "4xl"),
-  $max-width-breakpoints: ("m"),
+  $widths: (
+    "2xs",
+    "xs", 
+    "s", 
+    "m", 
+    "l", 
+    "xl",
+    "2xl",
+    "4xl"
+  ),
+
+  $width-breakpoints: ("m", "l"),
+
+  $width-percentage-breakpoints: (
+    "s", 
+    "m", 
+    "l", 
+    "xl"
+  ),
+
+  $max-widths: ("2xl"),
+
+  $heights: (
+    "2xs",
+    "xs",
+    "s",
+    "m",
+    "l",
+    "xl"
+  ),
 
   $container-padding: 20px,
 
@@ -175,7 +201,12 @@ $margin-vertical: (
     "default": 1340px,
   ),
 
-  $flex-row-breakpoints: ("s", "m", "l", "xl"),
+  $flex-row-breakpoints: (
+    "s", 
+    "m", 
+    "l", 
+    "xl"
+  ),
 
   $nav: (
     "icon": (
@@ -198,8 +229,6 @@ $margin-vertical: (
     "xl": 30px,
     "2xl": 40px,
   ),
-
-  $border-radius-breakpoints: ("l"),
 
   $outline: (
     "width": 0.25rem,

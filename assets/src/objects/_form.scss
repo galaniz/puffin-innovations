@@ -5,15 +5,18 @@
 /* Imports */
 
 @use "@alanizcreative/formation/src/config";
+@use "@alanizcreative/formation/src/utils/functions" as func;
+@use "@alanizcreative/formation/src/utils/mixins" as mix;
 
 /* Form */
 
 .o-form {
   --label: var(--h4);
-  --label-s: var(--h5);
+  --label-small: var(--h5);
   --input: var(--t-m);
   --border-radius: var(--border-radius-s);
-  --arrow-w: var(--xs);
+  --arrow-width: var(--xs);
+  --focus-width: 0.1875rem;
 
   fieldset {
     @extend %u-width-100-pc;
@@ -23,20 +26,24 @@
     @extend %u-display-block;
   }
 
-  label:first-child,
-  legend:first-child {
-    margin-bottom: var(--3xs);
-  }
-
   label,
   legend {
     > span:first-child {
       @extend %u-font-family-secondary;
       @extend %u-line-height-130-pc;
-  
+
       font-size: var(--label);
       color: var(--heading-color);
     }
+  }
+
+  label:first-child,
+  legend:first-child {
+    margin-bottom: var(--3xs);
+  }
+
+  select {
+    padding-right: var(--m);
   }
 
   input[type="search"],
@@ -57,12 +64,20 @@
     padding: var(--input-padding);
     font-size: var(--input);
     color: var(--heading-color);
-    box-shadow: inset 0 0 0 0.1875rem var(--color);
+    box-shadow: inset 0 0 0 var(--focus-width) var(--color);
     transition: box-shadow var(--duration) var(--easing);
 
     &:focus {
       --outline-width: 0;
       --color: var(--outline-color);
+    }
+
+    &[aria-invalid="true"] {
+      --color: var(--negative-color);
+
+      &:focus {
+        --color: var(--outline-color);
+      }
     }
   }
 
@@ -88,22 +103,13 @@
 
 .o-form-s {
   --label: var(--h5);
-  --label-s: var(--h6);
+  --label-small: var(--h6);
   --input-padding: var(--3-5xs) var(--xs);
-  --arrow-w: var(--2xs);
+  --arrow-width: var(--2xs);
 }
 
 .o-form-round {
   --border-radius: var(--border-radius-xl);
-}
-
-/* Required */
-
-legend[data-req] > span:first-child::after,
-.o-form__label[data-req] > span:first-child::after,
-[data-req] > .o-form__label > span:first-child::after {
-  content: ' *';
-  color: var(--negative-color);
 }
 
 /* Group */
@@ -111,11 +117,30 @@ legend[data-req] > span:first-child::after,
 .o-form__group {
   --input: var(--t);
   --input-padding: var(--4xs) var(--2xs);
-  --arrow-w: var(--2xs);
+  --arrow-width: var(--2xs);
+  --label-width: auto;
 
   .o-form__label {
-    --label: var(--label-s);
+    --label: var(--label-small);
+
+    width: var(--label-width);
   }
+}
+
+.o-form__group, 
+.o-form-s {
+  select {
+    padding-right: var(--sm);
+  }
+}
+
+/* Required */
+
+legend[data-req] > span:first-child::after,
+.o-form__label[data-req] > span:first-child::after,
+[data-req] > .o-form__label > span:first-child::after {
+  content: " *";
+  color: var(--negative-color);
 }
 
 /* Controls */
@@ -140,27 +165,41 @@ legend[data-req] > span:first-child::after,
     }
   }
 
-  &[data-type="select"] div {
-    @extend %u-position-relative;
-
-    &::after {
-      @extend %u-content-empty;
-      @extend %u-position-absolute;
-      @extend %u-position-vertical-center;
-      @extend %u-right-0;
-      @extend %u-background-size-cover;
-      @extend %u-background-no-repeat;
-
-      background-image: url("assets/public/svg/arrow-down.svg");
-      margin-right: var(--2xs);
-      width: var(--arrow-w);
-      height: var(--arrow-w);
+  &[data-type="radio-select"],
+  &[data-type="radio-text"] {
+    .o-form__field {
+      @include mix.breakpoint-min-max("0", "m-1") {
+        margin-left: func.calc-rem(55px);
+        margin-top: func.calc-rem(-15px);
+      }
     }
+  }
+
+  & > [data-type="select"] {
+    @extend %u-position-relative;
+  }
+}
+
+[data-select-caret] {
+  @extend %u-position-absolute;
+  @extend %u-position-vertical-center;
+  @extend %u-right-0;
+  @extend %u-background-size-cover;
+  @extend %u-background-no-repeat;
+
+  background-image: url("assets/public/svg/arrow-down.svg");
+  margin-right: var(--2xs);
+  width: var(--arrow-width);
+  height: var(--arrow-width);
+
+  select:disabled ~ & {
+    opacity: 0.5;
   }
 }
 
 .o-form__control {
-  --br: var(--border-radius-l);
+  --border-radius: var(--border-radius-l);
+  --color: transparent;
 
   @extend %u-flex-shrink-0;
   @extend %u-position-relative;
@@ -168,11 +207,14 @@ legend[data-req] > span:first-child::after,
   width: var(--s);
   height: var(--s);
   background: var(--input-bg);
-  border-radius: var(--br);
+  border-radius: var(--border-radius);
+  outline: var(--focus-width) solid var(--color);
+  outline-offset: var(--focus-width) ;
+  transition: outline 100ms var(--easing);
   order: -1;
 
   &[data-type="checkbox"] {
-    --br: var(--border-radius-xs);
+    --border-radius: var(--border-radius-xs);
   }
 
   &[data-type="checkbox"],
@@ -215,21 +257,18 @@ legend[data-req] > span:first-child::after,
       @extend %u-opacity-1;
     }
   }
-}
 
-/* Result */ 
+  input:focus ~ label &,
+  input[aria-invalid="true"]:focus ~ label & {
+    --color: var(--outline-color);
+  }
 
-.o-form__negative,
-.o-form__positive {
-  box-shadow: inset 0.3125rem 0 0 0 currentColor;
-  border-top-right-radius: var(--border-radius-s);
-  border-bottom-right-radius: var(--border-radius-s);
-  background: var(--bg-result);
-
-  [tabindex="-1"]:focus & {
-    box-shadow: inset 0 0 0 0.3125rem currentColor;
+  input[aria-invalid="true"] ~ label & {
+    --color: var(--negative-color);
   }
 }
+
+/* Result */
 
 .o-form__negative,
 .o-form__error {
@@ -242,4 +281,16 @@ legend[data-req] > span:first-child::after,
   --heading-color: var(--positive-color);
 
   color: var(--positive-color);
+}
+
+.o-form__negative,
+.o-form__positive {
+  box-shadow: inset 0.3125rem 0 0 0 currentcolor;
+  border-top-right-radius: var(--border-radius-s);
+  border-bottom-right-radius: var(--border-radius-s);
+  background: var(--bg-result);
+
+  [tabindex="-1"]:focus & {
+    box-shadow: inset 0 0 0 0.3125rem currentcolor;
+  }
 }

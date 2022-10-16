@@ -1,0 +1,19 @@
+/**
+ * Borders
+ */
+
+/* Imports */
+
+@use "@alanizcreative/formation/src/borders/radius";
+@use "@alanizcreative/formation/src/utils/functions" as func;
+@use "@alanizcreative/formation/src/utils/mixins" as mix;
+
+/* Styles */
+
+.b-radius-xl-fluid {
+  @include mix.fluid-size(
+    border-radius,
+    func.calc-rem(15px) func.calc-rem(30px),
+    "s" "xl"
+  );
+}

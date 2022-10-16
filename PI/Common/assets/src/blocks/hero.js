@@ -45,8 +45,11 @@ const def = nO.blocks[name].default
 registerBlockType(name, {
   title: 'Hero',
   category: 'theme-blocks',
-  icon: 'slides',
+  icon: 'align-full-width',
   attributes: attr,
+  supports: {
+    multiple: false
+  },
   edit (props) {
     const { attributes, setAttributes } = props
 
@@ -65,7 +68,7 @@ registerBlockType(name, {
 
     /* Style */
 
-    const style = { padding: '1.25rem 0', border: 'inherit' }
+    const style = { margin: '1.25rem 0' }
 
     /* Output */
 
@@ -108,13 +111,14 @@ registerBlockType(name, {
         </InspectorControls>
       </Fragment>,
       <Panel key='panel'>
-        <PanelBody title='Hero'>
+        <PanelBody title='Hero' initialOpen={false}>
           <div style={style}>
             <BaseControl label='Title Small'>
               <PlainText
                 value={title_small} // eslint-disable-line camelcase
                 onChange={v => setAttributes({ title_small: v })}
                 placeholder='Title Small'
+                className='t-h5'
               />
             </BaseControl>
           </div>
@@ -124,6 +128,7 @@ registerBlockType(name, {
                 value={title_large} // eslint-disable-line camelcase
                 onChange={v => setAttributes({ title_large: v })}
                 placeholder='Title Large'
+                className='t-h1'
               />
             </BaseControl>
           </div>
@@ -133,6 +138,7 @@ registerBlockType(name, {
                 value={text} // eslint-disable-line camelcase
                 onChange={v => setAttributes({ text: v })}
                 placeholder='Text'
+                className='t-l'
               />
             </BaseControl>
           </div>
@@ -143,6 +149,7 @@ registerBlockType(name, {
                   value={primary_link_text} // eslint-disable-line camelcase
                   onChange={v => setAttributes({ primary_link_text: v })}
                   placeholder='Primary Link Text'
+                  className='t-h5'
                 />
                 <URLInputButton
                   url={primary_link} // eslint-disable-line camelcase
@@ -158,6 +165,7 @@ registerBlockType(name, {
                   value={secondary_link_text} // eslint-disable-line camelcase
                   onChange={v => setAttributes({ secondary_link_text: v })}
                   placeholder='Secondary Link Text'
+                  className='t-h5'
                 />
                 <URLInputButton
                   url={secondary_link} // eslint-disable-line camelcase

@@ -120,6 +120,63 @@ class PI extends FRM {
 		],
 	];
 
+	/* Html element options */
+
+	public static $html_options = [
+		[
+			'label' => 'Div',
+			'value' => 'div',
+		],
+		[
+			'label' => 'Unordered List',
+			'value' => 'ul',
+		],
+		[
+			'label' => 'Ordered List',
+			'value' => 'ol',
+		],
+		[
+			'label' => 'List Item',
+			'value' => 'li',
+		],
+		[
+			'label' => 'Figure',
+			'value' => 'figure',
+		],
+		[
+			'label' => 'Figcaption',
+			'value' => 'figcaption',
+		],
+		[
+			'label' => 'Blockquote',
+			'value' => 'blockquote',
+		],
+		[
+			'label' => 'Section',
+			'value' => 'section',
+		],
+		[
+			'label' => 'Article',
+			'value' => 'article',
+		],
+		[
+			'label' => 'Aside',
+			'value' => 'aside',
+		],
+		[
+			'label' => 'Header',
+			'value' => 'header',
+		],
+		[
+			'label' => 'Footer',
+			'value' => 'footer',
+		],
+		[
+			'label' => 'Address',
+			'value' => 'address',
+		],
+	];
+
 	/* Hero theme */
 
 	public static $hero_theme = 'background-light';
@@ -154,7 +211,7 @@ class PI extends FRM {
 							'</div>' .
 						'</div>' .
 						'<div>' .
-							'<h2 id="%s" class="t-h4 l-padding-top-5xs l-padding-bottom-5xs o-form-result__primary"></h2>' .
+							'<h2 id="%s" class="t-h4 l-margin-0 l-padding-top-5xs l-padding-bottom-5xs o-form-result__primary"></h2>' .
 							'<p class="t t-current o-form-result__secondary"></p>' .
 						'</div>' .
 					'</div>' .
@@ -172,7 +229,7 @@ class PI extends FRM {
 							'</div>' .
 						'</div>' .
 						'<div>' .
-							'<h2 id="%s" class="t-h4 l-padding-top-5xs l-padding-bottom-5xs o-form-result__primary"></h2>' .
+							'<h2 id="%s" class="t-h4 l-margin-0 l-padding-top-5xs l-padding-bottom-5xs o-form-result__primary"></h2>' .
 							'<p class="t t-current o-form-result__secondary"></p>' .
 						'</div>' .
 					'</div>' .
@@ -190,7 +247,7 @@ class PI extends FRM {
 							'</div>' .
 						'</div>' .
 						'<div>' .
-							'<h2 id="%s" class="t-h4 l-padding-top-5xs l-padding-bottom-5xs">There is a problem</h2>' .
+							'<h2 id="%s" class="t-h4 l-margin-0 l-padding-top-5xs l-padding-bottom-5xs">There is a problem</h2>' .
 							'<ul class="l-flex l-flex-column l-margin-bottom-5xs-all l-margin-0-last t t-link-current t-list-style-none e-underline o-form-error__list" role="list"></ul>' .
 						'</div>' .
 					'</div>' .
@@ -232,6 +289,10 @@ class PI extends FRM {
 			[
 				'label' => '50%',
 				'value' => '1-2',
+			],
+			[
+				'label' => '40%',
+				'value' => '2-5',
 			],
 			[
 				'label' => '33%',
@@ -369,6 +430,19 @@ class PI extends FRM {
 
 		self::$editor_color_palette = self::$colors;
 
+		self::$editor_style = '/PI/Admin/assets/public/css/editor.css';
+
+		/* Embed variations */
+
+		self::$embed_variations = [
+			'facebook',
+			'instagram',
+			'twitter',
+			'tiktok',
+			'vimeo',
+			'youtube',
+		];
+
 		/* Image sizes */
 
 		self::$image_sizes = [
@@ -422,6 +496,7 @@ class PI extends FRM {
 		/* Pass data to front end */
 
 		additional_script_data( self::$namespace, ['padding_options' => self::$padding_options ], true, true );
+		additional_script_data( self::$namespace, ['html_options' => self::$html_options ], true, true );
 
 		/* Actions */
 

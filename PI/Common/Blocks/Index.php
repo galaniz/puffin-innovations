@@ -15,6 +15,8 @@ use PI\PI as PI;
 use PI\Common\Blocks\Hero;
 use PI\Common\Blocks\Container;
 use PI\Common\Blocks\Column;
+use PI\Common\Blocks\Text;
+use PI\Common\Blocks\Image;
 use Formation\Common\Blocks\Blocks;
 use function Formation\additional_script_data;
 
@@ -41,6 +43,8 @@ class Index {
 		new Hero();
 		new Container();
 		new Column();
+		new Text();
+		new Image();
 		new Blocks(
 			[
 				'folder_url' => get_template_directory_uri() . '/PI/Common/assets/public/js/blocks/',
@@ -69,7 +73,6 @@ class Index {
 			'core/list',
 			'core/html',
 			'core/quote',
-			'core/pullquote',
 			'core/image',
 			'core/video',
 			'core/embed',
@@ -85,6 +88,8 @@ class Index {
 			"$n/hero",
 			"$n/container",
 			"$n/column",
+			"$n/text",
+			"$n/image",
 		];
 	}
 

@@ -16,6 +16,7 @@ const n = 'pi'
 /* Output path */
 
 const outputPath = path.resolve(__dirname, 'assets', 'public')
+const outputAdminPath = path.resolve(__dirname, 'PI', 'Admin', 'assets', 'public')
 const outputCommonPath = path.resolve(__dirname, 'PI', 'Common', 'assets', 'public')
 
 /* Asset paths */
@@ -195,7 +196,9 @@ const copyPatterns = [
 const blocks = [
   'hero',
   'container',
-  'column'
+  'column',
+  'text',
+  'image'
 ]
 
 const blocksEntry = {}
@@ -297,6 +300,30 @@ module.exports = [
       rules
     },
     resolve
+  },
+
+  /* Admin assets */
+
+  {
+    mode: 'production',
+    entry: {
+      editor: './PI/Admin/assets/src/editor/index.scss'
+    },
+    output: {
+      path: outputAdminPath,
+      filename: 'js/[name].js',
+      publicPath: '/',
+      chunkFormat: 'array-push'
+    },
+    module: {
+      rules: rulesCompat
+    },
+    resolve,
+    plugins: [
+      new MiniCssExtractPlugin({
+        filename: 'css/[name].css'
+      })
+    ]
   },
 
   /* Block assets */

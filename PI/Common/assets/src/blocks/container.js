@@ -13,10 +13,12 @@ const {
 const {
   Panel,
   PanelBody,
+  TextControl,
   SelectControl,
   ColorPalette,
   BaseControl,
-  CheckboxControl
+  CheckboxControl,
+  RadioControl
 } = window.wp.components
 
 const {
@@ -49,11 +51,11 @@ registerBlockType(name, {
     const { attributes, setAttributes } = props
 
     const {
-      outer_tag = def.outer_tag, // eslint-disable-line camelcase
+      internal_name = def.internal_name, // eslint-disable-line camelcase
       tag = def.tag,
-      column = def.column,
+      layout = def.layout,
       wrap = def.wrap,
-      fill_width = def.fill_width, // eslint-disable-line camelcase
+      contain = def.contain, // eslint-disable-line camelcase
       align = def.align,
       justify = def.justify,
       gap_mobile = def.gap_mobile, // eslint-disable-line camelcase
@@ -62,8 +64,17 @@ registerBlockType(name, {
       padding_top = def.padding_top, // eslint-disable-line camelcase
       padding_bottom_mobile = def.padding_bottom_mobile, // eslint-disable-line camelcase
       padding_bottom = def.padding_bottom, // eslint-disable-line camelcase
-      bg_color = def.bg_color // eslint-disable-line camelcase
+      bg_color = def.bg_color, // eslint-disable-line camelcase
+      bg_seamless = def.bg_seamless // eslint-disable-line camelcase
     } = attributes
+
+    /* Internal name */
+
+    const internalName = internal_name // eslint-disable-line camelcase
+
+    /* Layout */
+
+    const isFlex = layout === 'row' || layout === 'column'
 
     /* Output */
 
@@ -71,127 +82,145 @@ registerBlockType(name, {
       <Fragment key='frag'>
         <InspectorControls>
           <PanelBody title='Container Options'>
-            <SelectControl
-              label='Outer Tag'
-              value={outer_tag} // eslint-disable-line camelcase
-              options={[
-                { label: 'Section', value: 'section' },
-                { label: 'Div', value: 'div' },
-                { label: 'Article', value: 'article' },
-                { label: 'Aside', value: 'aside' }
-              ]}
-              onChange={v => setAttributes({ outer_tag: v })}
+            <TextControl
+              label='Internal Name'
+              help='For editor organization'
+              value={internal_name} // eslint-disable-line camelcase
+              onChange={v => setAttributes({ internal_name: v })}
             />
+            <RadioControl
+              label='Layout'
+              selected={layout}
+              options={[
+                { label: 'Block', value: 'block' },
+                { label: 'Column', value: 'column' },
+                { label: 'Row', value: 'row' }
+              ]}
+              onChange={layout => setAttributes({ layout })}
+            />
+            {!isFlex && (
+              <Fragment>
+                <BaseControl label='Background Color'>
+                  <ColorPalette
+                    colors={nO.color_options}
+                    value={bg_color} // eslint-disable-line camelcase
+                    clearable={false}
+                    disableCustomColors
+                    disableAlpha
+                    onChange={bg_color => { // eslint-disable-line camelcase
+                      const slug = getColorSlug(nO.color_options, bg_color)
+
+                      setAttributes({
+                        bg_color, // eslint-disable-line camelcase
+                        bg_color_slug: slug
+                      })
+                    }}
+                  />
+                </BaseControl>
+                <CheckboxControl
+                  label='Background seamless'
+                  value='1'
+                  checked={!!bg_seamless} // eslint-disable-line camelcase
+                  onChange={checked => setAttributes({ bg_seamless: checked })}
+                />
+              </Fragment>
+            )}
             <SelectControl
               label='Tag'
-              value={tag}
-              options={[
-                { label: 'Div', value: 'div' },
-                { label: 'Unordered List', value: 'ul' },
-                { label: 'Ordered List', value: 'ol' }
-              ]}
+              value={tag} // eslint-disable-line camelcase
+              options={nO.html_options}
               onChange={tag => setAttributes({ tag })}
             />
-            <SelectControl
-              label='Justify'
-              value={justify}
-              options={[
-                { label: 'None', value: '' },
-                { label: 'Start', value: 'start' },
-                { label: 'Center', value: 'center' },
-                { label: 'End', value: 'end' },
-                { label: 'Space Between', value: 'between' }
-              ]}
-              onChange={justify => setAttributes({ justify })}
-            />
-            <SelectControl
-              label='Align'
-              value={align}
-              options={[
-                { label: 'None', value: '' },
-                { label: 'Start', value: 'start' },
-                { label: 'Center', value: 'center' },
-                { label: 'End', value: 'end' }
-              ]}
-              onChange={align => setAttributes({ align })}
-            />
-            <SelectControl
-              label='Gap'
-              value={gap_mobile} // eslint-disable-line camelcase
-              options={nO.gap_options}
-              onChange={v => setAttributes({ gap_mobile: v })}
-            />
-            <SelectControl
-              label='Gap Larger Screens'
-              value={gap} // eslint-disable-line camelcase
-              options={nO.gap_options}
-              onChange={v => setAttributes({ gap: v })}
-            />
-            <SelectControl
-              label='Padding Top'
-              value={padding_top_mobile} // eslint-disable-line camelcase
-              options={nO.padding_options}
-              onChange={v => setAttributes({ padding_top_mobile: v })}
-            />
-            <SelectControl
-              label='Padding Top Larger Screens'
-              value={padding_top} // eslint-disable-line camelcase
-              options={nO.padding_options}
-              onChange={v => setAttributes({ padding_top: v })}
-            />
-            <SelectControl
-              label='Padding Bottom'
-              value={padding_bottom_mobile} // eslint-disable-line camelcase
-              options={nO.padding_options}
-              onChange={v => setAttributes({ padding_bottom_mobile: v })}
-            />
-            <SelectControl
-              label='Padding Bottom Larger Screens'
-              value={padding_bottom} // eslint-disable-line camelcase
-              options={nO.padding_options}
-              onChange={v => setAttributes({ padding_bottom: v })}
-            />
-            <CheckboxControl
-              label='Column'
-              help='Otherwise row layout'
-              value='1'
-              checked={!!column}
-              onChange={column => setAttributes({ column })}
-            />
-            <CheckboxControl
-              label='Wrap'
-              value='1'
-              checked={!!wrap}
-              onChange={wrap => setAttributes({ wrap })}
-            />
-            <CheckboxControl
-              label='Fill Width'
-              value='1'
-              checked={!!fill_width} // eslint-disable-line camelcase
-              onChange={v => setAttributes({ fill_width: v })}
-            />
-            <BaseControl label='Background Color'>
-              <ColorPalette
-                colors={nO.color_options}
-                value={bg_color} // eslint-disable-line camelcase
-                clearable={false}
-                disableCustomColors
-                disableAlpha
-                onChange={bg_color => { // eslint-disable-line camelcase
-                  const slug = getColorSlug(nO.color_options, bg_color)
-
-                  setAttributes({
-                    bg_color, // eslint-disable-line camelcase
-                    bg_color_slug: slug
-                  })
-                }}
+            {!isFlex && (
+              <Fragment>
+                <SelectControl
+                  label='Padding Top'
+                  value={padding_top_mobile} // eslint-disable-line camelcase
+                  options={nO.padding_options}
+                  onChange={v => setAttributes({ padding_top_mobile: v })}
+                />
+                <SelectControl
+                  label='Padding Top Larger Screens'
+                  value={padding_top} // eslint-disable-line camelcase
+                  options={nO.padding_options}
+                  onChange={v => setAttributes({ padding_top: v })}
+                />
+                <SelectControl
+                  label='Padding Bottom'
+                  value={padding_bottom_mobile} // eslint-disable-line camelcase
+                  options={nO.padding_options}
+                  onChange={v => setAttributes({ padding_bottom_mobile: v })}
+                />
+                <SelectControl
+                  label='Padding Bottom Larger Screens'
+                  value={padding_bottom} // eslint-disable-line camelcase
+                  options={nO.padding_options}
+                  onChange={v => setAttributes({ padding_bottom: v })}
+                />
+              </Fragment>
+            )}
+            {isFlex && (
+              <Fragment>
+                <SelectControl
+                  label='Gap'
+                  value={gap_mobile} // eslint-disable-line camelcase
+                  options={nO.gap_options}
+                  onChange={v => setAttributes({ gap_mobile: v })}
+                />
+                <SelectControl
+                  label='Gap Larger Screens'
+                  value={gap} // eslint-disable-line camelcase
+                  options={nO.gap_options}
+                  onChange={v => setAttributes({ gap: v })}
+                />
+                <SelectControl
+                  label='Justify'
+                  value={justify}
+                  options={[
+                    { label: 'None', value: '' },
+                    { label: 'Start', value: 'start' },
+                    { label: 'Center', value: 'center' },
+                    { label: 'End', value: 'end' },
+                    { label: 'Space Between', value: 'between' }
+                  ]}
+                  onChange={justify => setAttributes({ justify })}
+                />
+                <SelectControl
+                  label='Align'
+                  value={align}
+                  options={[
+                    { label: 'None', value: '' },
+                    { label: 'Start', value: 'start' },
+                    { label: 'Center', value: 'center' },
+                    { label: 'End', value: 'end' }
+                  ]}
+                  onChange={align => setAttributes({ align })}
+                />
+              </Fragment>
+            )}
+            {layout === 'row' && (
+              <CheckboxControl
+                label='Wrap'
+                help='Items wrap onto multiple rows'
+                value='1'
+                checked={!!wrap}
+                onChange={wrap => setAttributes({ wrap })}
               />
-            </BaseControl>
+            )}
+            {!isFlex && (
+              <CheckboxControl
+                label='Contain'
+                help='Limit to 1300px container'
+                value='1'
+                checked={!!contain} // eslint-disable-line camelcase
+                onChange={contain => setAttributes({ contain })}
+              />
+            )}
           </PanelBody>
         </InspectorControls>
       </Fragment>,
       <Panel key='panel'>
-        <PanelBody title='Container'>
+        <PanelBody title={`Container${internalName ? `: ${internalName}` : ''}`} initialOpen={false}>
           <InnerBlocks />
         </PanelBody>
       </Panel>

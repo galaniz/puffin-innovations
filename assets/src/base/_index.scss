@@ -20,7 +20,7 @@
   --link-color: var(--primary-dark);
   --cubic: cubic-bezier(0.76, 0, 0.24, 1);
   --underline: #{func.calc-rem(1px)};
-  --input-bg: var(--background-base); 
+  --input-bg: var(--background-base);
   --input-padding: var(--2xs) var(--xs);
   --input-control-bg-checked: var(--primary-dark);
   --input-control-color-checked: var(--background-light);
@@ -53,5 +53,48 @@ p {
 
   &:empty {
     @extend %u-display-none;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+blockquote {
+  margin-bottom: var(--xs);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+*:disabled,
+*[aria-disabled="true"],
+input[type="radio"]:disabled ~ label .o-form__control,
+input[type="checkbox"]:disabled ~ label .o-form__control {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+blockquote {
+  &::before {
+    @extend %u-content-empty;
+    @extend %u-display-block;
+    @extend %u-background-size-cover;
+    @extend %u-background-no-repeat;
+
+    background-image: url("assets/public/svg/quote-dark.svg");
+    width: var(--s);
+    height: var(--xs);
+  }
+
+  .t-light & {
+    background-image: url("assets/public/svg/quote.svg");
   }
 }

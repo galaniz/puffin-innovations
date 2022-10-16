@@ -1,0 +1,17 @@
+/**
+ * WordPress
+ */
+
+/* Imports */
+
+@use "../config/placeholders";
+
+/* Styles */
+
+.wp-block-button .wp-block-button__link {
+  @extend %u-button;
+}
+
+.wp-block-button.is-style-outline .wp-block-button__link {
+  @extend %u-button-secondary;
+}

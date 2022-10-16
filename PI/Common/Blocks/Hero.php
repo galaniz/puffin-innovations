@@ -199,7 +199,7 @@ class Hero {
 
 			if ( $media_output ) {
 				$ar             = $media_video ? 56 : 66;
-				$figure_classes = "l-aspect-ratio-$ar l-relative l-overflow-hidden b-radius-m b-radius-xl-l bg-background-base";
+				$figure_classes = "l-aspect-ratio-$ar l-relative l-overflow-hidden b-radius-xl-fluid bg-background-base";
 
 				if ( $media_video ) {
 					$figure_classes .= ' l-after bg-overlay l-flex l-align-center l-justify-center';
@@ -237,7 +237,7 @@ class Hero {
 		}
 
 		if ( $title_output ) {
-			$title_output = "<h1>$title_output</h1>";
+			$title_output = "<h1 class='l-margin-0'>$title_output</h1>";
 		}
 
 		/* Background classes */

@@ -19,8 +19,8 @@
 }
 
 %u-button {
-  --p: var(--2-5xs) var(--xs);
-  --sz: var(--h5);
+  --padding: var(--2-5xs) var(--xs);
+  --size: var(--h5);
 
   @extend %u-font-family-secondary;
   @extend %u-font-weight-bold;
@@ -31,23 +31,23 @@
   @extend %u-overflow-hidden;
   @extend %u-position-relative;
 
-  padding: var(--p);
-  font-size: var(--sz);
+  padding: var(--padding);
+  font-size: var(--size);
 }
 
 %u-button-secondary {
-  color: currentColor;
-  box-shadow: inset 0 0 0 var(--border-width) currentColor;
+  color: currentcolor;
+  box-shadow: inset 0 0 0 var(--border-width) currentcolor;
 }
 
 %u-button-small {
-  --p: var(--3xs) var(--1-5xs);
-  --sz: var(--h6);
+  --padding: var(--3xs) var(--1-5xs);
+  --size: var(--h6);
 }
 
 %u-button-large {
-  --p: var(--2xs) var(--s);
-  --sz: var(--h4);
+  --padding: var(--2xs) var(--s);
+  --size: var(--h4);
 
   border-radius: var(--border-radius-2xl);
 }

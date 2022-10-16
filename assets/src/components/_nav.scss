@@ -4,7 +4,7 @@
 
 /* Imports */
 
-@use 'sass:map';
+@use "sass:map";
 @use "@alanizcreative/formation/src/config" as con;
 @use "@alanizcreative/formation/src/utils/functions" as func;
 @use "@alanizcreative/formation/src/components/nav";
@@ -35,12 +35,12 @@
     transform: translateY(100%) scaleX(0.9);
     transition: opacity var(--duration) var(--easing), transform var(--duration) var(--easing);
     height: func.calc-rem(3px);
-    background: currentColor;
+    background: currentcolor;
     top: auto;
   }
 
-  &:hover, 
-  &:active, 
+  &:hover,
+  &:active,
   &:focus,
   .current-menu-parent &,
   .current-menu-item & {
@@ -102,7 +102,7 @@
   --duration: 0ms, 400ms;
   --delay: 400ms, 10ms;
 
-	@extend %u-opacity-0;
+  @extend %u-opacity-0;
 
   .c-nav[data-open="true"] & {
     --delay: 10ms, 0ms;
