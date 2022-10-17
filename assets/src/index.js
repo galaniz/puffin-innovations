@@ -55,6 +55,16 @@ const meta = [
     ]
   },
   {
+    prop: 'hero',
+    selector: '.js-hero',
+    items: [
+      {
+        prop: 'heroTarget',
+        selector: '.js-hero__target'
+      }
+    ]
+  },
+  {
     prop: 'forms',
     selector: `.js-${ns}-form`,
     all: true,
@@ -103,14 +113,12 @@ const initialize = () => {
 
   /* Get scrollbar width */
 
-  const getScrollbarWidth = () => {
+  const getScrollbarWidth = (navToggle = false) => {
     const html = document.documentElement
     const w = window.innerWidth - html.clientWidth
 
     html.style.setProperty('--scrollbar-width', `${w}px`)
   }
-
-  onResize(getScrollbarWidth())
 
   getScrollbarWidth()
 
@@ -129,11 +137,37 @@ const initialize = () => {
         itemSelector,
         links: el.navLinks,
         button: el.navButton,
-        overlay: el.navOverlay
+        overlay: el.navOverlay,
+        onToggle (open) {
+          if (open) {
+            document.documentElement.setAttribute('data-100-vw', 'true')
+            document.documentElement.setAttribute('data-nav-open', 'true')
+          }
+        },
+        endToggle () {
+          document.documentElement.setAttribute('data-100-vw', 'false')
+          document.documentElement.setAttribute('data-nav-open', 'false')
+        }
       })
     }
 
     nav()
+  }
+
+  /* Hero - set min height */
+
+  if (el.hero && el.heroTarget) {
+    const setMinHeight = () => {
+      const h = el.heroTarget.clientHeight
+
+      el.hero.style.setProperty('--min-height', `${h / 16}rem`)
+    }
+
+    onResize(() => {
+      setMinHeight()
+    })
+
+    setMinHeight()
   }
 
   /* Forms */
@@ -371,7 +405,7 @@ const initialize = () => {
         },
         {
           prop: 'labels',
-          selector: '[data-type|="radio"] span.o-form__label',
+          selector: '[data-type|="radio"] [data-label]',
           all: true,
           array: true
         }

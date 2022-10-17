@@ -27,32 +27,40 @@ class Hero {
 	public static $blocks = [
 		'hero' => [
 			'attr'    => [
-				'title_small'         => ['type' => 'string'],
-				'title_large'         => ['type' => 'string'],
-				'text'                => ['type' => 'string'],
-				'bg_color'            => ['type' => 'string'],
-				'bg_color_slug'       => ['type' => 'string'],
-				'bg_color_slug_meta'  => ['type' => 'string'],
-				'video'               => ['type' => 'boolean'],
-				'video_link'          => ['type' => 'string'],
-				'primary_link'        => ['type' => 'string'],
-				'primary_link_text'   => ['type' => 'string'],
-				'secondary_link'      => ['type' => 'string'],
-				'secondary_link_text' => ['type' => 'string'],
+				'title_small'               => ['type' => 'string'],
+				'title_large'               => ['type' => 'string'],
+				'text'                      => ['type' => 'string'],
+				'bg_color'                  => ['type' => 'string'],
+				'bg_color_slug'             => ['type' => 'string'],
+				'bg_color_slug_meta'        => ['type' => 'string'],
+				'video'                     => ['type' => 'boolean'],
+				'video_link'                => ['type' => 'string'],
+				'primary_link'              => ['type' => 'string'],
+				'primary_link_text'         => ['type' => 'string'],
+				'primary_link_color'        => ['type' => 'string'],
+				'primary_link_color_slug'   => ['type' => 'string'],
+				'secondary_link'            => ['type' => 'string'],
+				'secondary_link_text'       => ['type' => 'string'],
+				'secondary_link_color'      => ['type' => 'string'],
+				'secondary_link_color_slug' => ['type' => 'string'],
 			],
 			'default' => [
-				'title_small'         => '',
-				'title_large'         => '',
-				'text'                => '',
-				'bg_color'            => '',
-				'bg_color_slug'       => 'background-light',
-				'bg_color_slug_meta'  => 'background-light',
-				'video'               => false,
-				'video_link'          => '',
-				'primary_link'        => '',
-				'primary_link_text'   => '',
-				'secondary_link'      => '',
-				'secondary_link_text' => '',
+				'title_small'               => '',
+				'title_large'               => '',
+				'text'                      => '',
+				'bg_color'                  => '',
+				'bg_color_slug'             => 'background-light',
+				'bg_color_slug_meta'        => 'background-light',
+				'video'                     => false,
+				'video_link'                => '',
+				'primary_link'              => '',
+				'primary_link_text'         => '',
+				'primary_link_color'        => '',
+				'primary_link_color_slug'   => 'foreground-dark',
+				'secondary_link'            => '',
+				'secondary_link_text'       => '',
+				'secondary_link_color'      => '',
+				'secondary_link_color_slug' => 'foreground-dark',
 			],
 			'render'  => [__CLASS__, 'render_hero'],
 			'handle'  => 'hero',
@@ -132,17 +140,19 @@ class Hero {
 		/* Destructure */
 
 		[
-			'title_small'         => $title_small,
-			'title_large'         => $title_large,
-			'text'                => $text,
-			'bg_color'            => $bg_color,
-			'bg_color_slug'       => $bg_color_slug,
-			'video'               => $video,
-			'video_link'          => $video_link,
-			'primary_link'        => $primary_link,
-			'primary_link_text'   => $primary_link_text,
-			'secondary_link'      => $secondary_link,
-			'secondary_link_text' => $secondary_link_text,
+			'title_small'               => $title_small,
+			'title_large'               => $title_large,
+			'text'                      => $text,
+			'bg_color'                  => $bg_color,
+			'bg_color_slug'             => $bg_color_slug,
+			'video'                     => $video,
+			'video_link'                => $video_link,
+			'primary_link'              => $primary_link,
+			'primary_link_text'         => $primary_link_text,
+			'primary_link_color_slug'   => $primary_link_color_slug,
+			'secondary_link'            => $secondary_link,
+			'secondary_link_text'       => $secondary_link_text,
+			'secondary_link_color_slug' => $secondary_link_color_slug,
 		] = $attr;
 
 		/* Id */
@@ -199,7 +209,7 @@ class Hero {
 
 			if ( $media_output ) {
 				$ar             = $media_video ? 56 : 66;
-				$figure_classes = "l-aspect-ratio-$ar l-relative l-overflow-hidden b-radius-xl-fluid bg-background-base";
+				$figure_classes = "c-hero__media l-aspect-ratio-$ar l-relative l-overflow-hidden b-radius-xl-fluid bg-background-base";
 
 				if ( $media_video ) {
 					$figure_classes .= ' l-after bg-overlay l-flex l-align-center l-justify-center';
@@ -242,15 +252,56 @@ class Hero {
 
 		/* Background classes */
 
-		$bg_classes = 'l-padding-bottom-l l-before l-relative c-hero-bg' . ( ! $media_output ? ' l-padding-bottom-xl-l' : '' );
+		$bg_classes = 'l-padding-bottom-l l-before l-relative c-hero__bg' . ( ! $media_output ? ' l-padding-bottom-xl-l' : '' );
+
+		/* Links */
+
+		$links_output = '';
+
+		if ( $primary_link && $primary_link_text ) {
+			$text_color = PI::get_text_color( $primary_link_color_slug );
+
+			$links_output .= (
+				'<div class="l-width-100-pc l-width-auto-l">' .
+					"<a href='$primary_link' class='o-button-primary l-width-100-pc t-$text_color bg-$primary_link_color_slug'>$primary_link_text</a>" .
+				'</div>'
+			);
+		}
+
+		if ( $secondary_link && $secondary_link_text ) {
+			$links_output .= (
+				'<div class="l-width-100-pc l-width-auto-l">' .
+					"<a href='$secondary_link' class='o-button-secondary l-width-100-pc t-$secondary_link_color_slug'>$secondary_link_text</a>" .
+				'</div>'
+			);
+		}
+
+		if ( $links_output ) {
+			$links_output = (
+				'<div class="l-padding-top-xs l-padding-top-s-l">' .
+					"<div class='l-flex l-flex-wrap l-gap-margin-2xs l-gap-margin-xs-m'>$links_output</div>" .
+				'</div>'
+			);
+		}
 
 		/* Text */
 
 		$text_output = '';
 
-		if ( $text ) {
-			$text_classes = 't-l ' . $bg_classes;
-			$text_output  = "<p class='$text_classes'>$text</p>";
+		if ( $text || $links_output ) {
+			if ( $text ) {
+				$text_output = "<p class='t-l l-margin-0'>$text</p>";
+			}
+
+			if ( $links_output ) {
+				$text_output .= $links_output;
+			}
+
+			if ( $media_output ) {
+				$bg_classes .= ' js-hero__target';
+			}
+
+			$text_output = "<div class='$bg_classes'>$text_output</div>";
 
 			if ( ! $media_output ) {
 				$text_output = "<div class='l-width-3-4-xl l-padding-top-xs'>$text_output</div>";
@@ -268,14 +319,18 @@ class Hero {
 
 		/* Section classes */
 
-		$section_classes = 'l-padding-top-s l-padding-top-m-l';
+		$section_classes = 'c-hero l-padding-top-s l-padding-top-m-l';
 
-		if ( 'foreground-dark' === $bg_color_slug || 'primary-dark' === $bg_color_slug ) {
+		if ( PI::is_text_light( $bg_color_slug ) ) {
 			$section_classes .= ' t-light';
 		}
 
 		if ( ! $text_output && ! $media_output ) {
 			$section_classes .= " $bg_classes";
+		}
+
+		if ( $text_output && $media_output ) {
+			$section_classes .= ' js-hero';
 		}
 
 		/* Output */

@@ -23,6 +23,7 @@
   --negative-color: var(--negative-light);
   --positive-color: var(--positive-light);
   --bg-result: #{rgba(func.get-color("background-light"), 0.05)};
+  --invert-color: var(--foreground-dark);
 
   color: var(--text-color);
 }

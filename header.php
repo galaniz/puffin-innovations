@@ -16,12 +16,12 @@ use Formation\Pub\Nav_Walker;
 
 /* Logo */
 
-$logo = PI::render_logo();
+$logo = PI::render_logo( '', true );
 
 if ( $logo ) {
 	$logo = (
 		'<div data-logo>' .
-			'<a href="' . esc_url( home_url( '/' ) ) . '" class="l-block o-logo">' .
+			'<a href="' . esc_url( home_url( '/' ) ) . '" class="l-block l-relative l-svg l-svg-absolute o-logo">' .
 				'<span class="a11y-visually-hidden">' . get_bloginfo( 'name' ) . ' home</span>' .
 				$logo .
 			'</a>' .
@@ -53,7 +53,7 @@ if ( has_nav_menu( 'main' ) ) {
 						$obj->a_class = $a_class;
 
 						if ( 'Button' === $item->post_content ) {
-							$obj->a_class = 'c-nav__link o-button-primary o-button-small bg-foreground-dark t-background-light';
+							$obj->a_class = 'c-nav__link c-nav__cta o-button-primary o-button-small bg-foreground-dark t-background-light';
 						}
 					},
 					'before_output'      => function( &$obj, &$output, $depth, $args, $item ) use ( $attr ) {
@@ -70,7 +70,7 @@ if ( has_nav_menu( 'main' ) ) {
 $list_classes = 'c-nav__list l-flex l-flex-wrap l-align-center l-gap-margin-s l-gap-margin-sm-l t-list-style-none';
 $light        = false;
 
-if ( 'foreground-dark' === PI::$hero_theme || 'primary-dark' === PI::$hero_theme ) {
+if ( PI::is_text_light( PI::$hero_theme ) ) {
 	$light         = true;
 	$list_classes .= ' t-link t-background-light t-light';
 } else {
@@ -94,7 +94,7 @@ if ( 'foreground-dark' === PI::$hero_theme || 'primary-dark' === PI::$hero_theme
 			Skip to main content
 		</a>
 		<nav class="c-nav l-container l-relative" aria-label="Main">
-			<div class="c-nav__overlay bg-foreground-dark-09 l-fixed l-top-0 l-left-0 l-width-100-pc l-height-100-pc e-transition"></div>
+			<div class="c-nav__overlay bg-foreground-dark-09 l-fixed l-top-0 l-left-0 l-z-index-1 l-width-100-pc l-height-100-pc e-transition"></div>
 			<div class="l-flex l-justify-between l-align-center">
 				<?php /* phpcs:ignore */ ?>
 				<?php echo $logo; ?>
@@ -102,15 +102,15 @@ if ( 'foreground-dark' === PI::$hero_theme || 'primary-dark' === PI::$hero_theme
 					<?php /* phpcs:ignore */ ?>
 					<?php echo $main_nav; ?>
 				</ul>
-				<button class="c-nav__button l-relative l-z-index-1<?php echo $light ? ' t-light' : ''; ?>" type="button" aria-haspopup="true" aria-controls="<?php echo esc_attr( $main_nav_overflow_id ); ?>">
-					<span class="c-nav-icon l-relative l-margin-auto e-transition" data-num="4">
-						<span class="c-nav-icon__top e-transition"></span>
-						<span class="c-nav-icon__middle e-transition"></span>
-						<span class="c-nav-icon__bottom e-transition"></span>
+				<button class="c-nav__button l-relative<?php echo $light ? ' t-light' : ''; ?>" type="button" aria-haspopup="true" aria-controls="<?php echo esc_attr( $main_nav_overflow_id ); ?>">
+					<span class="c-nav-icon l-block l-relative l-margin-auto e-transition" data-num="4">
+						<span class="c-nav-icon__top l-block e-transition"></span>
+						<span class="c-nav-icon__middle l-block e-transition"></span>
+						<span class="c-nav-icon__bottom l-block e-transition"></span>
 					</span>
-					<span class="c-nav-icon-label t-h6 l-padding-top-5xs e-transition">Menu</span>
+					<span class="c-nav-icon-label t-h6 l-block l-padding-top-5xs e-transition">Menu</span>
 				</button>
-				<div class="c-nav-overflow l-fixed l-right-0 l-bottom-0 l-height-100-vh bg-primary-light t-foreground-dark t-link-current e-transition l-width-4-5" role="dialog" aria-modal="true" aria-label="Main navigation" id="<?php echo esc_attr( $main_nav_overflow_id ); ?>">
+				<div class="c-nav-overflow l-fixed l-right-0 l-bottom-0 l-z-index-1 l-height-100-vh bg-primary-light t-foreground-dark t-link-current e-transition l-width-4-5" role="dialog" aria-modal="true" aria-label="Main navigation" id="<?php echo esc_attr( $main_nav_overflow_id ); ?>">
 					<div class="l-height-100-vh l-overflow-y-auto l-padding-right-2xs l-padding-left-xs l-padding-top-2xl l-padding-bottom-xs">
 						<ul class="c-nav-overflow__list l-flex l-flex-column l-gap-margin-xs t-list-style-none" role="list"></ul>
 					</div>

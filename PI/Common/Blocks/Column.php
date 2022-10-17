@@ -31,16 +31,20 @@ class Column {
 				'tag'           => ['type' => 'string'],
 				'width_mobile'  => ['type' => 'string'],
 				'width'         => ['type' => 'string'],
+				'align'         => ['type' => 'string'],
 				'justify'       => ['type' => 'string'],
 				'grow'          => ['type' => 'boolean'],
+				'quote_mark'    => ['type' => 'boolean'],
 			],
 			'default' => [
 				'internal_name' => '',
 				'tag'           => 'div',
 				'width_mobile'  => '',
 				'width'         => '',
+				'align'         => '',
 				'justify'       => '',
 				'grow'          => false,
+				'quote_mark'    => false,
 			],
 			'render'  => [__CLASS__, 'render_column'],
 			'handle'  => 'column',
@@ -81,18 +85,30 @@ class Column {
 			'tag'          => $tag,
 			'width_mobile' => $width_mobile,
 			'width'        => $width,
+			'align'        => $align,
 			'justify'      => $justify,
 			'grow'         => $grow,
+			'quote_mark'   => $quote_mark,
 		] = $attr;
 
 		/* Classes */
 
 		$classes = 'l-flex l-flex-column l-width-100-pc';
 
+		/* Attributes */
+
+		$atr = '';
+
 		/* Grow */
 
 		if ( $grow ) {
 			$classes .= ' l-flex-grow-1';
+		}
+
+		/* Align */
+
+		if ( $align ) {
+			$classes .= " l-align-$align";
 		}
 
 		/* Justify */
@@ -111,10 +127,16 @@ class Column {
 			$classes .= " l-width-$width-l";
 		}
 
+		/* Quote mark */
+
+		if ( 'blockquote' === $tag && $quote_mark ) {
+			$atr .= ' data-quote';
+		}
+
 		/* Output */
 
 		return (
-			"<$tag class='$classes'>" .
+			"<$tag class='$classes'$atr>" .
 				$content .
 			"</$tag>"
 		);

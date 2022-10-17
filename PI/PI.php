@@ -511,6 +511,28 @@ class PI extends FRM {
 	}
 
 	/**
+	 * Get text color with sufficient contrast.
+	 */
+
+	public static function get_text_color( $bg = 'foreground-dark' ) {
+		$text_color = 'foreground-dark';
+
+		if ( 'foreground-dark' === $bg || 'primary-dark' === $bg ) {
+			$text_color = 'background-light';
+		}
+
+		return $text_color;
+	}
+
+	/**
+	 * Check if light text required.
+	 */
+
+	public static function is_text_light( $bg = 'background-light' ) {
+		return 'foreground-dark' === $bg || 'primary-dark' === $bg;
+	}
+
+	/**
 	 * Register widget area.
 	 */
 
@@ -646,6 +668,5 @@ class PI extends FRM {
 
 		return $field;
 	}
-
 
 } // End PI

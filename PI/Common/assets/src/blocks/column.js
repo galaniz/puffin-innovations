@@ -51,8 +51,10 @@ registerBlockType(name, {
       tag = def.tag,
       width_mobile = def.width_mobile, // eslint-disable-line camelcase
       width = def.width,
+      align = def.align,
       justify = def.justify,
-      grow = def.grow
+      grow = def.grow,
+      quote_mark = def.quote_mark // eslint-disable-line camelcase
     } = attributes
 
     /* Internal name */
@@ -101,6 +103,17 @@ registerBlockType(name, {
               ]}
               onChange={justify => setAttributes({ justify })}
             />
+            <SelectControl
+              label='Align'
+              value={align}
+              options={[
+                { label: 'None', value: '' },
+                { label: 'Start', value: 'start' },
+                { label: 'Center', value: 'center' },
+                { label: 'End', value: 'end' }
+              ]}
+              onChange={align => setAttributes({ align })}
+            />
             <CheckboxControl
               label='Grow'
               help='Fill in remaining space'
@@ -108,6 +121,15 @@ registerBlockType(name, {
               checked={!!grow}
               onChange={grow => setAttributes({ grow })}
             />
+            {tag === 'blockquote' && (
+              <CheckboxControl
+                label='Quote Mark'
+                help='Display quotation mark above content'
+                value='1'
+                checked={!!quote_mark} // eslint-disable-line camelcase
+                onChange={v => setAttributes({ quote_mark: v })}
+              />
+            )}
           </PanelBody>
         </InspectorControls>
       </Fragment>,

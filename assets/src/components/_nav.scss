@@ -52,12 +52,22 @@
   }
 }
 
+/* Button link */
+
+.c-nav__cta {
+  [data-theme="foreground-dark"] .c-nav__list & {
+    background-color: var(--background-light-15);
+  }
+}
+
 /* Icon */
 
 .c-nav__button {
   --icon-color: var(--heading-color);
 
-  &[data-show] {
+  z-index: 2;
+
+  [data-nav-open="true"] & {
     --icon-color: var(--foreground-dark);
   }
 }

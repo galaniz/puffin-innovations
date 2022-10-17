@@ -62,8 +62,10 @@ registerBlockType(name, {
       video_link = def.video_link, // eslint-disable-line camelcase
       primary_link = def.primary_link, // eslint-disable-line camelcase
       primary_link_text = def.primary_link_text, // eslint-disable-line camelcase
+      primary_link_color = def.primary_link_color, // eslint-disable-line camelcase
       secondary_link = def.secondary_link, // eslint-disable-line camelcase
-      secondary_link_text = def.secondary_link_text // eslint-disable-line camelcase
+      secondary_link_text = def.secondary_link_text, // eslint-disable-line camelcase
+      secondary_link_color = def.secondary_link_color // eslint-disable-line camelcase
     } = attributes
 
     /* Style */
@@ -94,6 +96,44 @@ registerBlockType(name, {
                 }}
               />
             </BaseControl>
+            {primary_link && primary_link_text && ( // eslint-disable-line camelcase
+              <BaseControl label='Primary Link Background Color'>
+                <ColorPalette
+                  colors={nO.color_options}
+                  value={primary_link_color} // eslint-disable-line camelcase
+                  clearable={false}
+                  disableCustomColors
+                  disableAlpha
+                  onChange={primary_link_color => { // eslint-disable-line camelcase
+                    const slug = getColorSlug(nO.color_options, primary_link_color)
+
+                    setAttributes({
+                      primary_link_color, // eslint-disable-line camelcase
+                      primary_link_color_slug: slug
+                    })
+                  }}
+                />
+              </BaseControl>
+            )}
+            {secondary_link && secondary_link_text && ( // eslint-disable-line camelcase
+              <BaseControl label='Secondary Link Color'>
+                <ColorPalette
+                  colors={nO.color_options}
+                  value={secondary_link_color} // eslint-disable-line camelcase
+                  clearable={false}
+                  disableCustomColors
+                  disableAlpha
+                  onChange={secondary_link_color => { // eslint-disable-line camelcase
+                    const slug = getColorSlug(nO.color_options, secondary_link_color)
+
+                    setAttributes({
+                      secondary_link_color, // eslint-disable-line camelcase
+                      secondary_link_color_slug: slug
+                    })
+                  }}
+                />
+              </BaseControl>
+            )}
             <CheckboxControl
               label='Video'
               value='1'

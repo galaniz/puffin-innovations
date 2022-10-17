@@ -72,9 +72,12 @@ $margin-vertical: (
   $text-colors: (
     "primary-base",
     "primary-light",
+    "primary-tint",
     "primary-dark",
     "foreground-dark",
+    "background-base",
     "background-light",
+    "background-dark",
     "negative-light",
     "negative-dark",
     "positive-light",
@@ -84,6 +87,7 @@ $margin-vertical: (
   $background-colors: (
     "primary-base",
     "primary-light",
+    "primary-tint",
     "primary-dark",
     "foreground-dark",
     "background-base",
@@ -194,6 +198,8 @@ $margin-vertical: (
     "l",
     "xl"
   ),
+
+  $height-breakpoints: ("m", "l"),
 
   $container-padding: 20px,
 

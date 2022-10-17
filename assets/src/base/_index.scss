@@ -4,6 +4,7 @@
 
 /* Imports */
 
+@use "../config/mixins" as m;
 @use "@alanizcreative/formation/src/base/mixins" as mix;
 @use "@alanizcreative/formation/src/utils/functions" as func;
 
@@ -11,6 +12,7 @@
 
 :root {
   @include mix.set-root;
+  @include m.set-text;
 
   --scrollbar-width: 0rem;
   --background-light-15: #{rgba(func.get-color("background-light"), 0.15)};
@@ -30,6 +32,7 @@
   --negative-color: var(--negative-dark);
   --positive-color: var(--positive-dark);
   --bg-result: var(--background-base);
+  --invert-color: var(--background-light);
 }
 
 html {
@@ -75,14 +78,14 @@ blockquote {
 
 *:disabled,
 *[aria-disabled="true"],
-input[type="radio"]:disabled ~ label .o-form__control,
-input[type="checkbox"]:disabled ~ label .o-form__control {
+input[type="radio"]:disabled ~ label [data-form-control],
+input[type="checkbox"]:disabled ~ label [data-form-control] {
   opacity: 0.5;
   pointer-events: none;
   cursor: not-allowed;
 }
 
-blockquote {
+blockquote[data-quote] {
   &::before {
     @extend %u-content-empty;
     @extend %u-display-block;
@@ -92,9 +95,9 @@ blockquote {
     background-image: url("assets/public/svg/quote-dark.svg");
     width: var(--s);
     height: var(--xs);
-  }
 
-  .t-light & {
-    background-image: url("assets/public/svg/quote.svg");
+    .t-light & {
+      background-image: url("assets/public/svg/quote.svg");
+    }
   }
 }

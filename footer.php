@@ -20,7 +20,7 @@ $n = PI::$namespace;
 
 /* Logo */
 
-$logo = PI::render_logo();
+$logo = PI::render_logo( '', true );
 
 if ( $logo ) {
 	$tagline = get_option( $n . '_tagline', '' );
@@ -32,7 +32,7 @@ if ( $logo ) {
 	$logo = (
 		'<div>' .
 			'<div class="l-width-4xl-m">' .
-				'<a href="' . esc_url( home_url( '/' ) ) . '" class="l-block o-logo-s">' .
+				'<a href="' . esc_url( home_url( '/' ) ) . '" class="l-block l-relative l-svg l-svg-absolute o-logo-s">' .
 					'<span class="a11y-visually-hidden">' . get_bloginfo( 'name' ) . '</span>' .
 					$logo .
 				'</a>' .
@@ -73,6 +73,9 @@ $social = PI::render_social(
 	[
 		'links'      => 'social',
 		'list_class' => 'l-flex l-flex-wrap l-gap-margin-2xs t-list-style-none',
+		'list_attr'  => [
+			'role' => 'list',
+		],
 		'link_class' => 'l-flex l-padding-top-3xs l-padding-bottom-3xs l-padding-left-3xs l-padding-right-3xs bg-background-light-15 e-transition-border-radius',
 		'link_attr'  => [
 			'target' => '_blank',

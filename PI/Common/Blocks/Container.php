@@ -42,7 +42,9 @@ class Container {
 				'padding_bottom'        => ['type' => 'string'],
 				'bg_color'              => ['type' => 'string'],
 				'bg_color_slug'         => ['type' => 'string'],
+				'bg_color_custom'       => ['type' => 'string'],
 				'bg_seamless'           => ['type' => 'boolean'],
+				'quote_mark'            => ['type' => 'boolean'],
 			],
 			'default' => [
 				'internal_name'         => '',
@@ -60,7 +62,9 @@ class Container {
 				'padding_bottom'        => '',
 				'bg_color'              => '',
 				'bg_color_slug'         => '',
+				'bg_color_custom'       => '',
 				'bg_seamless'           => false,
+				'quote_mark'            => false,
 			],
 			'render'  => [__CLASS__, 'render_container'],
 			'handle'  => 'container',
@@ -111,12 +115,18 @@ class Container {
 			'padding_bottom_mobile' => $padding_bottom_mobile,
 			'padding_bottom'        => $padding_bottom,
 			'bg_color_slug'         => $bg_color_slug,
+			'bg_color_custom'       => $bg_color_custom,
 			'bg_seamless'           => $bg_seamless,
+			'quote_mark'            => $quote_mark,
 		] = $attr;
 
 		/* Classes */
 
 		$classes = '';
+
+		/* Attributes */
+
+		$atr = '';
 
 		/* Layout */
 
@@ -140,6 +150,7 @@ class Container {
 
 		if ( $list ) {
 			$classes .= ' t-list-style-none';
+			$atr     .= ' role="list"';
 		}
 
 		if ( 'blockquote' === $tag ) {
@@ -198,18 +209,32 @@ class Container {
 
 		/* Background */
 
-		if ( $bg_color_slug ) {
-			$classes .= " bg-$bg_color_slug b-radius-xl";
+		if ( $bg_color_slug || $bg_color_custom ) {
+			$classes .= ' b-radius-xl';
+		}
 
-			if ( 'foreground-dark' === $bg_color_slug || 'primary-dark' === $bg_color_slug ) {
+		if ( $bg_color_slug ) {
+			$classes .= " bg-$bg_color_slug";
+
+			if ( PI::is_text_light( $bg_color_slug ) ) {
 				$classes .= ' t-light';
 			}
+		}
+
+		if ( $bg_color_custom ) {
+			$atr .= " style='background-color:$bg_color_custom'";
 		}
 
 		/* Seamless */
 
 		if ( $bg_seamless ) {
 			$classes .= ' l-relative l-before bg-seamless';
+		}
+
+		/* Quote mark */
+
+		if ( 'blockquote' === $tag && $quote_mark ) {
+			$atr .= ' data-quote';
 		}
 
 		/* Output */
@@ -221,10 +246,10 @@ class Container {
 		}
 
 		return (
-			"<$tag$classes>" .
-				( $contain ? '<div class="l-container">' : '' ) .
+			"<$tag$classes$atr>" .
+				( 'block' === $layout && $contain ? '<div class="l-container">' : '' ) .
 					$content .
-				( $contain ? '</div>' : '' ) .
+				( 'block' === $layout && $contain ? '</div>' : '' ) .
 			"</$tag>"
 		);
 	}

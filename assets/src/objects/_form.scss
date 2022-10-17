@@ -120,7 +120,7 @@
   --arrow-width: var(--2xs);
   --label-width: auto;
 
-  .o-form__label {
+  [data-label] {
     --label: var(--label-small);
 
     width: var(--label-width);
@@ -137,8 +137,8 @@
 /* Required */
 
 legend[data-req] > span:first-child::after,
-.o-form__label[data-req] > span:first-child::after,
-[data-req] > .o-form__label > span:first-child::after {
+[data-label][data-req] > span:first-child::after,
+[data-req] > [data-label] > span:first-child::after {
   content: " *";
   color: var(--negative-color);
 }
@@ -154,7 +154,7 @@ legend[data-req] > span:first-child::after,
       @extend %u-display-inline-flex;
     }
 
-    .o-form__label {
+    [data-label] {
       @extend %u-font-family-secondary;
       @extend %u-line-height-130-pc;
 
@@ -180,7 +180,7 @@ legend[data-req] > span:first-child::after,
   }
 }
 
-[data-select-caret] {
+[data-select-arrow] {
   @extend %u-position-absolute;
   @extend %u-position-vertical-center;
   @extend %u-right-0;
@@ -197,7 +197,7 @@ legend[data-req] > span:first-child::after,
   }
 }
 
-.o-form__control {
+[data-control] {
   --border-radius: var(--border-radius-l);
   --color: transparent;
 

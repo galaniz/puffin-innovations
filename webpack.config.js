@@ -99,7 +99,7 @@ const rulesCompat = [
         [
           '@babel/preset-env',
           {
-            targets: { chrome: '60', edge: '16' }
+            targets: { chrome: '60', edge: '12' }
           }
         ]
       ],
@@ -198,7 +198,8 @@ const blocks = [
   'container',
   'column',
   'text',
-  'image'
+  'image',
+  'number'
 ]
 
 const blocksEntry = {}

@@ -14,3 +14,11 @@
     @extend %u-height-100-pc;
   }
 }
+
+.l-svg-absolute {
+  svg {
+    @extend %u-position-absolute;
+    @extend %u-top-0;
+    @extend %u-left-0;
+  }
+}
