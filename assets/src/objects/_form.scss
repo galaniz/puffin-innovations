@@ -81,14 +81,9 @@
     }
   }
 
-  [type="submit"] {
+  &:not([role="search"]) [type="submit"] {
     background: var(--submit-bg);
     color: var(--submit-color);
-  }
-
-  [data-required],
-  [data-asl] {
-    @extend %u-visually-hidden;
   }
 
   [data-asi] {
@@ -101,7 +96,7 @@
   }
 }
 
-.o-form-s {
+.o-form-small {
   --label: var(--h5);
   --label-small: var(--h6);
   --input-padding: var(--3-5xs) var(--xs);
@@ -136,9 +131,9 @@
 
 /* Required */
 
-legend[data-req] > span:first-child::after,
-[data-label][data-req] > span:first-child::after,
-[data-req] > [data-label] > span:first-child::after {
+legend[data-required] > span:first-child::after,
+[data-label][data-required] > span:first-child::after,
+[data-required] > [data-label] > span:first-child::after {
   content: " *";
   color: var(--negative-color);
 }

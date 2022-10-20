@@ -35,6 +35,7 @@ class Hero {
 				'bg_color_slug_meta'        => ['type' => 'string'],
 				'video'                     => ['type' => 'boolean'],
 				'video_link'                => ['type' => 'string'],
+				'video_label'               => ['type' => 'string'],
 				'primary_link'              => ['type' => 'string'],
 				'primary_link_text'         => ['type' => 'string'],
 				'primary_link_color'        => ['type' => 'string'],
@@ -53,6 +54,7 @@ class Hero {
 				'bg_color_slug_meta'        => 'background-light',
 				'video'                     => false,
 				'video_link'                => '',
+				'video_label'               => '',
 				'primary_link'              => '',
 				'primary_link_text'         => '',
 				'primary_link_color'        => '',
@@ -147,6 +149,7 @@ class Hero {
 			'bg_color_slug'             => $bg_color_slug,
 			'video'                     => $video,
 			'video_link'                => $video_link,
+			'video_label'               => $video_label,
 			'primary_link'              => $primary_link,
 			'primary_link_text'         => $primary_link_text,
 			'primary_link_color_slug'   => $primary_link_color_slug,
@@ -177,6 +180,7 @@ class Hero {
 		if ( $image_id ) {
 			$image  = PI::get_image( $image_id, '1200w' );
 			$button = '';
+			$dialog = '';
 
 			if ( $image ) {
 				$src           = esc_attr( $image['url'] );
@@ -190,19 +194,77 @@ class Hero {
 				$media_output = "<img class='$image_classes' src='$src' alt='$alt' srcset='$srcset' sizes='$sizes' width='$width' height='$height'>";
 			}
 
+			/* Video modal */
+
 			if ( $media_video ) {
 				$text_width  = '1-3';
 				$media_width = '2-3';
 
+				/* Trigger */
+
 				/* phpcs:ignore */
 				$play_icon = file_get_contents( PI::$svg_assets_path . 'play.svg' ); // Ignore: local path
 
+				$dialog_id = 'd-' . uniqid();
+
 				$button = (
 					'<div class="l-absolute l-top-0 l-left-0 l-right-0 l-bottom-0 l-margin-auto l-flex l-align-center l-justify-center l-z-index-1 l-width-1-5 l-max-width-2xl">' .
-						'<button type="button" class="l-width-100-pc l-margin-auto l-relative l-aspect-ratio-100 l-flex l-align-center l-justify-center b-radius-100-pc t-background-light bg-background-light-30">' .
+						"<button type='button' class='l-width-100-pc l-margin-auto l-relative l-aspect-ratio-100 l-flex l-align-center l-justify-center b-radius-100-pc t-background-light bg-background-light-30 e-transition e-scale js-modal-trigger' aria-haspopup='dialog' aria-controls='$dialog_id'>" .
 							"<span class='l-absolute l-width-4-5 l-svg'>$play_icon</span>" .
 							'<span class="a11y-visually-hidden">Play video</span>' .
 						'</button>' .
+					'</div>'
+				);
+
+				/* Close */
+
+				/* phpcs:ignore */
+				$close_icon = file_get_contents( PI::$svg_assets_path . 'close.svg' );  // Ignore: local path
+
+				$close_button = (
+					'<button type="button" class="o-modal__close l-absolute l-top-0 l-right-0 l-z-index-1 l-width-s l-height-s l-margin-right-4xs l-margin-top-4xs b-radius-100-pc t-background-light bg-foreground-dark-09">' .
+						"<span class='l-block l-width-xs l-height-xs l-svg l-margin-auto'>$close_icon</span>" .
+					'</button>'
+				);
+
+				/* Text content */
+
+				$dialog_text = '';
+
+				if ( $video_label ) {
+					$label_id      = uniqid();
+					$video_label   = "<h2 class='t-h3' id='$label_id'>$video_label</h2>";
+					$aria_label_id = " aria-labelledby='$label_id'";
+				}
+
+				if ( $content || $video_label ) {
+					$dialog_text = (
+						'<div class="o-modal__scroll l-flex-shrink-0 l-overflow-y-auto l-width-1-1 l-width-1-3-l">' .
+							'<div class="l-padding-right-2xs l-padding-left-2xs l-padding-left-s-l l-padding-right-s-l l-padding-top-2xs l-padding-bottom-2xs l-margin-bottom-2xs-all l-margin-0-last t-s t-inherit">' .
+								$video_label .
+								$content .
+							'</div>' .
+						'</div>'
+					);
+				}
+
+				/* Dialog */
+
+				$dialog_type = $content ? 'media-text' : 'media';
+				$iframe_id   = 'i-' . uniqid();
+
+				$dialog = (
+					"<div class='o-modal t-light l-fixed l-top-0 l-left-0 l-width-100-vw l-height-100-vh l-flex l-align-center l-justify-center' id='$dialog_id' role='dialog' aria-modal='true'$aria_label_id>" .
+						'<div class="o-modal__overlay bg-foreground-dark l-fixed l-top-0 l-left-0 l-z-index-1 l-width-100-pc l-height-100-pc e-transition"></div>' .
+						"<div class='o-modal__window l-flex l-flex-column l-flex-row-l l-align-center l-justify-center l-z-index-1 e-transition' data-type='$dialog_type'>" .
+							'<div class="o-modal__media">' .
+								'<div class="l-width-100-pc l-height-100-pc l-relative l-overflow-hidden bg-background-light-15">' .
+									"<iframe id='$iframe_id' class='l-absolute l-top-0 l-left-0 l-width-100-pc l-height-100-pc' data-src='$video_link' title='Video player' frameborder='0' allow='autoplay' allowfullscreen></iframe>" .
+								'</div>' .
+							'</div>' .
+							$dialog_text .
+						'</div>' .
+						$close_button .
 					'</div>'
 				);
 			}
@@ -221,6 +283,7 @@ class Hero {
 							$media_output .
 							$button .
 						'</figure>' .
+						$dialog .
 					'</div>'
 				);
 			}

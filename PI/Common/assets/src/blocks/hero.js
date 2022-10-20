@@ -22,6 +22,7 @@ const {
 
 const {
   InspectorControls,
+  InnerBlocks,
   PlainText,
   URLInputButton
 } = window.wp.blockEditor
@@ -60,6 +61,7 @@ registerBlockType(name, {
       bg_color = def.bg_color, // eslint-disable-line camelcase
       video = def.video,
       video_link = def.video_link, // eslint-disable-line camelcase
+      video_label = def.video_label, // eslint-disable-line camelcase
       primary_link = def.primary_link, // eslint-disable-line camelcase
       primary_link_text = def.primary_link_text, // eslint-disable-line camelcase
       primary_link_color = def.primary_link_color, // eslint-disable-line camelcase
@@ -141,11 +143,19 @@ registerBlockType(name, {
               onChange={checked => setAttributes({ video: checked })}
             />
             {video && (
-              <TextControl
-                label='Video Embed Link'
-                value={video_link} // eslint-disable-line camelcase
-                onChange={v => setAttributes({ video_link: v })}
-              />
+              <Fragment>
+                <TextControl
+                  label='Video Embed Link'
+                  value={video_link} // eslint-disable-line camelcase
+                  onChange={v => setAttributes({ video_link: v })}
+                />
+                <TextControl
+                  label='Video Label'
+                  help='Heading displayed next to video'
+                  value={video_label} // eslint-disable-line camelcase
+                  onChange={v => setAttributes({ video_label: v })}
+                />
+              </Fragment>
             )}
           </PanelBody>
         </InspectorControls>
@@ -214,11 +224,16 @@ registerBlockType(name, {
               </PanelRow>
             </BaseControl>
           </div>
+          {video && video_link && ( // eslint-disable-line camelcase
+            <BaseControl label='Video Text'>
+              <InnerBlocks allowedBlocks={['core/paragraph', n + 'text']} />
+            </BaseControl>
+          )}
         </PanelBody>
       </Panel>
     ]
   },
   save () {
-    return null // Rendered in php
+    return <InnerBlocks.Content /> // Rendered in php
   }
 })

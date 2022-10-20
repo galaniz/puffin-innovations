@@ -9,6 +9,7 @@ import { setElements, usingMouse, request } from 'Formation/utils'
 /* Classes */
 
 import Nav from 'Formation/components/nav'
+import Modal from 'Formation/objects/modal'
 import SendForm from 'Formation/objects/form/send'
 import Conditional from 'Formation/objects/form/conditional'
 
@@ -55,6 +56,20 @@ const meta = [
     ]
   },
   {
+    prop: 'search',
+    selector: '.c-nav-search',
+    items: [
+      {
+        prop: 'searchButton',
+        selector: '.c-nav-search__button'
+      },
+      {
+        prop: 'searchInput',
+        selector: 'input'
+      }
+    ]
+  },
+  {
     prop: 'hero',
     selector: '.js-hero',
     items: [
@@ -63,6 +78,12 @@ const meta = [
         selector: '.js-hero__target'
       }
     ]
+  },
+  {
+    prop: 'modalTriggers',
+    selector: '.js-modal-trigger',
+    all: true,
+    array: true
   },
   {
     prop: 'forms',
@@ -154,6 +175,29 @@ const initialize = () => {
     nav()
   }
 
+  /* Search */
+
+  if (el.search && el.searchButton && el.searchInput) {
+    let searchOpen = false
+
+    const toggleSearchBar = (open) => {
+      searchOpen = open
+
+      el.searchButton.setAttribute('aria-expanded', searchOpen)
+      el.search.setAttribute('data-open', searchOpen)
+
+      if (searchOpen) {
+        setTimeout(() => {
+          el.searchInput.focus()
+        }, 100)
+      }
+    }
+
+    el.searchButton.addEventListener('click', () => {
+      toggleSearchBar(!searchOpen)
+    })
+  }
+
   /* Hero - set min height */
 
   if (el.hero && el.heroTarget) {
@@ -168,6 +212,108 @@ const initialize = () => {
     })
 
     setMinHeight()
+  }
+
+  /* Modal triggers and modals */
+
+  if (el.modalTriggers.length) {
+    const modal = (args) => {
+      return new Modal(args)
+    }
+
+    el.modalTriggers.forEach((m) => {
+      /* Get elements */
+
+      const meta = [
+        {
+          prop: 'modal',
+          selector: `#${m.getAttribute('aria-controls')}`,
+          items: [
+            {
+              prop: 'window',
+              selector: '.o-modal__window'
+            },
+            {
+              prop: 'overlay',
+              selector: '.o-modal__overlay'
+            },
+            {
+              prop: 'close',
+              selector: '.o-modal__close'
+            },
+            {
+              prop: 'iframe',
+              selector: 'iframe'
+            }
+          ]
+        }
+      ]
+
+      const args = {}
+
+      setElements(document, meta, args)
+
+      args.trigger = m
+
+      /* Iframe player */
+
+      const { iframe } = args
+
+      let iframeLink = ''
+
+      let player = false
+
+      if (iframe) {
+        iframeLink = iframe.getAttribute('data-src')
+      }
+
+      args.onToggle = (open) => {
+        document.documentElement.setAttribute('data-100-vw', open)
+
+        if (iframeLink && open && !player) {
+          iframe.src = iframeLink
+
+          /* Load IFrame Player API code asynchronously */
+
+          const tag = document.createElement('script')
+          tag.src = 'https://www.youtube.com/iframe_api'
+
+          const firstScriptTag = document.getElementsByTagName('script')[0]
+          firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
+
+          window.onPlayerReady = (event) => {
+            event.target.playVideo()
+
+            console.log("READDDYY", event);
+          }
+
+          window.onYouTubeIframeAPIReady = () => {
+            player = new window.YT.Player(iframe.id, {
+              events: {
+                onReady: window.onPlayerReady
+              }
+            })
+          }
+        }
+
+        console.log("WHAAA", window.YT, player)
+
+        if (player) {
+          if (!open) {
+            //player.stopVideo()
+            /*if (player.getPlayerState() === 1 || player.getPlayerState() === 3) {
+              player.stopVideo()
+            }*/
+          } else {
+            player.playVideo()
+          }
+        }
+      }
+
+      /* Init */
+
+      modal(args)
+    })
   }
 
   /* Forms */

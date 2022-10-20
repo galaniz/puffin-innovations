@@ -14,13 +14,25 @@
 use PI\PI as PI;
 use Formation\Pub\Nav_Walker;
 
+/* Classes */
+
+$list_classes = 'c-nav__list l-relative l-flex l-flex-wrap l-align-center l-gap-margin-s l-gap-margin-sm-l t-list-style-none';
+$light        = false;
+
+if ( PI::is_text_light( PI::$hero_theme ) ) {
+	$light         = true;
+	$list_classes .= ' t-link t-background-light t-light';
+} else {
+	$list_classes .= ' t-link-current t-foreground-dark';
+}
+
 /* Logo */
 
 $logo = PI::render_logo( '', true );
 
 if ( $logo ) {
 	$logo = (
-		'<div data-logo>' .
+		'<div data-logo' . ( $light ? ' class="t-light"' : '' ) . '>' .
 			'<a href="' . esc_url( home_url( '/' ) ) . '" class="l-block l-relative l-svg l-svg-absolute o-logo">' .
 				'<span class="a11y-visually-hidden">' . get_bloginfo( 'name' ) . ' home</span>' .
 				$logo .
@@ -65,31 +77,54 @@ if ( has_nav_menu( 'main' ) ) {
 	);
 }
 
-/* Classes */
+/* Search form */
 
-$list_classes = 'c-nav__list l-flex l-flex-wrap l-align-center l-gap-margin-s l-gap-margin-sm-l t-list-style-none';
-$light        = false;
+/* phpcs:ignore */
+$search_icon = file_get_contents( PI::$svg_assets_path . 'search.svg' );  // Ignore: local path
 
-if ( PI::is_text_light( PI::$hero_theme ) ) {
-	$light         = true;
-	$list_classes .= ' t-link t-background-light t-light';
-} else {
-	$list_classes .= ' t-link-current t-foreground-dark';
-}
+/* phpcs:ignore */
+$close_icon = file_get_contents( PI::$svg_assets_path . 'close.svg' );  // Ignore: local path
 
-?>
+$search_id = uniqid();
+
+$search_form = (
+	'<li class="c-nav__item" data-overflow-group="0" data-depth="0">' .
+		'<div class="c-nav-search">' .
+			"<button class='c-nav-search__button t-current l-width-xs l-height-m l-flex l-align-center l-justify-center' type='button' aria-expanded='false' aria-controls='$search_id' aria-label='Toggle search bar'>" .
+				'<span class="l-flex l-width-xs l-height-xs l-svg">' .
+					$search_icon .
+				'</span>' .
+				'<span class="l-flex l-width-xs l-height-xs l-svg">' .
+					$close_icon .
+				'</span>' .
+			'</button>' .
+			"<div class='c-nav-search__bar l-absolute l-bottom-0 l-left-0 l-width-100-pc e-transition' id='$search_id'>" .
+				PI::render_form_search(
+					[
+						'form_class'   => 'o-form o-form-small o-form-round o-form-search l-relative',
+						'field_class'  => '',
+						'input_class'  => 'l-height-m',
+						'button_class' => 'l-absolute l-right-0 l-bottom-0 l-top-0 l-flex l-align-center l-justify-center l-width-m l-height-m t-current',
+						'icon_class'   => 'l-flex l-width-xs l-height-xs l-svg',
+						'icon_path'    => PI::$svg_assets_path . 'search.svg',
+						'a11y_class'   => 'a11y-visually-hidden',
+					]
+				) .
+			'</div>' .
+		'</div>' .
+	'</li>'
+); ?>
 
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<meta name="theme-color" content="#e05920">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
 	<?php wp_body_open(); ?>
-	<header class="l-padding-top-2xs l-padding-bottom-2xs l-padding-top-xs-l l-padding-bottom-xs-l" data-theme="<?php echo esc_attr( PI::$hero_theme ); ?>">
+	<header class="l-padding-top-2xs l-padding-bottom-2xs l-padding-top-xs-l l-padding-bottom-xs-l" data-theme="<?php echo esc_attr( PI::$hero_theme ); ?>" style="--hero-bg: var(--<?php echo esc_attr( PI::$hero_theme ); ?>)">
 		<a href="#main" class="c-skip-link t-h5 bg-background-light t-foreground-dark l-block l-absolute l-left-0 l-right-0 l-top-0 l-padding-right-2xs l-padding-left-2xs l-padding-top-2xs l-padding-bottom-2xs t-align-center outline-snug">
 			Skip to main content
 		</a>
@@ -100,7 +135,7 @@ if ( PI::is_text_light( PI::$hero_theme ) ) {
 				<?php echo $logo; ?>
 				<ul class="<?php echo esc_attr( $list_classes ); ?>" role="list">
 					<?php /* phpcs:ignore */ ?>
-					<?php echo $main_nav; ?>
+					<?php echo $main_nav . $search_form; ?>
 				</ul>
 				<button class="c-nav__button l-relative<?php echo $light ? ' t-light' : ''; ?>" type="button" aria-haspopup="true" aria-controls="<?php echo esc_attr( $main_nav_overflow_id ); ?>">
 					<span class="c-nav-icon l-block l-relative l-margin-auto e-transition" data-num="4">

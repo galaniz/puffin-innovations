@@ -67,11 +67,13 @@
 @use "objects/form";
 @use "objects/loader";
 @use "objects/number";
+@use "objects/modal";
 
 /* Effects */
 
 @use "effects/transition";
 @use "effects/underline";
+@use "effects/scale";
 
 /* WordPress */
 

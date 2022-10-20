@@ -50,14 +50,6 @@ class PI extends FRM {
 	/* Static markup */
 
 	public static $html = [
-		'loader' => [
-			'button' => (
-				'<span class="o-loader l-absolute l-top-0 l-left-0 l-right-0 l-bottom-0 l-flex l-align-center l-justify-center" data-hide>' .
-					'<span class="l-width-xs l-height-xs b-radius-100-pc"></span>' .
-					'<span class="l-width-xs l-height-xs b-radius-100-pc l-absolute l-top-0 l-left-0 l-right-0 l-bottom-0 l-margin-auto"></span>' .
-				'</span>'
-			),
-		],
 		'result' => [
 			'error'   => [
 				'default' => '',
@@ -202,7 +194,7 @@ class PI extends FRM {
 		/* phpcs:enable */
 
 		self::$html['result']['success'] = (
-			'<div class="o-form-result__positive l-width-100-pc l-none outline-none" aria-labelledby="%s" tabindex="-1">' .
+			'<div class="o-form-result__positive l-width-100-pc l-none outline-none" aria-labelledby="%s" role="alert" tabindex="-1">' .
 				'<div class="o-form__positive l-padding-left-2xs l-padding-right-2xs l-padding-top-2xs l-padding-bottom-2xs">' .
 					'<div class="l-flex l-gap-margin-3xs">' .
 						'<div>' .
@@ -220,7 +212,7 @@ class PI extends FRM {
 		);
 
 		self::$html['result']['error']['default'] = (
-			'<div class="o-form-result__negative l-width-100-pc l-none outline-none" aria-labelledby="%s" tabindex="-1">' .
+			'<div class="o-form-result__negative l-width-100-pc l-none outline-none" aria-labelledby="%s" role="alert" tabindex="-1">' .
 				'<div class="o-form__negative l-padding-left-2xs l-padding-right-2xs l-padding-top-2xs l-padding-bottom-2xs">' .
 					'<div class="l-flex l-gap-margin-3xs">' .
 						'<div>' .
@@ -238,7 +230,7 @@ class PI extends FRM {
 		);
 
 		self::$html['result']['error']['summary'] = (
-			'<div class="o-form-error__summary l-width-100-pc l-none outline-none" aria-labelledby="%s" tabindex="-1">' .
+			'<div class="o-form-error__summary l-width-100-pc l-none outline-none" aria-labelledby="%s" role="alert" tabindex="-1">' .
 				'<div class="o-form__negative l-padding-left-2xs l-padding-right-2xs l-padding-top-2xs l-padding-bottom-2xs">' .
 					'<div class="l-flex l-gap-margin-3xs">' .
 						'<div>' .
@@ -525,6 +517,21 @@ class PI extends FRM {
 	}
 
 	/**
+	 * Get loader output.
+	 */
+
+	public static function get_loader( $size = 'xs', $hide = true ) {
+		$hide_output = $hide ? ' data-hide' : '';
+
+		return (
+			"<span class='o-loader l-absolute l-top-0 l-left-0 l-right-0 l-bottom-0 l-flex l-align-center l-justify-center'$hide_output>" .
+				"<span class='l-width-$size l-height-$size b-radius-100-pc'></span>" .
+				"<span class='l-width-$size l-height-$size b-radius-100-pc l-absolute l-top-0 l-left-0 l-right-0 l-bottom-0 l-margin-auto'></span>" .
+			'</span>'
+		);
+	}
+
+	/**
 	 * Check if light text required.
 	 */
 
@@ -587,7 +594,7 @@ class PI extends FRM {
 		$gap                = 'l-gap-margin-xs l-gap-margin-s-m';
 
 		if ( 'mailchimp' === $attr['type'] ) {
-			$form_class        .= ' o-form-s o-form-round';
+			$form_class        .= ' o-form-small o-form-round';
 			$button_field_class = 'l-margin-top-auto';
 			$gap                = 'l-gap-margin-2xs';
 		} else {
@@ -600,7 +607,7 @@ class PI extends FRM {
 		$args['fields_class']       = $fields_class;
 		$args['button_class']       = $button_class;
 		$args['button_field_class'] = $button_field_class;
-		$args['button_loader']      = self::$html['loader']['button'];
+		$args['button_loader']      = self::get_loader();
 		$args['error_summary']      = self::$html['result']['error']['summary'];
 		$args['error_result']       = self::$html['result']['error']['default'];
 		$args['success_result']     = self::$html['result']['success'];

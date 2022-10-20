@@ -15,6 +15,8 @@
 /* Container */
 
 .c-nav {
+  --search-bg: var(--hero-bg);
+
   z-index: map.get(con.$z-index, "nav");
 
   [data-logo] {
@@ -91,6 +93,7 @@
 /* Mobile */
 
 .c-nav-overflow {
+  --search-bg: var(--primary-light);
   --prop: visibility, transform;
   --duration: 0ms, 400ms;
   --delay: 400ms, 10ms;
@@ -118,5 +121,53 @@
     --delay: 10ms, 0ms;
 
     @extend %u-opacity-1;
+  }
+}
+
+/* Search */
+
+.c-nav-search {
+  .c-nav-overflow & {
+    @extend %u-position-relative;
+  }
+}
+
+.c-nav-search__button {
+  span {
+    @extend %u-display-none;
+  }
+
+  &[aria-expanded="false"] span:first-child {
+    @extend %u-display-flex;
+  }
+
+  &[aria-expanded="true"] span:last-child {
+    @extend %u-display-flex;
+  }
+
+  .c-nav-overflow & {
+    @extend %u-visibility-hidden;
+  }
+}
+
+.c-nav-search__bar {
+  background: var(--search-bg);
+
+  .c-nav__list & {
+    --prop: visibility, opacity;
+    --duration: 0ms, 400ms;
+    --delay: 400ms, 10ms;
+  
+    @extend %u-opacity-0;
+    @extend %u-visibility-hidden;
+  
+    width: calc(100% - var(--m));
+  }
+
+  .c-nav__list [data-open="true"] & {
+    --delay: 10ms, 0ms;
+
+    @extend %u-opacity-1;
+    @extend %u-visibility-visible;
   }
 }

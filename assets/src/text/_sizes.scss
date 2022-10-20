@@ -139,3 +139,10 @@ p,
 .t-xs {
   font-size: var(--t-xs);
 }
+
+.t-inherit {
+  p,
+  li {
+    font-size: inherit;
+  }
+}
