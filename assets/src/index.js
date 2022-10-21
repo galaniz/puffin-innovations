@@ -12,6 +12,7 @@ import Nav from 'Formation/components/nav'
 import Modal from 'Formation/objects/modal'
 import SendForm from 'Formation/objects/form/send'
 import Conditional from 'Formation/objects/form/conditional'
+import Collapsible from 'Formation/objects/collapsible'
 
 /* Variables */
 
@@ -84,6 +85,11 @@ const meta = [
     selector: '.js-modal-trigger',
     all: true,
     array: true
+  },
+  {
+    prop: 'collapsibles',
+    selector: '.o-collapsible',
+    all: true
   },
   {
     prop: 'forms',
@@ -313,6 +319,40 @@ const initialize = () => {
       /* Init */
 
       modal(args)
+    })
+  }
+
+  /* Collapsibles */
+
+  if (el.collapsibles.length) {
+    const collapsible = (args) => {
+      return new Collapsible(args)
+    }
+
+    el.collapsibles.forEach(c => {
+      const meta = [
+        {
+          prop: 'collapsible',
+          selector: '.o-collapsible__main'
+        },
+        {
+          prop: 'trigger',
+          selector: '.o-collapsible__toggle'
+        }
+      ]
+
+      const cc = {}
+
+      setElements(c, meta, cc)
+
+      const args = {
+        container: c,
+        collapsible: cc.collapsible,
+        accordionId: c.getAttribute('data-accordion'),
+        trigger: cc.trigger
+      }
+
+      collapsible(args)
     })
   }
 

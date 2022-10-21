@@ -47,6 +47,10 @@ class PI extends FRM {
 		'hide'          => 'a11y-hide-input',
 	];
 
+	/* Editor style classes */
+
+	public static $editor_classes = 't-list e-underline e-underline-thick';
+
 	/* Static markup */
 
 	public static $html = [
@@ -537,6 +541,14 @@ class PI extends FRM {
 
 	public static function is_text_light( $bg = 'background-light' ) {
 		return 'foreground-dark' === $bg || 'primary-dark' === $bg;
+	}
+
+	/**
+	 * Check if extra dark text required.
+	 */
+
+	public static function is_text_dark( $bg = 'background-light' ) {
+		return 'primary-base' === $bg || 'primary-tint' === $bg;
 	}
 
 	/**

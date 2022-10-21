@@ -16,7 +16,7 @@ use Formation\Pub\Nav_Walker;
 
 /* Classes */
 
-$list_classes = 'c-nav__list l-relative l-flex l-flex-wrap l-align-center l-gap-margin-s l-gap-margin-sm-l t-list-style-none';
+$list_classes = 'c-nav__list l-relative l-flex l-align-center l-gap-margin-s l-gap-margin-sm-l t-list-style-none l-overflow-x-auto';
 $light        = false;
 
 if ( PI::is_text_light( PI::$hero_theme ) ) {

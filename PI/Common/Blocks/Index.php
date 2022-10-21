@@ -18,6 +18,7 @@ use PI\Common\Blocks\Column;
 use PI\Common\Blocks\Text;
 use PI\Common\Blocks\Image;
 use PI\Common\Blocks\Number;
+use PI\Common\Blocks\Collapsible;
 use Formation\Common\Blocks\Blocks;
 use function Formation\additional_script_data;
 
@@ -47,6 +48,7 @@ class Index {
 		new Text();
 		new Image();
 		new Number();
+		new Collapsible();
 		new Blocks(
 			[
 				'folder_url' => get_template_directory_uri() . '/PI/Common/assets/public/js/blocks/',
@@ -94,6 +96,8 @@ class Index {
 			"$n/text",
 			"$n/image",
 			"$n/number",
+			"$n/collapsibles",
+			"$n/collapsible",
 		];
 	}
 

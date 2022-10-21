@@ -40,15 +40,20 @@ $logo: map.get(con.$vars, "logo");
 
   [data-theme="primary-base"] &,
   [data-theme="primary-light"] &,
+  [data-theme="primary-tint"] &,
   [data-theme="background-base"] &,
   [data-theme="background-dark"] &,
   [data-theme="background-light"] & {
     --text-top: #{map.get($logo, "black")};
   }
 
-  [data-theme="primary-base"] & {
+  [data-theme="primary-base"] &,
+  [data-theme="primary-tint"] & {
     --text-bottom: #{map.get($logo, "black")};
     --base: #{map.get($logo, "charcoal")};
+  }
+
+  [data-theme="primary-base"] & {
     --beak-bottom: #{map.get($logo, "yellow-light")};
     --beak-top: #{map.get($logo, "yellow-dark")};
   }

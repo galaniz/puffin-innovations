@@ -10,16 +10,6 @@
 
 /* Styles */
 
-.o-modal {
-  --prop: visibility;
-  --duration: 0ms;
-  --delay: #{con.$default-duration};
-
-  &[data-open="true"] {
-    --delay: #{con.$default-duration};
-  }
-}
-
 .o-modal__window {
   --max-height: none;
   --l: 0rem;
@@ -47,17 +37,6 @@
     }
 
     max-width: var(--container-no-padding);
-  }
-}
-
-.o-modal__overlay,
-.o-modal__window {
-  --prop: visibility, opacity;
-  --duration: 0ms, #{con.$default-duration};
-  --delay: #{con.$default-duration}, 10ms;
-
-  .o-modal[data-open="true"] & {
-    --delay: 10ms, 0ms;
   }
 }
 

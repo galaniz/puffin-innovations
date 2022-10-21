@@ -40,6 +40,10 @@ $margin-vertical: (
   "s",
 );
 
+/* Primary tint */
+
+$primary-tint: #4c94d5;
+
 /* Config variables */
 
 @use "@alanizcreative/formation/src/config" with (
@@ -48,7 +52,7 @@ $margin-vertical: (
     "primary": (
       "base": #e05920,
       "light": #ffc14a,
-      "tint": #4c94d5,
+      "tint": $primary-tint,
       "dark": #1b62a4,
     ),
     "foreground": (
@@ -227,6 +231,20 @@ $margin-vertical: (
   $aspect-ratio-padding: (
     "56": 56.25%,
     "66": 66.667%,
+  ),
+
+  /* Borders */
+
+  $borders: (
+    "sides": ("all"),
+    "colors": (
+      "default": currentcolor,
+      "primary-tint": "primary-tint",
+      "primary-tint-65": "primary-tint-65",
+    ),
+    "widths": (
+      "default": 0.125rem,
+    ),
   ),
 
   $border-radius: (

@@ -22,6 +22,10 @@
   background-color: rgba(func.get-color("background-light"), 0.3);
 }
 
+.bg-primary-tint-15 {
+  background-color: rgba(func.get-color("primary-tint"), 0.15);
+}
+
 .bg-overlay::after {
   background-color: rgba(func.get-color("foreground-dark"), 0.5);
 }

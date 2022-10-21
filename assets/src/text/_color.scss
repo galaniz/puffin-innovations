@@ -28,6 +28,12 @@
   color: var(--text-color);
 }
 
+.t-dark {
+  --text-color: #{rgba(func.get-color("foreground-dark"), 0.95)};
+
+  color: var(--text-color);
+}
+
 .t-link {
   color: var(--link-color);
 }

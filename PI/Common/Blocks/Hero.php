@@ -388,6 +388,10 @@ class Hero {
 			$section_classes .= ' t-light';
 		}
 
+		if ( PI::is_text_dark( $bg_color_slug ) ) {
+			$section_classes .= ' t-dark';
+		}
+
 		if ( ! $text_output && ! $media_output ) {
 			$section_classes .= " $bg_classes";
 		}

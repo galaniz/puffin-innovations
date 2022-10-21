@@ -1,0 +1,16 @@
+/**
+ * Objects: collapsible
+ */
+
+/* Imports */
+
+@use "@alanizcreative/formation/src/config" as con;
+@use "@alanizcreative/formation/src/objects/collapsible";
+
+/* Styles */
+
+.o-collapsible__icon {
+  .o-collapsible[data-expanded="true"] & {
+    transform: rotate(180deg);
+  }
+}

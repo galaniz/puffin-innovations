@@ -199,7 +199,9 @@ const blocks = [
   'column',
   'text',
   'image',
-  'number'
+  'number',
+  'collapsibles/collapsibles',
+  'collapsibles/collapsible'
 ]
 
 const blocksEntry = {}
