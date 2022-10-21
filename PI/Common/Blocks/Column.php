@@ -27,24 +27,26 @@ class Column {
 	public static $blocks = [
 		'column' => [
 			'attr'    => [
-				'internal_name' => ['type' => 'string'],
-				'tag'           => ['type' => 'string'],
-				'width_mobile'  => ['type' => 'string'],
-				'width'         => ['type' => 'string'],
-				'align'         => ['type' => 'string'],
-				'justify'       => ['type' => 'string'],
-				'grow'          => ['type' => 'boolean'],
-				'quote_mark'    => ['type' => 'boolean'],
+				'internal_name'   => ['type' => 'string'],
+				'tag'             => ['type' => 'string'],
+				'width_mobile'    => ['type' => 'string'],
+				'width'           => ['type' => 'string'],
+				'width_immediate' => ['type' => 'boolean'],
+				'align'           => ['type' => 'string'],
+				'justify'         => ['type' => 'string'],
+				'grow'            => ['type' => 'boolean'],
+				'quote_mark'      => ['type' => 'boolean'],
 			],
 			'default' => [
-				'internal_name' => '',
-				'tag'           => 'div',
-				'width_mobile'  => '',
-				'width'         => '',
-				'align'         => '',
-				'justify'       => '',
-				'grow'          => false,
-				'quote_mark'    => false,
+				'internal_name'   => '',
+				'tag'             => 'div',
+				'width_mobile'    => '',
+				'width'           => '',
+				'width_immediate' => false,
+				'align'           => '',
+				'justify'         => '',
+				'grow'            => false,
+				'quote_mark'      => false,
 			],
 			'render'  => [__CLASS__, 'render_column'],
 			'handle'  => 'column',
@@ -82,13 +84,14 @@ class Column {
 		/* Destructure */
 
 		[
-			'tag'          => $tag,
-			'width_mobile' => $width_mobile,
-			'width'        => $width,
-			'align'        => $align,
-			'justify'      => $justify,
-			'grow'         => $grow,
-			'quote_mark'   => $quote_mark,
+			'tag'             => $tag,
+			'width_mobile'    => $width_mobile,
+			'width'           => $width,
+			'width_immediate' => $width_immediate,
+			'align'           => $align,
+			'justify'         => $justify,
+			'grow'            => $grow,
+			'quote_mark'      => $quote_mark,
 		] = $attr;
 
 		/* Classes */
@@ -120,7 +123,11 @@ class Column {
 		/* Width */
 
 		if ( $width_mobile ) {
-			$classes .= " l-width-$width_mobile-s";
+			$classes .= " l-width-$width_mobile";
+
+			if ( ! $width_immediate ) {
+				$classes .= '-s';
+			}
 		}
 
 		if ( $width && $width !== $width_mobile ) {

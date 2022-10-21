@@ -49,6 +49,7 @@ registerBlockType(name, {
     const {
       internal_name = def.internal_name, // eslint-disable-line camelcase
       tag = def.tag,
+      width_immediate = def.width_immediate, // eslint-disable-line camelcase
       width_mobile = def.width_mobile, // eslint-disable-line camelcase
       width = def.width,
       align = def.align,
@@ -120,6 +121,13 @@ registerBlockType(name, {
               value='1'
               checked={!!grow}
               onChange={grow => setAttributes({ grow })}
+            />
+            <CheckboxControl
+              label='Width Immediate'
+              help='Specified width applies immediately otherwise applies at small breakpoint'
+              value='1'
+              checked={!!width_immediate} // eslint-disable-line camelcase
+              onChange={v => setAttributes({ width_immediate: v })}
             />
             {tag === 'blockquote' && (
               <CheckboxControl
