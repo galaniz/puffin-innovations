@@ -260,7 +260,6 @@ const initialize = () => {
       const { iframe } = args
 
       let iframeLink = ''
-
       let player = false
 
       if (iframe) {
@@ -271,7 +270,7 @@ const initialize = () => {
         document.documentElement.setAttribute('data-100-vw', open)
 
         if (iframeLink && open && !player) {
-          iframe.src = iframeLink
+          iframe.src = `${iframeLink}?autoplay=1&enablejsapi=1`
 
           /* Load IFrame Player API code asynchronously */
 
@@ -281,31 +280,32 @@ const initialize = () => {
           const firstScriptTag = document.getElementsByTagName('script')[0]
           firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
 
-          window.onPlayerReady = (event) => {
-            event.target.playVideo()
-
-            console.log("READDDYY", event);
-          }
-
           window.onYouTubeIframeAPIReady = () => {
             player = new window.YT.Player(iframe.id, {
               events: {
-                onReady: window.onPlayerReady
+                onReady: onPlayerReady
               }
             })
           }
-        }
 
-        console.log("WHAAA", window.YT, player)
+          window.onPlayerReady = (event) => {
+            event.target.playVideo()
+          }
+        }
 
         if (player) {
           if (!open) {
-            //player.stopVideo()
-            /*if (player.getPlayerState() === 1 || player.getPlayerState() === 3) {
-              player.stopVideo()
-            }*/
+            if (player.getPlayerState() === 1 || player.getPlayerState() === 3) {
+              setTimeout(() => {
+                player.stopVideo()
+              }, 300)
+            }
           } else {
-            player.playVideo()
+            if (player.getPlayerState() !== 1) {
+              setTimeout(() => {
+                player.playVideo()
+              }, 300)
+            }
           }
         }
       }
