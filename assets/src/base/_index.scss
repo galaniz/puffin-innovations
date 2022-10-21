@@ -53,10 +53,6 @@ a {
 
 p {
   color: var(--text-color);
-
-  &:empty {
-    @extend %u-display-none;
-  }
 }
 
 h1,
@@ -74,6 +70,10 @@ blockquote {
   &:last-child {
     margin-bottom: 0;
   }
+}
+
+p:empty {
+  @extend %u-display-none;
 }
 
 *:disabled,

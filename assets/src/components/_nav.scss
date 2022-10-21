@@ -157,10 +157,10 @@
     --prop: visibility, opacity;
     --duration: 0ms, 400ms;
     --delay: 400ms, 10ms;
-  
+
     @extend %u-opacity-0;
     @extend %u-visibility-hidden;
-  
+
     width: calc(100% - var(--m));
   }
 

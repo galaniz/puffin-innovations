@@ -17,6 +17,8 @@
   --border-radius: var(--border-radius-s);
   --arrow-width: var(--xs);
   --focus-width: 0.1875rem;
+  --input-padding-v: var(--input-padding);
+  --select-padding: var(--m);
 
   fieldset {
     @extend %u-width-100-pc;
@@ -40,10 +42,6 @@
   label:first-child,
   legend:first-child {
     margin-bottom: var(--3xs);
-  }
-
-  select {
-    padding-right: var(--m);
   }
 
   input[type="search"],
@@ -79,6 +77,10 @@
         --color: var(--outline-color);
       }
     }
+  }
+
+  .o-form__select {
+    padding-right: var(--select-padding);
   }
 
   &:not([role="search"]) [type="submit"] {
@@ -122,11 +124,9 @@
   }
 }
 
-.o-form__group, 
-.o-form-s {
-  select {
-    padding-right: var(--sm);
-  }
+.o-form__group,
+.o-form-small {
+  --select-padding: var(--sm);
 }
 
 /* Required */
@@ -204,7 +204,7 @@ legend[data-required] > span:first-child::after,
   background: var(--input-bg);
   border-radius: var(--border-radius);
   outline: var(--focus-width) solid var(--color);
-  outline-offset: var(--focus-width) ;
+  outline-offset: var(--focus-width);
   transition: outline 100ms var(--easing);
   order: -1;
 
@@ -253,13 +253,13 @@ legend[data-required] > span:first-child::after,
     }
   }
 
+  input[aria-invalid="true"] ~ label & {
+    --color: var(--negative-color);
+  }
+
   input:focus ~ label &,
   input[aria-invalid="true"]:focus ~ label & {
     --color: var(--outline-color);
-  }
-
-  input[aria-invalid="true"] ~ label & {
-    --color: var(--negative-color);
   }
 }
 
