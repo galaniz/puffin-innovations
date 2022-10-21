@@ -272,7 +272,7 @@ const initialize = () => {
         if (iframeLink && open && !player) {
           iframe.src = `${iframeLink}?autoplay=1&enablejsapi=1`
 
-          /* Load IFrame Player API code asynchronously */
+          /* Load IFrame Player API code */
 
           const tag = document.createElement('script')
           tag.src = 'https://www.youtube.com/iframe_api'
@@ -283,7 +283,7 @@ const initialize = () => {
           window.onYouTubeIframeAPIReady = () => {
             player = new window.YT.Player(iframe.id, {
               events: {
-                onReady: onPlayerReady
+                onReady: window.onPlayerReady
               }
             })
           }

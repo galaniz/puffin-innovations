@@ -45,6 +45,7 @@ class Container {
 				'bg_color_custom'       => ['type' => 'string'],
 				'bg_seamless'           => ['type' => 'boolean'],
 				'quote_mark'            => ['type' => 'boolean'],
+				'editor_styles'         => ['type' => 'boolean'],
 			],
 			'default' => [
 				'internal_name'         => '',
@@ -65,6 +66,7 @@ class Container {
 				'bg_color_custom'       => '',
 				'bg_seamless'           => false,
 				'quote_mark'            => false,
+				'editor_styles'         => false,
 			],
 			'render'  => [__CLASS__, 'render_container'],
 			'handle'  => 'container',
@@ -118,6 +120,7 @@ class Container {
 			'bg_color_custom'       => $bg_color_custom,
 			'bg_seamless'           => $bg_seamless,
 			'quote_mark'            => $quote_mark,
+			'editor_styles'         => $editor_styles,
 		] = $attr;
 
 		/* Classes */
@@ -235,6 +238,12 @@ class Container {
 
 		if ( 'blockquote' === $tag && $quote_mark ) {
 			$atr .= ' data-quote';
+		}
+
+		/* Editor styles */
+
+		if ( $editor_styles ) {
+			$classes .= ' t-list e-underline e-underline-thick';
 		}
 
 		/* Output */

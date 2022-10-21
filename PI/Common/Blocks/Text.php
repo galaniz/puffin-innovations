@@ -129,6 +129,8 @@ class Text {
 
 		/* Classes */
 
+		$classes = trim( $classes );
+
 		if ( $classes ) {
 			$classes = " class='$classes'";
 		}

@@ -55,7 +55,8 @@ registerBlockType(name, {
       align = def.align,
       justify = def.justify,
       grow = def.grow,
-      quote_mark = def.quote_mark // eslint-disable-line camelcase
+      quote_mark = def.quote_mark, // eslint-disable-line camelcase
+      editor_styles = def.editor_styles // eslint-disable-line camelcase
     } = attributes
 
     /* Internal name */
@@ -138,6 +139,13 @@ registerBlockType(name, {
                 onChange={v => setAttributes({ quote_mark: v })}
               />
             )}
+            <CheckboxControl
+              label='Editor Styles'
+              help='Styles for inline links and lists'
+              value='1'
+              checked={!!editor_styles} // eslint-disable-line camelcase
+              onChange={v => setAttributes({ editor_styles: v })}
+            />
           </PanelBody>
         </InspectorControls>
       </Fragment>,

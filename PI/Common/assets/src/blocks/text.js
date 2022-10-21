@@ -17,7 +17,7 @@ const {
 
 const {
   InspectorControls,
-  PlainText
+  RichText
 } = window.wp.blockEditor
 
 const { Fragment } = window.wp.element
@@ -53,8 +53,6 @@ registerBlockType(name, {
       padding_bottom_mobile = def.padding_bottom_mobile, // eslint-disable-line camelcase
       padding_bottom = def.padding_bottom // eslint-disable-line camelcase
     } = attributes
-
-    const TextTag = tag
 
     /* Output */
 
@@ -126,14 +124,15 @@ registerBlockType(name, {
       </Fragment>,
       <Panel key='panel'>
         <PanelBody title={`Text${text ? `: ${text.split(' ').splice(0, 5).join(' ')}...` : ''}`} initialOpen={false}>
-          <TextTag className={style}>
-            <PlainText
-              tag={tag}
-              value={text} // eslint-disable-line camelcase
-              onChange={v => setAttributes({ text: v })}
-              placeholder='Text'
-            />
-          </TextTag>
+          <RichText
+            className={style}
+            tagName={tag}
+            tag={tag}
+            allowedFormats={['core/bold', 'core/italic', 'core/link']}
+            value={text} // eslint-disable-line camelcase
+            onChange={v => setAttributes({ text: v })}
+            placeholder='Text'
+          />
         </PanelBody>
       </Panel>
     ]

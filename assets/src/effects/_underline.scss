@@ -15,6 +15,10 @@
   --color: currentcolor;
 }
 
+.e-underline-thick a {
+  --line-width: 0.125rem;
+}
+
 .e-underline-reverse a {
   --line-width: var(--underline);
   --color: transparent;
@@ -24,6 +28,13 @@
 .e-underline a:active,
 .e-underline a:focus {
   --color: transparent;
+}
+
+.e-underline-thick a:hover,
+.e-underline-thick a:active,
+.e-underline-thick a:focus {
+  --line-width: 0.0625rem;
+  --color: currentcolor;
 }
 
 .e-underline-reverse a:hover,

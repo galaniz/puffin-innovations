@@ -36,6 +36,7 @@ class Column {
 				'justify'         => ['type' => 'string'],
 				'grow'            => ['type' => 'boolean'],
 				'quote_mark'      => ['type' => 'boolean'],
+				'editor_styles'   => ['type' => 'boolean'],
 			],
 			'default' => [
 				'internal_name'   => '',
@@ -47,6 +48,7 @@ class Column {
 				'justify'         => '',
 				'grow'            => false,
 				'quote_mark'      => false,
+				'editor_styles'   => false,
 			],
 			'render'  => [__CLASS__, 'render_column'],
 			'handle'  => 'column',
@@ -92,6 +94,7 @@ class Column {
 			'justify'         => $justify,
 			'grow'            => $grow,
 			'quote_mark'      => $quote_mark,
+			'editor_styles'   => $editor_styles,
 		] = $attr;
 
 		/* Classes */
@@ -132,6 +135,12 @@ class Column {
 
 		if ( $width && $width !== $width_mobile ) {
 			$classes .= " l-width-$width-l";
+		}
+
+		/* Editor styles */
+
+		if ( $editor_styles ) {
+			$classes .= ' t-list e-underline e-underline-thick';
 		}
 
 		/* Quote mark */
