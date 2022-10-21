@@ -1,0 +1,24 @@
+/**
+ * Objects: number
+ */
+
+/* Imports */
+
+@use "@alanizcreative/formation/src/utils/functions" as func;
+@use "@alanizcreative/formation/src/utils/mixins" as mix;
+
+/* Styles */
+
+.o-number {
+  color: var(--invert-color);
+  background: var(--heading-color);
+  font-size: var(--h3);
+
+  @include mix.breakpoint-min("l") {
+    font-size: var(--h2);
+  }
+
+  @include mix.breakpoint-min("xl") {
+    margin-top: func.calc-rem(-15px);
+  }
+}

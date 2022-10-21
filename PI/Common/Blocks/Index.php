@@ -15,6 +15,9 @@ use PI\PI as PI;
 use PI\Common\Blocks\Hero;
 use PI\Common\Blocks\Container;
 use PI\Common\Blocks\Column;
+use PI\Common\Blocks\Text;
+use PI\Common\Blocks\Image;
+use PI\Common\Blocks\Number;
 use Formation\Common\Blocks\Blocks;
 use function Formation\additional_script_data;
 
@@ -41,6 +44,9 @@ class Index {
 		new Hero();
 		new Container();
 		new Column();
+		new Text();
+		new Image();
+		new Number();
 		new Blocks(
 			[
 				'folder_url' => get_template_directory_uri() . '/PI/Common/assets/public/js/blocks/',
@@ -50,6 +56,7 @@ class Index {
 		/* Filters */
 
 		add_filter( 'allowed_block_types_all', [$this, 'allowed_block_types'], 10, 2 );
+		add_filter( 'render_block', [$this, 'render_block'], 10, 2 );
 
 		/* Insert block data */
 
@@ -69,7 +76,6 @@ class Index {
 			'core/list',
 			'core/html',
 			'core/quote',
-			'core/pullquote',
 			'core/image',
 			'core/video',
 			'core/embed',
@@ -85,7 +91,52 @@ class Index {
 			"$n/hero",
 			"$n/container",
 			"$n/column",
+			"$n/text",
+			"$n/image",
+			"$n/number",
 		];
+	}
+
+	/**
+	 * Filter Gutenberg block output.
+	 */
+
+	public function render_block( $block_content, $block ) {
+		$name = $block['blockName'];
+
+		if ( 'core/button' === $name ) {
+			$class_name       = $block['attrs']['className'] ?? '';
+			$background_color = $block['attrs']['backgroundColor'] ?? 'foreground-dark';
+			$text_color       = $block['attrs']['textColor'] ?? 'foreground-dark';
+
+			/* Primary or secondary */
+
+			$primary = strpos( $class_name, 'is-style-outline' ) !== false ? false : true;
+
+			if ( $primary ) {
+				$text_color = PI::get_text_color( $background_color );
+			} else {
+				$background_color = '';
+			}
+
+			/* Classes */
+
+			$classes = '';
+
+			if ( $text_color ) {
+				$classes .= " t-$text_color";
+			}
+
+			if ( $background_color ) {
+				$classes .= " bg-$background_color";
+			}
+
+			/* Insert */
+
+			$block_content = str_replace( 'wp-block-button__link', "wp-block-button__link$classes", $block_content );
+		}
+
+		return $block_content;
 	}
 
 	/**

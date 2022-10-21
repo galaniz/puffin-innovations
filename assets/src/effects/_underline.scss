@@ -7,27 +7,38 @@
 .e-underline a,
 .e-underline-reverse a {
   transition: box-shadow 200ms var(--easing);
-  box-shadow: 0 var(--u) 0 0 var(--c);
+  box-shadow: 0 var(--line-width) 0 0 var(--color);
 }
 
 .e-underline a {
-  --u: var(--underline);
-  --c: currentColor;
+  --line-width: var(--underline);
+  --color: currentcolor;
+}
 
-  &:hover,
-  &:active,
-  &:focus {
-    --c: transparent;
-  }
+.e-underline-thick a {
+  --line-width: 0.125rem;
 }
 
 .e-underline-reverse a {
-  --u: var(--underline);
-  --c: transparent;
+  --line-width: var(--underline);
+  --color: transparent;
+}
 
-  &:hover,
-  &:active,
-  &:focus {
-    --c: currentColor;
-  }
+.e-underline a:hover,
+.e-underline a:active,
+.e-underline a:focus {
+  --color: transparent;
+}
+
+.e-underline-thick a:hover,
+.e-underline-thick a:active,
+.e-underline-thick a:focus {
+  --line-width: 0.0625rem;
+  --color: currentcolor;
+}
+
+.e-underline-reverse a:hover,
+.e-underline-reverse a:active,
+.e-underline-reverse a:focus {
+  --color: currentcolor;
 }

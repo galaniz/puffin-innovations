@@ -1,0 +1,47 @@
+/**
+ * WordPress
+ */
+
+/* Imports */
+
+@use "../config/placeholders";
+@use "@alanizcreative/formation/src/utils/mixins" as mix;
+
+/* Buttons */
+
+.wp-block-buttons {
+  --gap-margin: var(--2xs);
+
+  @extend %u-display-flex;
+  @extend %u-flex-wrap-wrap;
+  @extend %u-flex-grow-1;
+
+  margin: calc(var(--gap-margin) * -1) 0 0 calc(var(--gap-margin) * -1);
+  justify-content: inherit;
+  align-items: inherit;
+}
+
+.l-width-auto-l {
+  @include mix.breakpoint-min("m") {
+    width: auto;
+  }
+}
+
+.wp-block-button {
+  @extend %u-width-100-pc;
+
+  padding: var(--gap-margin) 0 0 var(--gap-margin);
+
+  @include mix.breakpoint-min("m") {
+    width: auto;
+  }
+}
+
+.wp-block-button .wp-block-button__link {
+  @extend %u-width-100-pc;
+  @extend %u-button;
+}
+
+.wp-block-button.is-style-outline .wp-block-button__link {
+  @extend %u-button-secondary;
+}

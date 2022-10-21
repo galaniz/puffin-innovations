@@ -4,7 +4,8 @@
 
 /* Imports */
 
-@use '@alanizcreative/formation/src/backgrounds/color';
+@use "@alanizcreative/formation/src/config";
+@use "@alanizcreative/formation/src/backgrounds/color";
 @use "@alanizcreative/formation/src/utils/functions" as func;
 
 /* Styles */
@@ -23,4 +24,12 @@
 
 .bg-overlay::after {
   background-color: rgba(func.get-color("foreground-dark"), 0.5);
+}
+
+.bg-seamless::before {
+  @extend %u-background-color-inherit;
+  @extend %u-z-index--1;
+
+  height: var(--m);
+  transform: translateY(-50%);
 }

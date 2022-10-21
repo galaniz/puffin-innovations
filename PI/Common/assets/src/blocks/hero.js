@@ -22,6 +22,7 @@ const {
 
 const {
   InspectorControls,
+  InnerBlocks,
   PlainText,
   URLInputButton
 } = window.wp.blockEditor
@@ -45,8 +46,11 @@ const def = nO.blocks[name].default
 registerBlockType(name, {
   title: 'Hero',
   category: 'theme-blocks',
-  icon: 'slides',
+  icon: 'align-full-width',
   attributes: attr,
+  supports: {
+    multiple: false
+  },
   edit (props) {
     const { attributes, setAttributes } = props
 
@@ -57,15 +61,18 @@ registerBlockType(name, {
       bg_color = def.bg_color, // eslint-disable-line camelcase
       video = def.video,
       video_link = def.video_link, // eslint-disable-line camelcase
+      video_label = def.video_label, // eslint-disable-line camelcase
       primary_link = def.primary_link, // eslint-disable-line camelcase
       primary_link_text = def.primary_link_text, // eslint-disable-line camelcase
+      primary_link_color = def.primary_link_color, // eslint-disable-line camelcase
       secondary_link = def.secondary_link, // eslint-disable-line camelcase
-      secondary_link_text = def.secondary_link_text // eslint-disable-line camelcase
+      secondary_link_text = def.secondary_link_text, // eslint-disable-line camelcase
+      secondary_link_color = def.secondary_link_color // eslint-disable-line camelcase
     } = attributes
 
     /* Style */
 
-    const style = { padding: '1.25rem 0', border: 'inherit' }
+    const style = { margin: '1.25rem 0' }
 
     /* Output */
 
@@ -91,6 +98,44 @@ registerBlockType(name, {
                 }}
               />
             </BaseControl>
+            {primary_link && primary_link_text && ( // eslint-disable-line camelcase
+              <BaseControl label='Primary Link Background Color'>
+                <ColorPalette
+                  colors={nO.color_options}
+                  value={primary_link_color} // eslint-disable-line camelcase
+                  clearable={false}
+                  disableCustomColors
+                  disableAlpha
+                  onChange={primary_link_color => { // eslint-disable-line camelcase
+                    const slug = getColorSlug(nO.color_options, primary_link_color)
+
+                    setAttributes({
+                      primary_link_color, // eslint-disable-line camelcase
+                      primary_link_color_slug: slug
+                    })
+                  }}
+                />
+              </BaseControl>
+            )}
+            {secondary_link && secondary_link_text && ( // eslint-disable-line camelcase
+              <BaseControl label='Secondary Link Color'>
+                <ColorPalette
+                  colors={nO.color_options}
+                  value={secondary_link_color} // eslint-disable-line camelcase
+                  clearable={false}
+                  disableCustomColors
+                  disableAlpha
+                  onChange={secondary_link_color => { // eslint-disable-line camelcase
+                    const slug = getColorSlug(nO.color_options, secondary_link_color)
+
+                    setAttributes({
+                      secondary_link_color, // eslint-disable-line camelcase
+                      secondary_link_color_slug: slug
+                    })
+                  }}
+                />
+              </BaseControl>
+            )}
             <CheckboxControl
               label='Video'
               value='1'
@@ -98,23 +143,32 @@ registerBlockType(name, {
               onChange={checked => setAttributes({ video: checked })}
             />
             {video && (
-              <TextControl
-                label='Video Embed Link'
-                value={video_link} // eslint-disable-line camelcase
-                onChange={v => setAttributes({ video_link: v })}
-              />
+              <Fragment>
+                <TextControl
+                  label='Video Embed Link'
+                  value={video_link} // eslint-disable-line camelcase
+                  onChange={v => setAttributes({ video_link: v })}
+                />
+                <TextControl
+                  label='Video Label'
+                  help='Heading displayed next to video'
+                  value={video_label} // eslint-disable-line camelcase
+                  onChange={v => setAttributes({ video_label: v })}
+                />
+              </Fragment>
             )}
           </PanelBody>
         </InspectorControls>
       </Fragment>,
       <Panel key='panel'>
-        <PanelBody title='Hero'>
+        <PanelBody title='Hero' initialOpen={false}>
           <div style={style}>
             <BaseControl label='Title Small'>
               <PlainText
                 value={title_small} // eslint-disable-line camelcase
                 onChange={v => setAttributes({ title_small: v })}
                 placeholder='Title Small'
+                className='t-h5'
               />
             </BaseControl>
           </div>
@@ -124,6 +178,7 @@ registerBlockType(name, {
                 value={title_large} // eslint-disable-line camelcase
                 onChange={v => setAttributes({ title_large: v })}
                 placeholder='Title Large'
+                className='t-h1'
               />
             </BaseControl>
           </div>
@@ -133,6 +188,7 @@ registerBlockType(name, {
                 value={text} // eslint-disable-line camelcase
                 onChange={v => setAttributes({ text: v })}
                 placeholder='Text'
+                className='t-l'
               />
             </BaseControl>
           </div>
@@ -143,6 +199,7 @@ registerBlockType(name, {
                   value={primary_link_text} // eslint-disable-line camelcase
                   onChange={v => setAttributes({ primary_link_text: v })}
                   placeholder='Primary Link Text'
+                  className='t-h5'
                 />
                 <URLInputButton
                   url={primary_link} // eslint-disable-line camelcase
@@ -158,6 +215,7 @@ registerBlockType(name, {
                   value={secondary_link_text} // eslint-disable-line camelcase
                   onChange={v => setAttributes({ secondary_link_text: v })}
                   placeholder='Secondary Link Text'
+                  className='t-h5'
                 />
                 <URLInputButton
                   url={secondary_link} // eslint-disable-line camelcase
@@ -166,11 +224,16 @@ registerBlockType(name, {
               </PanelRow>
             </BaseControl>
           </div>
+          {video && video_link && ( // eslint-disable-line camelcase
+            <BaseControl label='Video Text'>
+              <InnerBlocks allowedBlocks={['core/paragraph', n + 'text']} />
+            </BaseControl>
+          )}
         </PanelBody>
       </Panel>
     ]
   },
   save () {
-    return null // Rendered in php
+    return <InnerBlocks.Content /> // Rendered in php
   }
 })

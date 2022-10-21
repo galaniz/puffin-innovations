@@ -9,7 +9,9 @@ import { setElements, usingMouse, request } from 'Formation/utils'
 /* Classes */
 
 import Nav from 'Formation/components/nav'
+import Modal from 'Formation/objects/modal'
 import SendForm from 'Formation/objects/form/send'
+import Conditional from 'Formation/objects/form/conditional'
 
 /* Variables */
 
@@ -54,12 +56,70 @@ const meta = [
     ]
   },
   {
+    prop: 'search',
+    selector: '.c-nav-search',
+    items: [
+      {
+        prop: 'searchButton',
+        selector: '.c-nav-search__button'
+      },
+      {
+        prop: 'searchInput',
+        selector: 'input'
+      }
+    ]
+  },
+  {
+    prop: 'hero',
+    selector: '.js-hero',
+    items: [
+      {
+        prop: 'heroTarget',
+        selector: '.js-hero__target'
+      }
+    ]
+  },
+  {
+    prop: 'modalTriggers',
+    selector: '.js-modal-trigger',
+    all: true,
+    array: true
+  },
+  {
     prop: 'forms',
     selector: `.js-${ns}-form`,
     all: true,
     array: true
+  },
+  {
+    prop: 'conditionals',
+    selector: '.js-conditional',
+    all: true,
+    array: true
+  },
+  {
+    prop: 'fieldsets',
+    selector: 'fieldset',
+    all: true,
+    array: true
   }
 ]
+
+/* Resize helper */
+
+const onResize = (callback = () => {}) => {
+  let resizeTimer
+
+  const resizeHandler = () => {
+    clearTimeout(resizeTimer)
+
+    resizeTimer = setTimeout(() => {
+      callback()
+    }, 100)
+  }
+
+  window.addEventListener('resize', resizeHandler)
+}
 
 /* Init */
 
@@ -74,26 +134,14 @@ const initialize = () => {
 
   /* Get scrollbar width */
 
-  let resizeTimer
-
-  const getScrollbarWidth = () => {
+  const getScrollbarWidth = (navToggle = false) => {
     const html = document.documentElement
     const w = window.innerWidth - html.clientWidth
 
     html.style.setProperty('--scrollbar-width', `${w}px`)
   }
 
-  const resizeHandler = () => {
-    clearTimeout(resizeTimer)
-
-    resizeTimer = setTimeout(() => {
-      getScrollbarWidth()
-    }, 100)
-  }
-
   getScrollbarWidth()
-
-  window.addEventListener('resize', resizeHandler)
 
   /* Navigation */
 
@@ -110,11 +158,162 @@ const initialize = () => {
         itemSelector,
         links: el.navLinks,
         button: el.navButton,
-        overlay: el.navOverlay
+        overlay: el.navOverlay,
+        onToggle (open) {
+          if (open) {
+            document.documentElement.setAttribute('data-100-vw', 'true')
+            document.documentElement.setAttribute('data-nav-open', 'true')
+          }
+        },
+        endToggle () {
+          document.documentElement.setAttribute('data-100-vw', 'false')
+          document.documentElement.setAttribute('data-nav-open', 'false')
+        }
       })
     }
 
     nav()
+  }
+
+  /* Search */
+
+  if (el.search && el.searchButton && el.searchInput) {
+    let searchOpen = false
+
+    const toggleSearchBar = (open) => {
+      searchOpen = open
+
+      el.searchButton.setAttribute('aria-expanded', searchOpen)
+      el.search.setAttribute('data-open', searchOpen)
+
+      if (searchOpen) {
+        setTimeout(() => {
+          el.searchInput.focus()
+        }, 100)
+      }
+    }
+
+    el.searchButton.addEventListener('click', () => {
+      toggleSearchBar(!searchOpen)
+    })
+  }
+
+  /* Hero - set min height */
+
+  if (el.hero && el.heroTarget) {
+    const setMinHeight = () => {
+      const h = el.heroTarget.clientHeight
+
+      el.hero.style.setProperty('--min-height', `${h / 16}rem`)
+    }
+
+    onResize(() => {
+      setMinHeight()
+    })
+
+    setMinHeight()
+  }
+
+  /* Modal triggers and modals */
+
+  if (el.modalTriggers.length) {
+    const modal = (args) => {
+      return new Modal(args)
+    }
+
+    el.modalTriggers.forEach((m) => {
+      /* Get elements */
+
+      const meta = [
+        {
+          prop: 'modal',
+          selector: `#${m.getAttribute('aria-controls')}`,
+          items: [
+            {
+              prop: 'window',
+              selector: '.o-modal__window'
+            },
+            {
+              prop: 'overlay',
+              selector: '.o-modal__overlay'
+            },
+            {
+              prop: 'close',
+              selector: '.o-modal__close'
+            },
+            {
+              prop: 'iframe',
+              selector: 'iframe'
+            }
+          ]
+        }
+      ]
+
+      const args = {}
+
+      setElements(document, meta, args)
+
+      args.trigger = m
+
+      /* Iframe player */
+
+      const { iframe } = args
+
+      let iframeLink = ''
+      let player = false
+
+      if (iframe) {
+        iframeLink = iframe.getAttribute('data-src')
+      }
+
+      args.onToggle = (open) => {
+        document.documentElement.setAttribute('data-100-vw', open)
+
+        if (iframeLink && open && !player) {
+          iframe.src = `${iframeLink}?autoplay=1&enablejsapi=1`
+
+          /* Load IFrame Player API code */
+
+          const tag = document.createElement('script')
+          tag.src = 'https://www.youtube.com/iframe_api'
+
+          const firstScriptTag = document.getElementsByTagName('script')[0]
+          firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
+
+          window.onYouTubeIframeAPIReady = () => {
+            player = new window.YT.Player(iframe.id, {
+              events: {
+                onReady: window.onPlayerReady
+              }
+            })
+          }
+
+          window.onPlayerReady = (event) => {
+            event.target.playVideo()
+          }
+        }
+
+        if (player) {
+          if (!open) {
+            if (player.getPlayerState() === 1 || player.getPlayerState() === 3) {
+              setTimeout(() => {
+                player.stopVideo()
+              }, 300)
+            }
+          } else {
+            if (player.getPlayerState() !== 1) {
+              setTimeout(() => {
+                player.playVideo()
+              }, 300)
+            }
+          }
+        }
+      }
+
+      /* Init */
+
+      modal(args)
+    })
   }
 
   /* Forms */
@@ -320,6 +519,63 @@ const initialize = () => {
         .catch(xhr => {
           console.log(xhr)
         })
+    })
+  }
+
+  /* Conditional inputs */
+
+  if (el.conditionals.length) {
+    const conditional = (item) => {
+      return new Conditional(item)
+    }
+
+    el.conditionals.forEach((c) => {
+      conditional(c)
+    })
+  }
+
+  /* Fieldsets - equalize labels if radio-select or radio-text */
+
+  if (el.fieldsets.length) {
+    el.fieldsets.forEach((fieldset) => {
+      /* Get elements */
+
+      const meta = [
+        {
+          prop: 'radioSelect',
+          selector: '[data-type="radio-select"]'
+        },
+        {
+          prop: 'radioText',
+          selector: '[data-type="radio-text"]'
+        },
+        {
+          prop: 'labels',
+          selector: '[data-type|="radio"] [data-label]',
+          all: true,
+          array: true
+        }
+      ]
+
+      const f = {}
+
+      setElements(fieldset, meta, f)
+
+      /* Get and set max width */
+
+      const setWidth = () => {
+        if (f.radioSelect || f.radioText) {
+          fieldset.style.setProperty('--label-width', 'auto')
+
+          const width = Math.max.apply(null, f.labels.map((l) => l.clientWidth))
+
+          fieldset.style.setProperty('--label-width', `${width / 16}rem`)
+        }
+      }
+
+      setWidth()
+
+      onResize(setWidth())
     })
   }
 }

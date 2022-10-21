@@ -1,0 +1,56 @@
+{
+  "version": 2,
+  "settings": {
+    "appearanceTools": false,
+		"border": {
+			"color": false,
+			"radius": false,
+			"style": false,
+			"width": false
+		},
+		"color": {
+			"text": false,
+			"link": false,
+      "background": false,
+			"custom": false,
+			"customDuotone": false,
+			"customGradient": false,
+			"defaultDuotone": false,
+			"defaultGradients": false,
+			"defaultPalette": false
+		},
+		"layout": {
+			"contentSize": null,
+			"wideSize": null
+		},
+		"spacing": {
+			"blockGap": null,
+			"margin": false,
+			"padding": false,
+			"units": []
+		},
+		"typography": {
+			"customFontSize": false,
+			"fontStyle": false,
+			"fontWeight": false,
+			"letterSpacing": false,
+			"lineHeight": false,
+			"textDecoration": false,
+			"textTransform": false,
+			"dropCap": false,
+			"fontSizes": [],
+			"fontFamilies": []
+		},
+    "blocks": {
+      "core/button": {
+        "color": {
+          "background": true,
+          "text": true
+        },
+        "border": {
+          "customRadius": false
+        }
+      }
+    }
+  }
+}

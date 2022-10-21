@@ -4,7 +4,7 @@
 
 /* Imports */
 
-@use 'sass:map';
+@use "sass:map";
 @use "@alanizcreative/formation/src/config" as con;
 @use "@alanizcreative/formation/src/utils/functions" as func;
 @use "@alanizcreative/formation/src/components/nav";
@@ -15,6 +15,8 @@
 /* Container */
 
 .c-nav {
+  --search-bg: var(--hero-bg);
+
   z-index: map.get(con.$z-index, "nav");
 
   [data-logo] {
@@ -35,12 +37,12 @@
     transform: translateY(100%) scaleX(0.9);
     transition: opacity var(--duration) var(--easing), transform var(--duration) var(--easing);
     height: func.calc-rem(3px);
-    background: currentColor;
+    background: currentcolor;
     top: auto;
   }
 
-  &:hover, 
-  &:active, 
+  &:hover,
+  &:active,
   &:focus,
   .current-menu-parent &,
   .current-menu-item & {
@@ -52,12 +54,22 @@
   }
 }
 
+/* Button link */
+
+.c-nav__cta {
+  [data-theme="foreground-dark"] .c-nav__list & {
+    background-color: var(--background-light-15);
+  }
+}
+
 /* Icon */
 
 .c-nav__button {
   --icon-color: var(--heading-color);
 
-  &[data-show] {
+  z-index: 2;
+
+  [data-nav-open="true"] & {
     --icon-color: var(--foreground-dark);
   }
 }
@@ -81,6 +93,7 @@
 /* Mobile */
 
 .c-nav-overflow {
+  --search-bg: var(--primary-light);
   --prop: visibility, transform;
   --duration: 0ms, 400ms;
   --delay: 400ms, 10ms;
@@ -102,11 +115,59 @@
   --duration: 0ms, 400ms;
   --delay: 400ms, 10ms;
 
-	@extend %u-opacity-0;
+  @extend %u-opacity-0;
 
   .c-nav[data-open="true"] & {
     --delay: 10ms, 0ms;
 
     @extend %u-opacity-1;
+  }
+}
+
+/* Search */
+
+.c-nav-search {
+  .c-nav-overflow & {
+    @extend %u-position-relative;
+  }
+}
+
+.c-nav-search__button {
+  span {
+    @extend %u-display-none;
+  }
+
+  &[aria-expanded="false"] span:first-child {
+    @extend %u-display-flex;
+  }
+
+  &[aria-expanded="true"] span:last-child {
+    @extend %u-display-flex;
+  }
+
+  .c-nav-overflow & {
+    @extend %u-visibility-hidden;
+  }
+}
+
+.c-nav-search__bar {
+  background: var(--search-bg);
+
+  .c-nav__list & {
+    --prop: visibility, opacity;
+    --duration: 0ms, 400ms;
+    --delay: 400ms, 10ms;
+
+    @extend %u-opacity-0;
+    @extend %u-visibility-hidden;
+
+    width: calc(100% - var(--m));
+  }
+
+  .c-nav__list [data-open="true"] & {
+    --delay: 10ms, 0ms;
+
+    @extend %u-opacity-1;
+    @extend %u-visibility-visible;
   }
 }

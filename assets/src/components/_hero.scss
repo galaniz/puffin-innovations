@@ -9,7 +9,17 @@
 
 /* Styles */
 
-.c-hero-bg {
+.c-hero {
+  --min-height: 0rem;
+}
+
+.c-hero__media {
+  @include mix.breakpoint-min("l") {
+    min-height: calc(var(--min-height) + var(--l));
+  }
+}
+
+.c-hero__bg {
   --offset: var(--container-padding) * -1;
 
   &::before {
@@ -22,6 +32,10 @@
     height: 125rem;
     bottom: 0;
     top: auto;
+  }
+
+  [data-100-vw="true"] &::before {
+    width: 100vw;
   }
 
   [data-layout="partial-left"] &::before {

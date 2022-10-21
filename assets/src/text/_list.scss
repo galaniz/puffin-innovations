@@ -1,0 +1,28 @@
+/**
+ * Text: list
+ */
+
+/* Imports */
+
+@use "@alanizcreative/formation/src/config";
+
+/* Styles */
+
+.t-list-style-none {
+  list-style: none;
+}
+
+.t-list {
+  ul,
+  ol {
+    @extend %u-line-height-160-pc;
+    @extend %u-letter-spacing-1-pc;
+
+    font-size: var(--t-m);
+    padding-left: var(--xs);
+  }
+
+  li:not(:last-child) {
+    margin-bottom: var(--4xs);
+  }
+}

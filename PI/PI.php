@@ -50,14 +50,6 @@ class PI extends FRM {
 	/* Static markup */
 
 	public static $html = [
-		'loader' => [
-			'button' => (
-				'<span class="o-loader l-absolute l-top-0 l-left-0 l-right-0 l-bottom-0 l-flex l-align-center l-justify-center" data-hide>' .
-					'<span class="l-width-xs l-height-xs b-radius-100-pc"></span>' .
-					'<span class="l-width-xs l-height-xs b-radius-100-pc l-absolute l-top-0 l-left-0 l-right-0 l-bottom-0 l-margin-auto"></span>' .
-				'</span>'
-			),
-		],
 		'result' => [
 			'error'   => [
 				'default' => '',
@@ -120,6 +112,63 @@ class PI extends FRM {
 		],
 	];
 
+	/* Html element options */
+
+	public static $html_options = [
+		[
+			'label' => 'Div',
+			'value' => 'div',
+		],
+		[
+			'label' => 'Unordered List',
+			'value' => 'ul',
+		],
+		[
+			'label' => 'Ordered List',
+			'value' => 'ol',
+		],
+		[
+			'label' => 'List Item',
+			'value' => 'li',
+		],
+		[
+			'label' => 'Figure',
+			'value' => 'figure',
+		],
+		[
+			'label' => 'Figcaption',
+			'value' => 'figcaption',
+		],
+		[
+			'label' => 'Blockquote',
+			'value' => 'blockquote',
+		],
+		[
+			'label' => 'Section',
+			'value' => 'section',
+		],
+		[
+			'label' => 'Article',
+			'value' => 'article',
+		],
+		[
+			'label' => 'Aside',
+			'value' => 'aside',
+		],
+		[
+			'label' => 'Header',
+			'value' => 'header',
+		],
+		[
+			'label' => 'Footer',
+			'value' => 'footer',
+		],
+		[
+			'label' => 'Address',
+			'value' => 'address',
+		],
+	];
+
 	/* Hero theme */
 
 	public static $hero_theme = 'background-light';
@@ -145,7 +194,7 @@ class PI extends FRM {
 		/* phpcs:enable */
 
 		self::$html['result']['success'] = (
-			'<div class="o-form-result__positive l-width-100-pc l-none outline-none" aria-labelledby="%s" tabindex="-1">' .
+			'<div class="o-form-result__positive l-width-100-pc l-none outline-none" aria-labelledby="%s" role="alert" tabindex="-1">' .
 				'<div class="o-form__positive l-padding-left-2xs l-padding-right-2xs l-padding-top-2xs l-padding-bottom-2xs">' .
 					'<div class="l-flex l-gap-margin-3xs">' .
 						'<div>' .
@@ -154,7 +203,7 @@ class PI extends FRM {
 							'</div>' .
 						'</div>' .
 						'<div>' .
-							'<h2 id="%s" class="t-h4 l-padding-top-5xs l-padding-bottom-5xs o-form-result__primary"></h2>' .
+							'<h2 id="%s" class="t-h4 l-margin-0 l-padding-top-5xs l-padding-bottom-5xs o-form-result__primary"></h2>' .
 							'<p class="t t-current o-form-result__secondary"></p>' .
 						'</div>' .
 					'</div>' .
@@ -163,7 +212,7 @@ class PI extends FRM {
 		);
 
 		self::$html['result']['error']['default'] = (
-			'<div class="o-form-result__negative l-width-100-pc l-none outline-none" aria-labelledby="%s" tabindex="-1">' .
+			'<div class="o-form-result__negative l-width-100-pc l-none outline-none" aria-labelledby="%s" role="alert" tabindex="-1">' .
 				'<div class="o-form__negative l-padding-left-2xs l-padding-right-2xs l-padding-top-2xs l-padding-bottom-2xs">' .
 					'<div class="l-flex l-gap-margin-3xs">' .
 						'<div>' .
@@ -172,7 +221,7 @@ class PI extends FRM {
 							'</div>' .
 						'</div>' .
 						'<div>' .
-							'<h2 id="%s" class="t-h4 l-padding-top-5xs l-padding-bottom-5xs o-form-result__primary"></h2>' .
+							'<h2 id="%s" class="t-h4 l-margin-0 l-padding-top-5xs l-padding-bottom-5xs o-form-result__primary"></h2>' .
 							'<p class="t t-current o-form-result__secondary"></p>' .
 						'</div>' .
 					'</div>' .
@@ -181,7 +230,7 @@ class PI extends FRM {
 		);
 
 		self::$html['result']['error']['summary'] = (
-			'<div class="o-form-error__summary l-width-100-pc l-none outline-none" aria-labelledby="%s" tabindex="-1">' .
+			'<div class="o-form-error__summary l-width-100-pc l-none outline-none" aria-labelledby="%s" role="alert" tabindex="-1">' .
 				'<div class="o-form__negative l-padding-left-2xs l-padding-right-2xs l-padding-top-2xs l-padding-bottom-2xs">' .
 					'<div class="l-flex l-gap-margin-3xs">' .
 						'<div>' .
@@ -190,7 +239,7 @@ class PI extends FRM {
 							'</div>' .
 						'</div>' .
 						'<div>' .
-							'<h2 id="%s" class="t-h4 l-padding-top-5xs l-padding-bottom-5xs">There is a problem</h2>' .
+							'<h2 id="%s" class="t-h4 l-margin-0 l-padding-top-5xs l-padding-bottom-5xs">There is a problem</h2>' .
 							'<ul class="l-flex l-flex-column l-margin-bottom-5xs-all l-margin-0-last t t-link-current t-list-style-none e-underline o-form-error__list" role="list"></ul>' .
 						'</div>' .
 					'</div>' .
@@ -232,6 +281,10 @@ class PI extends FRM {
 			[
 				'label' => '50%',
 				'value' => '1-2',
+			],
+			[
+				'label' => '40%',
+				'value' => '2-5',
 			],
 			[
 				'label' => '33%',
@@ -369,6 +422,19 @@ class PI extends FRM {
 
 		self::$editor_color_palette = self::$colors;
 
+		self::$editor_style = '/PI/Admin/assets/public/css/editor.css';
+
+		/* Embed variations */
+
+		self::$embed_variations = [
+			'facebook',
+			'instagram',
+			'twitter',
+			'tiktok',
+			'vimeo',
+			'youtube',
+		];
+
 		/* Image sizes */
 
 		self::$image_sizes = [
@@ -422,6 +488,7 @@ class PI extends FRM {
 		/* Pass data to front end */
 
 		additional_script_data( self::$namespace, ['padding_options' => self::$padding_options ], true, true );
+		additional_script_data( self::$namespace, ['html_options' => self::$html_options ], true, true );
 
 		/* Actions */
 
@@ -433,6 +500,43 @@ class PI extends FRM {
 		add_filter( 'formation_contact_form_args', [$this, 'filter_contact_form_args'], 10, 2 );
 		add_filter( 'formation_contact_form_field_args', [$this, 'filter_contact_field_args'], 10, 2 );
 		add_filter( 'formation_contact_form_group_classes', [$this, 'filter_contact_group_classes'], 10, 3 );
+	}
+
+	/**
+	 * Get text color with sufficient contrast.
+	 */
+
+	public static function get_text_color( $bg = 'foreground-dark' ) {
+		$text_color = 'foreground-dark';
+
+		if ( 'foreground-dark' === $bg || 'primary-dark' === $bg ) {
+			$text_color = 'background-light';
+		}
+
+		return $text_color;
+	}
+
+	/**
+	 * Get loader output.
+	 */
+
+	public static function get_loader( $size = 'xs', $hide = true ) {
+		$hide_output = $hide ? ' data-hide' : '';
+
+		return (
+			"<span class='o-loader l-absolute l-top-0 l-left-0 l-right-0 l-bottom-0 l-flex l-align-center l-justify-center'$hide_output>" .
+				"<span class='l-width-$size l-height-$size b-radius-100-pc'></span>" .
+				"<span class='l-width-$size l-height-$size b-radius-100-pc l-absolute l-top-0 l-left-0 l-right-0 l-bottom-0 l-margin-auto'></span>" .
+			'</span>'
+		);
+	}
+
+	/**
+	 * Check if light text required.
+	 */
+
+	public static function is_text_light( $bg = 'background-light' ) {
+		return 'foreground-dark' === $bg || 'primary-dark' === $bg;
 	}
 
 	/**
@@ -490,7 +594,7 @@ class PI extends FRM {
 		$gap                = 'l-gap-margin-xs l-gap-margin-s-m';
 
 		if ( 'mailchimp' === $attr['type'] ) {
-			$form_class        .= ' o-form-s o-form-round';
+			$form_class        .= ' o-form-small o-form-round';
 			$button_field_class = 'l-margin-top-auto';
 			$gap                = 'l-gap-margin-2xs';
 		} else {
@@ -503,7 +607,7 @@ class PI extends FRM {
 		$args['fields_class']       = $fields_class;
 		$args['button_class']       = $button_class;
 		$args['button_field_class'] = $button_field_class;
-		$args['button_loader']      = self::$html['loader']['button'];
+		$args['button_loader']      = self::get_loader();
 		$args['error_summary']      = self::$html['result']['error']['summary'];
 		$args['error_result']       = self::$html['result']['error']['default'];
 		$args['success_result']     = self::$html['result']['success'];
@@ -571,6 +675,5 @@ class PI extends FRM {
 
 		return $field;
 	}
-
 
 } // End PI

@@ -20,7 +20,7 @@ $n = PI::$namespace;
 
 /* Logo */
 
-$logo = PI::render_logo();
+$logo = PI::render_logo( '', true );
 
 if ( $logo ) {
 	$tagline = get_option( $n . '_tagline', '' );
@@ -31,8 +31,8 @@ if ( $logo ) {
 
 	$logo = (
 		'<div>' .
-			'<div class="l-max-width-4xl-m">' .
-				'<a href="' . esc_url( home_url( '/' ) ) . '" class="l-block o-logo-s">' .
+			'<div class="l-width-4xl-m">' .
+				'<a href="' . esc_url( home_url( '/' ) ) . '" class="l-block l-relative l-svg l-svg-absolute o-logo-s">' .
 					'<span class="a11y-visually-hidden">' . get_bloginfo( 'name' ) . '</span>' .
 					$logo .
 				'</a>' .
@@ -73,13 +73,16 @@ $social = PI::render_social(
 	[
 		'links'      => 'social',
 		'list_class' => 'l-flex l-flex-wrap l-gap-margin-2xs t-list-style-none',
+		'list_attr'  => [
+			'role' => 'list',
+		],
 		'link_class' => 'l-flex l-padding-top-3xs l-padding-bottom-3xs l-padding-left-3xs l-padding-right-3xs bg-background-light-15 e-transition-border-radius',
 		'link_attr'  => [
 			'target' => '_blank',
 			'rel'    => 'noreferrer',
 		],
 		'a11y_class' => PI::$a11y_class['visually_hide'],
-		'icon_class' => 'l-flex',
+		'icon_class' => 'l-flex l-width-2xs l-height-2xs l-svg',
 		'icon_paths' => [
 			'Facebook'  => PI::$svg_assets_path . 'facebook.svg',
 			'Instagram' => PI::$svg_assets_path . 'instagram.svg',
@@ -137,7 +140,7 @@ $knowbility_logo = file_get_contents( PI::$svg_assets_path . 'knowbility.svg' );
 if ( $knowbility_logo ) {
 	$legal[] = (
 		'<div>' .
-			'<a class="l-flex t-link-current" href="https://knowbility.org/programs/air" target="_blank" rel="noreferrer" aria-label="Knowbility">' .
+			'<a class="l-flex l-width-xl l-height-xs l-svg t-link-current" href="https://knowbility.org/programs/air" target="_blank" rel="noreferrer" aria-label="Knowbility">' .
 				$knowbility_logo .
 			'</a>' .
 		'</div>'
@@ -157,7 +160,7 @@ if ( $legal ) {
 } ?>
 
 	</main><!-- #main -->
-	<footer class="bg-foreground-dark t-light l-padding-top-l l-padding-bottom-m l-padding-top-2xl-l l-padding-bottom-l-l">
+	<footer class="bg-foreground-dark bg-seamless t-light l-relative l-before l-padding-top-l l-padding-bottom-m l-padding-top-2xl-l l-padding-bottom-l-l">
 		<div class="l-container">
 			<div class="l-flex l-flex-column l-flex-row-m l-flex-wrap l-justify-between l-gap-margin-s l-gap-margin-xl-m">
 				<?php /* phpcs:disable */ ?>

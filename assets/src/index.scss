@@ -29,7 +29,7 @@
 /* Text */
 
 @use "@alanizcreative/formation/src/text/align";
-@use "text/list-style";
+@use "text/list";
 @use "text/line-height";
 @use "text/sizes";
 @use "text/color" as c;
@@ -52,7 +52,7 @@
 
 /* Borders */
 
-@use "@alanizcreative/formation/src/borders/radius";
+@use "borders";
 
 /* Components */
 
@@ -66,11 +66,18 @@
 @use "objects/button";
 @use "objects/form";
 @use "objects/loader";
+@use "objects/number";
+@use "objects/modal";
 
 /* Effects */
 
 @use "effects/transition";
 @use "effects/underline";
+@use "effects/scale";
+
+/* WordPress */
+
+@use "wp";
 
 /* Remove animations */
 
