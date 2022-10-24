@@ -23,7 +23,7 @@
 }
 
 .bg-primary-tint-15 {
-  background-color: rgba(func.get-color("primary-tint"), 0.15);
+  background-color: var(--primary-tint-15);
 }
 
 .bg-overlay::after {

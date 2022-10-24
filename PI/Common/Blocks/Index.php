@@ -17,8 +17,10 @@ use PI\Common\Blocks\Container;
 use PI\Common\Blocks\Column;
 use PI\Common\Blocks\Text;
 use PI\Common\Blocks\Image;
+use PI\Common\Blocks\Card;
 use PI\Common\Blocks\Number;
 use PI\Common\Blocks\Collapsible;
+use PI\Common\Blocks\Slider;
 use Formation\Common\Blocks\Blocks;
 use function Formation\additional_script_data;
 
@@ -47,8 +49,10 @@ class Index {
 		new Column();
 		new Text();
 		new Image();
+		new Card();
 		new Number();
 		new Collapsible();
+		new Slider();
 		new Blocks(
 			[
 				'folder_url' => get_template_directory_uri() . '/PI/Common/assets/public/js/blocks/',
@@ -95,9 +99,12 @@ class Index {
 			"$n/column",
 			"$n/text",
 			"$n/image",
+			"$n/card",
 			"$n/number",
 			"$n/collapsibles",
 			"$n/collapsible",
+			"$n/slider",
+			"$n/slide",
 		];
 	}
 

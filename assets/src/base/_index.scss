@@ -17,6 +17,7 @@
   --background-light-15: #{rgba(func.get-color("background-light"), 0.15)};
   --background-light-60: #{rgba(func.get-color("background-light"), 0.6)};
   --primary-tint-65: #{rgba(func.get-color("primary-tint"), 0.65)};
+  --primary-tint-15: #{rgba(func.get-color("primary-tint"), 0.15)};
   --scrollbar-width: 0rem;
   --text-color: #{rgba(func.get-color("foreground-dark"), 0.8)};
   --heading-color: var(--foreground-dark);

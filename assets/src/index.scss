@@ -48,6 +48,7 @@
 @use "@alanizcreative/formation/src/layouts/gap-margin";
 @use "@alanizcreative/formation/src/layouts/height";
 @use "@alanizcreative/formation/src/layouts/object";
+@use "@alanizcreative/formation/src/layouts/object-position";
 @use "layouts/svg";
 
 /* Borders */
@@ -69,11 +70,13 @@
 @use "objects/number";
 @use "objects/modal";
 @use "objects/collapsible";
+@use "objects/slider";
 
 /* Effects */
 
 @use "effects/transition";
 @use "effects/underline";
+@use "effects/background";
 @use "effects/scale";
 
 /* WordPress */
@@ -85,5 +88,28 @@
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .reduce-motion-show {
+    display: block;
+  }
+
+  .reduce-motion-hide {
+    display: none;
+  }
+
+  #pi .pi {
+    *,
+    *::before, 
+    *::after {
+      --duration: 0.001ms;
+      --easing: linear;
+  
+      transition: none;
+      transition-timing-function: linear;
+      transition-duration: 0.001ms;
+      animation-duration: 0.001ms;
+      animation-iteration-count: 1;
+    }
   }
 }

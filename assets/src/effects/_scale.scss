@@ -5,6 +5,8 @@
 /* Styles */
 
 .e-scale {
+  --duration: 400ms;
+
   transform: scale(1);
 
   &:hover {

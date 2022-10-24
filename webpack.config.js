@@ -199,9 +199,12 @@ const blocks = [
   'column',
   'text',
   'image',
+  'card',
   'number',
   'collapsibles/collapsibles',
-  'collapsibles/collapsible'
+  'collapsibles/collapsible',
+  'slider/slider',
+  'slider/slide'
 ]
 
 const blocksEntry = {}

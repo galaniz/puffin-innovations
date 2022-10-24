@@ -202,7 +202,9 @@ $primary-tint: #4c94d5;
     "s",
     "m",
     "l",
-    "xl"
+    "xl",
+    "2xl",
+    "4xl"
   ),
 
   $height-breakpoints: ("m", "l"),
@@ -239,8 +241,8 @@ $primary-tint: #4c94d5;
     "sides": ("all"),
     "colors": (
       "default": currentcolor,
-      "primary-tint": "primary-tint",
-      "primary-tint-65": "primary-tint-65",
+      "primary-tint": "var(--primary-tint)",
+      "primary-tint-65": "var(--primary-tint-65)",
     ),
     "widths": (
       "default": 0.125rem,

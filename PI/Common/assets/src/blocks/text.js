@@ -12,12 +12,15 @@ const {
 const {
   Panel,
   PanelBody,
-  SelectControl
+  BaseControl,
+  SelectControl,
+  CheckboxControl
 } = window.wp.components
 
 const {
   InspectorControls,
-  RichText
+  RichText,
+  URLInputButton
 } = window.wp.blockEditor
 
 const { Fragment } = window.wp.element
@@ -51,7 +54,9 @@ registerBlockType(name, {
       padding_top_mobile = def.padding_top_mobile, // eslint-disable-line camelcase
       padding_top = def.padding_top, // eslint-disable-line camelcase
       padding_bottom_mobile = def.padding_bottom_mobile, // eslint-disable-line camelcase
-      padding_bottom = def.padding_bottom // eslint-disable-line camelcase
+      padding_bottom = def.padding_bottom, // eslint-disable-line camelcase
+      is_link = def.is_link, // eslint-disable-line camelcase
+      link = def.link
     } = attributes
 
     /* Output */
@@ -119,6 +124,12 @@ registerBlockType(name, {
               options={nO.padding_options}
               onChange={v => setAttributes({ padding_bottom: v })}
             />
+            <CheckboxControl
+              label='Link'
+              value='1'
+              checked={!!is_link} // eslint-disable-line camelcase
+              onChange={v => setAttributes({ is_link: v })}
+            />
           </PanelBody>
         </InspectorControls>
       </Fragment>,
@@ -133,6 +144,14 @@ registerBlockType(name, {
             onChange={v => setAttributes({ text: v })}
             placeholder='Text'
           />
+          {is_link && ( // eslint-disable-line camelcase
+            <BaseControl label='Link'>
+              <URLInputButton
+                url={link}
+                onChange={link => setAttributes({ link })}
+              />
+            </BaseControl>
+          )}
         </PanelBody>
       </Panel>
     ]

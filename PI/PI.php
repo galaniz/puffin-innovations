@@ -529,8 +529,9 @@ class PI extends FRM {
 
 		return (
 			"<span class='o-loader l-absolute l-top-0 l-left-0 l-right-0 l-bottom-0 l-flex l-align-center l-justify-center'$hide_output>" .
-				"<span class='l-width-$size l-height-$size b-radius-100-pc'></span>" .
-				"<span class='l-width-$size l-height-$size b-radius-100-pc l-absolute l-top-0 l-left-0 l-right-0 l-bottom-0 l-margin-auto'></span>" .
+				"<span class='l-width-$size l-height-$size b-radius-100-pc reduce-motion-hide'></span>" .
+				'<span class="l-none reduce-motion-show">Loading</span>' .
+				"<span class='l-width-$size l-height-$size b-radius-100-pc l-absolute l-top-0 l-left-0 l-right-0 l-bottom-0 l-margin-auto reduce-motion-hide'></span>" .
 			'</span>'
 		);
 	}

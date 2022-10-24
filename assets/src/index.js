@@ -13,6 +13,7 @@ import Modal from 'Formation/objects/modal'
 import SendForm from 'Formation/objects/form/send'
 import Conditional from 'Formation/objects/form/conditional'
 import Collapsible from 'Formation/objects/collapsible'
+import Slider from 'Formation/objects/slider'
 
 /* Variables */
 
@@ -108,6 +109,11 @@ const meta = [
     selector: 'fieldset',
     all: true,
     array: true
+  },
+  {
+    prop: 'slider',
+    selector: '.o-slider',
+    all: true
   }
 ]
 
@@ -616,6 +622,81 @@ const initialize = () => {
       setWidth()
 
       onResize(setWidth())
+    })
+  }
+
+  /* Slider */
+
+  if (el.slider.length) {
+    const slider = (args) => {
+      return new Slider(args)
+    }
+
+    el.slider.forEach(s => {
+      const meta = [
+        {
+          prop: 'main',
+          selector: '.o-slider__main'
+        },
+        {
+          prop: 'track',
+          selector: '.o-slider__track'
+        },
+        {
+          prop: 'panels',
+          selector: '[role="tabpanel"]',
+          all: true
+        },
+        {
+          prop: 'items',
+          selector: '.o-slider__inner',
+          all: true
+        },
+        {
+          prop: 'nav',
+          selector: '[role="tab"]',
+          all: true
+        }
+      ]
+
+      const ss = {}
+
+      setElements(s, meta, ss)
+
+      const args = {
+        tabs: ss.nav,
+        panels: ss.panels,
+        delay: 600,
+        slider: ss.main,
+        track: ss.track,
+        targetHeight: ss.track
+      }
+
+      if (ss.main.getAttribute('data-loop')) {
+        args.loop = true
+      } else {
+        args.groupItems = ss.items
+        args.breakpoints = [
+          {
+            breakpoint: 0,
+            items: parseInt(s.getAttribute('data-0'))
+          },
+          {
+            breakpoint: 600,
+            items: parseInt(s.getAttribute('data-600'))
+          },
+          {
+            breakpoint: 900,
+            items: parseInt(s.getAttribute('data-900'))
+          },
+          {
+            breakpoint: 1200,
+            items: parseInt(s.getAttribute('data-1200'))
+          }
+        ]
+      }
+
+      slider(args)
     })
   }
 }
