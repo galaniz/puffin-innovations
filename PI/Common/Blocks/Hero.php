@@ -136,7 +136,7 @@ class Hero {
 	 * Render callbacks
 	 */
 
-	public static function render_hero( $attributes, $content, $block ) {
+	public static function render_hero( $attributes, $content = '', $block = [] ) {
 		$attr = array_replace_recursive( self::$blocks['hero']['default'], $attributes );
 
 		/* Destructure */

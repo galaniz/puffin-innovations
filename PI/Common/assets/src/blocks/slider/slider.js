@@ -13,7 +13,6 @@ const {
   Panel,
   PanelBody,
   SelectControl,
-  CheckboxControl,
   TextControl
 } = window.wp.components
 
@@ -81,8 +80,6 @@ registerBlockType(name, {
 
     const {
       label = def.label,
-      selected = def.selected,
-      loop = def.loop,
       width = def.width
     } = attributes
 
@@ -108,19 +105,6 @@ registerBlockType(name, {
                 { label: '25%', value: '25%' }
               ]}
               onChange={width => setAttributes({ width })}
-            />
-            <TextControl
-              label='Selected Slide'
-              help='First slide = 0'
-              type='number'
-              value={selected}
-              onChange={selected => setAttributes({ selected })}
-            />
-            <CheckboxControl
-              label='Loop'
-              value='1'
-              checked={!!loop}
-              onChange={loop => setAttributes({ loop })}
             />
           </PanelBody>
         </InspectorControls>

@@ -79,6 +79,7 @@ p:empty {
 }
 
 *:disabled,
+*[aria-disabled="true"],
 input[type="radio"]:disabled ~ label [data-form-control],
 input[type="checkbox"]:disabled ~ label [data-form-control] {
   opacity: 0.5;

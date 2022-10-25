@@ -174,7 +174,7 @@ class Image {
 
 			$image_classes .= ' l-object-' . ( $cover ? 'cover' : 'contain' ) . " l-object-$position";
 
-			$image_output = "<img class='$image_classes' src='$src' alt='$alt' srcset='$srcset' sizes='$sizes' width='$width' height='$height'>";
+			$image_output = "<img class='$image_classes' src='$src' alt='$alt' srcset='$srcset' sizes='$sizes' width='$width' height='$height' loading='lazy'>";
 		}
 
 		/* Order */

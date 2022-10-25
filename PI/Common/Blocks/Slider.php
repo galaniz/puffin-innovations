@@ -151,40 +151,44 @@ class Slider {
 
 		/* Slider attributes */
 
-		$slider_attr    = '';
-		$slider_classes = 'o-slider l-flex l-flex-column l-margin-auto';
+		$slider_attr = '';
 
-		$slider_breakpoints = [
+		$slider_data = [
 			'0'    => 1,
 			'600'  => 1,
 			'900'  => 1,
 			'1200' => 2,
+			's'    => '1-1',
+			'm'    => '1-1',
+			'xl'   => '1-1',
 		];
 
 		if ( '50%' === $width ) {
-			$slider_classes .= ' o-slider--m-1-2 o-slider--xl-1-2';
-
-			$slider_breakpoints['900']  = 2;
-			$slider_breakpoints['1200'] = 2;
+			$slider_data['900']  = 2;
+			$slider_data['1200'] = 2;
+			$slider_data['m']    = '1-2';
+			$slider_data['xl']   = '1-2';
 		}
 
 		if ( '33%' === $width ) {
-			$slider_classes .= ' o-slider--s-1-2 o-slider--m-1-2 o-slider--xl-1-3';
-
-			$slider_breakpoints['600']  = 2;
-			$slider_breakpoints['900']  = 2;
-			$slider_breakpoints['1200'] = 3;
+			$slider_data['600']  = 2;
+			$slider_data['900']  = 2;
+			$slider_data['1200'] = 3;
+			$slider_data['s']    = '1-2';
+			$slider_data['m']    = '1-2';
+			$slider_data['xl']   = '1-3';
 		}
 
 		if ( '25%' === $width ) {
-			$slider_classes .= ' o-slider--s-1-2 o-slider--m-1-3 o-slider--xl-1-4';
-
-			$slider_breakpoints['600']  = 2;
-			$slider_breakpoints['900']  = 3;
-			$slider_breakpoints['1200'] = 4;
+			$slider_data['600']  = 2;
+			$slider_data['900']  = 3;
+			$slider_data['1200'] = 4;
+			$slider_data['s']    = '1-2';
+			$slider_data['m']    = '1-3';
+			$slider_data['xl']   = '1-4';
 		}
 
-		foreach ( $slider_breakpoints as $k => $v ) {
+		foreach ( $slider_data as $k => $v ) {
 			$slider_attr .= " data-$k='$v'";
 		}
 
@@ -195,7 +199,7 @@ class Slider {
 		if ( '50%' === $width || '33%' === $width ) {
 			$gap = 'm';
 
-			$slider_classes .= ' o-slider--gap-l';
+			$slider_attr .= ' data-gap-l="m"';
 		}
 
 		$gap_class = "l-gap-margin-$gap-l";
@@ -208,10 +212,18 @@ class Slider {
 			$offset = '<div class="o-slider__offset l-flex-shrink-0"></div>';
 		}
 
+		/* Arrow icons */
+
+		/* phpcs:ignore */
+		$arrow_left = file_get_contents( PI::$svg_assets_path . 'arrow-left.svg' );  // Ignore: local path
+
+		/* phpcs:ignore */
+		$arrow_right = file_get_contents( PI::$svg_assets_path . 'arrow-right.svg' );  // Ignore: local path
+
 		/* Output */
 
 		return (
-			"<div class='$slider_classes' role='group'$slider_attr>" .
+			"<div class='o-slider l-flex l-flex-column l-margin-auto l-relative' role='group'$slider_attr>" .
 				'<div class="o-slider__main l-overflow-hidden"' . ( $loop ? ' data-loop="true"' : '' ) . '>' .
 					'<div class="o-slider__track l-overflow-x-auto l-padding-bottom-s l-relative" tabindex="-1">' .
 						"<div class='l-flex l-gap-margin-xs $gap_class'>" .
@@ -220,9 +232,17 @@ class Slider {
 						'</div>' .
 					'</div>' .
 				'</div>' .
-				"<ul class='o-slider__tabs l-flex l-justify-center l-padding-top-s l-padding-top-m-l t-list-style-none' role='tablist' aria-label='Select $label group to show'>" .
-					$tablist .
-				'</ul>' .
+				'<nav>' .
+					"<ul class='o-slider__tabs l-flex l-justify-center l-padding-top-s l-padding-top-m-l l-margin-0 t-list-style-none' role='tablist' aria-label='Select $label group to show'>" .
+						$tablist .
+					'</ul>' .
+					'<button type="button" class="o-slider__prev t-current l-width-s l-height-s l-svg l-absolute l-left-0 l-none outline-tight" aria-label="Go to previous group" data-prev disabled>' .
+						$arrow_left .
+					'</button>' .
+					'<button type="button" class="o-slider__next t-current l-width-s l-height-s l-svg l-absolute l-right-0 l-none outline-tight" aria-label="Go to next group" data-next>' .
+						$arrow_right .
+					'</button>' .
+				'</nav>' .
 			'</div>'
 		);
 	}

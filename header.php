@@ -16,7 +16,7 @@ use Formation\Pub\Nav_Walker;
 
 /* Classes */
 
-$list_classes = 'c-nav__list l-relative l-flex l-align-center l-gap-margin-s l-gap-margin-sm-l t-list-style-none l-overflow-x-auto l-overflow-y-hidden outline-snug';
+$list_classes = 'c-nav__list l-relative l-flex l-align-center l-gap-margin-s l-gap-margin-sm-l t-list-style-none l-overflow-x-auto l-overflow-y-hidden l-padding-top-5xs l-padding-bottom-5xs';
 $light        = false;
 
 if ( PI::is_text_light( PI::$hero_theme ) ) {
@@ -65,7 +65,7 @@ if ( has_nav_menu( 'main' ) ) {
 						$obj->a_class = $a_class;
 
 						if ( 'Button' === $item->post_content ) {
-							$obj->a_class = 'c-nav__link c-nav__cta o-button-primary o-button-small bg-foreground-dark t-background-light';
+							$obj->a_class = 'c-nav__link c-nav__cta l-relative l-before o-button-primary o-button-small bg-foreground-dark t-background-light';
 						}
 					},
 					'before_output'      => function( &$obj, &$output, $depth, $args, $item ) use ( $attr ) {

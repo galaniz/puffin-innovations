@@ -136,6 +136,14 @@ const onResize = (callback = () => {}) => {
 /* Init */
 
 const initialize = () => {
+  /* Check if reduce motion */
+
+  let reduceMotion = false
+
+  const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+
+  if (!mediaQuery || mediaQuery.matches) { reduceMotion = true }
+
   /* Set elements object */
 
   setElements(document, meta, el)
@@ -656,6 +664,14 @@ const initialize = () => {
           prop: 'nav',
           selector: '[role="tab"]',
           all: true
+        },
+        {
+          prop: 'prev',
+          selector: '[data-prev]'
+        },
+        {
+          prop: 'next',
+          selector: '[data-next]'
         }
       ]
 
@@ -667,9 +683,13 @@ const initialize = () => {
         tabs: ss.nav,
         panels: ss.panels,
         delay: 600,
+        container: s,
         slider: ss.main,
         track: ss.track,
-        targetHeight: ss.track
+        targetHeight: ss.track,
+        prev: ss.prev,
+        next: ss.next,
+        reduceMotion
       }
 
       if (ss.main.getAttribute('data-loop')) {
