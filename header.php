@@ -16,7 +16,7 @@ use Formation\Pub\Nav_Walker;
 
 /* Classes */
 
-$list_classes = 'c-nav__list l-relative l-flex l-flex-wrap l-align-center l-gap-margin-s l-gap-margin-sm-l t-list-style-none';
+$list_classes = 'c-nav__list l-relative l-flex l-align-center l-gap-margin-s l-gap-margin-sm-l t-list-style-none l-overflow-x-auto l-overflow-y-hidden l-padding-top-5xs l-padding-bottom-5xs';
 $light        = false;
 
 if ( PI::is_text_light( PI::$hero_theme ) ) {
@@ -65,7 +65,7 @@ if ( has_nav_menu( 'main' ) ) {
 						$obj->a_class = $a_class;
 
 						if ( 'Button' === $item->post_content ) {
-							$obj->a_class = 'c-nav__link c-nav__cta o-button-primary o-button-small bg-foreground-dark t-background-light';
+							$obj->a_class = 'c-nav__link c-nav__cta l-relative l-before o-button-primary o-button-small bg-foreground-dark t-background-light';
 						}
 					},
 					'before_output'      => function( &$obj, &$output, $depth, $args, $item ) use ( $attr ) {
@@ -88,7 +88,7 @@ $close_icon = file_get_contents( PI::$svg_assets_path . 'close.svg' );  // Ignor
 $search_id = uniqid();
 
 $search_form = (
-	'<li class="c-nav__item" data-overflow-group="0" data-depth="0">' .
+	'<li class="c-nav__item outline-tight" data-overflow-group="0" data-depth="0">' .
 		'<div class="c-nav-search">' .
 			"<button class='c-nav-search__button t-current l-width-xs l-height-m l-flex l-align-center l-justify-center' type='button' aria-expanded='false' aria-controls='$search_id' aria-label='Toggle search bar'>" .
 				'<span class="l-flex l-width-xs l-height-xs l-svg">' .
@@ -116,13 +116,13 @@ $search_form = (
 ); ?>
 
 <!DOCTYPE html>
-<html <?php language_attributes(); ?>>
+<html id="<?php echo esc_attr( PI::$namespace ); ?>" <?php language_attributes(); ?>>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<?php wp_head(); ?>
 </head>
-<body <?php body_class(); ?>>
+<body <?php body_class( PI::$namespace ); ?>>
 	<?php wp_body_open(); ?>
 	<header class="l-padding-top-2xs l-padding-bottom-2xs l-padding-top-xs-l l-padding-bottom-xs-l" data-theme="<?php echo esc_attr( PI::$hero_theme ); ?>" style="--hero-bg: var(--<?php echo esc_attr( PI::$hero_theme ); ?>)">
 		<a href="#main" class="c-skip-link t-h5 bg-background-light t-foreground-dark l-block l-absolute l-left-0 l-right-0 l-top-0 l-padding-right-2xs l-padding-left-2xs l-padding-top-2xs l-padding-bottom-2xs t-align-center outline-snug">
@@ -146,7 +146,7 @@ $search_form = (
 					<span class="c-nav-icon-label t-h6 l-block l-padding-top-5xs e-transition">Menu</span>
 				</button>
 				<div class="c-nav-overflow l-fixed l-right-0 l-bottom-0 l-z-index-1 l-height-100-vh bg-primary-light t-foreground-dark t-link-current e-transition l-width-4-5" role="dialog" aria-modal="true" aria-label="Main navigation" id="<?php echo esc_attr( $main_nav_overflow_id ); ?>">
-					<div class="l-height-100-vh l-overflow-y-auto l-padding-right-2xs l-padding-left-xs l-padding-top-2xl l-padding-bottom-xs">
+					<div class="l-height-100-vh l-overflow-y-auto l-overflow-x-hidden l-padding-right-2xs l-padding-left-xs l-padding-top-2xl l-padding-bottom-xs">
 						<ul class="c-nav-overflow__list l-flex l-flex-column l-gap-margin-xs t-list-style-none" role="list"></ul>
 					</div>
 				</div>

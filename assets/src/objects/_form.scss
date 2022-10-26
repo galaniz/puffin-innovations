@@ -86,6 +86,7 @@
   &:not([role="search"]) [type="submit"] {
     background: var(--submit-bg);
     color: var(--submit-color);
+    opacity: 1;
   }
 
   [data-asi] {

@@ -136,7 +136,7 @@ class Hero {
 	 * Render callbacks
 	 */
 
-	public static function render_hero( $attributes, $content, $block ) {
+	public static function render_hero( $attributes, $content = '', $block = [] ) {
 		$attr = array_replace_recursive( self::$blocks['hero']['default'], $attributes );
 
 		/* Destructure */
@@ -239,7 +239,7 @@ class Hero {
 
 				if ( $content || $video_label ) {
 					$dialog_text = (
-						'<div class="o-modal__scroll l-flex-shrink-0 l-overflow-y-auto l-width-1-1 l-width-1-3-l">' .
+						'<div class="o-modal__scroll l-flex-shrink-0 l-overflow-y-auto l-overflow-x-hidden l-width-1-1 l-width-1-3-l">' .
 							'<div class="l-padding-right-2xs l-padding-left-2xs l-padding-left-s-l l-padding-right-s-l l-padding-top-2xs l-padding-bottom-2xs l-margin-bottom-2xs-all l-margin-0-last t-s t-inherit">' .
 								$video_label .
 								$content .
@@ -386,6 +386,10 @@ class Hero {
 
 		if ( PI::is_text_light( $bg_color_slug ) ) {
 			$section_classes .= ' t-light';
+		}
+
+		if ( PI::is_text_dark( $bg_color_slug ) ) {
+			$section_classes .= ' t-dark';
 		}
 
 		if ( ! $text_output && ! $media_output ) {

@@ -26,7 +26,7 @@ class Text {
 
 	public static $blocks = [
 		'text' => [
-			'attr'    => [
+			'attr'         => [
 				'text'                  => ['type' => 'string'],
 				'tag'                   => ['type' => 'string'],
 				'style'                 => ['type' => 'string'],
@@ -34,8 +34,10 @@ class Text {
 				'padding_top'           => ['type' => 'string'],
 				'padding_bottom_mobile' => ['type' => 'string'],
 				'padding_bottom'        => ['type' => 'string'],
+				'is_link'               => ['type' => 'boolean'],
+				'link'                  => ['type' => 'string'],
 			],
-			'default' => [
+			'default'      => [
 				'text'                  => '',
 				'tag'                   => 'p',
 				'style'                 => '',
@@ -43,10 +45,15 @@ class Text {
 				'padding_top'           => '',
 				'padding_bottom_mobile' => '',
 				'padding_bottom'        => '',
+				'is_link'               => false,
+				'link'                  => '',
 			],
-			'render'  => [__CLASS__, 'render_text'],
-			'handle'  => 'text',
-			'script'  => 'text.js',
+			'uses_context' => [
+				'card/exists',
+			],
+			'render'       => [__CLASS__, 'render_text'],
+			'handle'       => 'text',
+			'script'       => 'text.js',
 		],
 	];
 
@@ -87,6 +94,8 @@ class Text {
 			'padding_top'           => $padding_top,
 			'padding_bottom_mobile' => $padding_bottom_mobile,
 			'padding_bottom'        => $padding_bottom,
+			'is_link'               => $is_link,
+			'link'                  => $link,
 		] = $attr;
 
 		/* Text required */
@@ -125,6 +134,23 @@ class Text {
 
 		if ( $style ) {
 			$classes = $style;
+		}
+
+		/* Link */
+
+		if ( $is_link && $link ) {
+			$external  = PI::is_external_url( $link );
+			$link_attr = $external ? ' target="_blank" rel="noopener noreferrer"' : '';
+
+			$in_card = $block->context[ PI::$namespace . '/card/exists' ] ?? false;
+
+			if ( $in_card ) {
+				$link_attr .= ' class="l-block l-before"';
+			}
+
+			$link_attr = trim( $link_attr );
+
+			$text = "<a href='$link'$link_attr>$text</a>";
 		}
 
 		/* Classes */

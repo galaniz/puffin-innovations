@@ -47,6 +47,10 @@ class PI extends FRM {
 		'hide'          => 'a11y-hide-input',
 	];
 
+	/* Editor style classes */
+
+	public static $editor_classes = 't-list e-underline e-underline-thick';
+
 	/* Static markup */
 
 	public static $html = [
@@ -524,9 +528,10 @@ class PI extends FRM {
 		$hide_output = $hide ? ' data-hide' : '';
 
 		return (
-			"<span class='o-loader l-absolute l-top-0 l-left-0 l-right-0 l-bottom-0 l-flex l-align-center l-justify-center'$hide_output>" .
-				"<span class='l-width-$size l-height-$size b-radius-100-pc'></span>" .
-				"<span class='l-width-$size l-height-$size b-radius-100-pc l-absolute l-top-0 l-left-0 l-right-0 l-bottom-0 l-margin-auto'></span>" .
+			"<span class='o-loader l-absolute l-top-0 l-left-0 l-right-0 l-bottom-0 l-flex l-align-center l-justify-center' aria-hidden='true'$hide_output>" .
+				"<span class='l-width-$size l-height-$size b-radius-100-pc reduce-motion-hide'></span>" .
+				'<span class="l-none reduce-motion-show">Loading</span>' .
+				"<span class='l-width-$size l-height-$size b-radius-100-pc l-absolute l-top-0 l-left-0 l-right-0 l-bottom-0 l-margin-auto reduce-motion-hide'></span>" .
 			'</span>'
 		);
 	}
@@ -537,6 +542,14 @@ class PI extends FRM {
 
 	public static function is_text_light( $bg = 'background-light' ) {
 		return 'foreground-dark' === $bg || 'primary-dark' === $bg;
+	}
+
+	/**
+	 * Check if extra dark text required.
+	 */
+
+	public static function is_text_dark( $bg = 'background-light' ) {
+		return 'primary-base' === $bg || 'primary-tint' === $bg;
 	}
 
 	/**

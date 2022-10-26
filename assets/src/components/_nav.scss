@@ -60,6 +60,15 @@
   [data-theme="foreground-dark"] .c-nav__list & {
     background-color: var(--background-light-15);
   }
+
+  .current-menu-parent &,
+  .current-menu-item & {
+    &::before {
+      border: func.calc-rem(3px) solid currentcolor;
+      border-radius: inherit;
+      margin: var(--5xs);
+    }
+  }
 }
 
 /* Icon */

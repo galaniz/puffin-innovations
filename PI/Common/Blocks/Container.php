@@ -222,6 +222,10 @@ class Container {
 			if ( PI::is_text_light( $bg_color_slug ) ) {
 				$classes .= ' t-light';
 			}
+
+			if ( PI::is_text_dark( $bg_color_slug ) ) {
+				$classes .= ' t-dark';
+			}
 		}
 
 		if ( $bg_color_custom ) {
@@ -243,7 +247,7 @@ class Container {
 		/* Editor styles */
 
 		if ( $editor_styles ) {
-			$classes .= ' t-list e-underline e-underline-thick';
+			$classes .= ' ' . PI::$editor_classes;
 		}
 
 		/* Output */

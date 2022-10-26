@@ -140,7 +140,7 @@ class Column {
 		/* Editor styles */
 
 		if ( $editor_styles ) {
-			$classes .= ' t-list e-underline e-underline-thick';
+			$classes .= ' ' . PI::$editor_classes;
 		}
 
 		/* Quote mark */

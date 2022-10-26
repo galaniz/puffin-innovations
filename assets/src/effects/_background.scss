@@ -1,0 +1,11 @@
+/**
+ * Effects: background
+ */
+
+/* Styles */
+
+.e-bg-primary-tint-15 {
+  &:hover {
+    background-color: var(--primary-tint-15);
+  }
+}
