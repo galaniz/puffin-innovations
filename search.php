@@ -28,8 +28,6 @@ echo Hero::render_hero(
 	]
 );
 
-/* Posts */
-
 /* Footer */
 
 get_footer();
