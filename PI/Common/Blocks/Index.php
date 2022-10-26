@@ -91,6 +91,7 @@ class Index {
 			'core/table',
 			'core/separator',
 			'core/shortcode',
+			'core/block',
 			"$n/contact-form",
 			"$n/contact-form-group",
 			"$n/contact-form-field",

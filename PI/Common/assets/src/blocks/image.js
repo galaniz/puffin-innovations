@@ -208,7 +208,7 @@ registerBlockType(name, {
         </InspectorControls>
       </Fragment>,
       <Panel key='panel'>
-        <PanelBody title='Image' initialOpen={false}>
+        <PanelBody title='Figure' initialOpen={false}>
           <InnerBlocks
             templateLock={false}
             allowedBlocks={isMaxBlock ? [] : allowedBlocks}

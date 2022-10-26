@@ -91,7 +91,7 @@ registerBlockType(name, {
           <PanelBody title='Slider Options'>
             <TextControl
               label='Label'
-              help='Screen reader text for slides and buttons'
+              help={`Screen reader text for slides and buttons. Slide: ${label || '{label}'} group {index}. Button: Go to ${label || '{label}'} group {index}`}
               value={label}
               onChange={label => setAttributes({ label })}
             />
