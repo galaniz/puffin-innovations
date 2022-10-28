@@ -14,7 +14,7 @@
   @include mix.set-root;
   @include m.set-text;
 
-  --background-light-15: #{rgba(func.get-color("background-light"), 0.15)};
+  --background-light-35: #{rgba(func.get-color("background-light"), 0.35)};
   --background-light-60: #{rgba(func.get-color("background-light"), 0.6)};
   --primary-tint-15: #{rgba(func.get-color("primary-tint"), 0.15)};
   --scrollbar-width: 0rem;
