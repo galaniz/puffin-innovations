@@ -14,16 +14,8 @@
   background-color: rgba(func.get-color("foreground-dark"), 0.9);
 }
 
-.bg-background-light-15 {
-  background-color: var(--background-light-15);
-}
-
 .bg-background-light-30 {
   background-color: rgba(func.get-color("background-light"), 0.3);
-}
-
-.bg-primary-tint-15 {
-  background-color: var(--primary-tint-15);
 }
 
 .bg-overlay::after {

@@ -76,7 +76,7 @@ $social = PI::render_social(
 		'list_attr'  => [
 			'role' => 'list',
 		],
-		'link_class' => 'l-flex l-padding-top-3xs l-padding-bottom-3xs l-padding-left-3xs l-padding-right-3xs bg-background-light-15 e-transition-border-radius',
+		'link_class' => 'l-flex l-align-center l-justify-center l-width-sm l-height-sm b-all b-background-light-35 e-transition-border-radius',
 		'link_attr'  => [
 			'target' => '_blank',
 			'rel'    => 'noreferrer',
@@ -124,7 +124,7 @@ if ( has_nav_menu( 'legal' ) ) {
 $copyright = get_option( $n . '_copyright', '&copy; ' . get_bloginfo( 'name' ) . ' *|YEAR|*. All rights reserved.' );
 $copyright = (
 	'<div class="l-margin-top-auto">' .
-		'<p class="t-xs">' . str_replace( '*|YEAR|*', gmdate( 'Y' ), $copyright ) . '</p>' .
+		'<span class="t-xs">' . str_replace( '*|YEAR|*', gmdate( 'Y' ), $copyright ) . '</span>' .
 	'</div>'
 );
 

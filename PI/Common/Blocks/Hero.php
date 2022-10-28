@@ -258,7 +258,7 @@ class Hero {
 						'<div class="o-modal__overlay bg-foreground-dark l-fixed l-top-0 l-left-0 l-z-index-1 l-width-100-pc l-height-100-pc e-transition"></div>' .
 						"<div class='o-modal__window l-flex l-flex-column l-flex-row-l l-align-center l-justify-center l-z-index-1 e-transition' data-type='$dialog_type'>" .
 							'<div class="o-modal__media">' .
-								'<div class="l-width-100-pc l-height-100-pc l-relative l-overflow-hidden bg-background-light-15">' .
+								'<div class="l-width-100-pc l-height-100-pc l-relative l-overflow-hidden bg-background-light-30">' .
 									"<iframe id='$iframe_id' class='l-absolute l-top-0 l-left-0 l-width-100-pc l-height-100-pc' data-src='$video_link' title='Video player' frameborder='0' allow='autoplay' allowfullscreen></iframe>" .
 								'</div>' .
 							'</div>' .

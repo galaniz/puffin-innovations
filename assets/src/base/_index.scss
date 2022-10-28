@@ -14,9 +14,8 @@
   @include mix.set-root;
   @include m.set-text;
 
-  --background-light-15: #{rgba(func.get-color("background-light"), 0.15)};
+  --background-light-35: #{rgba(func.get-color("background-light"), 0.35)};
   --background-light-60: #{rgba(func.get-color("background-light"), 0.6)};
-  --primary-tint-65: #{rgba(func.get-color("primary-tint"), 0.65)};
   --primary-tint-15: #{rgba(func.get-color("primary-tint"), 0.15)};
   --scrollbar-width: 0rem;
   --text-color: #{rgba(func.get-color("foreground-dark"), 0.8)};
@@ -24,7 +23,7 @@
   --link-color: var(--primary-dark);
   --cubic: cubic-bezier(0.76, 0, 0.24, 1);
   --underline: #{func.calc-rem(1px)};
-  --input-bg: #{rgba(func.get-color("foreground-dark"), 0.1)};
+  --input-border: #{rgba(func.get-color("foreground-dark"), 0.5)};
   --input-padding: var(--2xs) var(--xs);
   --input-control-bg-checked: var(--primary-dark);
   --input-control-color-checked: var(--background-light);

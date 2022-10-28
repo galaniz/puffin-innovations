@@ -33,7 +33,7 @@ $logo = PI::render_logo( '', true );
 if ( $logo ) {
 	$logo = (
 		'<div data-logo' . ( $light ? ' class="t-light"' : '' ) . '>' .
-			'<a href="' . esc_url( home_url( '/' ) ) . '" class="l-block l-relative l-svg l-svg-absolute o-logo">' .
+			'<a href="' . esc_url( home_url( '/' ) ) . '" class="l-block l-relative l-svg l-svg-absolute o-logo" id="js-logo">' .
 				'<span class="a11y-visually-hidden">' . get_bloginfo( 'name' ) . ' home</span>' .
 				$logo .
 			'</a>' .
@@ -90,18 +90,10 @@ $search_id = uniqid();
 $search_form = (
 	'<li class="c-nav__item outline-tight" data-overflow-group="0" data-depth="0">' .
 		'<div class="c-nav-search">' .
-			"<button class='c-nav-search__button t-current l-width-xs l-height-m l-flex l-align-center l-justify-center' type='button' aria-expanded='false' aria-controls='$search_id' aria-label='Toggle search bar'>" .
-				'<span class="l-flex l-width-xs l-height-xs l-svg">' .
-					$search_icon .
-				'</span>' .
-				'<span class="l-flex l-width-xs l-height-xs l-svg">' .
-					$close_icon .
-				'</span>' .
-			'</button>' .
 			"<div class='c-nav-search__bar l-absolute l-bottom-0 l-left-0 l-width-100-pc e-transition' id='$search_id'>" .
 				PI::render_form_search(
 					[
-						'form_class'   => 'o-form o-form-small o-form-round o-form-search l-relative',
+						'form_class'   => 'o-form o-form-small o-form-round o-form-search l-relative' . ( ! $light ? ' t-dark' : '' ),
 						'field_class'  => '',
 						'input_class'  => 'l-height-m',
 						'button_class' => 'l-absolute l-right-0 l-bottom-0 l-top-0 l-flex l-align-center l-justify-center l-width-m l-height-m t-current',
@@ -111,6 +103,14 @@ $search_form = (
 					]
 				) .
 			'</div>' .
+			"<button class='c-nav-search__button t-current l-width-xs l-height-m l-flex l-align-center l-justify-center' type='button' aria-expanded='false' aria-controls='$search_id' aria-label='Toggle search bar'>" .
+				'<span class="l-flex l-width-xs l-height-xs l-svg">' .
+					$search_icon .
+				'</span>' .
+				'<span class="l-flex l-width-xs l-height-xs l-svg">' .
+					$close_icon .
+				'</span>' .
+			'</button>' .
 		'</div>' .
 	'</li>'
 ); ?>
@@ -145,8 +145,8 @@ $search_form = (
 					</span>
 					<span class="c-nav-icon-label t-h6 l-block l-padding-top-5xs e-transition">Menu</span>
 				</button>
-				<div class="c-nav-overflow l-fixed l-right-0 l-bottom-0 l-z-index-1 l-height-100-vh bg-primary-light t-foreground-dark t-link-current e-transition l-width-4-5" role="dialog" aria-modal="true" aria-label="Main navigation" id="<?php echo esc_attr( $main_nav_overflow_id ); ?>">
-					<div class="l-height-100-vh l-overflow-y-auto l-overflow-x-hidden l-padding-right-2xs l-padding-left-xs l-padding-top-2xl l-padding-bottom-xs">
+				<div class="c-nav-overflow l-fixed l-right-0 l-bottom-0 l-z-index-1 l-height-100-pc bg-primary-light t-foreground-dark t-link-current e-transition l-width-4-5" role="dialog" aria-modal="true" aria-label="Main navigation" id="<?php echo esc_attr( $main_nav_overflow_id ); ?>">
+					<div class="l-height-100-pc l-overflow-y-auto l-overflow-x-hidden l-padding-right-2xs l-padding-left-xs l-padding-top-xl l-padding-bottom-xs">
 						<ul class="c-nav-overflow__list l-flex l-flex-column l-gap-margin-xs t-list-style-none" role="list"></ul>
 					</div>
 				</div>

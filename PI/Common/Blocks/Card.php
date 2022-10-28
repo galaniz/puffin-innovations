@@ -81,7 +81,7 @@ class Card {
 		/* Border */
 
 		if ( $border ) {
-			$classes .= ' l-padding-top-xs l-padding-bottom-xs l-padding-left-s l-padding-right-s b-radius-m b-all b-primary-tint-65 e-transition e-bg-primary-tint-15';
+			$classes .= ' l-padding-top-xs l-padding-bottom-xs l-padding-left-s l-padding-right-s b-radius-m b-all b-primary-tint e-transition e-bg-primary-tint-15';
 		}
 
 		/* Output */

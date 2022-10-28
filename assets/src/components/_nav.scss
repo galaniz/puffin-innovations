@@ -57,14 +57,16 @@
 /* Button link */
 
 .c-nav__cta {
-  [data-theme="foreground-dark"] .c-nav__list & {
-    background-color: var(--background-light-15);
+  [data-theme="foreground-dark"] .c-nav__list &,
+  [data-theme="primary-dark"] .c-nav__list & {
+    background-color: var(--background-light);
+    color: var(--foreground-dark);
   }
 
   .current-menu-parent &,
   .current-menu-item & {
     &::before {
-      border: func.calc-rem(3px) solid currentcolor;
+      border: func.calc-rem(2px) solid currentcolor;
       border-radius: inherit;
       margin: var(--5xs);
     }
@@ -171,6 +173,7 @@
     @extend %u-visibility-hidden;
 
     width: calc(100% - var(--m));
+    padding: var(--5xs) 0;
   }
 
   .c-nav__list [data-open="true"] & {
