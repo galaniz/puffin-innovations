@@ -15,8 +15,8 @@
   --label-small: var(--h5);
   --input: var(--t-m);
   --border-radius: var(--border-radius-s);
+  --border-width: 0.125rem;
   --arrow-width: var(--xs);
-  --focus-width: 0.1875rem;
   --input-padding-v: var(--input-padding);
   --select-padding: var(--m);
 
@@ -58,23 +58,27 @@
     @extend %u-line-height-160-pc;
 
     border-radius: var(--border-radius);
-    background: var(--input-bg);
     padding: var(--input-padding);
     font-size: var(--input);
     color: var(--heading-color);
-    box-shadow: inset 0 0 0 var(--focus-width) var(--color);
+    box-shadow: inset 0 0 0 var(--border-width) var(--input-border);
     transition: box-shadow var(--duration) var(--easing);
 
     &:focus {
       --outline-width: 0;
-      --color: var(--outline-color);
+      --input-border: var(--outline-color);
+    }
+
+    &:focus,
+    &[aria-invalid="true"] {
+      --border-width: 0.25rem;
     }
 
     &[aria-invalid="true"] {
-      --color: var(--negative-color);
+      --input-border: var(--negative-color);
 
       &:focus {
-        --color: var(--outline-color);
+        --input-border: var(--outline-color);
       }
     }
   }
@@ -202,11 +206,8 @@ legend[data-required] > span:first-child::after,
 
   width: var(--s);
   height: var(--s);
-  background: var(--input-bg);
+  box-shadow: inset 0 0 0 var(--border-width) var(--input-border);
   border-radius: var(--border-radius);
-  outline: var(--focus-width) solid var(--color);
-  outline-offset: var(--focus-width);
-  transition: outline 100ms var(--easing);
   order: -1;
 
   &[data-type="checkbox"] {
@@ -215,7 +216,8 @@ legend[data-required] > span:first-child::after,
 
   &[data-type="checkbox"],
   &[data-type|="radio"] {
-    &::after {
+    &::after,
+    &::before {
       @extend %u-content-empty;
       @extend %u-position-absolute;
       @extend %u-left-0;
@@ -224,6 +226,12 @@ legend[data-required] > span:first-child::after,
       @extend %u-bottom-0;
       @extend %u-margin-auto;
       @extend %u-opacity-0;
+    }
+
+    &::before {
+      border-radius: var(--border-radius);
+      border: 0.15625rem solid var(--color);
+      transform: scale(1.33);
     }
   }
 
@@ -247,6 +255,8 @@ legend[data-required] > span:first-child::after,
   }
 
   input:checked ~ label & {
+    --border-width: 0;
+
     background: var(--input-control-bg-checked);
 
     &::after {
@@ -261,6 +271,10 @@ legend[data-required] > span:first-child::after,
   input:focus ~ label &,
   input[aria-invalid="true"]:focus ~ label & {
     --color: var(--outline-color);
+
+    &::before {
+      @extend %u-opacity-1;
+    }
   }
 }
 
@@ -271,6 +285,13 @@ legend[data-required] > span:first-child::after,
   --heading-color: var(--negative-color);
 
   color: var(--negative-color);
+}
+
+.o-form__error {
+  svg {
+    width: func.calc-rem(25px);
+    height: func.calc-rem(25px);
+  }
 }
 
 .o-form__positive {

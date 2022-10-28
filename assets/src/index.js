@@ -4,7 +4,7 @@
 
 /* Imports */
 
-import { setElements, usingMouse, request } from 'Formation/utils'
+import { setElements, usingMouse, request, getKey } from 'Formation/utils'
 
 /* Classes */
 
@@ -21,6 +21,10 @@ const ns = window.namespace
 const n = window[ns]
 const el = {}
 const meta = [
+  {
+    prop: 'logo',
+    selector: '#js-logo'
+  },
   {
     prop: 'nav',
     selector: '.c-nav',
@@ -188,6 +192,13 @@ const initialize = () => {
         endToggle () {
           document.documentElement.setAttribute('data-100-vw', 'false')
           document.documentElement.setAttribute('data-nav-open', 'false')
+        },
+        filterFocusableItems (focusableItems) {
+          if (el.logo) {
+            focusableItems.unshift(el.logo)
+          }
+
+          return focusableItems
         }
       })
     }
@@ -215,6 +226,14 @@ const initialize = () => {
 
     el.searchButton.addEventListener('click', () => {
       toggleSearchBar(!searchOpen)
+    })
+
+    document.body.addEventListener('keydown', (e) => {
+      if (getKey(e) === 'ESC' && searchOpen) {
+        toggleSearchBar(false)
+
+        el.searchButton.focus()
+      }
     })
   }
 

@@ -9,6 +9,10 @@
 
 /* Styles */
 
+.o-collapsible[data-expanded="true"] {
+  background-color: var(--primary-tint-15);
+}
+
 .o-collapsible__icon {
   .o-collapsible[data-expanded="true"] & {
     transform: rotate(180deg);

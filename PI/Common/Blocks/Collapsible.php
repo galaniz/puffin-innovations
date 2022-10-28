@@ -134,7 +134,7 @@ class Collapsible {
 
 		return (
 			'<div>' .
-				"<div class='o-collapsible l-padding-top-2xs l-padding-bottom-2xs l-padding-right-2xs l-padding-left-2xs l-padding-top-xs-l l-padding-bottom-xs-l l-padding-right-xs-l l-padding-left-xs-l b-radius-m b-all b-primary-tint bg-primary-tint-15'$attr>" .
+				"<div class='o-collapsible l-padding-top-2xs l-padding-bottom-2xs l-padding-right-2xs l-padding-left-2xs l-padding-top-xs-l l-padding-bottom-xs-l l-padding-right-xs-l l-padding-left-xs-l b-radius-m b-all b-primary-tint e-transition e-bg-primary-tint-15'$attr>" .
 					"<$heading_level class='t-h4 l-margin-0'>" .
 						"<button class='o-collapsible__toggle l-flex l-width-100-pc t-align-left t-current' type='button' aria-controls='$id'>" .
 							'<span class="l-flex l-flex-grow-1 l-align-center l-justify-between l-gap-margin-2xs">' .

@@ -124,7 +124,7 @@ if ( has_nav_menu( 'legal' ) ) {
 $copyright = get_option( $n . '_copyright', '&copy; ' . get_bloginfo( 'name' ) . ' *|YEAR|*. All rights reserved.' );
 $copyright = (
 	'<div class="l-margin-top-auto">' .
-		'<p class="t-xs">' . str_replace( '*|YEAR|*', gmdate( 'Y' ), $copyright ) . '</p>' .
+		'<span class="t-xs">' . str_replace( '*|YEAR|*', gmdate( 'Y' ), $copyright ) . '</span>' .
 	'</div>'
 );
 
