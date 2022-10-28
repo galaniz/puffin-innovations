@@ -93,7 +93,7 @@ $search_form = (
 			"<div class='c-nav-search__bar l-absolute l-bottom-0 l-left-0 l-width-100-pc e-transition' id='$search_id'>" .
 				PI::render_form_search(
 					[
-						'form_class'   => 'o-form o-form-small o-form-round o-form-search l-relative',
+						'form_class'   => 'o-form o-form-small o-form-round o-form-search l-relative' . ( ! $light ? ' t-dark' : '' ),
 						'field_class'  => '',
 						'input_class'  => 'l-height-m',
 						'button_class' => 'l-absolute l-right-0 l-bottom-0 l-top-0 l-flex l-align-center l-justify-center l-width-m l-height-m t-current',
