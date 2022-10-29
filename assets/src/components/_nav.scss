@@ -77,11 +77,18 @@
 
 .c-nav__button {
   --icon-color: var(--heading-color);
+  --outline-offset: var(--4xs);
 
   z-index: 2;
 
   [data-nav-open="true"] & {
     --icon-color: var(--foreground-dark);
+    --outline-color: var(--foreground-dark);
+
+    @extend %u-position-fixed;
+
+    top: auto;
+    right: var(--2xs);
   }
 }
 
