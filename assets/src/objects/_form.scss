@@ -141,6 +141,7 @@ legend[data-required] > span:first-child::after,
 [data-required] > [data-label] > span:first-child::after {
   content: " *";
   color: var(--negative-color);
+  speak: none;
 }
 
 /* Controls */
