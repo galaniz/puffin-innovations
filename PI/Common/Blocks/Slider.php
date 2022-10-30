@@ -142,7 +142,7 @@ class Slider {
 
 			$tablist .= (
 				'<li class="l-flex" role="presentation">' .
-					"<button class='o-slider__tab t-current l-padding-left-5xs l-padding-right-5xs l-padding-top-5xs l-padding-bottom-5xs' type='button' role='tab' tabindex='$tabindex' aria-selected='$selected' aria-label='$tab_label'$max_width>" .
+					"<button class='o-slider__tab l-padding-left-5xs l-padding-right-5xs l-padding-top-5xs l-padding-bottom-5xs' type='button' role='tab' tabindex='$tabindex' aria-selected='$selected' aria-label='$tab_label'$max_width>" .
 						'<span class="l-block b-radius-100-pc b-all"></span>' .
 					'</button>' .
 				'</li>'

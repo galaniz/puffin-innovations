@@ -178,8 +178,9 @@
   }
 
   &[aria-selected="true"] span {
-    background: currentcolor;
-    opacity: 1;
+    @extend %u-opacity-1;
+
+    background: var(--heading-color);
   }
 }
 

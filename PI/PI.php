@@ -234,7 +234,7 @@ class PI extends FRM {
 		);
 
 		self::$html['result']['error']['summary'] = (
-			'<div class="o-form-error__summary l-width-100-pc l-none outline-none" aria-labelledby="%s" role="alert" tabindex="-1">' .
+			'<div class="o-form-error__summary l-width-100-pc l-none outline-none" aria-labelledby="%s" tabindex="-1">' .
 				'<div class="o-form__negative l-padding-left-2xs l-padding-right-2xs l-padding-top-2xs l-padding-bottom-2xs">' .
 					'<div class="l-flex l-gap-margin-3xs">' .
 						'<div>' .
