@@ -701,20 +701,26 @@ const initialize = () => {
       const args = {
         tabs: ss.nav,
         panels: ss.panels,
-        delay: 600,
         container: s,
         slider: ss.main,
         track: ss.track,
         targetHeight: ss.track,
         prev: ss.prev,
         next: ss.next,
+        duration: 500,
         reduceMotion
       }
 
-      if (ss.main.getAttribute('data-loop')) {
+      const loop = ss.main.getAttribute('data-loop') === 'true'
+      const type = s.getAttribute('data-type')
+
+      if (loop) {
         args.loop = true
-      } else {
+      }
+
+      if (type === 'group') {
         args.groupItems = ss.items
+        args.groupSelector = '.o-slider__insert'
         args.breakpoints = [
           {
             breakpoint: 0,

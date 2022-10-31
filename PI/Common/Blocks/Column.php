@@ -37,6 +37,7 @@ class Column {
 				'grow'            => ['type' => 'boolean'],
 				'quote_mark'      => ['type' => 'boolean'],
 				'editor_styles'   => ['type' => 'boolean'],
+				'order_first'     => ['type' => 'boolean'],
 			],
 			'default' => [
 				'internal_name'   => '',
@@ -49,6 +50,7 @@ class Column {
 				'grow'            => false,
 				'quote_mark'      => false,
 				'editor_styles'   => false,
+				'order_first'     => false,
 			],
 			'render'  => [__CLASS__, 'render_column'],
 			'handle'  => 'column',
@@ -95,6 +97,7 @@ class Column {
 			'grow'            => $grow,
 			'quote_mark'      => $quote_mark,
 			'editor_styles'   => $editor_styles,
+			'order_first'     => $order_first,
 		] = $attr;
 
 		/* Classes */
@@ -141,6 +144,12 @@ class Column {
 
 		if ( $editor_styles ) {
 			$classes .= ' ' . PI::$editor_classes;
+		}
+
+		/* Order */
+
+		if ( $order_first ) {
+			$classes .= ' l-order-first';
 		}
 
 		/* Quote mark */

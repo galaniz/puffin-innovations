@@ -13,7 +13,8 @@ const {
   Panel,
   PanelBody,
   SelectControl,
-  TextControl
+  TextControl,
+  RadioControl
 } = window.wp.components
 
 const {
@@ -52,19 +53,28 @@ const dataSelector = withSelect((select, ownProps) => {
   const { clientId } = ownProps
 
   const ids = []
+  const titles = []
 
   const blocks = select('core/block-editor').getBlocks(clientId)
 
   if (blocks.length) {
     blocks.forEach((block) => {
-      const { clientId } = block
+      const { clientId, attributes } = block
+      const { title = '' } = attributes
 
       ids.push(clientId)
+      titles.push(title)
     })
   }
 
+  ownProps.attributes.length = blocks.length
+
   if (ids.length) {
     ownProps.attributes.ids = ids.join(',')
+  }
+
+  if (titles.length) {
+    ownProps.attributes.titles = titles.join(',')
   }
 })
 
@@ -80,7 +90,8 @@ registerBlockType(name, {
 
     const {
       label = def.label,
-      width = def.width
+      width = def.width,
+      type = def.type
     } = attributes
 
     /* Output */
@@ -94,6 +105,15 @@ registerBlockType(name, {
               help={`Screen reader text for slides and buttons. Slide: ${label || '{label}'} group {index}. Button: Go to ${label || '{label}'} group {index}`}
               value={label}
               onChange={label => setAttributes({ label })}
+            />
+            <RadioControl
+              label='Type'
+              selected={type}
+              options={[
+                { label: 'Group', value: 'group' },
+                { label: 'Group Flex', value: 'group-flex' }
+              ]}
+              onChange={type => setAttributes({ type })}
             />
             <SelectControl
               label='Slide Width'

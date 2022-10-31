@@ -590,6 +590,10 @@ class PI extends FRM {
 
 		$hero_theme = get_post_meta( $id, self::$namespace . '_hero_theme', true );
 
+		if ( is_search() ) {
+			$hero_theme = 'background-base';
+		}
+
 		if ( $hero_theme ) {
 			self::$hero_theme = $hero_theme;
 		}

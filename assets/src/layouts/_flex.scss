@@ -9,6 +9,10 @@
 
 /* Styles */
 
+.l-align-self-start {
+  align-self: flex-start;
+}
+
 .l-align-self-center-m {
   @include mix.breakpoint-min("m") {
     align-self: center;

@@ -204,7 +204,8 @@ const blocks = [
   'collapsibles/collapsibles',
   'collapsibles/collapsible',
   'slider/slider',
-  'slider/slide'
+  'slider/slide',
+  'slider/slide-content'
 ]
 
 const blocksEntry = {}

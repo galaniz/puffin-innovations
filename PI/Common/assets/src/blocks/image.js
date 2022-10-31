@@ -66,7 +66,7 @@ const dataSelector = withSelect((select, ownProps) => {
 /* Block */
 
 registerBlockType(name, {
-  title: 'Figure',
+  title: 'Styled Image',
   category: 'theme-blocks',
   icon: 'camera-alt',
   attributes: attr,
@@ -77,6 +77,8 @@ registerBlockType(name, {
       width_mobile = def.width_mobile, // eslint-disable-line camelcase
       width = def.width,
       height = def.height,
+      inner_width = def.inner_width, // eslint-disable-line camelcase
+      inner_height = def.inner_height, // eslint-disable-line camelcase
       aspect_ratio = def.aspect_ratio, // eslint-disable-line camelcase
       border_radius = def.border_radius, // eslint-disable-line camelcase
       cover = def.cover,
@@ -95,6 +97,8 @@ registerBlockType(name, {
       { label: '60px', value: 'm' },
       { label: '80px', value: 'l' },
       { label: '100px', value: 'xl' },
+      { label: '120px', value: '2xl' },
+      { label: '140px', value: '3xl' },
       { label: '200px', value: '4xl' },
       { label: '100%', value: '1-1' }
     ]
@@ -107,8 +111,10 @@ registerBlockType(name, {
       { label: '60px', value: 'm' },
       { label: '80px', value: 'l' },
       { label: '100px', value: 'xl' },
+      { label: '120px', value: '2xl' },
+      { label: '140px', value: '3xl' },
       { label: '200px', value: '4xl' },
-      { label: '100%', value: '1-1' }
+      { label: '100%', value: '100-pc' }
     ]
 
     /* Position options */
@@ -130,7 +136,7 @@ registerBlockType(name, {
     return [
       <Fragment key='frag'>
         <InspectorControls>
-          <PanelBody title='Image Options'>
+          <PanelBody title='Styled Image Options'>
             <SelectControl
               label='Width'
               value={width_mobile} // eslint-disable-line camelcase
@@ -150,6 +156,18 @@ registerBlockType(name, {
               onChange={height => setAttributes({ height })}
             />
             <SelectControl
+              label='Inner Width'
+              value={inner_width} // eslint-disable-line camelcase
+              options={widthOptions}
+              onChange={v => setAttributes({ inner_width: v })}
+            />
+            <SelectControl
+              label='Inner Height'
+              value={inner_height} // eslint-disable-line camelcase
+              options={heightOptions}
+              onChange={v => setAttributes({ inner_height: v })}
+            />
+            <SelectControl
               label='Aspect Ratio'
               value={aspect_ratio} // eslint-disable-line camelcase
               options={[
@@ -166,6 +184,7 @@ registerBlockType(name, {
               options={[
                 { label: 'None', value: '' },
                 { label: '100%', value: '100-pc' },
+                { label: '10px', value: 's' },
                 { label: '15px', value: 'm' },
                 { label: '30px', value: 'xl' }
               ]}
@@ -208,18 +227,22 @@ registerBlockType(name, {
         </InspectorControls>
       </Fragment>,
       <Panel key='panel'>
-        <PanelBody title='Figure' initialOpen={false}>
-          <InnerBlocks
-            templateLock={false}
-            allowedBlocks={isMaxBlock ? [] : allowedBlocks}
-          />
+        <PanelBody title='Styled Image' initialOpen={false}>
+          <div style={{ background: 'lightgray' }}>
+            <InnerBlocks
+              templateLock={false}
+              allowedBlocks={isMaxBlock ? [] : allowedBlocks}
+            />
+          </div>
           {is_link && ( // eslint-disable-line camelcase
-            <BaseControl label='Link'>
-              <URLInputButton
-                url={link}
-                onChange={link => setAttributes({ link })}
-              />
-            </BaseControl>
+            <div style={{ marginTop: '1rem' }}>
+              <BaseControl label='Link'>
+                <URLInputButton
+                  url={link}
+                  onChange={link => setAttributes({ link })}
+                />
+              </BaseControl>
+            </div>
           )}
         </PanelBody>
       </Panel>
