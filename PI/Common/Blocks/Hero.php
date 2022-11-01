@@ -224,6 +224,7 @@ class Hero {
 				$close_button = (
 					'<button type="button" class="o-modal__close l-absolute l-top-0 l-right-0 l-z-index-1 l-width-s l-height-s l-margin-right-4xs l-margin-top-4xs b-radius-100-pc t-background-light bg-foreground-dark-09">' .
 						"<span class='l-block l-width-xs l-height-xs l-svg l-margin-auto'>$close_icon</span>" .
+						'<span class="a11y-visually-hidden">Close modal</span>' .
 					'</button>'
 				);
 

@@ -7,6 +7,7 @@
 @use "sass:map";
 @use "@alanizcreative/formation/src/config" as con;
 @use "@alanizcreative/formation/src/utils/functions" as func;
+@use "@alanizcreative/formation/src/utils/mixins" as mix;
 @use "@alanizcreative/formation/src/components/nav";
 @use "@alanizcreative/formation/src/components/nav/overflow";
 @use "@alanizcreative/formation/src/components/nav/icon";
@@ -84,11 +85,20 @@
   [data-nav-open="true"] & {
     --icon-color: var(--foreground-dark);
     --outline-color: var(--foreground-dark);
+  }
+}
 
-    @extend %u-position-fixed;
+.c-nav-overflow__button {
+  --p: var(--2xs);
+  --o: (var(--logo-height) / 2) - (var(--sm) / 2);
+  --t: calc(var(--p) + var(--o));
 
-    top: auto;
-    right: var(--2xs);
+  right: var(--container-padding);
+  top: var(--t);
+  background: coral;
+
+  @include mix.breakpoint-min("l") {
+    --p: var(--xs);
   }
 }
 
