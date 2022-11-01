@@ -106,6 +106,7 @@ class Index {
 			"$n/collapsible",
 			"$n/slider",
 			"$n/slide",
+			"$n/slide-content",
 		];
 	}
 

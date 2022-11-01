@@ -194,7 +194,8 @@ registerBlockType(name, {
       bg_color = def.bg_color, // eslint-disable-line camelcase
       bg_seamless = def.bg_seamless, // eslint-disable-line camelcase
       quote_mark = def.quote_mark, // eslint-disable-line camelcase
-      editor_styles = def.editor_styles // eslint-disable-line camelcase
+      editor_styles = def.editor_styles, // eslint-disable-line camelcase
+      order_first = def.order_first // eslint-disable-line camelcase
     } = attributes
 
     /* Internal name */
@@ -361,6 +362,13 @@ registerBlockType(name, {
               value='1'
               checked={!!editor_styles} // eslint-disable-line camelcase
               onChange={v => setAttributes({ editor_styles: v })}
+            />
+            <CheckboxControl
+              label='Order First'
+              help='Visually appear as first item'
+              value='1'
+              checked={!!order_first} // eslint-disable-line camelcase
+              onChange={v => setAttributes({ order_first: v })}
             />
           </PanelBody>
         </InspectorControls>

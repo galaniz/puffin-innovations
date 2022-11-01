@@ -24,6 +24,18 @@ class Image {
 	 * Variables
 	 */
 
+	public static $flex_positions = [
+		'left-top'      => 'l-justify-start l-align-start',
+		'left-center'   => 'l-justify-start l-align-center',
+		'left-bottom'   => 'l-justify-start l-align-end',
+		'center-top'    => 'l-justify-center l-align-start',
+		'center-center' => 'l-justify-center l-align-center',
+		'center-bottom' => 'l-justify-center l-align-end',
+		'right-top'     => 'l-justify-end l-align-start',
+		'right-center'  => 'l-justify-end l-align-center',
+		'right-bottom'  => 'l-justify-end l-align-end',
+	];
+
 	public static $blocks = [
 		'image' => [
 			'attr'         => [
@@ -31,6 +43,8 @@ class Image {
 				'width_mobile'  => ['type' => 'string'],
 				'width'         => ['type' => 'string'],
 				'height'        => ['type' => 'string'],
+				'inner_width'   => ['type' => 'string'],
+				'inner_height'  => ['type' => 'string'],
 				'aspect_ratio'  => ['type' => 'string'],
 				'border_radius' => ['type' => 'string'],
 				'cover'         => ['type' => 'boolean'],
@@ -45,6 +59,8 @@ class Image {
 				'width_mobile'  => '',
 				'width'         => '',
 				'height'        => '',
+				'inner_width'   => '1-1',
+				'inner_height'  => '100-pc',
 				'aspect_ratio'  => '',
 				'border_radius' => '',
 				'cover'         => true,
@@ -97,6 +113,8 @@ class Image {
 			'width_mobile'  => $width_mobile,
 			'width'         => $width,
 			'height'        => $height,
+			'inner_width'   => $inner_width,
+			'inner_height'  => $inner_height,
 			'aspect_ratio'  => $aspect_ratio,
 			'border_radius' => $border_radius,
 			'cover'         => $cover,
@@ -113,40 +131,44 @@ class Image {
 			return '';
 		}
 
-		/* Figure classes */
+		/* Outer classes */
 
-		$figure_classes = '';
-		$figure_attr    = '';
+		$outer_classes = '';
+		$outer_attr    = '';
 
 		/* Width */
 
 		if ( $width_mobile ) {
-			$figure_classes .= " l-width-$width_mobile";
+			$outer_classes .= " l-width-$width_mobile";
 		}
 
 		if ( $width && $width !== $width_mobile ) {
-			$figure_classes .= " l-width-$width-l";
+			$outer_classes .= " l-width-$width-l";
 		}
 
 		/* Height */
 
 		if ( $height ) {
-			$figure_classes .= " l-height-$height";
+			$outer_classes .= " l-height-$height";
 		}
 
 		/* Aspect ratio */
 
 		if ( $aspect_ratio ) {
-			$figure_classes .= " l-relative l-overflow-hidden l-aspect-ratio-$aspect_ratio";
+			$outer_classes .= " l-relative l-overflow-hidden l-aspect-ratio-$aspect_ratio";
 		}
 
 		/* Border radius */
 
 		if ( $border_radius ) {
-			$figure_classes .= " b-radius-$border_radius";
+			if ( ! $aspect_ratio ) {
+				$outer_classes .= ' l-overflow-hidden';
+			}
+
+			$outer_classes .= " b-radius-$border_radius";
 
 			if ( 'xl' === $border_radius ) {
-				$figure_classes .= '-fluid';
+				$outer_classes .= '-fluid';
 			}
 		}
 
@@ -160,27 +182,27 @@ class Image {
 			$alt           = esc_attr( $image['alt'] );
 			$srcset        = esc_attr( $image['srcset'] );
 			$sizes         = esc_attr( $image['sizes'] );
-			$width         = esc_attr( $image['width'] );
-			$height        = esc_attr( $image['height'] );
-			$image_classes = 'l-width-100-pc';
+			$w             = esc_attr( $image['width'] );
+			$h             = esc_attr( $image['height'] );
+			$image_classes = "l-width-$inner_width l-height-$inner_height";
 
-			if ( $aspect_ratio ) {
-				$image_classes .= ' l-absolute l-top-0 l-left-0 l-height-100-pc';
+			if ( '100-pc' !== $inner_height ) {
+				$outer_classes .= ' l-flex ' . self::$flex_positions[ $position ];
 			}
 
-			if ( $height && ! $aspect_ratio ) {
-				$image_classes .= ' l-height-100-pc';
+			if ( $aspect_ratio ) {
+				$image_classes .= ' l-absolute l-top-0 l-left-0';
 			}
 
 			$image_classes .= ' l-object-' . ( $cover ? 'cover' : 'contain' ) . " l-object-$position";
 
-			$image_output = "<img class='$image_classes' src='$src' alt='$alt' srcset='$srcset' sizes='$sizes' width='$width' height='$height' loading='lazy'>";
+			$image_output = "<img class='$image_classes' src='$src' alt='$alt' srcset='$srcset' sizes='$sizes' width='$w' height='$h' loading='lazy'>";
 		}
 
 		/* Order */
 
 		if ( $order_first ) {
-			$figure_classes .= ' l-order-first';
+			$outer_classes .= ' l-order-first';
 		}
 
 		/* Opacity */
@@ -188,15 +210,15 @@ class Image {
 		if ( 100 !== $opacity ) {
 			$opacity = $opacity / 100;
 
-			$figure_attr = " style='opacity:$opacity'";
+			$outer_attr = " style='opacity:$opacity'";
 		}
 
 		/* Classes */
 
-		$figure_classes = trim( $figure_classes );
+		$outer_classes = trim( $outer_classes );
 
-		if ( $figure_classes ) {
-			$figure_classes = " class='$figure_classes'";
+		if ( $outer_classes ) {
+			$outer_classes = " class='$outer_classes'";
 		}
 
 		/* Link */
@@ -210,7 +232,7 @@ class Image {
 			if ( $in_card ) {
 				return (
 					"<a href='$link'$link_attr class='l-before'>" .
-						"<div$figure_classes>" .
+						"<div$outer_classes>" .
 							$image_output .
 						'</div>' .
 					'</a>'
@@ -223,9 +245,9 @@ class Image {
 		/* Output */
 
 		return (
-			"<figure$figure_classes$figure_attr>" .
+			"<div$outer_classes$outer_attr>" .
 				$image_output .
-			'</figure>'
+			'</div>'
 		);
 	}
 

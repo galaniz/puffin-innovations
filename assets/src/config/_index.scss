@@ -184,7 +184,8 @@ $primary-tint: #4c94d5;
     "l",
     "xl",
     "2xl",
-    "4xl"
+    "3xl",
+    "4xl",
   ),
 
   $width-breakpoints: ("m", "l"),
@@ -193,7 +194,7 @@ $primary-tint: #4c94d5;
     "s",
     "m",
     "l",
-    "xl"
+    "xl",
   ),
 
   $max-widths: ("2xl"),
@@ -207,7 +208,8 @@ $primary-tint: #4c94d5;
     "l",
     "xl",
     "2xl",
-    "4xl"
+    "3xl",
+    "4xl",
   ),
 
   $height-breakpoints: ("m", "l"),
@@ -222,14 +224,14 @@ $primary-tint: #4c94d5;
     "s",
     "m",
     "l",
-    "xl"
+    "xl",
   ),
 
   $nav: (
     "icon": (
       "width": 50px,
       "line-width": 2px,
-      "margin": 8px
+      "margin": 8px,
     ),
   ),
 

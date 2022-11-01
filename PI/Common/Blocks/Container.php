@@ -46,6 +46,7 @@ class Container {
 				'bg_seamless'           => ['type' => 'boolean'],
 				'quote_mark'            => ['type' => 'boolean'],
 				'editor_styles'         => ['type' => 'boolean'],
+				'order_first'           => ['type' => 'boolean'],
 			],
 			'default' => [
 				'internal_name'         => '',
@@ -67,6 +68,7 @@ class Container {
 				'bg_seamless'           => false,
 				'quote_mark'            => false,
 				'editor_styles'         => false,
+				'order_first'           => false,
 			],
 			'render'  => [__CLASS__, 'render_container'],
 			'handle'  => 'container',
@@ -121,6 +123,7 @@ class Container {
 			'bg_seamless'           => $bg_seamless,
 			'quote_mark'            => $quote_mark,
 			'editor_styles'         => $editor_styles,
+			'order_first'           => $order_first,
 		] = $attr;
 
 		/* Classes */
@@ -248,6 +251,12 @@ class Container {
 
 		if ( $editor_styles ) {
 			$classes .= ' ' . PI::$editor_classes;
+		}
+
+		/* Order */
+
+		if ( $order_first ) {
+			$classes .= ' l-order-first';
 		}
 
 		/* Output */

@@ -136,9 +136,9 @@
 
 /* Required */
 
-legend[data-required] > span:first-child::after,
-[data-label][data-required] > span:first-child::after,
-[data-required] > [data-label] > span:first-child::after {
+legend[data-required] > span:first-child [data-required-icon]::after,
+[data-label][data-required] > span:first-child [data-required-icon]::after,
+[data-required] > [data-label] > span:first-child [data-required-icon]::after {
   content: " *";
   color: var(--negative-color);
 }

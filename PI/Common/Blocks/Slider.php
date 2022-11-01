@@ -25,51 +25,85 @@ class Slider {
 	 */
 
 	public static $blocks = [
-		'slider' => [
+		'slider'        => [
 			'attr'             => [
 				'ids'      => ['type' => 'string'],
+				'titles'   => ['type' => 'string'],
+				'type'     => ['type' => 'string'],
 				'label'    => ['type' => 'string'],
 				'selected' => ['type' => 'string'],
 				'loop'     => ['type' => 'boolean'],
 				'width'    => ['type' => 'string'],
+				'length'   => ['type' => 'integer'],
 			],
 			'default'          => [
 				'ids'      => '',
+				'titles'   => '',
+				'type'     => 'group',
 				'label'    => '',
 				'selected' => '0',
 				'loop'     => false,
 				'width'    => '100%',
+				'length'   => 1,
 			],
 			'provides_context' => [
-				'slider/loop'     => 'loop',
+				'slider/type'     => 'type',
 				'slider/label'    => 'label',
 				'slider/selected' => 'selected',
 				'slider/width'    => 'width',
+				'slider/length'   => 'length',
 			],
 			'render'           => [__CLASS__, 'render_slider'],
 			'handle'           => 'slider',
 			'script'           => 'slider/slider.js',
 		],
-		'slide'  => [
-			'attr'         => [
+		'slide'         => [
+			'attr'             => [
 				'internal_name' => ['type' => 'string'],
 				'index'         => ['type' => 'integer'],
 				'id'            => ['type' => 'string'],
+				'title'         => ['type' => 'string'],
+				'title_tag'     => ['type' => 'string'],
+				'length'        => ['type' => 'integer'],
+			],
+			'default'          => [
+				'internal_name' => '',
+				'index'         => 0,
+				'id'            => '',
+				'title'         => '',
+				'title_tag'     => 'h3',
+				'length'        => 1,
+			],
+			'provides_context' => [
+				'slide/title' => 'title',
+			],
+			'uses_context'     => [
+				'slider/type',
+				'slider/label',
+				'slider/selected',
+				'slider/width',
+				'slider/length',
+			],
+			'render'           => [__CLASS__, 'render_slide'],
+			'handle'           => 'slide',
+			'script'           => 'slider/slide.js',
+		],
+		'slide-content' => [
+			'attr'         => [
+				'internal_name' => ['type' => 'string'],
+				'index'         => ['type' => 'integer'],
 			],
 			'default'      => [
 				'internal_name' => '',
 				'index'         => 0,
-				'id'            => '',
 			],
 			'uses_context' => [
-				'slider/loop',
-				'slider/label',
-				'slider/selected',
-				'slider/width',
+				'slide/title',
+				'slider/type',
 			],
-			'render'       => [__CLASS__, 'render_slide'],
-			'handle'       => 'slide',
-			'script'       => 'slider/slide.js',
+			'render'       => [__CLASS__, 'render_slide_content'],
+			'handle'       => 'slide-content',
+			'script'       => 'slider/slide-content.js',
 		],
 	];
 
@@ -104,6 +138,8 @@ class Slider {
 
 		[
 			'ids'      => $ids,
+			'titles'   => $titles,
+			'type'     => $type,
 			'label'    => $label,
 			'selected' => $selected,
 			'loop'     => $loop,
@@ -123,6 +159,14 @@ class Slider {
 			return '';
 		}
 
+		/* Titles */
+
+		if ( 'group-flex' === $type && $titles ) {
+			$titles = explode( ',', $titles );
+		} else {
+			$titles = [];
+		}
+
 		/* Selected */
 
 		$selected_index = (int) $selected;
@@ -140,6 +184,10 @@ class Slider {
 
 			$tab_label = "Go to $label group $index";
 
+			if ( isset( $titles[ $i ] ) ) {
+				$tab_label = 'Go to ' . $titles[ $i ] . ' group';
+			}
+
 			$tablist .= (
 				'<li class="l-flex" role="presentation">' .
 					"<button class='o-slider__tab t-current l-padding-left-5xs l-padding-right-5xs l-padding-top-5xs l-padding-bottom-5xs' type='button' role='tab' tabindex='$tabindex' aria-selected='$selected' aria-label='$tab_label'$max_width>" .
@@ -151,7 +199,7 @@ class Slider {
 
 		/* Slider attributes */
 
-		$slider_attr = '';
+		$slider_attr = " data-type='$type'";
 
 		$slider_data = [
 			'0'    => 1,
@@ -232,7 +280,7 @@ class Slider {
 						'</div>' .
 					'</div>' .
 				'</div>' .
-				'<nav>' .
+				'<nav class="o-slider__nav">' .
 					"<ul class='o-slider__tabs l-flex l-justify-center l-padding-top-s l-padding-top-m-l l-margin-0 t-list-style-none' role='tablist' aria-label='Select $label group to show'>" .
 						$tablist .
 					'</ul>' .
@@ -253,9 +301,16 @@ class Slider {
 		/* Destructure */
 
 		[
-			'index' => $index,
-			'id'    => $id,
+			'index'     => $index,
+			'id'        => $id,
+			'title'     => $title,
+			'title_tag' => $title_tag,
+			'length'    => $length,
 		] = $attr;
+
+		/* Type */
+
+		$type = $block->context[ PI::$namespace . '/slider/type' ] ?? 'group';
 
 		/* Label required */
 
@@ -268,9 +323,9 @@ class Slider {
 		$i     = $index + 1;
 		$label = ucfirst( $label ) . " group $i";
 
-		/* Loop */
-
-		$loop = $block->context[ PI::$namespace . '/slider/loop' ] ?? false;
+		if ( $title && 'group-flex' === $type ) {
+			$label = "$title group";
+		}
 
 		/* Selected */
 
@@ -281,9 +336,15 @@ class Slider {
 		$tab_index = $index === $selected_index ? 0 : -1;
 		$hidden    = $index !== $selected_index ? 'true' : 'false';
 
-		/* Class */
+		/* Classes */
 
-		$suffix = $loop ? 'item' : 'group';
+		$suffix = 'group';
+
+		if ( 'item' === $type ) {
+			$suffix = 'item';
+		}
+
+		$classes = "o-slider__$suffix l-flex-shrink-0 l-relative";
 
 		/* Gap */
 
@@ -295,19 +356,127 @@ class Slider {
 			$gap_large = 'l-gap-margin-m-l';
 		}
 
+		/* Inner output & slide attributes */
+
+		$slide_content = '';
+		$slide_attr    = '';
+
+		if ( 'group' === $type ) {
+			$slide_content = (
+				"<div class='o-slider__insert o-slider__trans o-slider__focus l-flex l-before l-relative l-gap-margin-xs $gap_large'>" .
+					'<div class="o-slider__inner l-flex l-flex-shrink-0 l-flex-column">' .
+						'<div class="outline-tight">' .
+							$content .
+						'</div>' .
+					'</div>' .
+				'</div>'
+			);
+		} elseif ( 'group-flex' === $type ) {
+			$is_last_index = false;
+
+			if ( isset( $block->context[ PI::$namespace . '/slider/length' ] ) ) {
+				$total = $block->context[ PI::$namespace . '/slider/length' ];
+
+				$is_last_index = $index === $total - 1;
+			}
+
+			$length_s  = $length;
+			$length_m  = $length;
+			$length_xl = $length;
+
+			if ( $is_last_index ) {
+				if ( '50%' === $width ) {
+					$length_m  = max( $length, 2 );
+					$length_xl = max( $length, 2 );
+				}
+
+				if ( '33%' === $width ) {
+					$length_s  = max( $length, 2 );
+					$length_m  = max( $length, 2 );
+					$length_xl = max( $length, 3 );
+				}
+
+				if ( '25%' === $width ) {
+					$length_s  = max( $length, 2 );
+					$length_m  = max( $length, 3 );
+					$length_xl = max( $length, 4 );
+				}
+			}
+
+			$slide_attr = " style='--l:$length;--l-s:$length_s;--l-m:$length_m;--l-xl:$length_xl;'";
+			$classes   .= ' l-flex l-flex-column';
+
+			$title = $title ? "<$title_tag class='o-slider__trans l-align-self-start l-sticky l-top-0 l-left-0'>$title</$title_tag>" : '';
+
+			$slide_content = (
+				'<div class="o-slider__focus l-before l-flex l-flex-grow-1 l-flex-column">' .
+					$title .
+					"<div class='l-flex l-flex-grow-1 l-gap-margin-xs $gap_large'>" .
+						$content .
+					'</div>' .
+				'</div>'
+			);
+		} else { // Item
+			$slide_content = (
+				'<div class="o-slider__trans o-slider__focus l-flex l-before l-relative l-flex-column">' .
+					'<div class="outline-tight">' .
+						$content .
+					'</div>' .
+				'</div>'
+			);
+		}
+
 		/* Output */
 
 		return (
-			"<div class='o-slider__$suffix l-flex-shrink-0 l-relative' id='$id' role='tabpanel' tabindex='$tab_index' aria-hidden='$hidden' aria-label='$label' data-selected='$selected'>" .
-				'<div class="o-slider__view l-flex l-before l-relative ' . ( ! $loop ? "l-gap-margin-xs $gap_large" : 'l-flex-column' ) . '">' .
-					( ! $loop ? '<div class="o-slider__inner l-flex l-flex-shrink-0 l-flex-column">' : '' ) .
-						'<div class="o-slider__content outline-tight">' .
-							$content .
-						'</div>' .
-					( ! $loop ? '</div>' : '' ) .
-				'</div>' .
+			"<div class='$classes' id='$id' role='tabpanel' tabindex='$tab_index' aria-hidden='$hidden' aria-label='$label' data-selected='$selected'$slide_attr>" .
+				$slide_content .
 			'</div>'
 		);
+	}
+
+	public static function render_slide_content( $attributes, $content, $block ) {
+		$attr = array_replace_recursive( self::$blocks['slide-content']['default'], $attributes );
+
+		/* Destructure */
+
+		['index' => $index ] = $attr;
+
+		/* Type */
+
+		$type = $block->context[ PI::$namespace . '/slider/type' ] ?? 'group';
+
+		/* Title */
+
+		$title = $block->context[ PI::$namespace . '/slide/title' ] ?? '';
+
+		/* Border in group-flex */
+
+		$border = false;
+
+		if ( 0 === $index && 'group-flex' === $type && $title ) {
+			$border = true;
+		}
+
+		/* Output */
+
+		$output = $content;
+
+		if ( 'group-flex' === $type ) {
+			$output = (
+				'<div class="o-slider__inner l-flex l-flex-column l-flex-shrink-0">' .
+					'<div class="' . ( $border ? 'o-slider__sep ' : '' ) . 'o-slider__trans l-flex l-flex-grow-1">' .
+						'<div class="l-width-100-pc">' .
+							$content .
+						'</div>' .
+					'</div>' .
+				'</div>'
+			);
+		} else {
+			$output = "<div>$content</div>";
+		}
+
+		return $output;
 	}
 
 } // End Slider

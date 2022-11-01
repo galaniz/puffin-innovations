@@ -234,7 +234,7 @@ class PI extends FRM {
 		);
 
 		self::$html['result']['error']['summary'] = (
-			'<div class="o-form-error__summary l-width-100-pc l-none outline-none" aria-labelledby="%s" role="alert" tabindex="-1">' .
+			'<div class="o-form-error__summary l-width-100-pc l-none outline-none" aria-labelledby="%s" tabindex="-1">' .
 				'<div class="o-form__negative l-padding-left-2xs l-padding-right-2xs l-padding-top-2xs l-padding-bottom-2xs">' .
 					'<div class="l-flex l-gap-margin-3xs">' .
 						'<div>' .
@@ -589,6 +589,10 @@ class PI extends FRM {
 		}
 
 		$hero_theme = get_post_meta( $id, self::$namespace . '_hero_theme', true );
+
+		if ( is_search() ) {
+			$hero_theme = 'background-base';
+		}
 
 		if ( $hero_theme ) {
 			self::$hero_theme = $hero_theme;
