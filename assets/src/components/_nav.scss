@@ -58,12 +58,6 @@
 /* Button link */
 
 .c-nav__cta {
-  [data-theme="foreground-dark"] .c-nav__list &,
-  [data-theme="primary-dark"] .c-nav__list & {
-    background-color: var(--background-light);
-    color: var(--foreground-dark);
-  }
-
   .current-menu-parent &,
   .current-menu-item & {
     &::before {
@@ -71,6 +65,12 @@
       border-radius: inherit;
       margin: var(--5xs);
     }
+  }
+
+  [data-theme="foreground-dark"] .c-nav__list &,
+  [data-theme="primary-dark"] .c-nav__list & {
+    background-color: var(--background-light);
+    color: var(--foreground-dark);
   }
 }
 

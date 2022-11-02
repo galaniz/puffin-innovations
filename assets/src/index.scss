@@ -100,11 +100,11 @@
 
   #pi .pi {
     *,
-    *::before, 
+    *::before,
     *::after {
       --duration: 0.001ms;
       --easing: linear;
-  
+
       transition: none;
       transition-timing-function: linear;
       transition-duration: 0.001ms;

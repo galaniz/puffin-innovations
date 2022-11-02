@@ -344,7 +344,7 @@ class Slider {
 			$suffix = 'item';
 		}
 
-		$classes = "o-slider__$suffix l-flex-shrink-0 l-relative";
+		$classes = "o-slider__$suffix l-flex-shrink-0 l-relative outline-none";
 
 		/* Gap */
 
