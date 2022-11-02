@@ -4,7 +4,7 @@
 
 /* Imports */
 
-import { setElements, usingMouse, request, getKey } from 'Formation/utils'
+import { setElements, usingMouse, request, getKey, getDefaultFontSize } from 'Formation/utils'
 
 /* Classes */
 
@@ -52,8 +52,12 @@ const meta = [
         all: true
       },
       {
-        prop: 'navButton',
-        selector: '.c-nav__button'
+        prop: 'navOpen',
+        selector: '.c-nav__open'
+      },
+      {
+        prop: 'navClose',
+        selector: '.c-nav__close'
       },
       {
         prop: 'navOverlay',
@@ -148,6 +152,10 @@ const initialize = () => {
 
   if (!mediaQuery || mediaQuery.matches) { reduceMotion = true }
 
+  /* Multiplier based on default font size */
+
+  const multiplier = getDefaultFontSize() / 16
+
   /* Set elements object */
 
   setElements(document, meta, el)
@@ -165,6 +173,10 @@ const initialize = () => {
     html.style.setProperty('--scrollbar-width', `${w}px`)
   }
 
+  onResize(() => {
+    getScrollbarWidth()
+  })
+
   getScrollbarWidth()
 
   /* Navigation */
@@ -181,7 +193,8 @@ const initialize = () => {
         items: el.navItems,
         itemSelector,
         links: el.navLinks,
-        button: el.navButton,
+        open: el.navOpen,
+        close: el.navClose,
         overlay: el.navOverlay,
         onToggle (open) {
           if (open) {
@@ -193,12 +206,8 @@ const initialize = () => {
           document.documentElement.setAttribute('data-100-vw', 'false')
           document.documentElement.setAttribute('data-nav-open', 'false')
         },
-        filterFocusableItems (focusableItems) {
-          if (el.logo) {
-            focusableItems.unshift(el.logo)
-          }
-
-          return focusableItems
+        filterFocusableItem (item) {
+          return el.logo !== item
         }
       })
     }
@@ -243,7 +252,7 @@ const initialize = () => {
     const setMinHeight = () => {
       const h = el.heroTarget.clientHeight
 
-      el.hero.style.setProperty('--min-height', `${h / 16}rem`)
+      el.hero.style.setProperty('--min-height', `${h}px`)
     }
 
     onResize(() => {
@@ -727,15 +736,15 @@ const initialize = () => {
             items: parseInt(s.getAttribute('data-0'))
           },
           {
-            breakpoint: 600,
+            breakpoint: 600 * multiplier,
             items: parseInt(s.getAttribute('data-600'))
           },
           {
-            breakpoint: 900,
+            breakpoint: 900 * multiplier,
             items: parseInt(s.getAttribute('data-900'))
           },
           {
-            breakpoint: 1200,
+            breakpoint: 1200 * multiplier,
             items: parseInt(s.getAttribute('data-1200'))
           }
         ]

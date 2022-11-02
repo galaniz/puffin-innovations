@@ -137,7 +137,7 @@ $search_form = (
 					<?php /* phpcs:ignore */ ?>
 					<?php echo $main_nav . $search_form; ?>
 				</ul>
-				<button class="c-nav__button l-height-sm l-relative <?php echo $light ? ' t-light' : ''; ?>" type="button" aria-haspopup="true" aria-controls="<?php echo esc_attr( $main_nav_overflow_id ); ?>">
+				<button class="c-nav__button c-nav__open l-height-sm l-relative <?php echo $light ? ' t-light' : ''; ?>" type="button" aria-haspopup="true" aria-controls="<?php echo esc_attr( $main_nav_overflow_id ); ?>">
 					<span class="c-nav-icon l-block l-relative l-margin-auto e-transition" data-num="4">
 						<span class="c-nav-icon__top l-block e-transition"></span>
 						<span class="c-nav-icon__middle l-block e-transition"></span>
@@ -146,7 +146,14 @@ $search_form = (
 					<span class="c-nav-icon-label t-h6 l-block l-padding-top-5xs e-transition">Menu</span>
 				</button>
 				<div class="c-nav-overflow l-fixed l-right-0 l-bottom-0 l-z-index-1 l-height-100-pc bg-primary-light t-foreground-dark t-link-current e-transition l-width-4-5" role="dialog" aria-modal="true" aria-label="Main navigation" id="<?php echo esc_attr( $main_nav_overflow_id ); ?>">
-					<button class="c-nav-overflow__button l-width-sm l-height-sm l-fixed" type="button" aria-label="Close menu"></button>
+					<button class="c-nav__button c-nav__close l-width-sm l-height-sm l-fixed" type="button" aria-label="Close menu" data-show>
+						<span class="c-nav-icon l-block l-relative l-margin-auto e-transition" data-num="4">
+							<span class="c-nav-icon__top l-block e-transition"></span>
+							<span class="c-nav-icon__middle l-block e-transition"></span>
+							<span class="c-nav-icon__bottom l-block e-transition"></span>
+						</span>
+						<span class="c-nav-icon-label t-h6 l-block l-padding-top-5xs e-transition" aria-hidden="true">Menu</span>
+					</button>
 					<div class="l-height-100-pc l-overflow-y-auto l-overscroll-none l-overflow-x-hidden l-padding-right-2xs l-padding-left-xs l-padding-top-xl l-padding-bottom-xs">
 						<ul class="c-nav-overflow__list l-flex l-flex-column l-gap-margin-xs t-list-style-none" role="list"></ul>
 					</div>
