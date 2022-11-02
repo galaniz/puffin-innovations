@@ -7,6 +7,7 @@
 @use "../config/mixins" as m;
 @use "@alanizcreative/formation/src/base/mixins" as mix;
 @use "@alanizcreative/formation/src/utils/functions" as func;
+@use "@alanizcreative/formation/src/utils/mixins" as mixi;
 
 /* Root */
 
@@ -38,6 +39,12 @@
 
 html {
   scroll-behavior: smooth;
+
+  @include mixi.fluid-size(
+    --logo-height,
+    func.calc-rem(63.31px) func.calc-rem(100.25px),
+    "s" "xl"
+  );
 }
 
 html,

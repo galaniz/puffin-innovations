@@ -230,7 +230,7 @@ legend[data-required] > span:first-child [data-required-icon]::after,
 
     &::before {
       border-radius: var(--border-radius);
-      border: 0.15625rem solid var(--color);
+      border: 0.1563rem solid var(--color);
       transform: scale(1.33);
     }
   }
