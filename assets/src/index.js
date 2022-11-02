@@ -127,7 +127,7 @@ const meta = [
 
 /* Resize helper */
 
-const onResize = (callback = () => {}) => {
+const onResize = (callback = () => {}, delay = 100) => {
   let resizeTimer
 
   const resizeHandler = () => {
@@ -135,7 +135,7 @@ const onResize = (callback = () => {}) => {
 
     resizeTimer = setTimeout(() => {
       callback()
-    }, 100)
+    }, delay)
   }
 
   window.addEventListener('resize', resizeHandler)
@@ -175,7 +175,7 @@ const initialize = () => {
 
   onResize(() => {
     getScrollbarWidth()
-  })
+  }, 800)
 
   getScrollbarWidth()
 
