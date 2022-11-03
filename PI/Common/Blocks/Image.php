@@ -53,6 +53,8 @@ class Image {
 				'link'          => ['type' => 'string'],
 				'opacity'       => ['type' => 'integer'],
 				'position'      => ['type' => 'string'],
+				'bg_color'      => ['type' => 'string'],
+				'bg_color_slug' => ['type' => 'string'],
 			],
 			'default'      => [
 				'id'            => 0,
@@ -69,6 +71,8 @@ class Image {
 				'link'          => '',
 				'opacity'       => 100,
 				'position'      => 'center-center',
+				'bg_color'      => '',
+				'bg_color_slug' => '',
 			],
 			'uses_context' => [
 				'card/exists',
@@ -123,6 +127,7 @@ class Image {
 			'link'          => $link,
 			'opacity'       => $opacity,
 			'position'      => $position,
+			'bg_color_slug' => $bg_color_slug,
 		] = $attr;
 
 		/* Id required */
@@ -211,6 +216,12 @@ class Image {
 			$opacity = $opacity / 100;
 
 			$outer_attr = " style='opacity:$opacity'";
+		}
+
+		/* Background color */
+
+		if ( $bg_color_slug ) {
+			$outer_classes .= " bg-$bg_color_slug";
 		}
 
 		/* Classes */
