@@ -234,7 +234,7 @@ registerBlockType(name, {
                   <ColorPalette
                     colors={nO.color_options}
                     value={bg_color} // eslint-disable-line camelcase
-                    clearable={false}
+                    clearable
                     enableAlpha
                     onChange={bg_color => { // eslint-disable-line camelcase
                       const slug = getColorSlug(nO.color_options, bg_color)

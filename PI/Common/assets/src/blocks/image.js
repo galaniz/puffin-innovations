@@ -6,7 +6,8 @@
 
 const {
   getNamespace,
-  getNamespaceObj
+  getNamespaceObj,
+  getColorSlug
 } = window.blockUtils
 
 const {
@@ -15,7 +16,8 @@ const {
   BaseControl,
   SelectControl,
   CheckboxControl,
-  RangeControl
+  RangeControl,
+  ColorPalette
 } = window.wp.components
 
 const {
@@ -86,7 +88,8 @@ registerBlockType(name, {
       is_link = def.is_link, // eslint-disable-line camelcase
       link = def.link,
       opacity = def.opacity,
-      position = def.position
+      position = def.position,
+      bg_color = def.bg_color // eslint-disable-line camelcase
     } = attributes
 
     /* Width options */
@@ -223,6 +226,20 @@ registerBlockType(name, {
               min={0}
               max={100}
             />
+            <BaseControl label='Background Color'>
+              <ColorPalette
+                colors={nO.color_options}
+                value={bg_color} // eslint-disable-line camelcase
+                clearable
+                enableAlpha
+                onChange={bg_color => { // eslint-disable-line camelcase
+                  setAttributes({
+                    bg_color, // eslint-disable-line camelcase
+                    bg_color_slug: getColorSlug(nO.color_options, bg_color)
+                  })
+                }}
+              />
+            </BaseControl>
           </PanelBody>
         </InspectorControls>
       </Fragment>,

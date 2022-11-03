@@ -166,6 +166,7 @@
 
   .c-nav-overflow & {
     @extend %u-display-none;
+    @extend %u-visibility-hidden;
   }
 }
 
