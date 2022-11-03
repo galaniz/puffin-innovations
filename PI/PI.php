@@ -578,17 +578,17 @@ class PI extends FRM {
 	public function wp() {
 		global $post;
 
-		if ( ! is_object( $post ) || ! isset( $post->ID ) ) {
-			return;
+		$hero_theme = '';
+
+		if ( is_object( $post ) && isset( $post->ID ) ) {
+			$id = $post->ID;
+
+			if ( is_home() ) {
+				$id = (int) get_option( 'page_for_posts' );
+			}
+
+			$hero_theme = get_post_meta( $id, self::$namespace . '_hero_theme', true );
 		}
-
-		$id = $post->ID;
-
-		if ( is_home() ) {
-			$id = (int) get_option( 'page_for_posts' );
-		}
-
-		$hero_theme = get_post_meta( $id, self::$namespace . '_hero_theme', true );
 
 		if ( is_search() ) {
 			$hero_theme = 'background-base';
