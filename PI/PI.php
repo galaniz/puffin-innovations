@@ -605,7 +605,7 @@ class PI extends FRM {
 
 	public function filter_contact_form_args( $args, $attr ) {
 		$form_class         = 'o-form';
-		$fields_class       = 'l-flex l-flex-column l-flex-row-xl l-flex-wrap';
+		$fields_class       = 'l-flex l-flex-column l-flex-row-xl l-flex-wrap l-align-end-xl';
 		$button_class       = 'o-button-primary l-width-100-pc';
 		$button_field_class = '';
 		$gap                = 'l-gap-margin-xs l-gap-margin-s-m';

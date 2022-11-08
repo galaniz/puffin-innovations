@@ -255,7 +255,7 @@ class Hero {
 				$iframe_id   = 'i-' . uniqid();
 
 				$dialog = (
-					"<div class='o-modal t-light l-fixed l-top-0 l-left-0 l-width-100-vw l-height-100-vh l-flex l-align-center l-justify-center' id='$dialog_id' role='dialog' aria-modal='true'$aria_label_id>" .
+					"<div class='o-modal t-light l-fixed l-top-0 l-left-0 l-width-100-vw l-height-100-vh l-flex l-align-center l-justify-center' id='$dialog_id' role='dialog'$aria_label_id>" .
 						'<div class="o-modal__overlay bg-foreground-dark l-fixed l-top-0 l-left-0 l-z-index-1 l-width-100-pc l-height-100-pc e-transition"></div>' .
 						"<div class='o-modal__window l-flex l-flex-column l-flex-row-l l-align-center l-justify-center l-z-index-1 e-transition' data-type='$dialog_type'>" .
 							'<div class="o-modal__media">' .

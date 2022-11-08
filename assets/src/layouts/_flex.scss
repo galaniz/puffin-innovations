@@ -25,6 +25,12 @@
   }
 }
 
+.l-align-end-xl {
+  @include mix.breakpoint-min("xl") {
+    align-items: flex-end;
+  }
+}
+
 .l-order-first {
   order: -9999;
 }
