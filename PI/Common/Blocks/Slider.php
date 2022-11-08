@@ -182,10 +182,10 @@ class Slider {
 			$selected = $i === $selected_index ? 'true' : 'false';
 			$tabindex = $i === $selected_index ? 0 : -1;
 
-			$tab_label = "Go to $label group $index";
+			$tab_label = "$label group $index";
 
 			if ( isset( $titles[ $i ] ) ) {
-				$tab_label = 'Go to ' . $titles[ $i ] . ' group';
+				$tab_label = $titles[ $i ] . ' group';
 			}
 
 			$tablist .= (
@@ -284,10 +284,10 @@ class Slider {
 					"<ul class='o-slider__tabs l-flex l-justify-center l-padding-top-s l-padding-top-m-l l-margin-0 t-list-style-none' role='tablist' aria-label='Select $label group to show'>" .
 						$tablist .
 					'</ul>' .
-					'<button type="button" class="o-slider__prev t-current l-width-s l-height-s l-svg l-absolute l-left-0 l-none outline-tight" aria-label="Go to previous group" data-prev disabled>' .
+					'<button type="button" class="o-slider__prev t-current l-width-s l-height-s l-svg l-absolute l-left-0 l-none outline-tight" aria-label="Previous group" data-prev disabled>' .
 						$arrow_left .
 					'</button>' .
-					'<button type="button" class="o-slider__next t-current l-width-s l-height-s l-svg l-absolute l-right-0 l-none outline-tight" aria-label="Go to next group" data-next>' .
+					'<button type="button" class="o-slider__next t-current l-width-s l-height-s l-svg l-absolute l-right-0 l-none outline-tight" aria-label="Next group" data-next>' .
 						$arrow_right .
 					'</button>' .
 				'</nav>' .
