@@ -179,7 +179,7 @@ class Image {
 
 		/* Image */
 
-		$image        = PI::get_image( $id, 'medium' );
+		$image        = PI::get_image( $id, 'large' );
 		$image_output = '';
 
 		if ( $image ) {
