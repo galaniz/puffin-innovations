@@ -74,6 +74,10 @@ const meta = [
         selector: '.c-nav-search__button'
       },
       {
+        prop: 'searchBar',
+        selector: '.c-nav-search__bar'
+      },
+      {
         prop: 'searchInput',
         selector: 'input'
       }
@@ -154,7 +158,8 @@ const initialize = () => {
 
   /* Multiplier based on default font size */
 
-  const multiplier = getDefaultFontSize() / 16
+  const defaultFontSize = getDefaultFontSize() ?? 16
+  const multiplier = defaultFontSize / 16
 
   /* Set elements object */
 
@@ -217,14 +222,29 @@ const initialize = () => {
 
   /* Search */
 
-  if (el.search && el.searchButton && el.searchInput) {
+  if (el.search && el.searchButton && el.searchInput && el.searchBar) {
     let searchOpen = false
 
     const toggleSearchBar = (open) => {
       searchOpen = open
 
       el.searchButton.setAttribute('aria-expanded', searchOpen)
-      el.search.setAttribute('data-open', searchOpen)
+
+      if (searchOpen) {
+        el.searchBar.setAttribute('data-display', true)
+
+        setTimeout(() => {
+          el.searchBar.setAttribute('data-open', true)
+        }, 50)
+      }
+
+      if (!searchOpen) {
+        el.searchBar.setAttribute('data-open', false)
+
+        setTimeout(() => {
+          el.searchBar.setAttribute('data-display', false)
+        }, 300)
+      }
 
       if (searchOpen) {
         setTimeout(() => {

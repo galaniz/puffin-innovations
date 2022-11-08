@@ -86,17 +86,29 @@
     --icon-color: var(--foreground-dark);
     --outline-color: var(--foreground-dark);
   }
+
+  .c-nav[data-overflow="true"] & {
+    &[data-visible="true"] {
+      @extend %u-display-block;
+    }
+  
+    &[data-visible="false"] {
+      @extend %u-display-none;
+    }
+  }
 }
 
 .c-nav__close {
-  @extend %u-visibility-hidden;
-
   --p: var(--2xs);
   --o: (var(--logo-height) / 2) - (var(--sm) / 2);
-  --t: calc(var(--p) + var(--o) + var(--wp-admin--admin-bar--height, 0rem));
+  --t: calc(var(--p) + var(--o) + var(--wp-admin--admin-bar--height, 0rem) + 0.015625rem);
 
   right: var(--container-padding);
   top: var(--t);
+
+  &[data-overflow="false"] {
+    @extend %u-display-none;
+  }
 
   @include mix.breakpoint-min("l") {
     --p: var(--xs);
@@ -166,7 +178,6 @@
 
   .c-nav-overflow & {
     @extend %u-display-none;
-    @extend %u-visibility-hidden;
   }
 }
 
@@ -174,22 +185,22 @@
   background: var(--search-bg);
 
   .c-nav__list & {
-    --prop: visibility, opacity;
-    --duration: 0ms, 400ms;
-    --delay: 400ms, 10ms;
-
     @extend %u-opacity-0;
-    @extend %u-visibility-hidden;
 
     width: calc(100% - var(--m));
     padding: var(--5xs) 0;
-  }
 
-  .c-nav__list [data-open="true"] & {
-    --delay: 10ms, 0ms;
+    &[data-open="true"] {
+      @extend %u-opacity-1;
+    }
 
-    @extend %u-opacity-1;
-    @extend %u-visibility-visible;
+    &[data-display="true"] {
+      @extend %u-display-block;
+    }
+
+    &[data-display="false"] {
+      @extend %u-display-none;
+    }
   }
 
   .c-nav-overflow & {

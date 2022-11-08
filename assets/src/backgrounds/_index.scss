@@ -24,8 +24,8 @@
 
 .bg-seamless::before {
   @extend %u-background-color-inherit;
-  @extend %u-z-index--1;
 
-  height: var(--m);
-  transform: translateY(-50%);
+  height: var(--4xl);
+  transform: translateY(calc(-100% + var(--xs)));
+  z-index: -2;
 }
