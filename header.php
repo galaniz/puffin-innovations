@@ -103,14 +103,16 @@ $search_form = (
 					]
 				) .
 			'</div>' .
-			"<button class='c-nav-search__button t-current l-width-xs l-height-m l-flex l-align-center l-justify-center' type='button' aria-expanded='false' aria-controls='$search_id' aria-label='Toggle search bar'>" .
-				'<span class="l-flex l-width-xs l-height-xs l-svg">' .
-					$search_icon .
-				'</span>' .
-				'<span class="l-flex l-width-xs l-height-xs l-svg">' .
-					$close_icon .
-				'</span>' .
-			'</button>' .
+			'<div class="c-nav-overflow__hide">' .
+				"<button class='c-nav-search__button t-current l-width-xs l-height-m l-flex l-align-center l-justify-center' type='button' aria-expanded='false' aria-controls='$search_id' aria-label='Toggle search bar'>" .
+					'<span class="l-flex l-width-xs l-height-xs l-svg">' .
+						$search_icon .
+					'</span>' .
+					'<span class="l-flex l-width-xs l-height-xs l-svg">' .
+						$close_icon .
+					'</span>' .
+				'</button>' .
+			'</div>' .
 		'</div>' .
 	'</li>'
 ); ?>

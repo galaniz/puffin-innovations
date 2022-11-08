@@ -357,6 +357,7 @@ const initialize = () => {
           }
 
           window.onPlayerReady = (event) => {
+            iframe.focus()
             event.target.playVideo()
           }
         }

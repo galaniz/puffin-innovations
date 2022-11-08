@@ -25,6 +25,20 @@
   }
 }
 
+/* Hide elements */
+
+.c-nav__hide {
+  [data-overflow="false"] & {
+    @extend %u-display-none;
+  }
+}
+
+.c-nav-overflow__hide {
+  [data-overflow="true"] & {
+    @extend %u-display-none;
+  }
+}
+
 /* Link */
 
 .c-nav__link {
@@ -75,12 +89,6 @@
 }
 
 /* Mobile buttons */
-
-.c-nav__hide {
-  [data-overflow="false"] & {
-    @extend %u-display-none;
-  }
-}
 
 .c-nav__button {
   --icon-color: var(--heading-color);
