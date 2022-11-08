@@ -74,7 +74,13 @@
   }
 }
 
-/* Icon */
+/* Mobile buttons */
+
+.c-nav__hide {
+  [data-overflow="false"] & {
+    @extend %u-display-none;
+  }
+}
 
 .c-nav__button {
   --icon-color: var(--heading-color);
@@ -105,10 +111,6 @@
 
   right: var(--container-padding);
   top: var(--t);
-
-  &[data-overflow="false"] {
-    @extend %u-display-none;
-  }
 
   @include mix.breakpoint-min("l") {
     --p: var(--xs);
