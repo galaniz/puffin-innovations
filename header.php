@@ -103,14 +103,16 @@ $search_form = (
 					]
 				) .
 			'</div>' .
-			"<button class='c-nav-search__button t-current l-width-xs l-height-m l-flex l-align-center l-justify-center' type='button' aria-expanded='false' aria-controls='$search_id' aria-label='Toggle search bar'>" .
-				'<span class="l-flex l-width-xs l-height-xs l-svg">' .
-					$search_icon .
-				'</span>' .
-				'<span class="l-flex l-width-xs l-height-xs l-svg">' .
-					$close_icon .
-				'</span>' .
-			'</button>' .
+			'<div class="c-nav-overflow__hide">' .
+				"<button class='c-nav-search__button t-current l-width-xs l-height-m l-flex l-align-center l-justify-center' type='button' aria-expanded='false' aria-controls='$search_id' aria-label='Toggle search bar'>" .
+					'<span class="l-flex l-width-xs l-height-xs l-svg">' .
+						$search_icon .
+					'</span>' .
+					'<span class="l-flex l-width-xs l-height-xs l-svg">' .
+						$close_icon .
+					'</span>' .
+				'</button>' .
+			'</div>' .
 		'</div>' .
 	'</li>'
 ); ?>
@@ -145,7 +147,7 @@ $search_form = (
 					</span>
 					<span class="c-nav-icon-label t-h6 t-line-height-100-pc l-block l-padding-top-4xs e-transition">Menu</span>
 				</button>
-				<div class="c-nav-overflow l-fixed l-right-0 l-bottom-0 l-z-index-1 l-height-100-pc bg-primary-light t-foreground-dark t-link-current e-transition l-width-4-5" role="dialog" aria-label="Main navigation" id="<?php echo esc_attr( $main_nav_overflow_id ); ?>">
+				<div class="c-nav-overflow l-fixed l-right-0 l-bottom-0 l-z-index-1 l-height-100-pc bg-primary-light t-foreground-dark t-link-current e-transition l-width-4-5" role="dialog" aria-modal="true" aria-label="Main navigation" id="<?php echo esc_attr( $main_nav_overflow_id ); ?>">
 					<div class="c-nav__hide">
 						<button class="c-nav__button c-nav__close l-width-sm l-height-sm l-padding-top-5xs l-fixed" type="button" aria-label="Close menu" data-visible="false">
 							<span class="c-nav-icon l-block l-relative l-margin-auto e-transition" data-num="4">
