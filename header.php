@@ -148,6 +148,9 @@ $search_form = (
 					<span class="c-nav-icon-label t-h6 t-line-height-100-pc l-block l-padding-top-4xs e-transition">Menu</span>
 				</button>
 				<div class="c-nav-overflow l-fixed l-right-0 l-bottom-0 l-z-index-1 l-height-100-pc bg-primary-light t-foreground-dark t-link-current e-transition l-width-4-5" role="dialog" aria-modal="true" aria-label="Main navigation" id="<?php echo esc_attr( $main_nav_overflow_id ); ?>">
+					<div class="l-height-100-pc l-overflow-y-auto l-overscroll-none l-overflow-x-hidden l-padding-right-2xs l-padding-left-xs l-padding-top-xl l-padding-bottom-xs">
+						<ul class="c-nav-overflow__list l-flex l-flex-column l-gap-margin-xs t-list-style-none" role="list"></ul>
+					</div>
 					<div class="c-nav__hide">
 						<button class="c-nav__button c-nav__close l-width-sm l-height-sm l-padding-top-5xs l-fixed" type="button" aria-label="Close menu" data-visible="false">
 							<span class="c-nav-icon l-block l-relative l-margin-auto e-transition" data-num="4">
@@ -157,9 +160,6 @@ $search_form = (
 							</span>
 							<span class="c-nav-icon-label t-h6 t-line-height-100-pc l-block l-padding-top-4xs e-transition" aria-hidden="true">Menu</span>
 						</button>
-					</div>
-					<div class="l-height-100-pc l-overflow-y-auto l-overscroll-none l-overflow-x-hidden l-padding-right-2xs l-padding-left-xs l-padding-top-xl l-padding-bottom-xs">
-						<ul class="c-nav-overflow__list l-flex l-flex-column l-gap-margin-xs t-list-style-none" role="list"></ul>
 					</div>
 				</div>
 			</div>

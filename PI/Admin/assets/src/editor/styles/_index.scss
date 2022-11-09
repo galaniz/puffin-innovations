@@ -77,6 +77,51 @@ li:not(:last-child) {
   margin-bottom: var(--4xs);
 }
 
+.wp-block-table figcaption {
+  @extend %u-text-align-left;
+
+  padding: var(--3xs) 0;
+  font-family: var(--font-family-secondary);
+  font-size: var(--h3);
+}
+
+table {
+  @extend %u-width-100-pc;
+
+  border-collapse: collapse;
+  border-spacing: 0;
+
+  thead {
+    @extend %u-text-align-left;
+    @extend %u-line-height-130-pc;
+
+    font-family: var(--font-family-secondary);
+    color: var(--heading-color);
+    font-size: var(--h4);
+  }
+
+  thead,
+  tr:nth-child(even) {
+    background: var(--bg-table);
+  }
+
+  td,
+  th {
+    padding: var(--3xs) var(--2xs);
+
+    &:not(:first-child) {
+      border-left: var(--border-width) solid var(--input-border);
+    }
+  }
+
+  td {
+    @extend %u-line-height-150-pc;
+    @extend %u-letter-spacing-1-pc;
+
+    font-size: var(--t-m);
+  }
+}
+
 .wp-block {
   margin: var(--2xs) 0;
 }

@@ -191,11 +191,16 @@ registerBlockType(name, {
       padding_top = def.padding_top, // eslint-disable-line camelcase
       padding_bottom_mobile = def.padding_bottom_mobile, // eslint-disable-line camelcase
       padding_bottom = def.padding_bottom, // eslint-disable-line camelcase
+      padding_left_mobile = def.padding_left_mobile, // eslint-disable-line camelcase
+      padding_left = def.padding_left, // eslint-disable-line camelcase
+      padding_right_mobile = def.padding_right_mobile, // eslint-disable-line camelcase
+      padding_right = def.padding_right, // eslint-disable-line camelcase
       bg_color = def.bg_color, // eslint-disable-line camelcase
       bg_seamless = def.bg_seamless, // eslint-disable-line camelcase
       quote_mark = def.quote_mark, // eslint-disable-line camelcase
       editor_styles = def.editor_styles, // eslint-disable-line camelcase
-      order_first = def.order_first // eslint-disable-line camelcase
+      order_first = def.order_first, // eslint-disable-line camelcase
+      border_radius = def.border_radius // eslint-disable-line camelcase
     } = attributes
 
     /* Internal name */
@@ -205,6 +210,18 @@ registerBlockType(name, {
     /* Layout */
 
     const isFlex = layout === 'row' || layout === 'column'
+
+    /* Horizontal padding */
+
+    const horizontalPaddingOptions = [
+      { label: 'None', value: '' },
+      { label: '5px', value: '5xs' },
+      { label: '10px', value: '4xs' },
+      { label: '15px', value: '3xs' },
+      { label: '20px', value: '2xs' },
+      { label: '30px', value: 'xs' },
+      { label: '40px', value: 's' }
+    ]
 
     /* Output */
 
@@ -287,6 +304,46 @@ registerBlockType(name, {
                   value={padding_bottom} // eslint-disable-line camelcase
                   options={nO.padding_options}
                   onChange={v => setAttributes({ padding_bottom: v })}
+                />
+              </Fragment>
+            )}
+            {!isFlex && bg_color && ( // eslint-disable-line camelcase
+              <Fragment>
+                <SelectControl
+                  label='Padding Left'
+                  value={padding_left_mobile} // eslint-disable-line camelcase
+                  options={horizontalPaddingOptions}
+                  onChange={v => setAttributes({ padding_left_mobile: v })}
+                />
+                <SelectControl
+                  label='Padding Left Larger Screens'
+                  value={padding_left} // eslint-disable-line camelcase
+                  options={horizontalPaddingOptions}
+                  onChange={v => setAttributes({ padding_left: v })}
+                />
+                <SelectControl
+                  label='Padding Right'
+                  value={padding_right_mobile} // eslint-disable-line camelcase
+                  options={horizontalPaddingOptions}
+                  onChange={v => setAttributes({ padding_right_mobile: v })}
+                />
+                <SelectControl
+                  label='Padding Right Larger Screens'
+                  value={padding_right} // eslint-disable-line camelcase
+                  options={horizontalPaddingOptions}
+                  onChange={v => setAttributes({ padding_right: v })}
+                />
+                <SelectControl
+                  label='Border Radius'
+                  value={border_radius} // eslint-disable-line camelcase
+                  options={[
+                    { label: 'None', value: '' },
+                    { label: '10px', value: 's' },
+                    { label: '15px', value: 'm' },
+                    { label: '20px', value: 'l' },
+                    { label: '30px', value: 'xl' }
+                  ]}
+                  onChange={v => setAttributes({ border_radius: v })}
                 />
               </Fragment>
             )}

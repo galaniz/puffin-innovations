@@ -117,6 +117,8 @@ class Index {
 	public function render_block( $block_content, $block ) {
 		$name = $block['blockName'];
 
+		/* Button */
+
 		if ( 'core/button' === $name ) {
 			$class_name       = $block['attrs']['className'] ?? '';
 			$background_color = $block['attrs']['backgroundColor'] ?? 'foreground-dark';
@@ -148,6 +150,43 @@ class Index {
 
 			$block_content = str_replace( 'wp-block-button__link', "wp-block-button__link$classes", $block_content );
 		}
+
+		/* Table */
+
+		if ( 'core/table' === $name ) {
+			$block_content = str_replace(
+				'<th>',
+				'<th scope="col">',
+				$block_content
+			);
+
+			/* Regex */
+
+			$table_match = preg_match( '/<figure[^>]*>(.*?)<\/figure>/', $block_content, $matches );
+			$table       = $matches[1] ?? '';
+
+			if ( $table ) {
+				$block_content = $table;
+
+				$caption_match = preg_match( '/<figcaption[^>]*>(.*?)<\/figcaption>/', $block_content, $matches );
+				$caption       = $matches[1] ?? '';
+
+				if ( $caption ) {
+					$table_array   = explode( '<figcaption', $block_content );
+					$block_content = $table_array[0];
+
+					$block_content = str_replace(
+						'<table>',
+						"<table><caption>$caption</caption>",
+						$block_content
+					);
+				}
+
+				$block_content = "<div class='b-radius-s b-all l-overflow-x-auto' data-table>$block_content</div>";
+			}
+		}
+
+		/* Output */
 
 		return $block_content;
 	}
