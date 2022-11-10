@@ -96,6 +96,8 @@ registerBlockType(name, {
 
     const widthOptions = [
       { label: 'Auto', value: '' },
+      { label: '20px', value: '2xs' },
+      { label: '30px', value: 'xs' },
       { label: '40px', value: 's' },
       { label: '60px', value: 'm' },
       { label: '80px', value: 'l' },
@@ -110,6 +112,8 @@ registerBlockType(name, {
 
     const heightOptions = [
       { label: 'Auto', value: '' },
+      { label: '20px', value: '2xs' },
+      { label: '30px', value: 'xs' },
       { label: '40px', value: 's' },
       { label: '60px', value: 'm' },
       { label: '80px', value: 'l' },
@@ -189,6 +193,7 @@ registerBlockType(name, {
                 { label: '100%', value: '100-pc' },
                 { label: '10px', value: 's' },
                 { label: '15px', value: 'm' },
+                { label: '20px', value: 'l' },
                 { label: '30px', value: 'xl' }
               ]}
               onChange={v => setAttributes({ border_radius: v })}

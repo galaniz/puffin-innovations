@@ -35,6 +35,7 @@
   --positive-color: var(--positive-dark);
   --bg-result: var(--background-base);
   --invert-color: var(--background-light);
+  --bg-table: var(--background-base);
 }
 
 html {
@@ -107,5 +108,16 @@ blockquote[data-quote] {
     .t-light & {
       background-image: url("assets/public/svg/quote.svg");
     }
+  }
+}
+
+main {
+  min-height: calc(100vh - var(--logo-height) - var(--m));
+
+  &::before {
+    @extend %u-background-color-background-light;
+
+    border-radius: var(--xs);
+    z-index: -2;
   }
 }

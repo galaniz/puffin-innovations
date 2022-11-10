@@ -17,6 +17,10 @@ import Slider from 'Formation/objects/slider'
 
 /* Variables */
 
+let windowWidth
+let windowHeight
+let aspectRatio
+
 const ns = window.namespace
 const n = window[ns]
 const el = {}
@@ -129,6 +133,16 @@ const meta = [
   }
 ]
 
+/* Set window width, height and aspect ratio */
+
+const setWindowDimensions = () => {
+  windowWidth = window.innerWidth
+  windowHeight = window.innerHeight
+  aspectRatio = (windowHeight / windowWidth) * 100
+}
+
+setWindowDimensions()
+
 /* Resize helper */
 
 const onResize = (callback = () => {}, delay = 100) => {
@@ -138,6 +152,8 @@ const onResize = (callback = () => {}, delay = 100) => {
     clearTimeout(resizeTimer)
 
     resizeTimer = setTimeout(() => {
+      setWindowDimensions()
+
       callback()
     }, delay)
   }
@@ -173,7 +189,7 @@ const initialize = () => {
 
   const getScrollbarWidth = (navToggle = false) => {
     const html = document.documentElement
-    const w = window.innerWidth - html.clientWidth
+    const w = windowWidth - html.clientWidth
 
     html.style.setProperty('--scrollbar-width', `${w}px`)
   }
@@ -289,6 +305,14 @@ const initialize = () => {
       return new Modal(args)
     }
 
+    const setScrollAttr = (modal) => {
+      if (aspectRatio < 100) {
+        modal.setAttribute('data-scroll', 'window')
+      } else {
+        modal.setAttribute('data-scroll', 'text')
+      }
+    }
+
     el.modalTriggers.forEach((m) => {
       /* Get elements */
 
@@ -378,6 +402,16 @@ const initialize = () => {
           }
         }
       }
+
+      /* Scroll attribute based on window aspect ratio */
+
+      setScrollAttr(args.modal)
+
+      /* Resize */
+
+      onResize(() => {
+        setScrollAttr(args.modal)
+      })
 
       /* Init */
 

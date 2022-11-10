@@ -40,6 +40,11 @@ class Container {
 				'padding_top'           => ['type' => 'string'],
 				'padding_bottom_mobile' => ['type' => 'string'],
 				'padding_bottom'        => ['type' => 'string'],
+				'padding_left_mobile'   => ['type' => 'string'],
+				'padding_left'          => ['type' => 'string'],
+				'padding_right_mobile'  => ['type' => 'string'],
+				'padding_right'         => ['type' => 'string'],
+				'border_radius'         => ['type' => 'string'],
 				'bg_color'              => ['type' => 'string'],
 				'bg_color_slug'         => ['type' => 'string'],
 				'bg_color_custom'       => ['type' => 'string'],
@@ -62,6 +67,11 @@ class Container {
 				'padding_top'           => '',
 				'padding_bottom_mobile' => '',
 				'padding_bottom'        => '',
+				'padding_left_mobile'   => '',
+				'padding_left'          => '',
+				'padding_right_mobile'  => '',
+				'padding_right'         => '',
+				'border_radius'         => 'xl',
 				'bg_color'              => '',
 				'bg_color_slug'         => '',
 				'bg_color_custom'       => '',
@@ -100,7 +110,7 @@ class Container {
 	 * Render callbacks
 	 */
 
-	public static function render_container( $attributes, $content, $block ) {
+	public static function render_container( $attributes, $content = '', $block = [] ) {
 		$attr = array_replace_recursive( self::$blocks['container']['default'], $attributes );
 
 		/* Destructure */
@@ -118,6 +128,11 @@ class Container {
 			'padding_top'           => $padding_top,
 			'padding_bottom_mobile' => $padding_bottom_mobile,
 			'padding_bottom'        => $padding_bottom,
+			'padding_left_mobile'   => $padding_left_mobile,
+			'padding_left'          => $padding_left,
+			'padding_right_mobile'  => $padding_right_mobile,
+			'padding_right'         => $padding_right,
+			'border_radius'         => $border_radius,
 			'bg_color_slug'         => $bg_color_slug,
 			'bg_color_custom'       => $bg_color_custom,
 			'bg_seamless'           => $bg_seamless,
@@ -213,10 +228,26 @@ class Container {
 			$classes .= " l-padding-bottom-$padding_bottom-l";
 		}
 
+		if ( $padding_left_mobile ) {
+			$classes .= " l-padding-left-$padding_left_mobile";
+		}
+
+		if ( $padding_left && $padding_left !== $padding_left_mobile ) {
+			$classes .= " l-padding-left-$padding_left-l";
+		}
+
+		if ( $padding_right_mobile ) {
+			$classes .= " l-padding-right-$padding_right_mobile";
+		}
+
+		if ( $padding_right && $padding_right !== $padding_right_mobile ) {
+			$classes .= " l-padding-right-$padding_right-l";
+		}
+
 		/* Background */
 
-		if ( $bg_color_slug || $bg_color_custom ) {
-			$classes .= ' b-radius-xl';
+		if ( ( $bg_color_slug || $bg_color_custom ) && $border_radius ) {
+			$classes .= " b-radius-$border_radius";
 		}
 
 		if ( $bg_color_slug ) {

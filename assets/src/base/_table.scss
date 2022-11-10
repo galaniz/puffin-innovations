@@ -1,0 +1,68 @@
+/**
+ * Base: table
+ */
+
+/* Imports */
+
+@use "@alanizcreative/formation/src/config";
+@use "@alanizcreative/formation/src/utils/mixins" as mix;
+
+/* Styles */
+
+[data-table] {
+  --border-color: var(--input-border);
+}
+
+table {
+  --caption-padding: var(--3xs) var(--2xs);
+  --td-padding: var(--3xs) var(--2xs);
+
+  @extend %u-width-100-pc;
+
+  border-collapse: collapse;
+  border-spacing: 0;
+
+  thead, 
+  caption {
+    @extend %u-text-align-left;
+    @extend %u-line-height-130-pc;
+
+    font-family: var(--font-family-secondary);
+    color: var(--heading-color);
+  }
+
+  caption {
+    padding: var(--caption-padding);
+    font-size: var(--h3);
+  }
+
+  thead {
+    font-size: var(--h4);
+  }
+
+  thead,
+  tr:nth-child(even) {
+    background: var(--bg-table);
+  }
+
+  td,
+  th {
+    padding: var(--td-padding);
+
+    &:not(:first-child) {
+      border-left: var(--border-width) solid var(--input-border);
+    }
+  }
+
+  td {
+    @extend %u-line-height-150-pc;
+    @extend %u-letter-spacing-1-pc;
+
+    font-size: var(--t-m);
+  }
+  
+  @include mix.breakpoint-min("m") {
+    --caption-padding: var(--2xs) var(--xs);
+    --td-padding: var(--3xs) var(--xs);
+  }
+}

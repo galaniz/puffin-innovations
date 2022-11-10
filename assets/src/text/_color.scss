@@ -24,6 +24,7 @@
   --positive-color: var(--positive-light);
   --bg-result: #{rgba(func.get-color("background-light"), 0.05)};
   --invert-color: var(--foreground-dark);
+  --bg-table: #{rgba(func.get-color("background-light"), 0.1)};
 
   color: var(--text-color);
 }

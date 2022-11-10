@@ -17,6 +17,7 @@
 @use "@alanizcreative/formation/src/base/inputs-reset";
 @use "base" as b;
 @use "base/focus";
+@use "base/table";
 
 /* A11y */
 
@@ -60,6 +61,7 @@
 @use "components/skip-link";
 @use "components/nav";
 @use "components/hero";
+@use "components/pagination";
 
 /* Objects */
 

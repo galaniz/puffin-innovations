@@ -18,6 +18,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 
 use PI\Common\Blocks\Index as Blocks;
+use PI\Common\Blocks\Hero;
+use PI\Common\Blocks\Container;
 use Formation\Formation as FRM;
 use Formation\Utils;
 use Formation\Admin\Settings\Theme;
@@ -501,6 +503,7 @@ class PI extends FRM {
 
 		/* Filters */
 
+		add_filter( 'paginate_links_output', [$this, 'filter_paginate_links_output'], 10, 2 );
 		add_filter( 'formation_contact_form_args', [$this, 'filter_contact_form_args'], 10, 2 );
 		add_filter( 'formation_contact_form_field_args', [$this, 'filter_contact_field_args'], 10, 2 );
 		add_filter( 'formation_contact_form_group_classes', [$this, 'filter_contact_group_classes'], 10, 3 );
@@ -521,10 +524,10 @@ class PI extends FRM {
 	}
 
 	/**
-	 * Get loader output.
+	 * Output loader.
 	 */
 
-	public static function get_loader( $size = 'xs', $hide = true ) {
+	public static function render_loader( $size = 'xs', $hide = true ) {
 		$hide_output = $hide ? ' data-hide' : '';
 
 		return (
@@ -534,6 +537,151 @@ class PI extends FRM {
 				"<span class='l-width-$size l-height-$size b-radius-100-pc l-absolute l-top-0 l-left-0 l-right-0 l-bottom-0 l-margin-auto reduce-motion-hide'></span>" .
 			'</span>'
 		);
+	}
+
+	/**
+	 * Output list from loop.
+	 */
+
+	public static function render_list() {
+		global $wp_query;
+
+		$output = '<ul class="t-list-style-none l-flex l-flex-column l-gap-margin-s l-gap-margin-m-l e-underline e-underline-thick" role="list">';
+
+		/* The loop */
+
+		while ( have_posts() ) {
+			the_post();
+
+			$heading_classes = 't-h3 t-link';
+
+			$id      = get_the_ID();
+			$link    = get_the_permalink();
+			$title   = get_the_title();
+			$excerpt = self::get_excerpt(
+				[
+					'post_id' => $id,
+					'words'   => true,
+					'length'  => 30,
+				]
+			);
+
+			if ( $excerpt ) {
+				$excerpt = "<p class='t'>$excerpt</p>";
+
+				$heading_classes .= ' l-margin-0 l-margin-bottom-3xs';
+			}
+
+			$output .= (
+				'<li>' .
+					"<h2 class='$heading_classes'>" .
+						"<a href='$link'>$title</a>" .
+					'</h2>' .
+					$excerpt .
+				'</li>'
+			);
+		}
+
+		$output .= '</ul>';
+
+		/* Pagination */
+
+		$big = 999999999; // Need an unlikely integer
+
+		/* phpcs:ignore */
+		$arrow_left = file_get_contents( PI::$svg_assets_path . 'arrow-left.svg' ); // Ignore: local path
+
+		/* phpcs:ignore */
+		$arrow_right = file_get_contents( PI::$svg_assets_path . 'arrow-right.svg' ); // Ignore: local path
+
+		$pagination = paginate_links(
+			[
+				'base'      => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+				'format'    => '?paged=%#%',
+				'current'   => max( 1, get_query_var( 'paged' ) ),
+				'total'     => $wp_query->max_num_pages,
+				'type'      => 'list',
+				'next_text' => (
+					'<span class="a11y-visually-hidden">Next</span>' .
+					'<div class="l-svg l-height-100-pc l-width-100-pc">' .
+						$arrow_right .
+					'</div>'
+				),
+				'prev_text' => (
+					'<span class="a11y-visually-hidden">Next</span>' .
+					'<div class="l-svg l-height-100-pc l-width-100-pc">' .
+						$arrow_left .
+					'</div>'
+				),
+			]
+		);
+
+		if ( $pagination ) {
+			$output .= "<nav class='c-pagination l-padding-top-m l-padding-top-l-l' aria-label='Pagination'>$pagination</nav>";
+		}
+
+		/* Output */
+
+		return $output;
+	}
+
+	/**
+	 * Output no content found.
+	 */
+
+	public static function render_content_none() {
+		$is_404 = is_404();
+
+		/* Message */
+
+		$message = 'Looks like nothing was found in this location. Maybe try a search?';
+
+		if ( is_search() ) {
+			$message = 'Sorry, but nothing matched your search terms.';
+		}
+
+		/* Hero */
+
+		self::$hero_theme = 'primary-base';
+
+		$hero = Hero::render_hero(
+			[
+				'title_large'   => $is_404 ? '404' : 'Nothing Found',
+				'text'          => $message,
+				'bg_color_slug' => 'primary-base',
+			]
+		);
+
+		/* Content */
+
+		$content = Container::render_container(
+			[
+				'tag'                   => 'section',
+				'bg_color_slug'         => 'background-light',
+				'contain'               => true,
+				'padding_top_mobile'    => 'm',
+				'padding_top'           => 'l',
+				'padding_bottom_mobile' => 'xl',
+				'padding_bottom'        => '2xl',
+			],
+			'<div class="l-width-1-1 l-width-3-4-l">' .
+				self::render_form_search(
+					[
+						'form_class'   => 'o-form o-form-round o-form-search l-relative',
+						'field_class'  => '',
+						'input_class'  => 'l-height-m',
+						'button_class' => 'l-absolute l-right-0 l-bottom-0 l-top-0 l-flex l-align-center l-justify-center l-width-m l-height-m t-current',
+						'icon_class'   => 'l-flex l-width-xs l-height-xs l-svg',
+						'icon_path'    => self::$svg_assets_path . 'search.svg',
+						'a11y_class'   => 'a11y-visually-hidden',
+					]
+				) .
+			'</div>'
+		);
+
+		/* Output */
+
+		return $hero . $content;
 	}
 
 	/**
@@ -594,9 +742,45 @@ class PI extends FRM {
 			$hero_theme = 'background-base';
 		}
 
+		if ( is_404() ) {
+			$hero_theme = 'primary-base';
+		}
+
 		if ( $hero_theme ) {
 			self::$hero_theme = $hero_theme;
 		}
+	}
+
+	/**
+	 * Filter pagination output.
+	 */
+
+	public function filter_paginate_links_output( $output, $args ) {
+		$link_classes = 'l-flex l-align-center l-justify-center l-width-xs l-width-s-m l-height-xs l-height-s-m t-h5 b-radius-100-pc';
+
+		$output = str_replace(
+			[
+				'page-numbers current',
+				'page-numbers dots"',
+				"class='page-numbers'",
+				'<ul',
+				'<a class="',
+				'b-all e-transition-border-radius next',
+				'b-all e-transition-border-radius prev',
+			],
+			[
+				$link_classes . ' bg-foreground-dark t-background-light',
+				$link_classes . '" aria-hidden="true"',
+				'',
+				'<ul class="t-list-style-none l-flex l-justify-center l-gap-margin-3xs l-gap-margin-2xs-m" role="list"',
+				'<a class="' . $link_classes . ' b-all e-transition-border-radius ',
+				'e-scale e-transition next',
+				'e-scale e-transition prev',
+			],
+			$output
+		);
+
+		return $output;
 	}
 
 	/**
@@ -624,7 +808,7 @@ class PI extends FRM {
 		$args['fields_class']       = $fields_class;
 		$args['button_class']       = $button_class;
 		$args['button_field_class'] = $button_field_class;
-		$args['button_loader']      = self::get_loader();
+		$args['button_loader']      = self::render_loader();
 		$args['error_summary']      = self::$html['result']['error']['summary'];
 		$args['error_result']       = self::$html['result']['error']['default'];
 		$args['success_result']     = self::$html['result']['success'];
