@@ -177,6 +177,10 @@ class Hero {
 		$media_video  = $video && $video_link;
 		$image_id     = (int) get_post_thumbnail_id( $id );
 
+		if ( is_search() ) {
+			$image_id = 0;
+		}
+
 		if ( $image_id ) {
 			$image  = PI::get_image( $image_id, '1200w' );
 			$button = '';

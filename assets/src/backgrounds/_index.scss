@@ -29,3 +29,7 @@
   transform: translateY(calc(-100% + var(--xs)));
   z-index: -2;
 }
+
+footer.bg-seamless::before {
+  z-index: -3;
+}

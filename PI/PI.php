@@ -503,6 +503,7 @@ class PI extends FRM {
 
 		/* Filters */
 
+		add_filter( 'paginate_links_output', [$this, 'filter_paginate_links_output'], 10, 2 );
 		add_filter( 'formation_contact_form_args', [$this, 'filter_contact_form_args'], 10, 2 );
 		add_filter( 'formation_contact_form_field_args', [$this, 'filter_contact_field_args'], 10, 2 );
 		add_filter( 'formation_contact_form_group_classes', [$this, 'filter_contact_group_classes'], 10, 3 );
@@ -543,6 +544,8 @@ class PI extends FRM {
 	 */
 
 	public static function render_list() {
+		global $wp_query;
+
 		$output = '<ul class="t-list-style-none l-flex l-flex-column l-gap-margin-s l-gap-margin-m-l e-underline e-underline-thick" role="list">';
 
 		/* The loop */
@@ -580,6 +583,42 @@ class PI extends FRM {
 		}
 
 		$output .= '</ul>';
+
+		/* Pagination */
+
+		$big = 999999999; // Need an unlikely integer
+
+		/* phpcs:ignore */
+		$arrow_left = file_get_contents( PI::$svg_assets_path . 'arrow-left.svg' ); // Ignore: local path
+
+		/* phpcs:ignore */
+		$arrow_right = file_get_contents( PI::$svg_assets_path . 'arrow-right.svg' ); // Ignore: local path
+
+		$pagination = paginate_links(
+			[
+				'base'      => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+				'format'    => '?paged=%#%',
+				'current'   => max( 1, get_query_var( 'paged' ) ),
+				'total'     => $wp_query->max_num_pages,
+				'type'      => 'list',
+				'next_text' => (
+					'<span class="a11y-visually-hidden">Next</span>' .
+					'<div class="l-svg l-height-100-pc l-width-100-pc">' .
+						$arrow_right .
+					'</div>'
+				),
+				'prev_text' => (
+					'<span class="a11y-visually-hidden">Next</span>' .
+					'<div class="l-svg l-height-100-pc l-width-100-pc">' .
+						$arrow_left .
+					'</div>'
+				),
+			]
+		);
+
+		if ( $pagination ) {
+			$output .= "<nav class='c-pagination l-padding-top-m l-padding-top-l-l' aria-label='Pagination'>$pagination</nav>";
+		}
 
 		/* Output */
 
@@ -710,6 +749,38 @@ class PI extends FRM {
 		if ( $hero_theme ) {
 			self::$hero_theme = $hero_theme;
 		}
+	}
+
+	/**
+	 * Filter pagination output.
+	 */
+
+	public function filter_paginate_links_output( $output, $args ) {
+		$link_classes = 'l-flex l-align-center l-justify-center l-width-xs l-width-s-m l-height-xs l-height-s-m t-h5 b-radius-100-pc';
+
+		$output = str_replace(
+			[
+				'page-numbers current',
+				'page-numbers dots"',
+				"class='page-numbers'",
+				'<ul',
+				'<a class="',
+				'b-all e-transition-border-radius next',
+				'b-all e-transition-border-radius prev',
+			],
+			[
+				$link_classes . ' bg-foreground-dark t-background-light',
+				$link_classes . '" aria-hidden="true"',
+				'',
+				'<ul class="t-list-style-none l-flex l-justify-center l-gap-margin-3xs l-gap-margin-2xs-m" role="list"',
+				'<a class="' . $link_classes . ' b-all e-transition-border-radius ',
+				'e-scale e-transition next',
+				'e-scale e-transition prev',
+			],
+			$output
+		);
+
+		return $output;
 	}
 
 	/**

@@ -1,0 +1,18 @@
+/**
+ * Components: pagination
+ */
+
+/* Imports */
+
+@use "@alanizcreative/formation/src/utils/functions" as func;
+
+/* Styles */
+
+.c-pagination {
+  --border-color: #{rgba(func.get-color("foreground-dark"), 0.65)};
+
+  li span, 
+  li a {
+    max-width: calc(12vw - var(--3xs));
+  }
+}
