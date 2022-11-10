@@ -306,7 +306,7 @@ const initialize = () => {
     }
 
     const setScrollAttr = (modal) => {
-      if (aspectRatio < 120) {
+      if (aspectRatio < 100) {
         modal.setAttribute('data-scroll', 'window')
       } else {
         modal.setAttribute('data-scroll', 'text')

@@ -17,11 +17,13 @@
 
   max-height: var(--max-height);
 
-  [data-scroll="window"] & {
-    --max-height: 100vh;
+  @include mix.breakpoint-min-max("0", "l") {
+    [data-scroll="window"] & {
+      --max-height: 100vh;
 
-    @extend %u-display-block;
-    @extend %u-overflow-y-auto;
+      display: block;
+      overflow-y: auto;
+    }
   }
 
   @include mix.breakpoint-min("l") {
@@ -50,8 +52,14 @@
 .o-modal__media {
   width: 177.78vh;
   height: 56.25vw;
-  max-width: 100%;
+  max-width: 100vw;
   max-height: 100vh;
+
+  @include mix.breakpoint-min-max("0", "l") {
+    [data-scroll="window"] & {
+      max-width: 100%;
+    }
+  }
 
   @include mix.breakpoint-min("l") {
     height: 100%;
@@ -61,10 +69,6 @@
 .o-modal__scroll {
   max-height: calc(100vh - 56.25vw);
   scrollbar-color: gray transparent;
-
-  [data-scroll="window"] & {
-    max-height: none;
-  }
 
   &::-webkit-scrollbar {
     width: var(--2-5xs);
@@ -76,6 +80,12 @@
     border: var(--5xs) solid transparent;
     background-clip: content-box;
     background-color: gray;
+  }
+
+  @include mix.breakpoint-min-max("0", "l") {
+    [data-scroll="window"] & {
+      max-height: none;
+    }
   }
 
   @include mix.breakpoint-min("l") {
