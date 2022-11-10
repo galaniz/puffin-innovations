@@ -17,7 +17,7 @@
 
   max-height: var(--max-height);
 
-  @include mix.breakpoint-min-max("0", "l") {
+  @include mix.breakpoint-min-max("0", "l-1") {
     [data-scroll="window"] & {
       --max-height: 100vh;
 
@@ -55,7 +55,7 @@
   max-width: 100vw;
   max-height: 100vh;
 
-  @include mix.breakpoint-min-max("0", "l") {
+  @include mix.breakpoint-min-max("0", "l-1") {
     [data-scroll="window"] & {
       max-width: 100%;
     }
@@ -82,7 +82,7 @@
     background-color: gray;
   }
 
-  @include mix.breakpoint-min-max("0", "l") {
+  @include mix.breakpoint-min-max("0", "l-1") {
     [data-scroll="window"] & {
       max-height: none;
     }
