@@ -110,7 +110,7 @@ class Container {
 	 * Render callbacks
 	 */
 
-	public static function render_container( $attributes, $content, $block ) {
+	public static function render_container( $attributes, $content = '', $block = [] ) {
 		$attr = array_replace_recursive( self::$blocks['container']['default'], $attributes );
 
 		/* Destructure */

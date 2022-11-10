@@ -110,3 +110,14 @@ blockquote[data-quote] {
     }
   }
 }
+
+main {
+  min-height: calc(100vh - var(--logo-height) - var(--m));
+
+  &::before {
+    @extend %u-background-color-background-light;
+
+    border-radius: var(--xs);
+    z-index: -1;
+  }
+}

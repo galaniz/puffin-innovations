@@ -165,4 +165,4 @@ $search_form = (
 			</div>
 		</nav>
 	</header>
-	<main id="main" class="l-min-height-100-vh">
+	<main id="main" class="l-relative l-before">
