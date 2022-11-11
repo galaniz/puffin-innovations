@@ -527,13 +527,26 @@ class PI extends FRM {
 	 * Output loader.
 	 */
 
-	public static function render_loader( $size = 'xs', $hide = true ) {
-		$hide_output = $hide ? ' data-hide' : '';
+	public static function render_loader( $size = 'xs', $hide = true, $aria_hidden = true, $a11y_hide_text = '' ) {
+		$attr = '';
+
+		if ( $hide ) {
+			$attr .= ' data-hide';
+		}
+
+		if ( $aria_hidden ) {
+			$attr .= ' aria-hidden="true"';
+		}
+
+		if ( $a11y_hide_text ) {
+			$a11y_hide_text = "<span class='a11y-visually-hidden reduce-motion-hide'>$a11y_hide_text</span>";
+		}
 
 		return (
-			"<span class='o-loader l-absolute l-top-0 l-left-0 l-right-0 l-bottom-0 l-flex l-align-center l-justify-center' aria-hidden='true'$hide_output>" .
+			"<span class='o-loader l-absolute l-top-0 l-left-0 l-right-0 l-bottom-0 l-flex l-align-center l-justify-center e-transition outline-none'$attr>" .
 				"<span class='l-width-$size l-height-$size b-radius-100-pc reduce-motion-hide'></span>" .
 				'<span class="l-none reduce-motion-show">Loading</span>' .
+				$a11y_hide_text .
 				"<span class='l-width-$size l-height-$size b-radius-100-pc l-absolute l-top-0 l-left-0 l-right-0 l-bottom-0 l-margin-auto reduce-motion-hide'></span>" .
 			'</span>'
 		);

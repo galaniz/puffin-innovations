@@ -262,9 +262,10 @@ class Hero {
 					"<div class='o-modal t-light l-fixed l-top-0 l-left-0 l-width-100-vw l-height-100-vh l-flex l-align-center l-justify-center' id='$dialog_id' role='dialog' aria-modal='true'$aria_label_id>" .
 						'<div class="o-modal__overlay bg-foreground-dark l-fixed l-top-0 l-left-0 l-z-index-1 l-width-100-pc l-height-100-pc e-transition"></div>' .
 						"<div class='o-modal__window l-flex l-flex-column l-flex-row-l l-align-center l-justify-center l-z-index-1 e-transition outline-snug' data-type='$dialog_type'>" .
-							'<div class="o-modal__media l-margin-auto">' .
-								'<div class="l-width-100-pc l-height-100-pc l-relative bg-background-light-30">' .
+							'<div class="o-modal__media">' .
+								'<div class="l-width-100-pc l-height-100-pc l-relative bg-foreground-dark t-background-light">' .
 									"<iframe id='$iframe_id' class='l-absolute l-top-0 l-left-0 l-width-100-pc l-height-100-pc' data-src='$video_link' title='Video player' frameborder='0' allow='autoplay' allowfullscreen></iframe>" .
+									PI::render_loader( 'm', false, false, 'Loading' ) .
 								'</div>' .
 							'</div>' .
 							$dialog_text .

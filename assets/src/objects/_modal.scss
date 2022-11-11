@@ -58,6 +58,7 @@
   @include mix.breakpoint-min-max("0", "l-1") {
     [data-scroll="window"] & {
       max-width: 100%;
+      margin: auto;
     }
   }
 
