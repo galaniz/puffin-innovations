@@ -316,7 +316,7 @@ class Hero {
 		}
 
 		if ( $title_output ) {
-			$title_output = "<h1 class='l-margin-0'>$title_output</h1>";
+			$title_output = "<h1 class='l-margin-0'><span role='text'>$title_output</span></h1>";
 		}
 
 		/* Background classes */

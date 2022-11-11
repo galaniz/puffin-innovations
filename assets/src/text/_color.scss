@@ -13,6 +13,7 @@
   --outline-color: var(--background-light);
   --heading-color: var(--background-light);
   --text-color: #{rgba(func.get-color("background-light"), 0.8)};
+  --hr-color: #{rgba(func.get-color("background-light"), 0.3)};
   --link-color: var(--background-light);
   --placeholder-color: var(--background-light-60);
   --input-border: #{rgba(func.get-color("background-light"), 0.7)};

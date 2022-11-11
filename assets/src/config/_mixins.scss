@@ -45,7 +45,6 @@
   --h4: #{func.calc-rem(22px)};
   --h5: #{func.calc-rem(18px)};
   --h6: #{func.calc-rem(18px)};
-  --t-quote: #{func.calc-rem(22px)};
   --t: #{func.calc-rem(18px)};
   --t-s: #{func.calc-rem(16px)};
   --t-xs: #{func.calc-rem(16px)};
@@ -53,10 +52,17 @@
   @include mix.breakpoint-min("m") {
     --h4: #{func.calc-rem(24px)};
     --h5: #{func.calc-rem(20px)};
-    --t-quote: #{func.calc-rem(24px)};
     --t: #{func.calc-rem(20px)};
     --t-s: #{func.calc-rem(18px)};
   }
+
+  /* t-quote */
+
+  @include mix.fluid-size(
+    --t-quote,
+    func.calc-rem(21px) func.calc-rem(24px),
+    "s" "xl"
+  );
 
   /* t-l */
 
