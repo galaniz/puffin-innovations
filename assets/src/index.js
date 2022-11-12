@@ -831,6 +831,10 @@ const initialize = () => {
         ]
       }
 
+      if (type === 'group-flex') {
+        args.variableWidths = true
+      }
+
       slider(args)
     })
   }
