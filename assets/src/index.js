@@ -336,6 +336,10 @@ const initialize = () => {
             {
               prop: 'iframe',
               selector: 'iframe'
+            },
+            {
+              prop: 'loader',
+              selector: '.o-loader'
             }
           ]
         }
@@ -349,10 +353,11 @@ const initialize = () => {
 
       /* Iframe player */
 
-      const { iframe } = args
+      const { iframe, loader } = args
 
       let iframeLink = ''
       let player = false
+      let firstFocusableItem = null
 
       if (iframe) {
         iframeLink = iframe.getAttribute('data-src')
@@ -381,8 +386,19 @@ const initialize = () => {
           }
 
           window.onPlayerReady = (event) => {
+            modalInstance.setFirstFocusableItem(firstFocusableItem)
+
+            if (loader) {
+              loader.setAttribute('data-hide', '')
+            }
+
             iframe.focus()
+
             event.target.playVideo()
+
+            if (loader) {
+              loader.removeAttribute('tabindex')
+            }
           }
         }
 
@@ -415,7 +431,17 @@ const initialize = () => {
 
       /* Init */
 
-      modal(args)
+      const modalInstance = modal(args)
+
+      /* Iframe loader */
+
+      if (iframe && loader) {
+        loader.setAttribute('tabindex', '-1')
+
+        firstFocusableItem = modalInstance.getFirstFocusableItem()
+
+        modalInstance.setFirstFocusableItem(loader)
+      }
     })
   }
 
@@ -803,6 +829,10 @@ const initialize = () => {
             items: parseInt(s.getAttribute('data-1200'))
           }
         ]
+      }
+
+      if (type === 'group-flex') {
+        args.variableWidths = true
       }
 
       slider(args)

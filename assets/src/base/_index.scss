@@ -18,8 +18,8 @@
   --background-light-35: #{rgba(func.get-color("background-light"), 0.35)};
   --background-light-60: #{rgba(func.get-color("background-light"), 0.6)};
   --primary-tint-15: #{rgba(func.get-color("primary-tint"), 0.15)};
-  --scrollbar-width: 0rem;
   --text-color: #{rgba(func.get-color("foreground-dark"), 0.8)};
+  --hr-color: #{rgba(func.get-color("foreground-dark"), 0.3)};
   --heading-color: var(--foreground-dark);
   --link-color: var(--primary-dark);
   --cubic: cubic-bezier(0.76, 0, 0.24, 1);
@@ -36,6 +36,7 @@
   --bg-result: var(--background-base);
   --invert-color: var(--background-light);
   --bg-table: var(--background-base);
+  --scrollbar-width: 0rem;
 }
 
 html {
@@ -119,5 +120,16 @@ main {
 
     border-radius: var(--xs);
     z-index: -2;
+  }
+}
+
+hr {
+  height: var(--border-width);
+  background: var(--hr-color);
+  margin: var(--s) 0;
+  border: 0;
+
+  @include mixi.breakpoint-min("m") {
+    margin: var(--m) 0;
   }
 }

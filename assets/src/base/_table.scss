@@ -22,7 +22,7 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 
-  thead, 
+  thead,
   caption {
     @extend %u-text-align-left;
     @extend %u-line-height-130-pc;
@@ -45,6 +45,13 @@ table {
     background: var(--bg-table);
   }
 
+  td {
+    @extend %u-line-height-150-pc;
+    @extend %u-letter-spacing-1-pc;
+
+    font-size: var(--t-m);
+  }
+
   td,
   th {
     padding: var(--td-padding);
@@ -54,13 +61,6 @@ table {
     }
   }
 
-  td {
-    @extend %u-line-height-150-pc;
-    @extend %u-letter-spacing-1-pc;
-
-    font-size: var(--t-m);
-  }
-  
   @include mix.breakpoint-min("m") {
     --caption-padding: var(--2xs) var(--xs);
     --td-padding: var(--3xs) var(--xs);

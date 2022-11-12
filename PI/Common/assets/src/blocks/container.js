@@ -255,12 +255,22 @@ registerBlockType(name, {
                     enableAlpha
                     onChange={bg_color => { // eslint-disable-line camelcase
                       const slug = getColorSlug(nO.color_options, bg_color)
-                      const custom = bg_color.length > 7 // eslint-disable-line camelcase
+                      const rgba = bg_color.length > 7 // eslint-disable-line camelcase
+
+                      let custom = ''
+
+                      if (!slug) {
+                        custom = bg_color // eslint-disable-line camelcase
+                      }
+
+                      if (rgba) {
+                        custom = `rgba(${hexToRgba(bg_color)})` // eslint-disable-line camelcase
+                      }
 
                       setAttributes({
                         bg_color, // eslint-disable-line camelcase
                         bg_color_slug: slug,
-                        bg_color_custom: custom ? `rgba(${hexToRgba(bg_color)})` : '' // eslint-disable-line camelcase
+                        bg_color_custom: custom
                       })
                     }}
                   />

@@ -95,7 +95,8 @@ registerBlockType(name, {
     /* Width options */
 
     const widthOptions = [
-      { label: 'Auto', value: '' },
+      { label: 'None', value: '' },
+      { label: 'Auto', value: 'auto' },
       { label: '20px', value: '2xs' },
       { label: '30px', value: 'xs' },
       { label: '40px', value: 's' },
@@ -111,7 +112,8 @@ registerBlockType(name, {
     /* Height options */
 
     const heightOptions = [
-      { label: 'Auto', value: '' },
+      { label: 'None', value: '' },
+      { label: 'Auto', value: 'auto' },
       { label: '20px', value: '2xs' },
       { label: '30px', value: 'xs' },
       { label: '40px', value: 's' },

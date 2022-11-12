@@ -123,7 +123,7 @@ class Collapsible {
 
 		/* Main classes */
 
-		$main_classes = 'l-padding-top-2xs t t-inherit l-margin-bottom-2xs-all l-margin-0-last ' . PI::$editor_classes;
+		$main_classes = 't t-inherit l-padding-bottom-2xs l-padding-right-2xs l-padding-left-2xs l-padding-bottom-xs-l l-padding-right-xs-l l-padding-left-xs-l l-margin-bottom-2xs-all l-margin-0-last ' . PI::$editor_classes;
 
 		/* Arrow */
 
@@ -134,9 +134,9 @@ class Collapsible {
 
 		return (
 			'<div>' .
-				"<div class='o-collapsible l-padding-top-2xs l-padding-bottom-2xs l-padding-right-2xs l-padding-left-2xs l-padding-top-xs-l l-padding-bottom-xs-l l-padding-right-xs-l l-padding-left-xs-l b-radius-m b-all b-primary-tint e-transition e-bg-primary-tint-15'$attr>" .
+				"<div class='o-collapsible b-radius-m b-all b-primary-tint e-transition e-bg-primary-tint-15'$attr>" .
 					"<$heading_level class='t-h4 l-margin-0'>" .
-						"<button class='o-collapsible__toggle l-flex l-width-100-pc t-align-left t-current' type='button' aria-controls='$id'>" .
+						"<button class='o-collapsible__toggle l-flex l-width-100-pc l-padding-top-2xs l-padding-bottom-2xs l-padding-right-2xs l-padding-left-2xs l-padding-top-xs-l l-padding-bottom-xs-l l-padding-right-xs-l l-padding-left-xs-l t-align-left t-current' type='button' aria-controls='$id'>" .
 							'<span class="l-flex l-flex-grow-1 l-align-center l-justify-between l-gap-margin-2xs">' .
 								"<span>$title</span>" .
 								'<span>' .

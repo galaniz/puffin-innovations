@@ -34,7 +34,7 @@ if ( have_posts() ) {
 			'padding_bottom_mobile' => 'xl',
 			'padding_bottom'        => '2xl',
 		],
-		'<div class="l-width-1-1 l-width-3-4-l">' .
+		'<div class="l-width-1-1 l-width-2-3-l">' .
 			PI::render_list() .
 		'</div>'
 	);
