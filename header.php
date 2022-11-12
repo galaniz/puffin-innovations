@@ -130,7 +130,7 @@ $search_form = (
 		<a href="#main" class="c-skip-link t-h5 bg-background-light t-foreground-dark l-block l-absolute l-left-0 l-right-0 l-top-0 l-padding-right-2xs l-padding-left-2xs l-padding-top-2xs l-padding-bottom-2xs t-align-center outline-snug">
 			Skip to main content
 		</a>
-		<nav class="c-nav l-container l-relative" id="n-<?php echo esc_attr( uniqid() ); ?>" aria-label="Main">
+		<nav class="c-nav l-container l-relative" id="n-<?php echo esc_attr( uniqid() ); ?>" aria-label="Site">
 			<div class="c-nav__overlay bg-foreground-dark-09 l-fixed l-top-0 l-left-0 l-z-index-1 l-width-100-pc l-height-100-pc e-transition"></div>
 			<div class="l-flex l-justify-between l-align-center">
 				<?php /* phpcs:ignore */ ?>
