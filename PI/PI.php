@@ -200,7 +200,7 @@ class PI extends FRM {
 		/* phpcs:enable */
 
 		self::$html['result']['success'] = (
-			'<div class="o-form-result__positive l-width-100-pc l-none outline-none" aria-labelledby="%s" role="alert" tabindex="-1">' .
+			'<div class="o-form-result__positive l-width-100-pc l-none outline-none" role="alert" tabindex="-1">' .
 				'<div class="o-form__positive l-padding-left-2xs l-padding-right-2xs l-padding-top-2xs l-padding-bottom-2xs">' .
 					'<div class="l-flex l-gap-margin-3xs">' .
 						'<div>' .
@@ -209,7 +209,7 @@ class PI extends FRM {
 							'</div>' .
 						'</div>' .
 						'<div>' .
-							'<h2 id="%s" class="t-h4 l-margin-0 l-padding-top-5xs l-padding-bottom-5xs o-form-result__primary"></h2>' .
+							'<h2 class="t-h4 l-margin-0 l-padding-top-5xs l-padding-bottom-5xs o-form-result__primary"></h2>' .
 							'<p class="t t-current o-form-result__secondary"></p>' .
 						'</div>' .
 					'</div>' .
@@ -218,7 +218,7 @@ class PI extends FRM {
 		);
 
 		self::$html['result']['error']['default'] = (
-			'<div class="o-form-result__negative l-width-100-pc l-none outline-none" aria-labelledby="%s" role="alert" tabindex="-1">' .
+			'<div class="o-form-result__negative l-width-100-pc l-none outline-none" role="alert" tabindex="-1">' .
 				'<div class="o-form__negative l-padding-left-2xs l-padding-right-2xs l-padding-top-2xs l-padding-bottom-2xs">' .
 					'<div class="l-flex l-gap-margin-3xs">' .
 						'<div>' .
@@ -227,7 +227,7 @@ class PI extends FRM {
 							'</div>' .
 						'</div>' .
 						'<div>' .
-							'<h2 id="%s" class="t-h4 l-margin-0 l-padding-top-5xs l-padding-bottom-5xs o-form-result__primary"></h2>' .
+							'<h2 class="t-h4 l-margin-0 l-padding-top-5xs l-padding-bottom-5xs o-form-result__primary"></h2>' .
 							'<p class="t t-current o-form-result__secondary"></p>' .
 						'</div>' .
 					'</div>' .
@@ -236,7 +236,7 @@ class PI extends FRM {
 		);
 
 		self::$html['result']['error']['summary'] = (
-			'<div class="o-form-error__summary l-width-100-pc l-none outline-none" aria-labelledby="%s" tabindex="-1">' .
+			'<div class="o-form-error__summary l-width-100-pc l-none outline-none" tabindex="-1">' .
 				'<div class="o-form__negative l-padding-left-2xs l-padding-right-2xs l-padding-top-2xs l-padding-bottom-2xs">' .
 					'<div class="l-flex l-gap-margin-3xs">' .
 						'<div>' .
@@ -245,7 +245,7 @@ class PI extends FRM {
 							'</div>' .
 						'</div>' .
 						'<div>' .
-							'<h2 id="%s" class="t-h4 l-margin-0 l-padding-top-5xs l-padding-bottom-5xs">There is a problem</h2>' .
+							'<h2 class="t-h4 l-margin-0 l-padding-top-5xs l-padding-bottom-5xs">There is a problem</h2>' .
 							'<ul class="l-flex l-flex-column l-margin-bottom-5xs-all l-margin-0-last t t-link-current t-list-style-none e-underline o-form-error__list" role="list"></ul>' .
 						'</div>' .
 					'</div>' .

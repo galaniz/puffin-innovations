@@ -58,7 +58,7 @@ if ( has_nav_menu( 'footer' ) ) {
 
 	$navigation = (
 		'<div>' .
-			'<nav aria-label="Overview">' .
+			'<nav aria-label="Site">' .
 				'<ul class="l-flex l-flex-column l-gap-margin-4xs l-gap-margin-2xs-l t-list-style-none e-underline-reverse t" role="list">' .
 					$navigation .
 				'</ul>' .

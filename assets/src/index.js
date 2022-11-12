@@ -637,6 +637,18 @@ const initialize = () => {
             secondary: f.successSecondary,
             message: messages.success
           }
+        },
+        onError (err) {
+          this.result.error.message = messages.error
+
+          if (type !== 'mailchimp') {
+            return
+          }
+
+          if (err.status === 400 && err.responseText.includes('valid email')) {
+            this.result.error.message.primary = 'There is a problem with the email address entered'
+            this.result.error.message.secondary = 'Try another email address'
+          }
         }
       }
 
