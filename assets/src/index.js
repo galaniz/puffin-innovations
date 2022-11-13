@@ -663,7 +663,7 @@ const initialize = () => {
             if (mcRes.includes('Invalid') && mcRes.includes('email')) {
               const initMessage = defaults.secondary ? `${defaults.secondary} ` : ''
 
-              this.result.success.message.secondary = `${initMessage}Note there is a problem subscribing the email address entered to our newsletter. Try signing up with another email address.`
+              this.result.success.message.secondary = `${initMessage}Note there was a problem subscribing the email address entered to our newsletter. Try signing up with another email address.`
             }
           }
         },
