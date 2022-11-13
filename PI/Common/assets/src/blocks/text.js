@@ -134,7 +134,7 @@ registerBlockType(name, {
         </InspectorControls>
       </Fragment>,
       <Panel key='panel'>
-        <PanelBody title={`Text${text ? `: ${text.split(' ').splice(0, 5).join(' ')}...` : ''}`} initialOpen={false}>
+        <PanelBody title={`Text${text ? `: ${text.replace(/(<([^>]+)>)/gi, '').split(' ').splice(0, 5).join(' ')}...` : ''}`} initialOpen={false}>
           <RichText
             className={style}
             tagName={tag}
