@@ -210,7 +210,7 @@ class PI extends FRM {
 						'</div>' .
 						'<div>' .
 							'<h2 class="t-h4 l-margin-0 l-padding-top-5xs l-padding-bottom-5xs o-form-result__primary"></h2>' .
-							'<p class="t t-current o-form-result__secondary"></p>' .
+							'<p class="t t-current t-link-current o-form-result__secondary e-underline"></p>' .
 						'</div>' .
 					'</div>' .
 				'</div>' .
@@ -228,7 +228,7 @@ class PI extends FRM {
 						'</div>' .
 						'<div>' .
 							'<h2 class="t-h4 l-margin-0 l-padding-top-5xs l-padding-bottom-5xs o-form-result__primary"></h2>' .
-							'<p class="t t-current o-form-result__secondary"></p>' .
+							'<p class="t t-current t-link-current o-form-result__secondary e-underline"></p>' .
 						'</div>' .
 					'</div>' .
 				'</div>' .

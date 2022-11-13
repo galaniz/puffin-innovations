@@ -482,6 +482,49 @@ const initialize = () => {
   /* Forms */
 
   if (el.forms.length) {
+    /* Default result messages */
+
+    const getDefaultMessages = (id) => {
+      const messages = {
+        error: {
+          primary: 'Sorry, there is a problem with the service.',
+          secondary: 'Try again later.'
+        },
+        success: {
+          primary: 'Success!',
+          secondary: ''
+        }
+      }
+
+      if (Object.getOwnPropertyDescriptor(n, `form_${id}`)) {
+        const ff = n[`form_${id}`]
+
+        if (Object.getOwnPropertyDescriptor(ff, 'success_message')) {
+          if (ff.success_message.primary) {
+            messages.success.primary = ff.success_message.primary
+          }
+
+          if (ff.success_message.secondary) {
+            messages.success.secondary = ff.success_message.secondary
+          }
+        }
+
+        if (Object.getOwnPropertyDescriptor(ff, 'error_message')) {
+          if (ff.error_message.primary) {
+            messages.error.primary = ff.error_message.primary
+          }
+
+          if (ff.error_message.secondary) {
+            messages.error.secondary = ff.error_message.secondary
+          }
+        }
+      }
+
+      return messages
+    }
+
+    /* Form instantiation */
+
     const sendForm = (form, nonce = null) => {
       /* Store instance */
 
@@ -562,40 +605,7 @@ const initialize = () => {
 
       /* Messages */
 
-      const messages = {
-        error: {
-          primary: 'Sorry, there is a problem with the service.',
-          secondary: 'Try again later.'
-        },
-        success: {
-          primary: 'Success!',
-          secondary: ''
-        }
-      }
-
-      if (Object.getOwnPropertyDescriptor(n, `form_${id}`)) {
-        const ff = n[`form_${id}`]
-
-        if (Object.getOwnPropertyDescriptor(ff, 'success_message')) {
-          if (ff.success_message.primary) {
-            messages.success.primary = ff.success_message.primary
-          }
-
-          if (ff.success_message.secondary) {
-            messages.success.secondary = ff.success_message.secondary
-          }
-        }
-
-        if (Object.getOwnPropertyDescriptor(ff, 'error_message')) {
-          if (ff.error_message.primary) {
-            messages.error.primary = ff.error_message.primary
-          }
-
-          if (ff.error_message.secondary) {
-            messages.error.secondary = ff.error_message.secondary
-          }
-        }
-      }
+      const messages = getDefaultMessages(id)
 
       /* Args */
 
@@ -638,14 +648,33 @@ const initialize = () => {
             message: messages.success
           }
         },
+        onSuccess (res) {
+          const defaults = getDefaultMessages(id).success
+
+          this.result.success.message = defaults
+
+          if (type !== 'contact-mailchimp') {
+            return
+          }
+
+          if (Object.getOwnPropertyDescriptor(res, 'mailchimp_result')) {
+            const mcRes = res.mailchimp_result
+
+            if (mcRes.includes('Invalid') && mcRes.includes('email')) {
+              const initMessage = defaults.secondary ? `${defaults.secondary} ` : ''
+
+              this.result.success.message.secondary = `${initMessage}Note there is a problem subscribing the email address entered to our newsletter. Try signing up with another email address.`
+            }
+          }
+        },
         onError (err) {
-          this.result.error.message = messages.error
+          this.result.error.message = getDefaultMessages(id).error
 
           if (type !== 'mailchimp') {
             return
           }
 
-          if (err.status === 400 && err.responseText.includes('valid email')) {
+          if (err.status === 400 && err.responseText.includes('email')) {
             this.result.error.message.primary = 'There is a problem with the email address entered'
             this.result.error.message.secondary = 'Try another email address'
           }
@@ -657,9 +686,11 @@ const initialize = () => {
       if (type === 'mailchimp' || type === 'contact-mailchimp') {
         args.filterInputs = (formValuesArgs, inputs) => {
           inputs.forEach((input) => {
+            /*
             if (input.hasAttribute('data-tag')) {
               formValuesArgs.tag = true
             }
+            */
 
             if (input.hasAttribute('data-merge-field')) {
               formValuesArgs.merge_field = input.getAttribute('data-merge-field')
