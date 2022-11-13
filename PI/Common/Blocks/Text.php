@@ -82,7 +82,8 @@ class Text {
 	 */
 
 	public static function render_text( $attributes, $content, $block ) {
-		$attr = array_replace_recursive( self::$blocks['text']['default'], $attributes );
+		$attr       = array_replace_recursive( self::$blocks['text']['default'], $attributes );
+		$class_name = $attributes['className'] ?? '';
 
 		/* Destructure */
 
@@ -151,6 +152,12 @@ class Text {
 			$link_attr = trim( $link_attr );
 
 			$text = "<a href='$link'$link_attr>$text</a>";
+		}
+
+		/* Class name */
+
+		if ( $class_name ) {
+			$classes .= " $class_name";
 		}
 
 		/* Classes */

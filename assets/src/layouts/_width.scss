@@ -5,11 +5,18 @@
 /* Imports */
 
 @use "@alanizcreative/formation/src/layouts/width";
+@use "@alanizcreative/formation/src/utils/mixins" as mix;
 
 /* Styles */
 
 .l-width-auto {
   width: auto;
+}
+
+.l-width-auto-m {
+  @include mix.breakpoint-min("m") {
+    width: auto;
+  }
 }
 
 .l-height-auto {

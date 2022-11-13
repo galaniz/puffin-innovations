@@ -136,6 +136,10 @@
 
 /* Required */
 
+.o-form__asterisk strong {
+  color: var(--negative-color);
+}
+
 legend[data-required] > span:first-child [data-required-icon]::after,
 [data-label][data-required] > span:first-child [data-required-icon]::after,
 [data-required] > [data-label] > span:first-child [data-required-icon]::after {

@@ -21,12 +21,6 @@
   align-items: inherit;
 }
 
-.l-width-auto-l {
-  @include mix.breakpoint-min("m") {
-    width: auto;
-  }
-}
-
 .wp-block-button {
   @extend %u-width-100-pc;
 

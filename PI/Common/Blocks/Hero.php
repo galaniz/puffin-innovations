@@ -331,7 +331,7 @@ class Hero {
 			$text_color = PI::get_text_color( $primary_link_color_slug );
 
 			$links_output .= (
-				'<div class="l-width-100-pc l-width-auto-l">' .
+				'<div class="l-width-100-pc l-width-auto-m">' .
 					"<a href='$primary_link' class='o-button-primary l-width-100-pc t-$text_color bg-$primary_link_color_slug'>$primary_link_text</a>" .
 				'</div>'
 			);
@@ -339,7 +339,7 @@ class Hero {
 
 		if ( $secondary_link && $secondary_link_text ) {
 			$links_output .= (
-				'<div class="l-width-100-pc l-width-auto-l">' .
+				'<div class="l-width-100-pc l-width-auto-m">' .
 					"<a href='$secondary_link' class='o-button-secondary l-width-100-pc t-$secondary_link_color_slug'>$secondary_link_text</a>" .
 				'</div>'
 			);
