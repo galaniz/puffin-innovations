@@ -13,6 +13,10 @@
   background-color: var(--primary-tint-15);
 }
 
+.o-collapsible__toggle {
+  --outline-offset: -1rem;
+}
+
 .o-collapsible__icon {
   .o-collapsible[data-expanded="true"] & {
     transform: rotate(180deg);
