@@ -96,7 +96,7 @@ class Text {
 			'padding_bottom_mobile' => $padding_bottom_mobile,
 			'padding_bottom'        => $padding_bottom,
 			'is_link'               => $is_link,
-			'link'                  => $link
+			'link'                  => $link,
 		] = $attr;
 
 		/* Text required */
