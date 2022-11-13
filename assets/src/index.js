@@ -674,8 +674,6 @@ const initialize = () => {
             return
           }
 
-          console.log('ERR', err)
-
           if (err.status === 400 && err.responseText.includes('email')) {
             this.result.error.message.primary = 'There is a problem with the email address entered'
             this.result.error.message.secondary = 'Try another email address'
