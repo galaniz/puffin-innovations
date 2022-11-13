@@ -787,6 +787,8 @@ const initialize = () => {
 
   /* Slider */
 
+  const sliderInstances = []
+
   if (el.slider.length) {
     const slider = (args) => {
       return new Slider(args)
@@ -878,9 +880,33 @@ const initialize = () => {
         args.variableWidths = true
       }
 
-      slider(args)
+      const sliderInstance = slider(args)
+
+      sliderInstances.push(sliderInstance)
     })
   }
+
+  /* Mutation observer for head */
+
+  const head = document.querySelector('head')
+
+  const observer = new window.MutationObserver((mutationList, observer) => {
+    for (const mutation of mutationList) {
+      if (mutation.type === 'childList') {
+        const textSpacingStyle = head.querySelector('#phltsbkmklt')
+
+        if (textSpacingStyle) {
+          if (sliderInstances.length) {
+            sliderInstances.forEach(instance => {
+              instance._setHeight()
+            })
+          }
+        }
+      }
+    }
+  })
+
+  observer.observe(head, { childList: true })
 }
 
 initialize()
