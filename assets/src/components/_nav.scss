@@ -131,11 +131,15 @@
   background: var(--icon-color);
 }
 
+.c-nav-icon,
+.c-nav-icon-label {
+  margin-top: -0.0625rem;
+}
+
 .c-nav-icon-label {
   color: var(--icon-color);
   font-size: 1rem;
   letter-spacing: 0.05em;
-  margin-top: -0.0625rem;
 }
 
 /* Mobile */
