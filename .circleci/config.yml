@@ -2,7 +2,7 @@
 version: 2.1
 
 jobs:
-  build-and-deploy-production:
+  build-and-deploy-staging:
     docker:
       - image: cimg/php:7.4-node
     steps:
@@ -13,18 +13,18 @@ jobs:
       - run: npm run build
       - add_ssh_keys:
           fingerprints:
-            - "96:49:79:f2:41:67:a8:62:01:f6:3a:b5:2b:39:2c:d3"
+            - "f3:2b:cf:8b:63:84:23:8f:ed:dc:2b:0a:28:77:f4:5a"
       - run: ssh-keyscan -p $SSH_PORT $SSH_HOST >> ~/.ssh/known_hosts
       - run: sudo apt update
       - run: sudo apt install rsync
       - run:
-          rsync -avzr --delete --delete-excluded --exclude-from='exclude-list.txt' -e "ssh -p $SSH_PORT" ./ $SSH_USER@$SSH_HOST://home/puffininn_graciela/web/wp-content/themes/puffin-innovations
+          rsync -avzr --delete --delete-excluded --exclude-from='exclude-list.txt' -e "ssh -p $SSH_PORT" ./ $SSH_USER@$SSH_HOST:/staging4.puffininno.com/public_html/wp-content/themes/puffin-innovations
 
 workflows:
   version: 2.1
-  build_and_deploy_production:
+  build_and_deploy_staging:
     jobs:
-      - build-and-deploy-production:
+      - build-and-deploy-staging:
           filters:
             branches:
-              only: main
+              only: staging
