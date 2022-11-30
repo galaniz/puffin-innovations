@@ -18,7 +18,7 @@ jobs:
       - run: sudo apt update
       - run: sudo apt install rsync
       - run:
-          rsync -avzr --delete --delete-excluded --exclude-from='exclude-list.txt' -e "ssh -p $SSH_PORT" ./ $SSH_USER@$SSH_HOST:/home/customer/www/$SSH_HOST/staging4.puffininno.com/public_html/wp-content/themes/puffin-innovations
+          rsync -avzr --delete --delete-excluded --exclude-from='exclude-list.txt' -e "ssh -p $SSH_PORT" ./ $SSH_USER@$SSH_HOST:/home/customer/www/staging4.puffininno.com/public_html/wp-content/themes/puffin-innovations
 
 workflows:
   version: 2.1
