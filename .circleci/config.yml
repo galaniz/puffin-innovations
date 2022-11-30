@@ -13,7 +13,7 @@ jobs:
       - run: npm run build
       - add_ssh_keys:
           fingerprints:
-            - "f3:2b:cf:8b:63:84:23:8f:ed:dc:2b:0a:28:77:f4:5a"
+            - "61:17:62:c6:d1:ca:1c:0a:48:cf:85:8f:d9:6b:ca:2b"
       - run: ssh-keyscan -p $SSH_PORT $SSH_HOST >> ~/.ssh/known_hosts
       - run: sudo apt update
       - run: sudo apt install rsync
