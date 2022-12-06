@@ -141,6 +141,11 @@ p,
   font-size: var(--t);
 }
 
+.t-s,
+.t-xs {
+  --external: var(--3xs);
+}
+
 .t-s {
   font-size: var(--t-s);
 }

@@ -27,24 +27,26 @@ class Slider {
 	public static $blocks = [
 		'slider'        => [
 			'attr'             => [
-				'ids'      => ['type' => 'string'],
-				'titles'   => ['type' => 'string'],
-				'type'     => ['type' => 'string'],
-				'label'    => ['type' => 'string'],
-				'selected' => ['type' => 'string'],
-				'loop'     => ['type' => 'boolean'],
-				'width'    => ['type' => 'string'],
-				'length'   => ['type' => 'integer'],
+				'ids'       => ['type' => 'string'],
+				'titles'    => ['type' => 'string'],
+				'tab_texts' => ['type' => 'string'],
+				'type'      => ['type' => 'string'],
+				'label'     => ['type' => 'string'],
+				'selected'  => ['type' => 'string'],
+				'loop'      => ['type' => 'boolean'],
+				'width'     => ['type' => 'string'],
+				'length'    => ['type' => 'integer'],
 			],
 			'default'          => [
-				'ids'      => '',
-				'titles'   => '',
-				'type'     => 'group',
-				'label'    => '',
-				'selected' => '0',
-				'loop'     => false,
-				'width'    => '100%',
-				'length'   => 1,
+				'ids'       => '',
+				'titles'    => '',
+				'tab_texts' => '',
+				'type'      => 'group',
+				'label'     => '',
+				'selected'  => '0',
+				'loop'      => false,
+				'width'     => '100%',
+				'length'    => 1,
 			],
 			'provides_context' => [
 				'slider/type'     => 'type',
@@ -65,6 +67,7 @@ class Slider {
 				'title'         => ['type' => 'string'],
 				'title_tag'     => ['type' => 'string'],
 				'length'        => ['type' => 'integer'],
+				'tab_text'      => ['type' => 'string'],
 			],
 			'default'          => [
 				'internal_name' => '',
@@ -73,6 +76,7 @@ class Slider {
 				'title'         => '',
 				'title_tag'     => 'h3',
 				'length'        => 1,
+				'tab_text'      => '',
 			],
 			'provides_context' => [
 				'slide/title' => 'title',
@@ -137,13 +141,14 @@ class Slider {
 		/* Destructure */
 
 		[
-			'ids'      => $ids,
-			'titles'   => $titles,
-			'type'     => $type,
-			'label'    => $label,
-			'selected' => $selected,
-			'loop'     => $loop,
-			'width'    => $width,
+			'ids'       => $ids,
+			'titles'    => $titles,
+			'tab_texts' => $tab_texts,
+			'type'      => $type,
+			'label'     => $label,
+			'selected'  => $selected,
+			'loop'      => $loop,
+			'width'     => $width,
 		] = $attr;
 
 		/* Ids and label required */
@@ -167,6 +172,14 @@ class Slider {
 			$titles = [];
 		}
 
+		/* Tab texts */
+
+		if ( $tab_texts ) {
+			$tab_texts = explode( ',', $tab_texts );
+		} else {
+			$tab_texts = [];
+		}
+
 		/* Selected */
 
 		$selected_index = (int) $selected;
@@ -188,10 +201,17 @@ class Slider {
 				$tab_label = $titles[ $i ] . ' group';
 			}
 
+			$tab_text_span = '';
+
+			if ( isset( $tab_texts[ $i ] ) ) {
+				$tab_text_span = '<span class="t-xs l-margin-top-4xs">' . $tab_texts[ $i ] . '</span>';
+			}
+
 			$tablist .= (
 				'<li class="l-flex" role="presentation">' .
-					"<button class='o-slider__tab t-current l-padding-left-5xs l-padding-right-5xs l-padding-top-5xs l-padding-bottom-5xs' type='button' role='tab' tabindex='$tabindex' aria-selected='$selected' aria-label='$tab_label'$max_width>" .
+					"<button class='o-slider__tab t-current l-flex l-flex-column l-align-center l-padding-left-5xs l-padding-right-5xs l-padding-top-5xs l-padding-bottom-5xs' type='button' role='tab' tabindex='$tabindex' aria-selected='$selected' aria-label='$tab_label'$max_width>" .
 						'<span class="l-block b-radius-100-pc b-all"></span>' .
+						$tab_text_span .
 					'</button>' .
 				'</li>'
 			);
