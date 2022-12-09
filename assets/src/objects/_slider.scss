@@ -272,7 +272,7 @@
 .o-slider__tab {
   margin-left: var(--margin);
 
-  span {
+  span:first-child {
     width: var(--3xs);
     height: var(--3xs);
   }
@@ -284,7 +284,9 @@
   &[aria-selected="true"] span {
     @extend %u-opacity-1;
 
-    background: currentcolor;
+    &:first-child {
+      background: currentcolor;
+    }
   }
 }
 

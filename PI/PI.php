@@ -689,6 +689,9 @@ class PI extends FRM {
 						'a11y_class'   => 'a11y-visually-hidden',
 					]
 				) .
+				'<div class="l-padding-top-xs">' .
+					'<a href="' . esc_url( home_url( '/' ) ) . '" class="o-button-secondary">Back to Homepage</a>' .
+				'</div>' .
 			'</div>'
 		);
 

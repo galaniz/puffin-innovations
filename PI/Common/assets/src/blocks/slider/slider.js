@@ -54,16 +54,18 @@ const dataSelector = withSelect((select, ownProps) => {
 
   const ids = []
   const titles = []
+  const tabTexts = []
 
   const blocks = select('core/block-editor').getBlocks(clientId)
 
   if (blocks.length) {
     blocks.forEach((block) => {
       const { clientId, attributes } = block
-      const { title = '' } = attributes
+      const { title = '', tab_text = '' } = attributes // eslint-disable-line camelcase
 
       ids.push(clientId)
       titles.push(title)
+      tabTexts.push(tab_text)
     })
   }
 
@@ -75,6 +77,10 @@ const dataSelector = withSelect((select, ownProps) => {
 
   if (titles.length) {
     ownProps.attributes.titles = titles.join(',')
+  }
+
+  if (tabTexts.length) {
+    ownProps.attributes.tab_texts = tabTexts.join(',')
   }
 })
 

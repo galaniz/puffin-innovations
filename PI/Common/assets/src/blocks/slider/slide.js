@@ -73,7 +73,8 @@ registerBlockType(name, {
     const {
       internal_name = def.internal_name, // eslint-disable-line camelcase
       title = def.title,
-      title_tag = def.title_tag // eslint-disable-line camelcase
+      title_tag = def.title_tag, // eslint-disable-line camelcase
+      tab_text = def.tab_text // eslint-disable-line camelcase
     } = attributes
 
     /* Internal name */
@@ -122,6 +123,12 @@ registerBlockType(name, {
                 />
               </Fragment>
             )}
+            <TextControl
+              label='Button Text'
+              help='Visible text below dot'
+              value={tab_text} // eslint-disable-line camelcase
+              onChange={v => setAttributes({ tab_text: v })}
+            />
           </PanelBody>
         </InspectorControls>
       </Fragment>,

@@ -14,6 +14,7 @@
   --label: var(--h4);
   --label-small: var(--h5);
   --input: var(--t-m);
+  --input-width: 100%;
   --border-radius: var(--border-radius-s);
   --border-width: 0.125rem;
   --arrow-width: var(--xs);
@@ -53,10 +54,10 @@
   select {
     --color: transparent;
 
-    @extend %u-width-100-pc;
     @extend %u-letter-spacing-1-pc;
     @extend %u-line-height-160-pc;
 
+    width: var(--input-width);
     border-radius: var(--border-radius);
     padding: var(--input-padding);
     font-size: var(--input);
@@ -121,11 +122,18 @@
   --input-padding: var(--4xs) var(--2xs);
   --arrow-width: var(--2xs);
   --label-width: auto;
+  --radio-set-width: auto;
 
   [data-label] {
     --label: var(--label-small);
 
     width: var(--label-width);
+  }
+
+  @include mix.breakpoint-min("m") {
+    [data-radio-set] {
+      --input-width: var(--radio-set-width);
+    }
   }
 }
 
