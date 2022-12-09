@@ -14,6 +14,7 @@ import SendForm from 'Formation/objects/form/send'
 import Conditional from 'Formation/objects/form/conditional'
 import Collapsible from 'Formation/objects/collapsible'
 import Slider from 'Formation/objects/slider'
+import OverflowIndicator from 'Formation/objects/overflow-indicator'
 
 /* Variables */
 
@@ -129,6 +130,11 @@ const meta = [
   {
     prop: 'slider',
     selector: '.o-slider',
+    all: true
+  },
+  {
+    prop: 'overflow',
+    selector: '.o-overflow',
     all: true
   }
 ]
@@ -905,6 +911,22 @@ const initialize = () => {
       const sliderInstance = slider(args)
 
       sliderInstances.push(sliderInstance)
+    })
+  }
+
+  /* Overflow containers */
+
+  if (el.overflow.length) {
+    const overflowIndicator = (args) => {
+      return new OverflowIndicator(args)
+    }
+
+    el.overflow.forEach(o => {
+      overflowIndicator({
+        indicator: o.parentElement,
+        scroll: o,
+        y: false
+      })
     })
   }
 

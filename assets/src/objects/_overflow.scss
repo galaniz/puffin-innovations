@@ -1,0 +1,38 @@
+/**
+ * Objects: overflow
+ */
+
+/* Imports */
+
+@use "@alanizcreative/formation/src/utils/functions" as func;
+
+/* Styles */
+
+.o-overflow {
+  --to: #{rgba(func.get-color("foreground-dark"), 0.2)};
+  --from: #{rgba(func.get-color("foreground-dark"), 0)};
+
+  &::after {
+    --to: #{rgba(func.get-color("foreground-dark"), 0)};
+    --from: #{rgba(func.get-color("foreground-dark"), 0.2)};
+
+    margin-left: auto;
+  }
+
+  &::before,
+  &::after {
+    @extend %u-display-none;
+
+    width: var(--2xs);
+    background: linear-gradient(
+      to right,
+      var(--to) 0%,
+      var(--from) 100%
+    );
+  }
+
+  [data-left="true"] &::before,
+  [data-right="true"] &::after {
+    @extend %u-display-block;
+  }
+}

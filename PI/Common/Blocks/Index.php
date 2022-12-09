@@ -182,7 +182,13 @@ class Index {
 					);
 				}
 
-				$block_content = "<div class='b-radius-s b-all l-overflow-x-auto' data-table>$block_content</div>";
+				$block_content = (
+					'<div class="l-overflow-hidden l-isolate b-radius-s b-all l-relative" data-table>' .
+						'<div class="l-overflow-x-auto l-width-100-pc l-before l-after o-overflow">' .
+							$block_content .
+						'</div>' .
+					'</div>'
+				);
 			}
 		}
 
