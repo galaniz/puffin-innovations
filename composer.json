@@ -1,6 +1,6 @@
 {
 	"require": {
-		"alanizcreative/wp-theme-formation": "3.0.16"
+		"alanizcreative/wp-theme-formation": "3.0.17"
 	},
 	"autoload": {
 		"psr-4": {
