@@ -72,7 +72,7 @@ class Number {
 		/* Output */
 
 		return (
-			'<div class="o-number l-width-m l-width-l-l l-height-m l-height-l-l l-inline-flex l-justify-center l-align-center b-radius-100-pc t-h2" aria-hidden="true">' .
+			'<div class="o-number l-width-m l-width-l-l l-height-m l-height-l-l l-inline-flex l-justify-center l-align-center b-radius-100-pc t-h2">' .
 				$number .
 			'</div>'
 		);
