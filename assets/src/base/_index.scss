@@ -37,6 +37,7 @@
   --invert-color: var(--background-light);
   --bg-table: var(--background-base);
   --scrollbar-width: 0rem;
+  --external: var(--2xs);
 }
 
 html {
@@ -59,6 +60,11 @@ body {
 
 a {
   color: var(--link-color);
+
+  & [data-external] {
+    width: var(--external);
+    height: var(--external);
+  }
 }
 
 p {

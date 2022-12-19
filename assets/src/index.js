@@ -14,6 +14,7 @@ import SendForm from 'Formation/objects/form/send'
 import Conditional from 'Formation/objects/form/conditional'
 import Collapsible from 'Formation/objects/collapsible'
 import Slider from 'Formation/objects/slider'
+import OverflowIndicator from 'Formation/objects/overflow-indicator'
 
 /* Variables */
 
@@ -129,6 +130,11 @@ const meta = [
   {
     prop: 'slider',
     selector: '.o-slider',
+    all: true
+  },
+  {
+    prop: 'overflow',
+    selector: '.o-overflow',
     all: true
   }
 ]
@@ -686,11 +692,9 @@ const initialize = () => {
       if (type === 'mailchimp' || type === 'contact-mailchimp') {
         args.filterInputs = (formValuesArgs, inputs) => {
           inputs.forEach((input) => {
-            /*
             if (input.hasAttribute('data-tag')) {
               formValuesArgs.tag = true
             }
-            */
 
             if (input.hasAttribute('data-merge-field')) {
               formValuesArgs.merge_field = input.getAttribute('data-merge-field')
@@ -740,7 +744,7 @@ const initialize = () => {
     })
   }
 
-  /* Fieldsets - equalize labels if radio-select or radio-text */
+  /* Fieldsets - equalize labels and inputs if radio-select or radio-text */
 
   if (el.fieldsets.length) {
     el.fieldsets.forEach((fieldset) => {
@@ -754,6 +758,12 @@ const initialize = () => {
         {
           prop: 'radioText',
           selector: '[data-type="radio-text"]'
+        },
+        {
+          prop: 'radioSetInputs',
+          selector: '[data-radio-set]',
+          all: true,
+          array: true
         },
         {
           prop: 'labels',
@@ -782,6 +792,24 @@ const initialize = () => {
       setWidth()
 
       onResize(setWidth())
+
+      /* Equalize input widths */
+
+      const setInputWidths = () => {
+        if (!f.radioSetInputs.length) {
+          return
+        }
+
+        fieldset.style.setProperty('--radio-set-width', 'auto')
+
+        const width = Math.max.apply(null, f.radioSetInputs.map((i) => i.clientWidth))
+
+        fieldset.style.setProperty('--radio-set-width', `${width / 16}rem`)
+      }
+
+      setInputWidths()
+
+      onResize(setInputWidths())
     })
   }
 
@@ -883,6 +911,22 @@ const initialize = () => {
       const sliderInstance = slider(args)
 
       sliderInstances.push(sliderInstance)
+    })
+  }
+
+  /* Overflow containers */
+
+  if (el.overflow.length) {
+    const overflowIndicator = (args) => {
+      return new OverflowIndicator(args)
+    }
+
+    el.overflow.forEach(o => {
+      overflowIndicator({
+        indicator: o.parentElement,
+        scroll: o,
+        y: false
+      })
     })
   }
 

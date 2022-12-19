@@ -130,23 +130,6 @@ $copyright = (
 
 $legal[] = $copyright;
 
-/* Knowbility */
-
-$knowbility = '';
-
-/* phpcs:ignore */
-$knowbility_logo = file_get_contents( PI::$svg_assets_path . 'knowbility.svg' ); // Ignore: local path
-
-if ( $knowbility_logo ) {
-	$legal[] = (
-		'<div>' .
-			'<a class="l-flex l-width-xl l-height-xs l-svg t-link-current" href="https://knowbility.org/programs/air" target="_blank" rel="noreferrer" aria-label="Knowbility">' .
-				$knowbility_logo .
-			'</a>' .
-		'</div>'
-	);
-}
-
 /* Legal output */
 
 if ( $legal ) {
