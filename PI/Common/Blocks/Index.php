@@ -80,6 +80,7 @@ class Index {
 			'core/paragraph',
 			'core/heading',
 			'core/list',
+			'core/list-item',
 			'core/html',
 			'core/quote',
 			'core/image',
