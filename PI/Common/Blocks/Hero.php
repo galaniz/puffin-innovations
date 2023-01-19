@@ -189,13 +189,13 @@ class Hero {
 			if ( $image ) {
 				$src           = esc_attr( $image['url'] );
 				$alt           = esc_attr( $image['alt'] );
-				$srcset        = esc_attr( $image['srcset'] );
-				$sizes         = esc_attr( $image['sizes'] );
 				$width         = esc_attr( $image['width'] );
 				$height        = esc_attr( $image['height'] );
+				$srcset        = $image['srcset'] ? ' srcset="' . esc_attr( $image['srcset'] ) . '"' : '';
+				$sizes         = $image['sizes'] && $image['srcset'] ? ' sizes="' . esc_attr( $image['sizes'] ) . '"' : '';
 				$image_classes = 'l-absolute l-top-0 l-left-0 l-width-100-pc l-height-100-pc l-object-cover';
 
-				$media_output = "<img class='$image_classes' src='$src' alt='$alt' srcset='$srcset' sizes='$sizes' width='$width' height='$height'>";
+				$media_output = "<img class='$image_classes' src='$src' alt='$alt'$srcset$sizes width='$width' height='$height'>";
 			}
 
 			/* Video modal */
@@ -264,7 +264,7 @@ class Hero {
 						"<div class='o-modal__window l-flex l-flex-column l-flex-row-l l-align-center l-justify-center l-z-index-1 e-transition outline-snug' data-type='$dialog_type'>" .
 							'<div class="o-modal__media">' .
 								'<div class="l-width-100-pc l-height-100-pc l-relative bg-foreground-dark t-background-light">' .
-									"<iframe id='$iframe_id' class='l-absolute l-top-0 l-left-0 l-width-100-pc l-height-100-pc' data-src='$video_link' title='Video player' frameborder='0' allow='autoplay' allowfullscreen></iframe>" .
+									"<iframe id='$iframe_id' class='l-absolute l-top-0 l-left-0 l-width-100-pc l-height-100-pc' data-src='$video_link' title='Video player' allow='autoplay' allowfullscreen></iframe>" .
 									PI::render_loader( 'm', false, false, 'Loading' ) .
 								'</div>' .
 							'</div>' .

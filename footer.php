@@ -77,10 +77,6 @@ $social = PI::render_social(
 			'role' => 'list',
 		],
 		'link_class' => 'l-flex l-align-center l-justify-center l-width-sm l-height-sm b-all b-background-light-35 e-transition-border-radius',
-		'link_attr'  => [
-			'target' => '_blank',
-			'rel'    => 'noreferrer',
-		],
 		'a11y_class' => PI::$a11y_class['visually_hide'],
 		'icon_class' => 'l-flex l-width-2xs l-height-2xs l-svg',
 		'icon_paths' => [
