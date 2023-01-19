@@ -141,9 +141,8 @@ class Text {
 
 		if ( $is_link && $link ) {
 			$external  = PI::is_external_url( $link );
-			$link_attr = $external ? ' target="_blank" rel="noopener noreferrer"' : '';
-
-			$in_card = $block->context[ PI::$namespace . '/card/exists' ] ?? false;
+			$in_card   = $block->context[ PI::$namespace . '/card/exists' ] ?? false;
+			$link_attr = '';
 
 			if ( $in_card ) {
 				$link_attr .= ' class="l-block l-before"';

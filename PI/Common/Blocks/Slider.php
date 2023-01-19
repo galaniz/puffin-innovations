@@ -300,8 +300,8 @@ class Slider {
 						'</div>' .
 					'</div>' .
 				'</div>' .
-				"<nav class='o-slider__nav' aria-label='$label'>" .
-					"<ul class='o-slider__tabs l-flex l-justify-center l-padding-top-s l-padding-top-m-l l-margin-0 t-list-style-none' role='tablist'>" .
+				"<div class='o-slider__nav'>" .
+					"<ul class='o-slider__tabs l-flex l-justify-center l-padding-top-s l-padding-top-m-l l-margin-0 t-list-style-none' role='tablist' aria-label='$label controls'>" .
 						$tablist .
 					'</ul>' .
 					"<button type='button' class='o-slider__prev t-current l-width-s l-height-s l-svg l-absolute l-left-0 l-none outline-tight' aria-label='Previous $label group' data-prev disabled>" .
@@ -310,7 +310,7 @@ class Slider {
 					"<button type='button' class='o-slider__next t-current l-width-s l-height-s l-svg l-absolute l-right-0 l-none outline-tight' aria-label='Next $label group' data-next>" .
 						$arrow_right .
 					'</button>' .
-				'</nav>' .
+				'</div>' .
 			'</div>'
 		);
 	}

@@ -185,10 +185,10 @@ class Image {
 		if ( $image ) {
 			$src           = esc_attr( $image['url'] );
 			$alt           = esc_attr( $image['alt'] );
-			$srcset        = esc_attr( $image['srcset'] );
-			$sizes         = esc_attr( $image['sizes'] );
 			$w             = esc_attr( $image['width'] );
 			$h             = esc_attr( $image['height'] );
+			$srcset        = $image['srcset'] ? ' srcset="' . esc_attr( $image['srcset'] ) . '"' : '';
+			$sizes         = $image['sizes'] && $image['srcset'] ? ' sizes="' . esc_attr( $image['sizes'] ) . '"' : '';
 			$image_classes = "l-width-$inner_width l-height-$inner_height";
 
 			if ( '100-pc' !== $inner_height ) {
@@ -201,7 +201,7 @@ class Image {
 
 			$image_classes .= ' l-object-' . ( $cover ? 'cover' : 'contain' ) . " l-object-$position";
 
-			$image_output = "<img class='$image_classes' src='$src' alt='$alt' srcset='$srcset' sizes='$sizes' width='$w' height='$h' loading='lazy'>";
+			$image_output = "<img class='$image_classes' src='$src' alt='$alt'$srcset$sizes width='$w' height='$h' loading='lazy'>";
 		}
 
 		/* Order */
@@ -235,21 +235,19 @@ class Image {
 		/* Link */
 
 		if ( $is_link && $link && $image_output ) {
-			$external  = PI::is_external_url( $link );
-			$link_attr = $external ? ' target="_blank" rel="noopener noreferrer"' : '';
-
-			$in_card = $block->context[ PI::$namespace . '/card/exists' ] ?? false;
+			$external = PI::is_external_url( $link );
+			$in_card  = $block->context[ PI::$namespace . '/card/exists' ] ?? false;
 
 			if ( $in_card ) {
 				return (
-					"<a href='$link'$link_attr class='l-before'>" .
+					"<a href='$link' class='l-before'>" .
 						"<div$outer_classes>" .
 							$image_output .
 						'</div>' .
 					'</a>'
 				);
 			} else {
-				$image_output = "<a href='$link'$link_attr>$image_output</a>";
+				$image_output = "<a href='$link'>$image_output</a>";
 			}
 		}
 
