@@ -726,8 +726,8 @@ const initialize = () => {
         .then(response => {
           sendForm(form, JSON.parse(response).nonce)
         })
-        .catch(xhr => {
-          console.log(xhr)
+        .catch(error => {
+          console.log(error)
         })
     })
   }
