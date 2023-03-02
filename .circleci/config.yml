@@ -4,7 +4,7 @@ version: 2.1
 jobs:
   build-and-deploy-staging:
     docker:
-      - image: cimg/php:7.4-node
+      - image: cimg/php:8.0-node
     steps:
       - checkout
       - run: composer install
@@ -13,7 +13,7 @@ jobs:
       - run: npm run build
       - add_ssh_keys:
           fingerprints:
-            - "61:17:62:c6:d1:ca:1c:0a:48:cf:85:8f:d9:6b:ca:2b"
+            - "40:ab:6b:0c:38:65:89:66:10:1b:ab:90:73:2b:72:1a"
       - run: ssh-keyscan -p $SSH_PORT $SSH_HOST >> ~/.ssh/known_hosts
       - run: sudo apt update
       - run: sudo apt install rsync
@@ -22,7 +22,7 @@ jobs:
 
   build-and-deploy-production:
     docker:
-      - image: cimg/php:7.4-node
+      - image: cimg/php:8.0-node
     steps:
       - checkout
       - run: composer install
@@ -31,7 +31,7 @@ jobs:
       - run: npm run build
       - add_ssh_keys:
           fingerprints:
-            - "61:17:62:c6:d1:ca:1c:0a:48:cf:85:8f:d9:6b:ca:2b"
+            - "40:ab:6b:0c:38:65:89:66:10:1b:ab:90:73:2b:72:1a"
       - run: ssh-keyscan -p $SSH_PORT $SSH_HOST >> ~/.ssh/known_hosts
       - run: sudo apt update
       - run: sudo apt install rsync

@@ -178,14 +178,14 @@ const copyPatterns = [
   {
     from: '*.svg',
     context: path.resolve(__dirname, 'assets', 'src', 'svg'),
-    to ({ context, absoluteFilename }) {
+    to () {
       return path.resolve(__dirname, 'assets/public/svg/[name][ext]')
     }
   },
   {
     from: '*.*',
     context: path.resolve(__dirname, 'assets', 'src', 'fonts'),
-    to ({ context, absoluteFilename }) {
+    to () {
       return path.resolve(__dirname, 'assets/public/fonts/[name][ext]')
     }
   }
@@ -221,8 +221,7 @@ let entries = []
 entries.push({
   name: n,
   paths: [
-    './assets/src/index.scss',
-    './assets/src/index-compat.js'
+    './assets/src/index.scss'
   ]
 })
 
@@ -269,7 +268,6 @@ module.exports = [
     output: {
       path: outputPath,
       publicPath: '/',
-      filename: 'js/[name]-compat.js',
       environment: outputCompatEnv,
       chunkFormat: 'array-push'
     },

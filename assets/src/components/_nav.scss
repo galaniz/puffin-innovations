@@ -1,5 +1,5 @@
 /**
- * Components: nav
+ * Components - nav
  */
 
 /* Imports */
@@ -26,12 +26,6 @@
 }
 
 /* Hide elements */
-
-.c-nav__hide {
-  [data-overflow="false"] & {
-    @extend %u-display-none;
-  }
-}
 
 .c-nav-overflow__hide {
   [data-overflow="true"] & {
