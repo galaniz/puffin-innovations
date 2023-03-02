@@ -5,9 +5,6 @@
 /* Imports */
 
 import { setElements, usingMouse, request, getKey, getDefaultFontSize } from 'Formation/utils'
-
-/* Classes */
-
 import Nav from 'Formation/components/nav'
 import Modal from 'Formation/objects/modal'
 import SendForm from 'Formation/objects/form/send'
@@ -16,15 +13,62 @@ import Collapsible from 'Formation/objects/collapsible'
 import Slider from 'Formation/objects/slider'
 import OverflowIndicator from 'Formation/objects/overflow-indicator'
 
-/* Variables */
+/**
+ * Store viewport width
+ *
+ * @type {number}
+ */
 
 let windowWidth
+
+/**
+ * Store viewport height
+ *
+ * @type {number}
+ */
+
 let windowHeight
+
+/**
+ * Store viewport aspect ratio for modal
+ *
+ * @type {number}
+ */
+
 let aspectRatio
 
+/**
+ * Namespace
+ *
+ * @type {string}
+ */
+
 const ns = window.namespace
+
+/**
+ * Namespace object - back end info
+ *
+ * @type {object}
+ */
+
 const n = window[ns]
+
+console.log('N', n)
+
+/**
+ * Store DOM elements from setElements
+ *
+ * @type {object}
+ */
+
 const el = {}
+
+/**
+ * Props and selectors for setElements
+ *
+ * @type {array<object>}
+ */
+
 const meta = [
   {
     prop: 'logo',
@@ -139,7 +183,11 @@ const meta = [
   }
 ]
 
-/* Set window width, height and aspect ratio */
+/**
+ * Function - set window width, height and aspect ratio
+ *
+ * @return {void}
+ */
 
 const setWindowDimensions = () => {
   windowWidth = window.innerWidth
@@ -149,7 +197,13 @@ const setWindowDimensions = () => {
 
 setWindowDimensions()
 
-/* Resize helper */
+/**
+ * Function - run callback on window resize
+ *
+ * @param {function} callback
+ * @param {number} delay
+ * @return {void}
+ */
 
 const onResize = (callback = () => {}, delay = 100) => {
   let resizeTimer
@@ -167,7 +221,11 @@ const onResize = (callback = () => {}, delay = 100) => {
   window.addEventListener('resize', resizeHandler)
 }
 
-/* Init */
+/**
+ * Function - initialize functions and classes
+ *
+ * @return {void}
+ */
 
 const initialize = () => {
   /* Check if reduce motion */
@@ -176,7 +234,9 @@ const initialize = () => {
 
   const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
 
-  if (!mediaQuery || mediaQuery.matches) { reduceMotion = true }
+  if (!mediaQuery || mediaQuery.matches) {
+    reduceMotion = true
+  }
 
   /* Multiplier based on default font size */
 
@@ -720,14 +780,14 @@ const initialize = () => {
       request({
         method: 'POST',
         url: n.ajax_url,
-        headers: { 'Content-type': 'application/x-www-form-urlencoded' },
-        body: `action=create_nonce&nonce_name=${form.id}`
+        encode: 'url',
+        body: {
+          action: 'create_nonce',
+          nonce_name: form.id
+        }
       })
         .then(response => {
           sendForm(form, JSON.parse(response).nonce)
-        })
-        .catch(error => {
-          console.log(error)
         })
     })
   }

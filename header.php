@@ -122,6 +122,12 @@ $search_form = (
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<?php /* phpcs:ignore */ ?>
+	<link rel="preload" href="<?php echo get_template_directory_uri(); ?>/assets/public/fonts/mont-extra-bold.woff2" as="font" type="font/woff2" crossorigin>
+	<?php /* phpcs:ignore */ ?>
+	<link rel="preload" href="<?php echo get_template_directory_uri(); ?>/assets/public/fonts/mont-bold.woff2" as="font" type="font/woff2" crossorigin>
+	<?php /* phpcs:ignore */ ?>
+	<link rel="preload" href="<?php echo get_template_directory_uri(); ?>/assets/public/fonts/neue-haas-unica.woff2" as="font" type="font/woff2" crossorigin>
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class( PI::$namespace ); ?>>
@@ -149,7 +155,7 @@ $search_form = (
 						<span class="c-nav-icon-label t-h6 t-line-height-100-pc l-block l-padding-top-4xs e-transition">Menu</span>
 					</button>
 				</div>
-				<div class="c-nav-overflow l-fixed l-right-0 l-bottom-0 l-z-index-1 l-height-100-pc bg-primary-light t-foreground-dark t-link-current e-transition l-width-4-5" role="dialog" aria-modal="true" aria-label="Main navigation" id="<?php echo esc_attr( $main_nav_overflow_id ); ?>">
+				<div class="c-nav-overflow l-fixed l-right-0 l-bottom-0 l-z-index-1 l-height-100-pc bg-primary-light t-foreground-dark t-link-current e-transition l-width-4-5" role="dialog" aria-modal="true" aria-label="Main menu" id="<?php echo esc_attr( $main_nav_overflow_id ); ?>">
 					<div class="l-height-100-pc l-overflow-y-auto l-overscroll-none l-overflow-x-hidden l-padding-right-2xs l-padding-left-xs l-padding-top-xl l-padding-bottom-xs">
 						<ul class="c-nav-overflow__list l-flex l-flex-column l-gap-margin-xs t-list-style-none" role="list"></ul>
 					</div>
