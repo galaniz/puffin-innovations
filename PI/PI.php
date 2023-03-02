@@ -358,10 +358,6 @@ class PI extends FRM {
 
 		self::$scripts = [
 			[
-				'handle' => 'script-compat',
-				'url'    => get_template_directory_uri() . '/assets/public/js/' . self::$namespace . '-compat.js',
-			],
-			[
 				'handle' => 'script',
 				'url'    => get_template_directory_uri() . '/assets/public/js/' . self::$namespace . '.js',
 			],
@@ -372,12 +368,10 @@ class PI extends FRM {
 		self::$dequeue_gutenberg = true;
 
 		self::$script_attributes = [
-			'script-compat' => 'nomodule',
-			'script'        => 'type="module"',
+			'script' => 'type="module"',
 		];
 
 		self::$defer_script_handles = [
-			self::$namespace . 'script-compat',
 			self::$namespace . 'script',
 		];
 
@@ -491,10 +485,29 @@ class PI extends FRM {
 			);
 		}
 
-		/* Pass data to front end */
+		/* Pass data to admin */
 
-		additional_script_data( self::$namespace, ['padding_options' => self::$padding_options ], true, true );
-		additional_script_data( self::$namespace, ['html_options' => self::$html_options ], true, true );
+		additional_script_data(
+			[
+				'name'  => self::$namespace,
+				'data'  => [
+					'padding_options' => self::$padding_options,
+				],
+				'admin' => true,
+				'head'  => true,
+			]
+		);
+
+		additional_script_data(
+			[
+				'name'  => self::$namespace,
+				'data'  => [
+					'html_options' => self::$html_options,
+				],
+				'admin' => true,
+				'head'  => true,
+			]
+		);
 
 		/* Actions */
 
@@ -820,15 +833,17 @@ class PI extends FRM {
 
 		$fields_class .= " $gap";
 
-		$args['form_class']         = $form_class;
-		$args['fields_class']       = $fields_class;
-		$args['button_class']       = $button_class;
-		$args['button_field_class'] = $button_field_class;
-		$args['button_loader']      = self::render_loader();
-		$args['error_summary']      = self::$html['result']['error']['summary'];
-		$args['error_result']       = self::$html['result']['error']['default'];
-		$args['success_result']     = self::$html['result']['success'];
-		$args['a11y_class']         = self::$a11y_class['visually_hide'];
+		$args['form_class']           = $form_class;
+		$args['fields_class']         = $fields_class;
+		$args['button_class']         = $button_class;
+		$args['button_field_class']   = $button_field_class;
+		$args['button_loader']        = self::render_loader();
+		$args['error_summary']        = self::$html['result']['error']['summary'];
+		$args['error_result']         = self::$html['result']['error']['default'];
+		$args['success_result']       = self::$html['result']['success'];
+		$args['a11y_class']           = self::$a11y_class['visually_hide'];
+		$args['honeypot_field_class'] = 'o-form__field';
+		$args['honeypot_label_class'] = 'o-form__label';
 
 		return $args;
 	}

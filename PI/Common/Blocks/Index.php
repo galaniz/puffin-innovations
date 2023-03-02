@@ -233,7 +233,16 @@ class Index {
 			return;
 		}
 
-		additional_script_data( $n, ['insert_blocks' => self::$insert_blocks], true, true );
+		additional_script_data(
+			[
+				'name'  => $n,
+				'data'  => [
+					'insert_blocks' => self::$insert_blocks,
+				],
+				'admin' => true,
+				'head'  => true,
+			]
+		);
 	}
 
 } // End Index
