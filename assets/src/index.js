@@ -53,8 +53,6 @@ const ns = window.namespace
 
 const n = window[ns]
 
-console.log('N', n)
-
 /**
  * Store DOM elements from setElements
  *

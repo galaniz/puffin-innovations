@@ -122,12 +122,12 @@ $search_form = (
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<?php /* phpcs:ignore */ ?>
+	<?php /* phpcs:disable */ ?>
 	<link rel="preload" href="<?php echo get_template_directory_uri(); ?>/assets/public/fonts/mont-extra-bold.woff2" as="font" type="font/woff2" crossorigin>
-	<?php /* phpcs:ignore */ ?>
 	<link rel="preload" href="<?php echo get_template_directory_uri(); ?>/assets/public/fonts/mont-bold.woff2" as="font" type="font/woff2" crossorigin>
-	<?php /* phpcs:ignore */ ?>
 	<link rel="preload" href="<?php echo get_template_directory_uri(); ?>/assets/public/fonts/neue-haas-unica.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="<?php echo wp_upload_dir()['baseurl']; ?>/matomo/matomo.js" onload="embedTracker()" type="script" crossorigin>
+	<?php /* phpcs:enable */ ?>
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class( PI::$namespace ); ?>>
@@ -136,7 +136,7 @@ $search_form = (
 		<a href="#main" class="c-skip-link t-h5 bg-background-light t-foreground-dark l-block l-absolute l-left-0 l-right-0 l-top-0 l-padding-right-2xs l-padding-left-2xs l-padding-top-2xs l-padding-bottom-2xs t-align-center outline-snug">
 			Skip to main content
 		</a>
-		<nav class="c-nav l-container l-relative" id="n-<?php echo esc_attr( uniqid() ); ?>" aria-label="Site">
+		<nav class="c-nav l-container l-relative" id="n-<?php echo esc_attr( uniqid() ); ?>" aria-label="Site"  data-overflow="false" data-overflow-all="false" data-open="false">
 			<div class="c-nav__overlay bg-foreground-dark-09 l-fixed l-top-0 l-left-0 l-z-index-1 l-width-100-pc l-height-100-pc e-transition"></div>
 			<div class="l-flex l-justify-between l-align-center">
 				<?php /* phpcs:ignore */ ?>
