@@ -149,7 +149,8 @@ const meta = [
   {
     prop: 'collapsibles',
     selector: '.o-collapsible',
-    all: true
+    all: true,
+    array: true
   },
   {
     prop: 'forms',
@@ -172,12 +173,14 @@ const meta = [
   {
     prop: 'slider',
     selector: '.o-slider',
-    all: true
+    all: true,
+    array: true
   },
   {
     prop: 'overflow',
     selector: '.o-overflow',
-    all: true
+    all: true,
+    array: true
   }
 ]
 
@@ -433,21 +436,7 @@ const initialize = () => {
         if (iframeLink && open && !player) {
           iframe.src = `${iframeLink}?autoplay=1&enablejsapi=1`
 
-          /* Load IFrame Player API code */
-
-          const tag = document.createElement('script')
-          tag.src = 'https://www.youtube.com/iframe_api'
-
-          const firstScriptTag = document.getElementsByTagName('script')[0]
-          firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
-
-          window.onYouTubeIframeAPIReady = () => {
-            player = new window.YT.Player(iframe.id, {
-              events: {
-                onReady: window.onPlayerReady
-              }
-            })
-          }
+          /* Player ready callback */
 
           window.onPlayerReady = (event) => {
             modalInstance.setFirstFocusableItem(firstFocusableItem)
@@ -464,9 +453,33 @@ const initialize = () => {
               loader.removeAttribute('tabindex')
             }
           }
+
+          /* Load Iframe Player API code */
+
+          if (!document.getElementById('yt-iframe-api')) {
+            const script = document.createElement('script')
+            script.id = 'yt-iframe-api'
+            script.src = 'https://www.youtube.com/iframe_api'
+
+            document.head.appendChild(script)
+
+            window.onYouTubeIframeAPIReady = () => {
+              player = new window.YT.Player(iframe.id, {
+                events: {
+                  onReady: window.onPlayerReady
+                }
+              })
+            }
+          } else {
+            player = new window.YT.Player(iframe.id, {
+              events: {
+                onReady: window.onPlayerReady
+              }
+            })
+          }
         }
 
-        if (player) {
+        if (player && typeof player.getPlayerState === 'function') {
           if (!open) {
             if (player.getPlayerState() === 1 || player.getPlayerState() === 3) {
               setTimeout(() => {
