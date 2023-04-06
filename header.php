@@ -126,7 +126,7 @@ $search_form = (
 	<link rel="preload" href="<?php echo get_template_directory_uri(); ?>/assets/public/fonts/mont-extra-bold.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preload" href="<?php echo get_template_directory_uri(); ?>/assets/public/fonts/mont-bold.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preload" href="<?php echo get_template_directory_uri(); ?>/assets/public/fonts/neue-haas-unica.woff2" as="font" type="font/woff2" crossorigin>
-	<link rel="preload" href="<?php echo wp_upload_dir()['baseurl']; ?>/matomo/matomo.js" onload="embedTracker()" type="script" crossorigin>
+	<link rel="preload" href="<?php echo wp_upload_dir()['baseurl']; ?>/matomo/matomo.js" onload="embedTracker()" as="script" type="script" crossorigin>
 	<?php /* phpcs:enable */ ?>
 	<?php wp_head(); ?>
 </head>
