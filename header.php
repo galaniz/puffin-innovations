@@ -146,7 +146,7 @@ $search_form = (
 					<?php echo $main_nav . $search_form; ?>
 				</ul>
 				<div class="c-nav__hide">
-					<button class="c-nav__button c-nav__open l-height-sm l-padding-top-5xs l-relative <?php echo $light ? ' t-light' : ''; ?>" type="button" aria-haspopup="dialog" aria-controls="<?php echo esc_attr( $main_nav_overflow_id ); ?>">
+					<button class="c-nav__button c-nav__open l-height-sm l-padding-top-5xs l-relative <?php echo $light ? ' t-light' : ''; ?>" type="button" aria-haspopup="true" aria-controls="<?php echo esc_attr( $main_nav_overflow_id ); ?>">
 						<span class="c-nav-icon l-block l-relative l-margin-auto e-transition" data-num="4">
 							<span class="c-nav-icon__top l-block e-transition"></span>
 							<span class="c-nav-icon__middle l-block e-transition"></span>

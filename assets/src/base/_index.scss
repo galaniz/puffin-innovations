@@ -22,6 +22,7 @@
   --hr-color: #{rgba(func.get-color("foreground-dark"), 0.3)};
   --heading-color: var(--foreground-dark);
   --link-color: var(--primary-dark);
+  --layered-color: #{rgba(func.get-color("foreground-dark"), 0.15)};
   --cubic: cubic-bezier(0.76, 0, 0.24, 1);
   --underline: #{func.calc-rem(1px)};
   --input-border: #{rgba(func.get-color("foreground-dark"), 0.5)};
@@ -34,7 +35,6 @@
   --negative-color: var(--negative-dark);
   --positive-color: var(--positive-dark);
   --bg-result: var(--background-base);
-  --invert-color: var(--background-light);
   --bg-table: var(--background-base);
   --scrollbar-width: 0rem;
   --external: var(--2xs);
@@ -42,6 +42,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 
   @include mixi.fluid-size(
     --logo-height,

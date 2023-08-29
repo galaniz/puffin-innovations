@@ -15,6 +15,7 @@
   --text-color: #{rgba(func.get-color("background-light"), 0.8)};
   --hr-color: #{rgba(func.get-color("background-light"), 0.3)};
   --link-color: var(--background-light);
+  --layered-color: #{rgba(func.get-color("background-light"), 0.15)};
   --placeholder-color: var(--background-light-60);
   --input-border: #{rgba(func.get-color("background-light"), 0.7)};
   --input-control-bg-checked: var(--background-light);
@@ -24,7 +25,6 @@
   --negative-color: var(--negative-light);
   --positive-color: var(--positive-light);
   --bg-result: #{rgba(func.get-color("background-light"), 0.05)};
-  --invert-color: var(--foreground-dark);
   --bg-table: #{rgba(func.get-color("background-light"), 0.1)};
 
   color: var(--text-color);

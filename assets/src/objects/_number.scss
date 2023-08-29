@@ -10,8 +10,8 @@
 /* Styles */
 
 .o-number {
-  color: var(--invert-color);
-  background: var(--heading-color);
+  color: var(--heading-color);
+  background: var(--layered-color);
   font-size: var(--h3);
 
   @include mix.breakpoint-min("l") {
