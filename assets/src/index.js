@@ -4,7 +4,12 @@
 
 /* Imports */
 
-import { setElements, usingMouse, request, getKey, getDefaultFontSize } from 'Formation/utils'
+import { setElements } from 'Formation/utils/functions/set-elements'
+import { setSettings, settings } from 'Formation/utils/functions/set-settings'
+import { usingMouse } from 'Formation/utils/functions/using-mouse'
+import { request } from 'Formation/utils/functions/request'
+import { getKey } from 'Formation/utils/functions/get-key'
+import { getDefaultFontSize } from 'Formation/utils/functions/get-default-font-size'
 import Nav from 'Formation/components/nav'
 import Modal from 'Formation/objects/modal'
 import SendForm from 'Formation/objects/form/send'
@@ -229,15 +234,9 @@ const onResize = (callback = () => {}, delay = 100) => {
  */
 
 const initialize = () => {
-  /* Check if reduce motion */
+  /* Set settings object */
 
-  let reduceMotion = false
-
-  const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
-
-  if (!mediaQuery || mediaQuery.matches) {
-    reduceMotion = true
-  }
+  setSettings()
 
   /* Multiplier based on default font size */
 
@@ -254,7 +253,7 @@ const initialize = () => {
 
   /* Get scrollbar width */
 
-  const getScrollbarWidth = (navToggle = false) => {
+  const getScrollbarWidth = () => {
     const html = document.documentElement
     const w = windowWidth - html.clientWidth
 
@@ -942,7 +941,7 @@ const initialize = () => {
         prev: ss.prev,
         next: ss.next,
         duration: 500,
-        reduceMotion
+        reduceMotion: settings.reduceMotion
       }
 
       const loop = ss.main.getAttribute('data-loop') === 'true'
@@ -1005,7 +1004,7 @@ const initialize = () => {
 
   const head = document.querySelector('head')
 
-  const observer = new window.MutationObserver((mutationList, observer) => {
+  const observer = new window.MutationObserver((mutationList) => {
     for (const mutation of mutationList) {
       if (mutation.type === 'childList') {
         const textSpacingStyle = head.querySelector('#phltsbkmklt')

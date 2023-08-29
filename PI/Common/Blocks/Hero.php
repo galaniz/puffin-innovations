@@ -213,7 +213,7 @@ class Hero {
 
 				$button = (
 					'<div class="l-absolute l-top-0 l-left-0 l-right-0 l-bottom-0 l-margin-auto l-flex l-align-center l-justify-center l-z-index-1 l-width-1-5 l-max-width-2xl">' .
-						"<button type='button' class='l-width-100-pc l-margin-auto l-relative l-aspect-ratio-100 l-flex l-align-center l-justify-center b-radius-100-pc t-background-light bg-background-light-30 e-transition e-scale js-modal-trigger' aria-haspopup='dialog' aria-controls='$dialog_id'>" .
+						"<button type='button' class='l-width-100-pc l-margin-auto l-relative l-aspect-ratio-100 l-flex l-align-center l-justify-center b-radius-100-pc t-background-light bg-background-light-30 e-transition e-scale js-modal-trigger' aria-haspopup='true' aria-controls='$dialog_id'>" .
 							"<span class='l-absolute l-width-4-5 l-svg'>$play_icon</span>" .
 							'<span class="a11y-visually-hidden">Play video and access transcript</span>' .
 						'</button>' .
