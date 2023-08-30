@@ -74,10 +74,6 @@ const el = {}
 
 const meta = [
   {
-    prop: 'logo',
-    selector: '#js-logo'
-  },
-  {
     prop: 'nav',
     selector: '.c-nav',
     items: [
@@ -292,9 +288,6 @@ const initialize = () => {
         endToggle () {
           document.documentElement.setAttribute('data-100-vw', 'false')
           document.documentElement.setAttribute('data-nav-open', 'false')
-        },
-        filterFocusableItem (item) {
-          return el.logo !== item
         }
       })
     }
