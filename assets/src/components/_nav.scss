@@ -108,7 +108,7 @@
 .c-nav__close {
   --p: var(--2xs);
   --o: (var(--logo-height) / 2) - (var(--sm) / 2);
-  --t: calc(var(--p) + var(--o) + var(--wp-admin--admin-bar--height, 0rem) + 0.015625rem);
+  --t: calc(var(--p) + var(--o) + var(--wp-admin--admin-bar--height, 0rem) + 0.0156rem);
 
   right: var(--container-padding);
   top: var(--t);
@@ -137,7 +137,7 @@
 
 /* Mobile */
 
-.c-nav-overflow {
+.c-nav-overflow__main {
   --search-bg: var(--primary-light);
   --prop: visibility, transform;
   --duration: 0ms, 400ms;
